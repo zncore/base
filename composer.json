@@ -1,0 +1,26 @@
+{
+  "name": "zncore/base",
+  "type": "extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Yamshikov Vitaliy",
+      "email": "theyamshikov@yandex.ru"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "symfony/property-access": "4.*|5.*",
+    "symfony/dotenv": "4.*|5.*",
+    "symfony/console": "4.*|5.*",
+    "symfony/yaml": "4.*|5.*",
+    "illuminate/support": "^6.1",
+    "illuminate/container": "^6.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "PhpLab\\Core\\": "src",
+      "PhpLab\\Core\\Tests\\": "tests"
+    }
+  }
+}
