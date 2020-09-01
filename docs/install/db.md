@@ -10,5 +10,5 @@
 
 ## Создание БД на локальной машине с нуля
 
-* [Конфигурация менеджера соединений](https://github.com/zncore/db/blob/master/docs/config.md)
-* [Развертывание базы данных](https://github.com/zncore/db/blob/master/docs/init.md)
+* [Конфигурация менеджера соединений](https://github.com/php7lab/eloquent/blob/master/docs/config.md)
+* [Развертывание базы данных](https://github.com/php7lab/eloquent/blob/master/docs/init.md)
