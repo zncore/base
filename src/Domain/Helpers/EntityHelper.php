@@ -126,6 +126,7 @@ class EntityHelper
         }
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         foreach ($data as $name => $value) {
+            $name = Inflector::variablize($name);
             $isAllow = empty($filedsOnly) || in_array($name, $filedsOnly);
             if($isAllow) {
                 $propertyAccessor->setValue($entity, $name, $value);
