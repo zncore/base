@@ -29,12 +29,16 @@ class CommandHelper
         }, $files);
 
         foreach ($commands as $commandClassName) {
-            try {
-                $commandInstance = $container->get($commandClassName);
-                /** @var Application $application */
-                $application = $container->get(Application::class);
-                $application->add($commandInstance);
-            } catch (\Throwable $e) {}
+            $reflictionClass = new \ReflectionClass($commandClassName);
+            $isAbstract = $reflictionClass->isAbstract();
+            if(! $isAbstract) {
+                try {
+                    $commandInstance = $container->get($commandClassName);
+                    /** @var Application $application */
+                    $application = $container->get(Application::class);
+                    $application->add($commandInstance);
+                } catch (\Illuminate\Contracts\Container\BindingResolutionException $e) {}
+            }
         }
     }
 
