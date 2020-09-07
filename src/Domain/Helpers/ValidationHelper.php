@@ -13,6 +13,34 @@ use Symfony\Component\Validator\Validation;
 class ValidationHelper
 {
 
+    public static function throwUnprocessable(array $errorArray) {
+        $errorCollection = ValidationHelper::generateErrorCollectionFromArray($errorArray);
+        $exception = new UnprocessibleEntityException;
+        $exception->setErrorCollection($errorCollection);
+        throw $exception;
+    }
+
+    public static function generateErrorCollectionFromArray(array $errorArray): Collection {
+        $errorCollection = new Collection;
+
+        foreach ($errorArray as $field => $message) {
+            if(is_array($message)) {
+                foreach ($message as $m) {
+                    $validateErrorEntity = new ValidateErrorEntity;
+                    $validateErrorEntity->setField($field);
+                    $validateErrorEntity->setMessage($m);
+                }
+            } else {
+                $validateErrorEntity = new ValidateErrorEntity;
+                $validateErrorEntity->setField($field);
+                $validateErrorEntity->setMessage($message);
+            }
+        }
+
+        $errorCollection->add($validateErrorEntity);
+        return $errorCollection;
+    }
+
     public static function validateEntity(ValidateEntityInterface $entity): void
     {
         $rules = $entity->validationRules();
