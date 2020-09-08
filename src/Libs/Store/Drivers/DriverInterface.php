@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Libs\Store\Drivers;
+namespace ZnCore\Base\Libs\Store\Drivers;
 
 interface DriverInterface
 {

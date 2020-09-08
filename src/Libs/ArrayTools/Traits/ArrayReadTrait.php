@@ -1,19 +1,19 @@
 <?php
 
-namespace PhpLab\Core\Libs\ArrayTools\Traits;
+namespace ZnCore\Base\Libs\ArrayTools\Traits;
 
 use php7rails\domain\Domain;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Libs\ArrayTools\Helpers\ArrayIterator;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Libs\ArrayTools\Helpers\ArrayIterator;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use php7extension\yii\web\NotFoundHttpException;
-use PhpLab\Core\Domain\Libs\Alias;
-use PhpLab\Core\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Domain\Libs\Alias;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
 
 /**
  * Trait ArrayReadTrait
  *
- * @package PhpLab\Core\Libs\ArrayTools\Traits
+ * @package ZnCore\Base\Libs\ArrayTools\Traits
  *
  * @property string $id
  * @property string $primaryKey

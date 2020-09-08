@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces\Service;
+namespace ZnCore\Base\Domain\Interfaces\Service;
 
-use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
-use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
-use PhpLab\Core\Exceptions\NotFoundException;
+use ZnCore\Base\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Base\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Base\Exceptions\NotFoundException;
 
 interface ModifyInterface
 {

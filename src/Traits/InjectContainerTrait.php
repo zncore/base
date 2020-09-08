@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Traits;
+namespace ZnCore\Base\Traits;
 
 use Psr\Container\ContainerInterface;
 

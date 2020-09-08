@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Libs\Init\Helpers;
+namespace ZnCore\Base\Libs\Init\Helpers;
 
 use Symfony\Component\Console\Helper\DebugFormatterHelper;
 use Symfony\Component\Console\Helper\FormatterHelper;

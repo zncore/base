@@ -5,13 +5,13 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace PhpLab\Core\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\Helpers;
 
-use PhpLab\Core\Legacy\Yii\Base\Model;
+use ZnCore\Base\Legacy\Yii\Base\Model;
 use php7extension\yii\db\ActiveRecordInterface;
 use php7extension\yii\validators\StringValidator;
 use php7extension\yii\web\Request;
-use PhpLab\Core\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
 
 /**
  * Html provides a set of static methods for generating commonly used HTML tags.
@@ -408,7 +408,7 @@ class Html
      * If a value is null, the corresponding attribute will not be rendered.
      * See [[renderTagAttributes()]] for details on how attributes are being rendered.
      * @return string the generated hyperlink
-     * @see \PhpLab\Core\Legacy\Yii\Helpers\Url::to()
+     * @see \ZnCore\Base\Legacy\Yii\Helpers\Url::to()
      */
     public static function a($text, $url = null, $options = [])
     {

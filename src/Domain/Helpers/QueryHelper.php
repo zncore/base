@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Domain\Helpers;
+namespace ZnCore\Base\Domain\Helpers;
 
 use php7extension\yii\db\Expression;
-use PhpLab\Core\Domain\Libs\Query;
+use ZnCore\Base\Domain\Libs\Query;
 
 class QueryHelper
 {

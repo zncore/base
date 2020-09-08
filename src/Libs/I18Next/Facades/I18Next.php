@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\I18Next\Facades;
+namespace ZnCore\Base\Libs\I18Next\Facades;
 
-use PhpLab\Core\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
+use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 use Yii;
 
 class I18Next {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Env;
+namespace ZnCore\Base\Libs\Env;
 
-use PhpLab\Core\Exceptions\InvalidConfigException;
+use ZnCore\Base\Exceptions\InvalidConfigException;
 
 class EnvConfigException extends InvalidConfigException
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Helpers;
+namespace ZnCore\Base\Helpers;
 
 use DateTime;
 use DateTimeZone;
-use PhpLab\Core\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
 
 class TimeHelper
 {

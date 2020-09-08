@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces\Service;
+namespace ZnCore\Base\Domain\Interfaces\Service;
 
-use PhpLab\Core\Domain\Interfaces\DataProviderInterface;
-use PhpLab\Core\Domain\Interfaces\GetEntityClassInterface;
-use PhpLab\Core\Domain\Interfaces\ReadAllInterface;
+use ZnCore\Base\Domain\Interfaces\DataProviderInterface;
+use ZnCore\Base\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Base\Domain\Interfaces\ReadAllInterface;
 
 interface CrudServiceInterface extends DataProviderInterface, ServiceInterface, GetEntityClassInterface, ReadAllInterface, ReadOneInterface, ModifyInterface
 {

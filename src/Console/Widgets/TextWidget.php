@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Console\Widgets;
+namespace ZnCore\Base\Console\Widgets;
 
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Question\ConfirmationQuestion;

@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpLab\Core\Domain\Helpers;
+namespace ZnCore\Base\Domain\Helpers;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Helpers\InstanceHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\Inflector;
-use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
-use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
+use ZnCore\Base\Helpers\InstanceHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
+use ZnCore\Base\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Base\Domain\Interfaces\Entity\ValidateEntityInterface;
 use ReflectionClass;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;

@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Libs\ArrayTools\Filters\Iterator;
+namespace ZnCore\Base\Libs\ArrayTools\Filters\Iterator;
 
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Libs\Scenario\Base\BaseScenario;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Libs\Scenario\Base\BaseScenario;
 
 class Offset extends BaseScenario
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Domain\Enums;
+namespace ZnCore\Base\Domain\Enums;
 
-use PhpLab\Core\Domain\Base\BaseEnum;
+use ZnCore\Base\Domain\Base\BaseEnum;
 
 class OperatorEnum extends BaseEnum
 {

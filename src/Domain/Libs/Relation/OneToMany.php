@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Domain\Libs\Relation;
+namespace ZnCore\Base\Domain\Libs\Relation;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class OneToMany
@@ -24,7 +24,7 @@ class OneToMany
         $targetIds = array_unique($targetIds);
         $targetPkName = $this->foreignModel->primaryKey()[0];
         $query = new Query;
-        $query->where(\PhpLab\Core\Legacy\Yii\Helpers\Inflector::underscore($this->selfField), $targetIds);
+        $query->where(\ZnCore\Base\Legacy\Yii\Helpers\Inflector::underscore($this->selfField), $targetIds);
         /** @var Collection $targetCollection */
         $targetCollection = $this->foreignModel->all($query);
         $propertyAccessor = PropertyAccess::createPropertyAccessor();

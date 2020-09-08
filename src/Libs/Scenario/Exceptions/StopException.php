@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Libs\Scenario\Exceptions;
+namespace ZnCore\Base\Libs\Scenario\Exceptions;
 
 use Exception;
 

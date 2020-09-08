@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Scenario\Base;
+namespace ZnCore\Base\Libs\Scenario\Base;
 
-use PhpLab\Core\Libs\Scenario\Collections\ScenarioCollection;
+use ZnCore\Base\Libs\Scenario\Collections\ScenarioCollection;
 
 abstract class BaseGroupScenario extends BaseScenario
 {

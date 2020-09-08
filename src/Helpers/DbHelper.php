@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Helpers;
+namespace ZnCore\Base\Helpers;
 
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Libs\Env\DotEnvHelper;
-use PhpLab\Eloquent\Db\Enums\DbDriverEnum;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Env\DotEnvHelper;
+use ZnCore\Db\Db\Enums\DbDriverEnum;
 
 class DbHelper
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Libs\Init\Tasks;
+namespace ZnCore\Base\Libs\Init\Tasks;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Legacy\Code\helpers;
+namespace ZnCore\Base\Legacy\Code\helpers;
 
-use PhpLab\Core\Legacy\Code\entities\CodeEntity;
-use PhpLab\Core\Legacy\Code\render\CodeRender;
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Legacy\Code\entities\CodeEntity;
+use ZnCore\Base\Legacy\Code\render\CodeRender;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use php7extension\core\store\Store;
 
 class CodeHelper

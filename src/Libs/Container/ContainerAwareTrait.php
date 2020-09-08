@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Libs\Container;
+namespace ZnCore\Base\Libs\Container;
 
 use Psr\Container\ContainerInterface;
 

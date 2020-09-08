@@ -5,9 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace PhpLab\Core\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\Helpers;
 
-use PhpLab\Core\Exceptions\InvalidConfigException;
+use ZnCore\Base\Exceptions\InvalidConfigException;
 
 /**
  * Object that represents the replacement of array value while performing [[ArrayHelper::merge()]].
@@ -29,13 +29,13 @@ use PhpLab\Core\Exceptions\InvalidConfigException;
  *     'ids' => [
  *         2,
  *     ],
- *     'validDomains' => new \PhpLab\Core\Legacy\Yii\Helpers\ReplaceArrayValue([
+ *     'validDomains' => new \ZnCore\Base\Legacy\Yii\Helpers\ReplaceArrayValue([
  *         'yiiframework.com',
  *         'www.yiiframework.com',
  *     ]),
  * ];
  *
- * $result = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::merge($array1, $array2);
+ * $result = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::merge($array1, $array2);
  * ```
  *
  * The result will be

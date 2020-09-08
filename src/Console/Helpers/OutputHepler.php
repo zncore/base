@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Console\Helpers;
+namespace ZnCore\Base\Console\Helpers;
 
 use Symfony\Component\Console\Output\OutputInterface;
 

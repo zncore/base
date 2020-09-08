@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\CheckSum\Enums;
+namespace ZnCore\Base\Libs\CheckSum\Enums;
 
-use PhpLab\Core\Domain\Base\BaseEnum;
+use ZnCore\Base\Domain\Base\BaseEnum;
 
 class CheckSumAlgorithmEnum extends BaseEnum
 {

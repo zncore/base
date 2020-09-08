@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Domain\Entities\Query;
+namespace ZnCore\Base\Domain\Entities\Query;
 
-use PhpLab\Core\Domain\Enums\OperatorEnum;
+use ZnCore\Base\Domain\Enums\OperatorEnum;
 
 class Where
 {

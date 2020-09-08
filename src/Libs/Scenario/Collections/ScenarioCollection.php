@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpLab\Core\Libs\Scenario\Collections;
+namespace ZnCore\Base\Libs\Scenario\Collections;
 
 use php7rails\domain\values\BaseValue;
-use PhpLab\Core\Helpers\ClassHelper;
-use PhpLab\Core\Helpers\Helper;
-use PhpLab\Core\Libs\ArrayTools\Helpers\Collection;
-use PhpLab\Core\Libs\Scenario\Base\BaseScenario;
-use PhpLab\Core\Libs\Scenario\Exceptions\StopException;
+use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Helpers\Helper;
+use ZnCore\Base\Libs\ArrayTools\Helpers\Collection;
+use ZnCore\Base\Libs\Scenario\Base\BaseScenario;
+use ZnCore\Base\Libs\Scenario\Exceptions\StopException;
 
 class ScenarioCollection extends Collection
 {

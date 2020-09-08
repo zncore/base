@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces\Repository;
+namespace ZnCore\Base\Domain\Interfaces\Repository;
 
-use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Exceptions\NotFoundException;
+use ZnCore\Base\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Exceptions\NotFoundException;
 
 interface ReadOneInterface
 {

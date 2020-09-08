@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Domain\Entities;
+namespace ZnCore\Base\Domain\Entities;
 
 use Symfony\Component\Validator\ConstraintViolationInterface;
 

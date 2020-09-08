@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Scenario\Base;
+namespace ZnCore\Base\Libs\Scenario\Base;
 
-use PhpLab\Core\Libs\Scenario\Interfaces\RunInterface;
+use ZnCore\Base\Libs\Scenario\Interfaces\RunInterface;
 
 abstract class BaseScenario implements RunInterface
 {

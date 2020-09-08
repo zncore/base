@@ -1,18 +1,18 @@
 <?php
 
-namespace PhpLab\Core\Domain\Helpers\Repository;
+namespace ZnCore\Base\Domain\Helpers\Repository;
 
 use Illuminate\Support\Collection;
 use php7rails\domain\data\EntityCollection;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Domain\Dto\WithDto;
-use PhpLab\Core\Domain\Entities\relation\RelationEntity;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Helpers\Helper;
-use PhpLab\Core\Domain\Interfaces\Repository\RelationConfigInterface;
-use PhpLab\Core\Domain\Strategies\join\JoinStrategy;
-use PhpLab\Core\Exceptions\InvalidConfigException;
-use PhpLab\Core\Exceptions\NotFoundException;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Domain\Dto\WithDto;
+use ZnCore\Base\Domain\Entities\relation\RelationEntity;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Helpers\Helper;
+use ZnCore\Base\Domain\Interfaces\Repository\RelationConfigInterface;
+use ZnCore\Base\Domain\Strategies\join\JoinStrategy;
+use ZnCore\Base\Exceptions\InvalidConfigException;
+use ZnCore\Base\Exceptions\NotFoundException;
 
 class RelationHelper
 {

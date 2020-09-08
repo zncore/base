@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Libs\Scenario\Interfaces;
+namespace ZnCore\Base\Libs\Scenario\Interfaces;
 
 interface RunInterface
 {

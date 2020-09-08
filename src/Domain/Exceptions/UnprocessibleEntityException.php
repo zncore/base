@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Domain\Exceptions;
+namespace ZnCore\Base\Domain\Exceptions;
 
 use Exception;
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Entities\ValidateErrorEntity;
+use ZnCore\Base\Domain\Entities\ValidateErrorEntity;
 
 class UnprocessibleEntityException extends Exception
 {

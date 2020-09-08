@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Helpers;
+namespace ZnCore\Base\Helpers;
 
-use PhpLab\Core\Exceptions\InvalidConfigException;
+use ZnCore\Base\Exceptions\InvalidConfigException;
 
 class EntityType
 {

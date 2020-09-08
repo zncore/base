@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Helpers\Types;
+namespace ZnCore\Base\Helpers\Types;
 
 class FloatType extends BaseType
 {

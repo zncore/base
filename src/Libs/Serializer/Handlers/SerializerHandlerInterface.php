@@ -1,7 +1,7 @@
 <?php
 
 
-namespace PhpLab\Core\Libs\Serializer\Handlers;
+namespace ZnCore\Base\Libs\Serializer\Handlers;
 
 interface SerializerHandlerInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Domain\Helpers\Repository;
+namespace ZnCore\Base\Domain\Helpers\Repository;
 
-use PhpLab\Core\Domain\Entities\relation\RelationEntity;
-use PhpLab\Core\Helpers\Helper;
-use PhpLab\Core\Domain\Interfaces\Repository\RelationConfigInterface;
+use ZnCore\Base\Domain\Entities\relation\RelationEntity;
+use ZnCore\Base\Helpers\Helper;
+use ZnCore\Base\Domain\Interfaces\Repository\RelationConfigInterface;
 
 class RelationConfigHelper
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Enums;
+namespace ZnCore\Base\Enums;
 
-use PhpLab\Core\Domain\Base\BaseEnum;
+use ZnCore\Base\Domain\Base\BaseEnum;
 
 class StatusEnum extends BaseEnum
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Legacy\Code\helpers\generator;
+namespace ZnCore\Base\Legacy\Code\helpers\generator;
 
 use Yii;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 
 class FileGeneratorHelper {
 	

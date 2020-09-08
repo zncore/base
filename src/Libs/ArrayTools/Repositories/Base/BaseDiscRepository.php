@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Libs\ArrayTools\Repositories\Base;
+namespace ZnCore\Base\Libs\ArrayTools\Repositories\Base;
 
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use php7rails\domain\repositories\BaseRepository;
-use PhpLab\Core\Libs\Store\Store;
+use ZnCore\Base\Libs\Store\Store;
 
 abstract class BaseDiscRepository extends BaseRepository
 {

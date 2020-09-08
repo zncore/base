@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpLab\Core\Libs\ArrayTools\Base;
+namespace ZnCore\Base\Libs\ArrayTools\Base;
 
 use ArrayAccess;
 use Countable;
 use Iterator;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use Serializable;
 
 abstract class BaseCollection implements ArrayAccess, Countable, Iterator, Serializable

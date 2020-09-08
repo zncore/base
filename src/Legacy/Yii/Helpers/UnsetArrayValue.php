@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace PhpLab\Core\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 /**
  * Object that represents the removal of array value while performing [[ArrayHelper::merge()]].
@@ -27,10 +27,10 @@ namespace PhpLab\Core\Legacy\Yii\Helpers;
  *     'ids' => [
  *         2,
  *     ],
- *     'validDomains' => new \PhpLab\Core\Legacy\Yii\Helpers\UnsetArrayValue(),
+ *     'validDomains' => new \ZnCore\Base\Legacy\Yii\Helpers\UnsetArrayValue(),
  * ];
  *
- * $result = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::merge($array1, $array2);
+ * $result = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::merge($array1, $array2);
  * ```
  *
  * The result will be

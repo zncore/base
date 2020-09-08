@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Legacy\Traits\MagicAttribute;
+namespace ZnCore\Base\Legacy\Traits\MagicAttribute;
 
-use PhpLab\Core\Exceptions\InvalidCallException;
-use PhpLab\Core\Exceptions\UnknownPropertyException;
+use ZnCore\Base\Exceptions\InvalidCallException;
+use ZnCore\Base\Exceptions\UnknownPropertyException;
 
 trait MagicSetterTrait
 {

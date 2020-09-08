@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpLab\Core\Libs\I18Next\Services;
+namespace ZnCore\Base\Libs\I18Next\Services;
 
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
-use PhpLab\Core\Libs\Store\StoreFile;
-use PhpLab\Core\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
-use PhpLab\Core\Libs\I18Next\Libs\Translator;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\Store\StoreFile;
+use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
+use ZnCore\Base\Libs\I18Next\Libs\Translator;
 
 class TranslationService implements TranslationServiceInterface
 {

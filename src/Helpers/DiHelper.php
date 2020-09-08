@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Helpers;
+namespace ZnCore\Base\Helpers;
 
-use PhpLab\Core\Libs\Container\ContainerAwareInterface;
+use ZnCore\Base\Libs\Container\ContainerAwareInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface as SymfonyContainerAwareInterface;
 

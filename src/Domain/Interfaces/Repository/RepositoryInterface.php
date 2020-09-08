@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces\Repository;
+namespace ZnCore\Base\Domain\Interfaces\Repository;
 
 interface RepositoryInterface
 {

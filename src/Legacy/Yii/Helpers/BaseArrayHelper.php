@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace PhpLab\Core\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 use InvalidArgumentException;
 
@@ -156,17 +156,17 @@ abstract class BaseArrayHelper
      *
      * ```php
      * // working with array
-     * $username = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::getValue($_POST, 'username');
+     * $username = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::getValue($_POST, 'username');
      * // working with object
-     * $username = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::getValue($user, 'username');
+     * $username = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::getValue($user, 'username');
      * // working with anonymous function
-     * $fullName = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::getValue($user, function ($user, $defaultValue) {
+     * $fullName = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::getValue($user, function ($user, $defaultValue) {
      *     return $user->firstName . ' ' . $user->lastName;
      * });
      * // using dot format to retrieve the property of embedded object
-     * $street = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::getValue($users, 'address.street');
+     * $street = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::getValue($users, 'address.street');
      * // using an array of keys to retrieve the value
-     * $value = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::getValue($versions, ['1.0', 'date']);
+     * $value = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::getValue($versions, ['1.0', 'date']);
      * ```
      *
      * @param array|object $array array or object to extract value from
@@ -297,7 +297,7 @@ abstract class BaseArrayHelper
      * ```php
      * // $array = ['type' => 'A', 'options' => [1, 2]];
      * // working with array
-     * $type = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::remove($array, 'type');
+     * $type = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::remove($array, 'type');
      * // $array content
      * // $array = ['options' => [1, 2]];
      * ```
@@ -326,7 +326,7 @@ abstract class BaseArrayHelper
      *
      * ```php
      * $array = ['Bob' => 'Dylan', 'Michael' => 'Jackson', 'Mick' => 'Jagger', 'Janet' => 'Jackson'];
-     * $removed = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::removeValue($array, 'Jackson');
+     * $removed = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::removeValue($array, 'Jackson');
      * // result:
      * // $array = ['Bob' => 'Dylan', 'Mick' => 'Jagger'];
      * // $removed = ['Michael' => 'Jackson', 'Janet' => 'Jackson'];
@@ -889,20 +889,20 @@ abstract class BaseArrayHelper
      *     'E' => 1,
      * ];
      *
-     * $result = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::filter($array, ['A']);
+     * $result = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::filter($array, ['A']);
      * // $result will be:
      * // [
      * //     'A' => [1, 2],
      * // ]
      *
-     * $result = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::filter($array, ['A', 'B.C']);
+     * $result = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::filter($array, ['A', 'B.C']);
      * // $result will be:
      * // [
      * //     'A' => [1, 2],
      * //     'B' => ['C' => 1],
      * // ]
      *
-     * $result = \PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::filter($array, ['B', '!B.C']);
+     * $result = \ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::filter($array, ['B', '!B.C']);
      * // $result will be:
      * // [
      * //     'B' => ['D' => 2],

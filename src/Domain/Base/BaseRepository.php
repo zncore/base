@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Domain\Base;
+namespace ZnCore\Base\Domain\Base;
 
-use PhpLab\Core\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Base\Domain\Interfaces\GetEntityClassInterface;
 
 abstract class BaseRepository implements GetEntityClassInterface
 {

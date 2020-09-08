@@ -5,11 +5,11 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace PhpLab\Core\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\Helpers;
 
-use PhpLab\Core\Legacy\Yii\Base\Model;
+use ZnCore\Base\Legacy\Yii\Base\Model;
 use php7extension\yii\web\JsExpression;
-use PhpLab\Core\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
 
 /**
  * Json is a helper class providing JSON data encoding and decoding.

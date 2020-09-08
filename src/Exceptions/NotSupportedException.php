@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Exceptions;
+namespace ZnCore\Base\Exceptions;
 
 use Exception;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces\Traits;
+namespace ZnCore\Base\Domain\Interfaces\Traits;
 
 interface CreateEntityInterface
 {

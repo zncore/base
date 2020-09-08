@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Interfaces;
+namespace ZnCore\Base\Interfaces;
 
 interface GetNameInterface
 {

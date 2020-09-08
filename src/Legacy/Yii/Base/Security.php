@@ -5,9 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace PhpLab\Core\Legacy\Yii\Base;
+namespace ZnCore\Base\Legacy\Yii\Base;
 
-use PhpLab\Core\Legacy\Yii\Helpers\StringHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\StringHelper;
 
 /**
  * Security provides a set of methods to handle common security-related tasks.

@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpLab\Core\Domain\Entities\relation;
+namespace ZnCore\Base\Domain\Entities\relation;
 
-use PhpLab\Core\Domain\Enums\RelationEnum;
+use ZnCore\Base\Domain\Enums\RelationEnum;
 
 /**
  * Class RelationEntity
  *
- * @package PhpLab\Core\Domain\Entities\relation
+ * @package ZnCore\Base\Domain\Entities\relation
  *
  * @property $type
  * @property $field

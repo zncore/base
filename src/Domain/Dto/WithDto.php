@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Domain\Dto;
+namespace ZnCore\Base\Domain\Dto;
 
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Domain\Entities\relation\RelationEntity;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Domain\Entities\relation\RelationEntity;
 
 class WithDto
 {

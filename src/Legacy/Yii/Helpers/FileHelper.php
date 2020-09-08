@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\Helpers;
 
-use PhpLab\Core\Enums\Measure\ByteEnum;
-use PhpLab\Core\Helpers\ComposerHelper;
-use PhpLab\Core\Libs\Store\StoreFile;
+use ZnCore\Base\Enums\Measure\ByteEnum;
+use ZnCore\Base\Helpers\ComposerHelper;
+use ZnCore\Base\Libs\Store\StoreFile;
 
 class FileHelper extends BaseFileHelper
 {
@@ -87,7 +87,7 @@ class FileHelper extends BaseFileHelper
     {
         if (self::isAlias($name)) {
             $name = str_replace('\\', '/', $name);
-            $fileName = \PhpLab\Core\Legacy\Yii\Helpers\FileHelper::getAlias($name);
+            $fileName = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($name);
         } else {
             if (self::isAbsolute($name)) {
                 $fileName = $name;
@@ -143,7 +143,7 @@ class FileHelper extends BaseFileHelper
             $dir = ComposerHelper::getPsr4Path($path);
 
             /*if (class_exists('Yii')) {
-                $dir = \PhpLab\Core\Legacy\Yii\Helpers\FileHelper::getAlias($path);
+                $dir = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($path);
             } else {
                 $path = trim($path, '@/\\');
                 if ($pos = strpos($path, 'root') === 0) {

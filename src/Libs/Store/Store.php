@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Libs\Store;
+namespace ZnCore\Base\Libs\Store;
 
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
-use PhpLab\Core\Libs\Store\Drivers\DriverInterface;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\Store\Drivers\DriverInterface;
 
 class Store
 {
@@ -21,7 +21,7 @@ class Store
         $driver = strtolower($driver);
         $driver = ucfirst($driver);
         $this->driver = $driver;
-        $driverClass = 'PhpLab\\Core\\Libs\\Store\\Drivers\\' . $driver;
+        $driverClass = 'ZnCore\\Base\\Libs\\Store\\Drivers\\' . $driver;
         $implements = class_implements($driverClass);
         if ( ! array_key_exists(DriverInterface::class, $implements)) {
             throw new \Exception('No implements interface of driver class');

@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Store;
+namespace ZnCore\Base\Libs\Store;
 
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 
 class StoreFile
 {

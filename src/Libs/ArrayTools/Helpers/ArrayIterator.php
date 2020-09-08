@@ -1,12 +1,12 @@
 <?php
 
-namespace PhpLab\Core\Libs\ArrayTools\Helpers;
+namespace ZnCore\Base\Libs\ArrayTools\Helpers;
 
 use php7extension\yii\web\NotFoundHttpException;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Helpers\ReflectionHelper;
-use PhpLab\Core\Libs\Scenario\Collections\ScenarioCollection;
-use PhpLab\Core\Libs\Scenario\helpers\ScenarioHelper;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Helpers\ReflectionHelper;
+use ZnCore\Base\Libs\Scenario\Collections\ScenarioCollection;
+use ZnCore\Base\Libs\Scenario\helpers\ScenarioHelper;
 
 class ArrayIterator
 {
@@ -67,7 +67,7 @@ class ArrayIterator
         foreach ($allFilters as $filterName) {
             if (in_array($filterName, $filters)) {
                 $filterConfig = [
-                    'class' => 'PhpLab\Core\Libs\ArrayTools\Filters\Iterator\\' . ucfirst($filterName),
+                    'class' => 'ZnCore\Base\Libs\ArrayTools\Filters\Iterator\\' . ucfirst($filterName),
                     'query' => $query,
                 ];
                 $filterCollection = new ScenarioCollection([$filterConfig]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces;
+namespace ZnCore\Base\Domain\Interfaces;
 
 interface GetEntityClassInterface
 {

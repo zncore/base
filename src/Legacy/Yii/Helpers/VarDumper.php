@@ -5,9 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace PhpLab\Core\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\Helpers;
 
-use PhpLab\Core\Exceptions\InvalidValueException;
+use ZnCore\Base\Exceptions\InvalidValueException;
 
 /**
  * VarDumper is intended to replace the buggy PHP function var_dump and print_r.

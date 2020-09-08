@@ -1,22 +1,22 @@
 <?php
 
-namespace PhpLab\Core\Domain\Strategies\join;
+namespace ZnCore\Base\Domain\Strategies\join;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Dto\WithDto;
-use PhpLab\Core\Domain\Entities\relation\RelationEntity;
-use PhpLab\Core\Domain\Enums\RelationEnum;
-use PhpLab\Core\Domain\Strategies\join\handlers\Callback;
-use PhpLab\Core\Domain\Strategies\join\handlers\HandlerInterface;
-use PhpLab\Core\Domain\Strategies\join\handlers\Many;
-use PhpLab\Core\Domain\Strategies\join\handlers\ManyToMany;
-use PhpLab\Core\Domain\Strategies\join\handlers\One;
-use PhpLab\Core\Patterns\Strategy\Base\BaseStrategyContextHandlers;
+use ZnCore\Base\Domain\Dto\WithDto;
+use ZnCore\Base\Domain\Entities\relation\RelationEntity;
+use ZnCore\Base\Domain\Enums\RelationEnum;
+use ZnCore\Base\Domain\Strategies\join\handlers\Callback;
+use ZnCore\Base\Domain\Strategies\join\handlers\HandlerInterface;
+use ZnCore\Base\Domain\Strategies\join\handlers\Many;
+use ZnCore\Base\Domain\Strategies\join\handlers\ManyToMany;
+use ZnCore\Base\Domain\Strategies\join\handlers\One;
+use ZnCore\Base\Patterns\Strategy\Base\BaseStrategyContextHandlers;
 
 /**
  * Class PaymentStrategy
  *
- * @package PhpLab\Core\Domain\Strategies\payment
+ * @package ZnCore\Base\Domain\Strategies\payment
  *
  * @property-read HandlerInterface $strategyInstance
  */

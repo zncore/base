@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpLab\Core\Domain\Strategies\join\handlers;
+namespace ZnCore\Base\Domain\Strategies\join\handlers;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Dto\WithDto;
-use PhpLab\Core\Domain\Entities\relation\RelationEntity;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Domain\Dto\WithDto;
+use ZnCore\Base\Domain\Entities\relation\RelationEntity;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class One extends Many implements HandlerInterface

@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces;
+namespace ZnCore\Base\Domain\Interfaces;
 
-use PhpLab\Core\Domain\Libs\DataProvider;
-use PhpLab\Core\Domain\Libs\Query;
+use ZnCore\Base\Domain\Libs\DataProvider;
+use ZnCore\Base\Domain\Libs\Query;
 
 interface DataProviderInterface
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpLab\Core\Domain\Helpers\Repository;
+namespace ZnCore\Base\Domain\Helpers\Repository;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use php7rails\domain\interfaces\services\ReadAllInterface;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Domain\Entities\relation\BaseForeignEntity;
-//use PhpLab\Core\Domain\Enums\RelationClassTypeEnum;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Domain\Entities\relation\BaseForeignEntity;
+//use ZnCore\Base\Domain\Enums\RelationClassTypeEnum;
 
 class RelationRepositoryHelper
 {

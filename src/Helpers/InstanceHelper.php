@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Helpers;
+namespace ZnCore\Base\Helpers;
 
 use php7extension\yii\web\ServerErrorHttpException;
-use PhpLab\Core\Exceptions\InvalidConfigException;
+use ZnCore\Base\Exceptions\InvalidConfigException;
 
 class InstanceHelper
 {

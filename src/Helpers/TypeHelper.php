@@ -1,14 +1,14 @@
 <?php
 
-namespace PhpLab\Core\Helpers;
+namespace ZnCore\Base\Helpers;
 
 use DateTime;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use php7rails\domain\data\EntityCollection;
 use php7rails\domain\interfaces\ValueObjectInterface;
 use php7rails\domain\values\TimeValue;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Helpers\Types\BaseType;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Helpers\Types\BaseType;
 
 class TypeHelper
 {
@@ -144,7 +144,7 @@ class TypeHelper
 
     public static function getInstanceType($class)
     {
-        $class = 'PhpLab\Core\Helpers\Types\\' . ucfirst($class) . 'Type';
+        $class = 'ZnCore\Base\Helpers\Types\\' . ucfirst($class) . 'Type';
         if ( ! class_exists($class)) {
             return null;
         }

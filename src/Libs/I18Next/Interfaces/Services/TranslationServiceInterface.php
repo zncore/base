@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Libs\I18Next\Interfaces\Services;
+namespace ZnCore\Base\Libs\I18Next\Interfaces\Services;
 
 interface TranslationServiceInterface
 {

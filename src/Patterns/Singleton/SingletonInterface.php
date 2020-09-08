@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Patterns\Singleton;
+namespace ZnCore\Base\Patterns\Singleton;
 
 interface SingletonInterface
 {

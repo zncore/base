@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Domain\Helpers\Repository;
+namespace ZnCore\Base\Domain\Helpers\Repository;
 
-use PhpLab\Core\Domain\Libs\Query;
+use ZnCore\Base\Domain\Libs\Query;
 
 class RelationWithHelper
 {
@@ -69,7 +69,7 @@ class RelationWithHelper
     private static function sortWithParam(array $withArray): array
     {
         $withArray = array_unique($withArray);
-        usort($withArray, [\PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper::class, 'sortByLen']);
+        usort($withArray, [\ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper::class, 'sortByLen']);
         $withArray = array_reverse($withArray);
         return $withArray;
     }

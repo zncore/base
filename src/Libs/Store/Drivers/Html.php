@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Store\Drivers;
+namespace ZnCore\Base\Libs\Store\Drivers;
 
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 
 class Html implements DriverInterface
 {

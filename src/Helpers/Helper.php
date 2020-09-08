@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpLab\Core\Helpers;
+namespace ZnCore\Base\Helpers;
 
-use PhpLab\Core\Legacy\Yii\Base\Model;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Legacy\Yii\Base\Model;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use php7rails\app\helpers\EnvService;
-use PhpLab\Core\Domain\Exceptions\UnprocessableEntityHttpException;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Domain\Exceptions\UnprocessableEntityHttpException;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
 
 class Helper
 {

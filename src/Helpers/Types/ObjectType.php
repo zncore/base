@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpLab\Core\Helpers\Types;
+namespace ZnCore\Base\Helpers\Types;
 
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use php7rails\domain\data\EntityCollection;
 use php7rails\domain\values\BaseValue;
-use PhpLab\Core\Exceptions\InvalidArgumentException;
-use PhpLab\Core\Helpers\Helper;
-use PhpLab\Core\Libs\ArrayTools\Helpers\Collection;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Helpers\Helper;
+use ZnCore\Base\Libs\ArrayTools\Helpers\Collection;
 
 class ObjectType extends BaseType
 {

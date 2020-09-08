@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Libs\ArrayTools\Helpers;
+namespace ZnCore\Base\Libs\ArrayTools\Helpers;
 
-use PhpLab\Core\Helpers\ClassHelper;
-use PhpLab\Core\Libs\ArrayTools\Base\BaseCollection;
+use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Libs\ArrayTools\Base\BaseCollection;
 
 class Collection extends BaseCollection
 {

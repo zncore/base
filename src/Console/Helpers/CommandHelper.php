@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Console\Helpers;
+namespace ZnCore\Base\Console\Helpers;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
-use PhpLab\Core\Helpers\ComposerHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Helpers\ComposerHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 

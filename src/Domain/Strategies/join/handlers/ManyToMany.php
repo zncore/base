@@ -1,16 +1,16 @@
 <?php
 
-namespace PhpLab\Core\Domain\Strategies\join\handlers;
+namespace ZnCore\Base\Domain\Strategies\join\handlers;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Domain\Dto\WithDto;
-use PhpLab\Core\Domain\Entities\relation\RelationEntity;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Domain\Helpers\Repository\RelationConfigHelper;
-use PhpLab\Core\Domain\Helpers\Repository\RelationRepositoryHelper;
-use PhpLab\Core\Libs\ArrayTools\Helpers\ArrayIterator;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Domain\Dto\WithDto;
+use ZnCore\Base\Domain\Entities\relation\RelationEntity;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Domain\Helpers\Repository\RelationConfigHelper;
+use ZnCore\Base\Domain\Helpers\Repository\RelationRepositoryHelper;
+use ZnCore\Base\Libs\ArrayTools\Helpers\ArrayIterator;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ManyToMany extends Base implements HandlerInterface

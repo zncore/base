@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Libs\Serializer;
+namespace ZnCore\Base\Libs\Serializer;
 
-use PhpLab\Core\Libs\Serializer\Handlers\ArrayHandler;
-use PhpLab\Core\Libs\Serializer\Handlers\ObjectHandler;
+use ZnCore\Base\Libs\Serializer\Handlers\ArrayHandler;
+use ZnCore\Base\Libs\Serializer\Handlers\ObjectHandler;
 
 class ArraySerializer
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Serializer\Handlers;
+namespace ZnCore\Base\Libs\Serializer\Handlers;
 
-use PhpLab\Core\Libs\Serializer\ArraySerializer;
+use ZnCore\Base\Libs\Serializer\ArraySerializer;
 
 class ArrayHandler implements SerializerHandlerInterface
 {

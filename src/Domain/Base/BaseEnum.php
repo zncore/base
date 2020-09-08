@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Domain\Base;
+namespace ZnCore\Base\Domain\Base;
 
-use PhpLab\Core\Helpers\ReflectionHelper;
+use ZnCore\Base\Helpers\ReflectionHelper;
 
 abstract class BaseEnum
 {

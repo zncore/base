@@ -1,12 +1,12 @@
 <?php
 
-namespace PhpLab\Core\Libs\Store\Drivers;
+namespace ZnCore\Base\Libs\Store\Drivers;
 
-use PhpLab\Core\Legacy\Code\helpers\generator\FileGeneratorHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
-use PhpLab\Core\Legacy\Yii\Helpers\VarDumper;
-use PhpLab\Core\Helpers\StringHelper;
+use ZnCore\Base\Legacy\Code\helpers\generator\FileGeneratorHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\VarDumper;
+use ZnCore\Base\Helpers\StringHelper;
 
 class Php implements DriverInterface
 {

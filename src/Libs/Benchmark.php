@@ -1,12 +1,12 @@
 <?php
 
-namespace PhpLab\Core\Libs;
+namespace ZnCore\Base\Libs;
 
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use php7extension\yii\web\ServerErrorHttpException;
 use php7rails\app\helpers\EnvService;
-use PhpLab\Core\Helpers\StringHelper;
-use PhpLab\Core\Libs\Store\StoreFile;
+use ZnCore\Base\Helpers\StringHelper;
+use ZnCore\Base\Libs\Store\StoreFile;
 
 class Benchmark
 {

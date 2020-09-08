@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Domain\Libs\Relation;
+namespace ZnCore\Base\Domain\Libs\Relation;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class OneToOne

@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Init\Tasks;
+namespace ZnCore\Base\Libs\Init\Tasks;
 
-use PhpLab\Core\Libs\Init\Helpers\InputHelper;
+use ZnCore\Base\Libs\Init\Helpers\InputHelper;
 
 class CopyFilesTask extends BaseTask
 {

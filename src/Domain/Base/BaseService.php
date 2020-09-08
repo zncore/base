@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpLab\Core\Domain\Base;
+namespace ZnCore\Base\Domain\Base;
 
-use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Domain\Interfaces\Traits\CreateEntityInterface;
-use PhpLab\Core\Domain\Interfaces\GetEntityClassInterface;
-use PhpLab\Core\Helpers\InstanceHelper;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Domain\Interfaces\Traits\CreateEntityInterface;
+use ZnCore\Base\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Base\Helpers\InstanceHelper;
 
 abstract class BaseService implements GetEntityClassInterface, CreateEntityInterface
 {

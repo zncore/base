@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Console\Question;
+namespace ZnCore\Base\Console\Question;
 
 class ChoiceQuestion extends \Symfony\Component\Console\Question\ChoiceQuestion
 {

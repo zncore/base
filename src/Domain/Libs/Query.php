@@ -1,13 +1,13 @@
 <?php
 
-namespace PhpLab\Core\Domain\Libs;
+namespace ZnCore\Base\Domain\Libs;
 
 use php7extension\core\db\domain\helpers\TableHelper;
 use php7extension\yii\db\Expression;
 use php7extension\yii\db\ExpressionInterface;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Domain\Entities\Query\Where;
-use PhpLab\Core\Helpers\TypeHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Domain\Entities\Query\Where;
+use ZnCore\Base\Helpers\TypeHelper;
 
 /**
  * Class Query

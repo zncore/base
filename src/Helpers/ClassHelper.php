@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpLab\Core\Helpers;
+namespace ZnCore\Base\Helpers;
 
 use Exception;
 use php7extension\yii\web\ServerErrorHttpException;
-use PhpLab\Core\Exceptions\InvalidArgumentException;
-use PhpLab\Core\Exceptions\InvalidConfigException;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Exceptions\InvalidConfigException;
 
 class ClassHelper
 {

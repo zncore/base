@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Store\Drivers;
+namespace ZnCore\Base\Libs\Store\Drivers;
 
-use PhpLab\Core\Helpers\StringHelper;
+use ZnCore\Base\Helpers\StringHelper;
 
 class Csv implements DriverInterface
 {

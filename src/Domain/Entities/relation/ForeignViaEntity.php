@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpLab\Core\Domain\Entities\relation;
+namespace ZnCore\Base\Domain\Entities\relation;
 
 /**
  * Class ForeignViaEntity
  *
- * @package PhpLab\Core\Domain\Entities\relation
+ * @package ZnCore\Base\Domain\Entities\relation
  *
  * @property $self
  * @property $foreign

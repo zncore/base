@@ -1,17 +1,17 @@
 <?php
 
-namespace PhpLab\Core\Libs\ArrayTools\Traits;
+namespace ZnCore\Base\Libs\ArrayTools\Traits;
 
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use php7extension\yii\web\NotFoundHttpException;
 use php7rails\domain\Domain;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
 
 /**
  * Trait ArrayModifyTrait
  *
- * @package PhpLab\Core\Libs\ArrayTools\Traits
+ * @package ZnCore\Base\Libs\ArrayTools\Traits
  *
  * @property string $id
  * @property string $primaryKey

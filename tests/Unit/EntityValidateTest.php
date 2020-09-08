@@ -1,12 +1,12 @@
 <?php
 
-namespace PhpLab\Core\Tests\Unit;
+namespace ZnCore\Base\Tests\Unit;
 
-use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
-use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Domain\Helpers\ValidationHelper;
-use PhpLab\Core\Tests\Libs\AccessEntity;
-use PhpLab\Test\Base\BaseTest;
+use ZnCore\Base\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Domain\Helpers\ValidationHelper;
+use ZnCore\Base\Tests\Libs\AccessEntity;
+use ZnTool\Test\Base\BaseTest;
 
 final class EntityValidateTest extends BaseTest
 {

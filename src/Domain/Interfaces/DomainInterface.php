@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces;
+namespace ZnCore\Base\Domain\Interfaces;
 
-use PhpLab\Core\Interfaces\GetNameInterface;
+use ZnCore\Base\Interfaces\GetNameInterface;
 
 interface DomainInterface extends GetNameInterface
 {

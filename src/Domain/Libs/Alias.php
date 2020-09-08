@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Domain\Libs;
+namespace ZnCore\Base\Domain\Libs;
 
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 
 class Alias
 {

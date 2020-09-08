@@ -1,20 +1,20 @@
 <?php
 
-namespace PhpLab\Core\Domain\Base;
+namespace ZnCore\Base\Domain\Base;
 
-use PhpLab\Core\Domain\Helpers\EntityHelper;
-use PhpLab\Core\Domain\Helpers\ValidationHelper;
-use PhpLab\Core\Domain\Interfaces\Entity\EntityIdInterface;
-use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
-use PhpLab\Core\Domain\Interfaces\Repository\CrudRepositoryInterface;
-use PhpLab\Core\Domain\Interfaces\Service\CrudServiceInterface;
-use PhpLab\Core\Domain\Libs\DataProvider;
-use PhpLab\Core\Domain\Libs\Query;
-use PhpLab\Core\Exceptions\NotFoundException;
+use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Domain\Helpers\ValidationHelper;
+use ZnCore\Base\Domain\Interfaces\Entity\EntityIdInterface;
+use ZnCore\Base\Domain\Interfaces\Entity\ValidateEntityInterface;
+use ZnCore\Base\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use ZnCore\Base\Domain\Interfaces\Service\CrudServiceInterface;
+use ZnCore\Base\Domain\Libs\DataProvider;
+use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Base\Exceptions\NotFoundException;
 
 /**
  * Class BaseCrudService
- * @package PhpLab\Core\Domain\Base
+ * @package ZnCore\Base\Domain\Base
  *
  * @method CrudRepositoryInterface getRepository()
  */

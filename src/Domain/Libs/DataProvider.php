@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpLab\Core\Domain\Libs;
+namespace ZnCore\Base\Domain\Libs;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Entities\DataProviderEntity;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Domain\Interfaces\ReadAllInterface;
+use ZnCore\Base\Domain\Entities\DataProviderEntity;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Domain\Interfaces\ReadAllInterface;
 
 class DataProvider
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces\Entity;
+namespace ZnCore\Base\Domain\Interfaces\Entity;
 
 interface EntityIdInterface
 {

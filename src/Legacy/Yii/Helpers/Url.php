@@ -5,9 +5,9 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace PhpLab\Core\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\Helpers;
 
-use PhpLab\Core\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
 
 /**
  * Url provides a set of static methods for managing URLs.
@@ -126,7 +126,7 @@ class Url
      */
     protected static function normalizeRoute($route)
     {
-        $route = \PhpLab\Core\Legacy\Yii\Helpers\FileHelper::getAlias((string) $route);
+        $route = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias((string) $route);
         if (strncmp($route, '/', 1) === 0) {
             // absolute route
             return ltrim($route, '/');
@@ -214,7 +214,7 @@ class Url
             return static::toRoute($url, $scheme);
         }
 
-        $url = \PhpLab\Core\Legacy\Yii\Helpers\FileHelper::getAlias($url);
+        $url = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($url);
         if ($url === '') {
             $url = Yii::$app->getRequest()->getUrl();
         }

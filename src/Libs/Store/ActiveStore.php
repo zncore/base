@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Store;
+namespace ZnCore\Base\Libs\Store;
 
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 
 class ActiveStore
 {

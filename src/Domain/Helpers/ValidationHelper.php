@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpLab\Core\Domain\Helpers;
+namespace ZnCore\Base\Domain\Helpers;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Entities\ValidateErrorEntity;
-use PhpLab\Core\Domain\Exceptions\UnprocessibleEntityException;
-use PhpLab\Core\Domain\Interfaces\Entity\ValidateEntityInterface;
+use ZnCore\Base\Domain\Entities\ValidateErrorEntity;
+use ZnCore\Base\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Base\Domain\Interfaces\Entity\ValidateEntityInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validation;

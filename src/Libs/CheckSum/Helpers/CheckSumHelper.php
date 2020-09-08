@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Libs\CheckSum\Helpers;
+namespace ZnCore\Base\Libs\CheckSum\Helpers;
 
-use PhpLab\Core\Libs\CheckSum\Enums\CheckSumAlgorithmEnum;
-use PhpLab\Core\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Libs\CheckSum\Enums\CheckSumAlgorithmEnum;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
 
 class CheckSumHelper
 {

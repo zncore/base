@@ -1,15 +1,15 @@
 <?php
 
-namespace PhpLab\Core\Patterns\Strategy\Base;
+namespace ZnCore\Base\Patterns\Strategy\Base;
 
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Exceptions\InvalidArgumentException;
-use PhpLab\Core\Helpers\InstanceHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Helpers\InstanceHelper;
 
 /**
  * Class BaseStrategyContext
  *
- * @package PhpLab\Core\Libs\Scenario\Base
+ * @package ZnCore\Base\Libs\Scenario\Base
  *
  * @property-read Object $strategyInstance
  * @property-read array $strategyDefinitions

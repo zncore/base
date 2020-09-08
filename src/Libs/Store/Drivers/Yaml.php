@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Libs\Store\Drivers;
+namespace ZnCore\Base\Libs\Store\Drivers;
 
 use Symfony\Component\Yaml\Yaml as SymfonyYaml;
 

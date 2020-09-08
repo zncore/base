@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Libs\I18Next\Libs;
+namespace ZnCore\Base\Libs\I18Next\Libs;
 
 class Translator {
 

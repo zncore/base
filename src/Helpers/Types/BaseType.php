@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Helpers\Types;
+namespace ZnCore\Base\Helpers\Types;
 
-use PhpLab\Core\Exceptions\InvalidArgumentException;
-use PhpLab\Core\Helpers\ClassHelper;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Helpers\ClassHelper;
 
 abstract class BaseType
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace PhpLab\Core\Libs\Init\Libs;
+namespace ZnCore\Base\Libs\Init\Libs;
 
-use PhpLab\Core\Libs\Init\Helpers\InputHelper;
-use PhpLab\Core\Libs\Init\Tasks\BaseTask;
-use PhpLab\Core\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\Init\Helpers\InputHelper;
+use ZnCore\Base\Libs\Init\Tasks\BaseTask;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 

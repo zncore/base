@@ -1,9 +1,9 @@
 <?php
 
-namespace PhpLab\Core\Domain\Interfaces;
+namespace ZnCore\Base\Domain\Interfaces;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Domain\Libs\Query;
+use ZnCore\Base\Domain\Libs\Query;
 
 interface ReadAllInterface
 {

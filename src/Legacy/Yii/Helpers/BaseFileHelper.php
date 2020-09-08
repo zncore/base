@@ -5,11 +5,11 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace PhpLab\Core\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 use ErrorException;
-use PhpLab\Core\Exceptions\InvalidArgumentException;
-use PhpLab\Core\Exceptions\InvalidConfigException;
+use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Exceptions\InvalidConfigException;
 
 /**
  * BaseFileHelper provides concrete implementation for [[FileHelper]].
@@ -151,7 +151,7 @@ abstract class BaseFileHelper
     public static function getMimeType($file, $magicFile = null, $checkExtension = true)
     {
         if ($magicFile !== null) {
-            $magicFile = \PhpLab\Core\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
+            $magicFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
         }
         if ( ! extension_loaded('fileinfo')) {
             if ($checkExtension) {
@@ -228,7 +228,7 @@ abstract class BaseFileHelper
         if ($magicFile === null) {
             $magicFile = static::$mimeMagicFile;
         }
-        $magicFile = \PhpLab\Core\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
+        $magicFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
         if ( ! isset(self::$_mimeTypes[$magicFile])) {
             self::$_mimeTypes[$magicFile] = require $magicFile;
         }
@@ -250,7 +250,7 @@ abstract class BaseFileHelper
         if ($aliasesFile === null) {
             $aliasesFile = static::$mimeAliasesFile;
         }
-        $aliasesFile = \PhpLab\Core\Legacy\Yii\Helpers\FileHelper::getAlias($aliasesFile);
+        $aliasesFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($aliasesFile);
         if ( ! isset(self::$_mimeAliases[$aliasesFile])) {
             self::$_mimeAliases[$aliasesFile] = require $aliasesFile;
         }

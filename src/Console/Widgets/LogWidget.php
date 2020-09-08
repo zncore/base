@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Console\Widgets;
+namespace ZnCore\Base\Console\Widgets;
 
 class LogWidget extends BaseWidget
 {

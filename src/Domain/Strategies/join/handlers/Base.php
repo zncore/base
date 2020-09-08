@@ -1,11 +1,11 @@
 <?php
 
-namespace PhpLab\Core\Domain\Strategies\join\handlers;
+namespace ZnCore\Base\Domain\Strategies\join\handlers;
 
 use Illuminate\Support\Collection;
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
-use PhpLab\Core\Domain\Dto\WithDto;
-use PhpLab\Core\Helpers\PhpHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Domain\Dto\WithDto;
+use ZnCore\Base\Helpers\PhpHelper;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 abstract class Base

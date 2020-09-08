@@ -1,6 +1,6 @@
 <?php
 
-namespace PhpLab\Core\Helpers;
+namespace ZnCore\Base\Helpers;
 
 use yii\web\UploadedFile;
 

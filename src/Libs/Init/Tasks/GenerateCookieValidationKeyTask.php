@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Init\Tasks;
+namespace ZnCore\Base\Libs\Init\Tasks;
 
-use PhpLab\Core\Helpers\StringHelper;
+use ZnCore\Base\Helpers\StringHelper;
 
 class GenerateCookieValidationKeyTask extends BaseTask
 {

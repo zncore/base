@@ -1,8 +1,8 @@
 <?php
 
-namespace PhpLab\Core\Libs\Env;
+namespace ZnCore\Base\Libs\Env;
 
-use PhpLab\Core\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use RuntimeException;
 use Symfony\Component\Dotenv\Dotenv;
 
