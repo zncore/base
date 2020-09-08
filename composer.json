@@ -21,8 +21,8 @@
     "psr-4": {
       "PhpLab\\Core\\": "src",
       "PhpLab\\Core\\Tests\\": "tests",
-      "ZnLab\\Core\\": "src",
-      "ZnLab\\Core\\Tests\\": "tests"
+      "ZnCore\\Base\\": "src",
+      "ZnCore\\Base\\Tests\\": "tests"
     }
   }
 }
