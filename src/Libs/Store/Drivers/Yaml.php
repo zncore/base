@@ -17,7 +17,7 @@ class Yaml implements DriverInterface
 
     public function encode($data)
     {
-        $content = Yaml::dump($data, 10);
+        $content = SymfonyYaml::dump($data, 10);
         //$content = str_replace('    ', "\t", $content);
         return $content;
     }

@@ -5,7 +5,7 @@ namespace ZnCore\Base\Console\Widgets;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class BaseWidget
+abstract class BaseWidget
 {
 
     protected $output;
