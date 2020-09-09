@@ -2,7 +2,6 @@
 
 namespace ZnCore\Base\Helpers;
 
-use php7extension\yii\web\ServerErrorHttpException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
 
 class InstanceHelper

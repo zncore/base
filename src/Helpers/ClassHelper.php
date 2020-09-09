@@ -3,7 +3,6 @@
 namespace ZnCore\Base\Helpers;
 
 use Exception;
-use php7extension\yii\web\ServerErrorHttpException;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
 
