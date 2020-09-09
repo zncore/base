@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\ArrayTools\Filters\Iterator;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Domain\Libs\Query;
 use ZnCore\Base\Libs\Scenario\Base\BaseScenario;
 
 class Where extends BaseScenario

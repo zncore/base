@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Enums\Http;
 
-use ZnCore\Base\Domain\Base\BaseEnum;
+use ZnCore\Domain\Base\BaseEnum;
 
 class HttpStatusCodeEnum extends BaseEnum
 {

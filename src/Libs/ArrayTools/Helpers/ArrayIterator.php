@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\ArrayTools\Helpers;
 
 use php7extension\yii\web\NotFoundHttpException;
-use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Domain\Libs\Query;
 use ZnCore\Base\Helpers\ReflectionHelper;
 use ZnCore\Base\Libs\Scenario\Collections\ScenarioCollection;
 use ZnCore\Base\Libs\Scenario\helpers\ScenarioHelper;

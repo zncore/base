@@ -6,8 +6,8 @@ use ZnCore\Base\Legacy\Yii\Base\Model;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use php7rails\app\helpers\EnvService;
-use ZnCore\Base\Domain\Exceptions\UnprocessableEntityHttpException;
-use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Domain\Exceptions\UnprocessableEntityHttpException;
+use ZnCore\Domain\Helpers\EntityHelper;
 
 class Helper
 {
@@ -28,6 +28,9 @@ class Helper
 
     public static function forgeEntity($value, string $className, bool $isCollection = null, $isSaveKey = false)
     {
+
+        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
         if (empty($value)) {
             return null;
         }
@@ -72,6 +75,9 @@ class Helper
 
     public static function forgeForm(Model $model, $data = null)
     {
+
+        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
         $data = self::post($data, $model);
         $model->setAttributes($data, false);
         /*if(!$model->validate()) {
@@ -81,6 +87,9 @@ class Helper
 
     public static function createForm($form, $data = null, $scenario = null): Model
     {
+
+        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
         if (is_string($form) || is_array($form)) {
             $form = ClassHelper::createObject($form);
         }
@@ -96,6 +105,9 @@ class Helper
 
     public static function validateForm($form, $data = null, $scenario = null)
     {
+
+        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
         $form = self::createForm($form, $data, $scenario);
         if ( ! $form->validate()) {
             throw new UnprocessableEntityHttpException($form);
@@ -106,6 +118,9 @@ class Helper
 
     public static function toArray($value, $recursive = true)
     {
+
+        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
         if (is_object($value) && method_exists($value, 'toArray')) {
             return $value->toArray([], [], $recursive);
         }
@@ -137,12 +152,18 @@ class Helper
 
     public static function includeConfig(string $file, array $mergeConfig = []): array
     {
+
+        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
         $parentConfig = include($file);
         return ArrayHelper::merge($parentConfig, $mergeConfig);
     }
 
     public static function list2tree($secureAttributes)
     {
+
+        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
         $tree = [];
         foreach ($secureAttributes as $attribute) {
             ArrayHelper::setValue($tree, $attribute, true);
@@ -152,6 +173,9 @@ class Helper
 
     public static function parseParams($path, $delimiter, $subDelimiter)
     {
+
+        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
         $isHasParams = strpos($path, $delimiter);
         if ( ! $isHasParams) {
             return null;

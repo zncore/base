@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Enums\Measure;
 
-use ZnCore\Base\Domain\Base\BaseEnum;
+use ZnCore\Domain\Base\BaseEnum;
 
 class ByteEnum extends BaseEnum
 {

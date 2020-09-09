@@ -4,6 +4,8 @@ namespace ZnCore\Base\Helpers;
 
 use ZnCore\Base\Exceptions\InvalidConfigException;
 
+throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
 class EntityType
 {
 

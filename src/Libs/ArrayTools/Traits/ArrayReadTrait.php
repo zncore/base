@@ -3,11 +3,11 @@
 namespace ZnCore\Base\Libs\ArrayTools\Traits;
 
 use php7rails\domain\Domain;
-use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Domain\Libs\Query;
 use ZnCore\Base\Libs\ArrayTools\Helpers\ArrayIterator;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use php7extension\yii\web\NotFoundHttpException;
-use ZnCore\Base\Domain\Libs\Alias;
+use ZnCore\Domain\Libs\Alias;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 
 /**

@@ -5,8 +5,8 @@ namespace ZnCore\Base\Libs\ArrayTools\Traits;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use php7extension\yii\web\NotFoundHttpException;
 use php7rails\domain\Domain;
-use ZnCore\Base\Domain\Libs\Query;
-use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Domain\Libs\Query;
+use ZnCore\Domain\Helpers\EntityHelper;
 
 /**
  * Trait ArrayModifyTrait

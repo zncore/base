@@ -12,6 +12,16 @@ trait ContainerAwareTrait
      */
     protected $container;
 
+    public function __construct(ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
+    protected function getContainer(): ContainerInterface
+    {
+        return $this->container;
+    }
+
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;

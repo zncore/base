@@ -5,6 +5,8 @@ namespace ZnCore\Base\Helpers\Types;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Helpers\ClassHelper;
 
+throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
 abstract class BaseType
 {
 

@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\CheckSum\Enums;
 
-use ZnCore\Base\Domain\Base\BaseEnum;
+use ZnCore\Domain\Base\BaseEnum;
 
 class CheckSumAlgorithmEnum extends BaseEnum
 {

@@ -2,6 +2,8 @@
 
 namespace ZnCore\Base\Helpers\Types;
 
+throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
 class ArrayType extends BaseType
 {
 

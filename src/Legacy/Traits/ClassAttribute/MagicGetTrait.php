@@ -5,6 +5,8 @@ namespace ZnCore\Base\Legacy\Traits\ClassAttribute;
 use ZnCore\Base\Exceptions\InvalidCallException;
 use ZnCore\Base\Exceptions\UnknownPropertyException;
 
+throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+
 trait MagicGetTrait
 {
 

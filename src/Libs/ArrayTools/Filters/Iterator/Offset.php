@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\ArrayTools\Filters\Iterator;
 
-use ZnCore\Base\Domain\Libs\Query;
+use ZnCore\Domain\Libs\Query;
 use ZnCore\Base\Libs\Scenario\Base\BaseScenario;
 
 class Offset extends BaseScenario

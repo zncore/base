@@ -7,7 +7,7 @@ use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use php7rails\domain\data\EntityCollection;
 use php7rails\domain\interfaces\ValueObjectInterface;
 use php7rails\domain\values\TimeValue;
-use ZnCore\Base\Domain\Helpers\EntityHelper;
+use ZnCore\Domain\Helpers\EntityHelper;
 use ZnCore\Base\Helpers\Types\BaseType;
 
 class TypeHelper
