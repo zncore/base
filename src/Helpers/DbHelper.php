@@ -5,7 +5,7 @@ namespace ZnCore\Base\Helpers;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Env\DotEnvHelper;
 use ZnCore\Db\Db\Enums\DbDriverEnum;
-
+// todo: перенести в zncore/db
 class DbHelper
 {
 
