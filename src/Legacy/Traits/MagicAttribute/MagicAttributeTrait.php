@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Legacy\Traits\MagicAttribute;
 
-throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+//throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
 trait MagicAttributeTrait
 {

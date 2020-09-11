@@ -29,7 +29,7 @@ class Helper
     public static function forgeEntity($value, string $className, bool $isCollection = null, $isSaveKey = false)
     {
 
-        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+        throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         if (empty($value)) {
             return null;
@@ -76,7 +76,7 @@ class Helper
     public static function forgeForm(Model $model, $data = null)
     {
 
-        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+        throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         $data = self::post($data, $model);
         $model->setAttributes($data, false);
@@ -88,7 +88,7 @@ class Helper
     public static function createForm($form, $data = null, $scenario = null): Model
     {
 
-        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+        throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         if (is_string($form) || is_array($form)) {
             $form = ClassHelper::createObject($form);
@@ -106,7 +106,7 @@ class Helper
     public static function validateForm($form, $data = null, $scenario = null)
     {
 
-        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+        throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         $form = self::createForm($form, $data, $scenario);
         if ( ! $form->validate()) {
@@ -119,7 +119,7 @@ class Helper
     public static function toArray($value, $recursive = true)
     {
 
-        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+        throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         if (is_object($value) && method_exists($value, 'toArray')) {
             return $value->toArray([], [], $recursive);
@@ -153,7 +153,7 @@ class Helper
     public static function includeConfig(string $file, array $mergeConfig = []): array
     {
 
-        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+        throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         $parentConfig = include($file);
         return ArrayHelper::merge($parentConfig, $mergeConfig);
@@ -162,7 +162,7 @@ class Helper
     public static function list2tree($secureAttributes)
     {
 
-        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+        throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         $tree = [];
         foreach ($secureAttributes as $attribute) {
@@ -174,7 +174,7 @@ class Helper
     public static function parseParams($path, $delimiter, $subDelimiter)
     {
 
-        throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+        throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         $isHasParams = strpos($path, $delimiter);
         if ( ! $isHasParams) {

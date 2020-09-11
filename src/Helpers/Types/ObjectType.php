@@ -9,7 +9,7 @@ use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Helpers\Helper;
 use ZnCore\Base\Libs\ArrayTools\Helpers\Collection;
 
-throw new \ZnCore\Base\Exceptions\DeprecatedException\DeprecatedException;
+throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
 class ObjectType extends BaseType
 {
