@@ -204,13 +204,6 @@ class Helper
         return null;
     }
 
-    public static function loadData($name, $key = null)
-    {
-        $file = COMMON_DATA_DIR . DIRECTORY_SEPARATOR . $name . '.php';
-        $data = FileHelper::loadData($file, $key, []);
-        return $data;
-    }
-
     public static function isEnabledComponent($config)
     {
         if ( ! is_array($config)) {
