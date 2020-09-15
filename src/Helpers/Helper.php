@@ -29,7 +29,7 @@ class Helper
     public static function forgeEntity($value, string $className, bool $isCollection = null, $isSaveKey = false)
     {
 
-        throw new \ZnCore\Base\Exceptions\DeprecatedException;
+        //throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         if (empty($value)) {
             return null;
