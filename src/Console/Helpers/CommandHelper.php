@@ -2,11 +2,10 @@
 
 namespace ZnCore\Base\Console\Helpers;
 
-use Illuminate\Contracts\Container\BindingResolutionException;
-use ZnCore\Base\Helpers\ComposerHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
+use ZnCore\Base\Helpers\ComposerHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 
 class CommandHelper
 {
@@ -31,13 +30,14 @@ class CommandHelper
         foreach ($commands as $commandClassName) {
             $reflictionClass = new \ReflectionClass($commandClassName);
             $isAbstract = $reflictionClass->isAbstract();
-            if(! $isAbstract) {
+            if (!$isAbstract) {
                 try {
                     $commandInstance = $container->get($commandClassName);
                     /** @var Application $application */
                     $application = $container->get(Application::class);
                     $application->add($commandInstance);
-                } catch (\Illuminate\Contracts\Container\BindingResolutionException $e) {}
+                } catch (\Illuminate\Contracts\Container\BindingResolutionException $e) {
+                }
             }
         }
     }
