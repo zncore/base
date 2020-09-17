@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
-use ZnCore\Base\Legacy\Code\helpers\generator\FileGeneratorHelper;
+use ZnCore\Base\Libs\Store\Helpers\FileGeneratorHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\VarDumper;

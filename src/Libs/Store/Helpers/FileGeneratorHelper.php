@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Legacy\Code\helpers\generator;
+namespace ZnCore\Base\Libs\Store\Helpers;
 
 use Yii;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
