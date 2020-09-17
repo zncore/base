@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Legacy\Traits\MagicAttribute;
+namespace ZnCore\Base\Traits\MagicAttribute;
 
 trait MagicAttributeTrait
 {

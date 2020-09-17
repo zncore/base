@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Legacy\Traits\MagicAttribute;
+namespace ZnCore\Base\Traits\MagicAttribute;
 
 use ZnCore\Base\Exceptions\InvalidCallException;
 use ZnCore\Base\Exceptions\UnknownPropertyException;
