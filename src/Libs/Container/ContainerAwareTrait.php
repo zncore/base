@@ -12,7 +12,7 @@ trait ContainerAwareTrait
      */
     protected $container;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
