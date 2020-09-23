@@ -8,10 +8,10 @@
 Создать проект из шаблона можно командой:
 
 ```
-composer create-project --prefer-dist php7tpl/symfony .
+composer create-project --prefer-dist zntpl/symfony4 .
 ```
 
-Так же, можно [скачать архив](https://github.com/php7tpl/symfony/archive/master.zip) и распаковать на хосте.
+Так же, можно [скачать архив](https://github.com/zntpl/symfony4/archive/master.zip) и распаковать на хосте.
 
 Клонировать существующий проект:
 
