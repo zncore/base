@@ -2,16 +2,16 @@
 
 namespace ZnCore\Base\Helpers;
 
-use ZnCore\Base\Libs\Container\ContainerAwareInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface as SymfonyContainerAwareInterface;
+use ZnCore\Base\Libs\Container\ContainerAwareInterface;
 
 class DiHelper
 {
 
     public static function make(string $className, ContainerInterface $container = null): object
     {
-        if($container->has($className)) {
+        if ($container->has($className)) {
             $instance = $container->get($className);
         } else {
             $instance = new $className;

@@ -4,16 +4,16 @@ namespace ZnCore\Base\Helpers;
 
 use DateTime;
 use DateTimeZone;
-use ZnCore\Base\Exceptions\InvalidArgumentException;
+use InvalidArgumentException;
 
 class TimeHelper
 {
 
     public static function unserialize($data): DateTime
     {
-        if(is_array($data) && !empty($data['timezone']) && !empty($data['date'])) {
+        if (is_array($data) && !empty($data['timezone']) && !empty($data['date'])) {
             return self::unserializeFromArray($data);
-        } elseif($data instanceof DateTime) {
+        } elseif ($data instanceof DateTime) {
             return $data;
         }
         throw new InvalidArgumentException;

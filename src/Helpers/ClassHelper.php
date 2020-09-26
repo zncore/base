@@ -24,13 +24,13 @@ class ClassHelper
         if (empty($interface)) {
             throw new InvalidArgumentException("Argument \"interfaceClass\" is empty");
         }
-        if ( ! is_object($instance)) {
+        if (!is_object($instance)) {
             throw new InvalidArgumentException("Class \"$instance\" not exists");
         }
-        if ( ! interface_exists($interface) && ! class_exists($interface)) {
+        if (!interface_exists($interface) && !class_exists($interface)) {
             throw new InvalidArgumentException("Class \"$interface\" not exists");
         }
-        if ( ! $instance instanceof $interface) {
+        if (!$instance instanceof $interface) {
             $instanceClassName = get_class($instance);
             throw new Exception("Class \"$instanceClassName\" not instanceof \"$interface\"");
         }
@@ -77,7 +77,7 @@ class ClassHelper
         $object = new $definition['class'];
         self::configure($object, $params);
         self::configure($object, $definition);
-        if ( ! empty($interface)) {
+        if (!empty($interface)) {
             self::isInstanceOf($object, $interface);
         }
         return $object;
@@ -101,7 +101,7 @@ class ClassHelper
         if (empty($namespace)) {
             return $className;
         }
-        if ( ! ClassHelper::isClass($className)) {
+        if (!ClassHelper::isClass($className)) {
             $className = $namespace . '\\' . ucfirst($className);
         }
         return $className;
@@ -144,7 +144,7 @@ class ClassHelper
         if (empty($config) && empty($class)) {
             return $config;
         }
-        if ( ! empty($class)) {
+        if (!empty($class)) {
             $config['class'] = $class;
         }
         if (is_array($config)) {

@@ -4,8 +4,6 @@ namespace ZnCore\Base\Helpers;
 
 use ZnCore\Base\Legacy\Yii\Base\Model;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
-use php7rails\app\helpers\EnvService;
 use ZnCore\Domain\Exceptions\UnprocessableEntityHttpException;
 use ZnCore\Domain\Helpers\EntityHelper;
 
@@ -17,7 +15,7 @@ class Helper
         if (empty($param)) {
             return [];
         }
-        if ( ! is_array($param)) {
+        if (!is_array($param)) {
             $param = explode(',', $param);
         }
         $param = array_map('trim', $param);
@@ -37,7 +35,7 @@ class Helper
         if ($value instanceof $className) {
             return $value;
         }
-        if ( ! is_array($value)) {
+        if (!is_array($value)) {
             return null;
         }
         if (ArrayHelper::isIndexed($value) || $isCollection) {
@@ -73,16 +71,29 @@ class Helper
         return $data;
     }
 
-    public static function forgeForm(Model $model, $data = null)
+    public static function isEnabledComponent($config)
+    {
+        if (!is_array($config)) {
+            return $config;
+        }
+        $isEnabled = !isset($config['isEnabled']) || !empty($config['isEnabled']);
+        unset($config['isEnabled']);
+        if (!$isEnabled) {
+            return null;
+        }
+        return $config;
+    }
+
+    /*public static function forgeForm(Model $model, $data = null)
     {
 
         throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         $data = self::post($data, $model);
         $model->setAttributes($data, false);
-        /*if(!$model->validate()) {
-            throw new UnprocessableEntityHttpException($model);
-        }*/
+//        if(!$model->validate()) {
+//            throw new UnprocessableEntityHttpException($model);
+//        }
     }
 
     public static function createForm($form, $data = null, $scenario = null): Model
@@ -93,11 +104,11 @@ class Helper
         if (is_string($form) || is_array($form)) {
             $form = ClassHelper::createObject($form);
         }
-        /** @var Model $form */
-        if ( ! empty($data)) {
+
+        if (!empty($data)) {
             ClassHelper::configure($form, $data);
         }
-        if ( ! empty($scenario)) {
+        if (!empty($scenario)) {
             $form->scenario = $scenario;
         }
         return $form;
@@ -109,7 +120,7 @@ class Helper
         throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         $form = self::createForm($form, $data, $scenario);
-        if ( ! $form->validate()) {
+        if (!$form->validate()) {
             throw new UnprocessableEntityHttpException($form);
         }
         return $form->getAttributes();
@@ -124,7 +135,7 @@ class Helper
         if (is_object($value) && method_exists($value, 'toArray')) {
             return $value->toArray([], [], $recursive);
         }
-        if ( ! ArrayHelper::isIndexed($value)) {
+        if (!ArrayHelper::isIndexed($value)) {
             return $value;
         }
         foreach ($value as &$item) {
@@ -136,6 +147,9 @@ class Helper
 
     public static function microtimeId($length = 14)
     {
+
+        throw new \ZnCore\Base\Exceptions\DeprecatedException;
+
         $timeArray = explode('.', microtime(true));
         $time = implode('', $timeArray);
         $time = strval($time);
@@ -177,7 +191,7 @@ class Helper
         throw new \ZnCore\Base\Exceptions\DeprecatedException;
 
         $isHasParams = strpos($path, $delimiter);
-        if ( ! $isHasParams) {
+        if (!$isHasParams) {
             return null;
         }
         $params = [];
@@ -197,27 +211,14 @@ class Helper
     {
         $args = func_get_args();
         foreach ($args as $arg) {
-            if ( ! empty($arg)) {
+            if (!empty($arg)) {
                 return $arg;
             }
         }
         return null;
-    }
+    }*/
 
-    public static function isEnabledComponent($config)
-    {
-        if ( ! is_array($config)) {
-            return $config;
-        }
-        $isEnabled = ! isset($config['isEnabled']) || ! empty($config['isEnabled']);
-        unset($config['isEnabled']);
-        if ( ! $isEnabled) {
-            return null;
-        }
-        return $config;
-    }
-
-    public static function assignAttributesForList($configList, $attributes = null)
+    /*public static function assignAttributesForList($configList, $attributes = null)
     {
         $configList = ClassHelper::normalizeComponentListConfig($configList);
         foreach ($configList as &$item) {
@@ -235,34 +236,11 @@ class Helper
         }
         $alias = FileHelper::normalizeAlias($path);
         $dir = FileHelper::getAlias($alias);
-        if ( ! is_dir($dir)) {
+        if (!is_dir($dir)) {
             return false;
         }
         return $alias;
     }
-
-    static function getCurrentDbDriver()
-    {
-        $driver = EnvService::getConnection('main.driver');
-        return $driver;
-    }
-
-    static function getDbConfig($name = null, $isEnvTest = YII_ENV_TEST)
-    {
-        $configName = $isEnvTest ? 'test' : 'main';
-        $config = EnvService::get("db.$configName");
-        if ($name) {
-            return $config[$name];
-        } else {
-            return $config;
-        }
-    }
-
-    /*static function strToArray($value) {
-        $value = trim($value, '{}');
-        $value = explode(',', $value);
-        return $value;
-    }*/
 
     static function timeForApi($value, $default = null, $mask = 'Y-m-d\TH:i:s\Z')
     {
@@ -275,9 +253,9 @@ class Helper
         if (is_numeric($value)) {
             $value = date('Y-m-d H:i:s', $value);
         }
-        $datetime = new \DateTime($value);
+        $datetime = new DateTime($value);
         $value = $datetime->format($mask);
         return $value;
-    }
+    }*/
 
 }

@@ -21,11 +21,11 @@ class ComposerHelper
             if (strpos($path, '.php') === false) {
                 $fileName .= '.php';
             }
-            if(strpos($path, 'phar://') === 0) {
+            if (strpos($path, 'phar://') === 0) {
                 include_once $fileName;
             } else {
                 $fileName = str_replace('\\', '/', $fileName);
-                if ( ! file_exists($fileName)) {
+                if (!file_exists($fileName)) {
                     //exit($fileName);
 
                     exit('Class "' . $className . '" not found!');
@@ -38,7 +38,8 @@ class ComposerHelper
         self::add($namespace, $path);
     }
 
-    private static function add(string $namespace, string $path) {
+    private static function add(string $namespace, string $path)
+    {
         $namespace = trim($namespace, '/\\');
         self::$autoload_psr4[$namespace . '\\'] = [
             realpath($path)
@@ -58,14 +59,14 @@ class ComposerHelper
     {
         $paths = [];
         $pp = '';
-        for($i = 0; $i <= count($pathItems) - 1; $i++) {
+        for ($i = 0; $i <= count($pathItems) - 1; $i++) {
             $pp .= $pathItems[$i] . '\\';
             unset($pathItems[$i]);
             $dirs = ArrayHelper::getValue(self::$autoload_psr4, $pp);
-            if($dirs) {
+            if ($dirs) {
                 foreach ($dirs as $dir) {
                     $relativeDir = implode('\\', $pathItems);
-                    $path = trim($dir. '\\' . $relativeDir, '\\');
+                    $path = trim($dir . '\\' . $relativeDir, '\\');
                     $paths[$pp . $relativeDir] = $path;
                 }
             }
@@ -79,7 +80,7 @@ class ComposerHelper
         $path = trim($path, '\\@');
         return $path;
     }
-    
+
     private static function ensure()
     {
         if (self::$autoload_psr4) {

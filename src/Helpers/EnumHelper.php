@@ -2,6 +2,8 @@
 
 namespace ZnCore\Base\Helpers;
 
+use ZnCore\Base\Interfaces\GetLabelsInterface;
+
 class EnumHelper
 {
 
@@ -50,6 +52,7 @@ class EnumHelper
     }
 
     public static function getLabel(string $className, $constValue) {
+        //ClassHelper::isInstanceOf($className, GetLabelsInterface::class);
         $labels = $className::getLabels();
         return $labels[$constValue];
     }

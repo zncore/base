@@ -19,7 +19,7 @@ class UrlHelper
     public static function parse($url, $key = null)
     {
         $r = parse_url($url);
-        if ( ! empty($r['query'])) {
+        if (!empty($r['query'])) {
             $r['query'] = parse_query($r['query']);
         }
         if ($key) {
@@ -58,15 +58,15 @@ class UrlHelper
         (?:[\w\.\-\+%!$&'\(\)*\+,;=]|%[0-9a-f]{2})+@)?(?:
         (?:[a-z0-9\-\.]|%[0-9a-f]{2})+|(?:\[(?:[0-9a-f]{0,4}:)*(?:[0-9a-f]{0,4})\]))(?::[0-9]+)?(?:[\/|\?]
         (?:[\w#!:\.\?\+\|=&@$'~*,;\/\(\)\[\]\-]|%[0-9a-f]{2})*)?$/xi";
-        return (bool) preg_match($pattern, $url);
+        return (bool)preg_match($pattern, $url);
     }
 
     public static function generateUrl($url, $getParameters = null)
     {
         $url = Url::to([$url]);
-        if ( ! empty($getParameters)) {
+        if (!empty($getParameters)) {
             $get = self::generateGetParameters($getParameters);
-            if ( ! empty($get)) {
+            if (!empty($get)) {
                 $url .= '?' . $get;
             }
         }
