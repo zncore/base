@@ -2,9 +2,7 @@
 
 namespace ZnCore\Base\Enums\Http;
 
-use ZnCore\Domain\Base\BaseEnum;
-
-class HttpMethodEnum extends BaseEnum
+class HttpMethodEnum
 {
 
     const GET = 'GET';

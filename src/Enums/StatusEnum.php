@@ -2,9 +2,7 @@
 
 namespace ZnCore\Base\Enums;
 
-use ZnCore\Domain\Base\BaseEnum;
-
-class StatusEnum extends BaseEnum
+class StatusEnum
 {
 
     // удален

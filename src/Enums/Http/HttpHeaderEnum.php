@@ -2,9 +2,7 @@
 
 namespace ZnCore\Base\Enums\Http;
 
-use ZnCore\Domain\Base\BaseEnum;
-
-class HttpHeaderEnum extends BaseEnum
+class HttpHeaderEnum
 {
 
     const LINK = 'Link';

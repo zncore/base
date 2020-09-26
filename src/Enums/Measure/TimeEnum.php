@@ -2,9 +2,7 @@
 
 namespace ZnCore\Base\Enums\Measure;
 
-use ZnCore\Domain\Base\BaseEnum;
-
-class TimeEnum extends BaseEnum
+class TimeEnum
 {
 
     const SECOND_PER_MILLISECOND = 1 / 1000;

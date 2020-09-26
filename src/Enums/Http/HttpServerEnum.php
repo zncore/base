@@ -2,9 +2,7 @@
 
 namespace ZnCore\Base\Enums\Http;
 
-use ZnCore\Domain\Base\BaseEnum;
-
-class HttpServerEnum extends BaseEnum
+class HttpServerEnum
 {
 
     const HTTP_ORIGIN = 'HTTP_ORIGIN';

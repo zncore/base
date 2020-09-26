@@ -16,7 +16,7 @@ class Debug {
 	private static $isLogged = false;
 	
 	public static function getRuntime($unit = TimeEnum::SECOND_PER_SECOND, $precision = 2) {
-		TimeEnum::validate($unit);
+	    EnumHelper::validate(TimeEnum::class, $unit);
 		$runtimeSecond = microtime(true) - MICRO_TIME;
 		$runtime = $runtimeSecond / $unit;
 		$runtime = round($runtime, $precision);

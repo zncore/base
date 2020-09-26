@@ -2,9 +2,7 @@
 
 namespace ZnCore\Base\Enums;
 
-use ZnCore\Domain\Base\BaseEnum;
-
-class RegexpPatternEnum extends BaseEnum
+class RegexpPatternEnum
 {
 
     const BEGIN_REQUIRED = '#^';

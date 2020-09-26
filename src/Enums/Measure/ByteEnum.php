@@ -2,9 +2,7 @@
 
 namespace ZnCore\Base\Enums\Measure;
 
-use ZnCore\Domain\Base\BaseEnum;
-
-class ByteEnum extends BaseEnum
+class ByteEnum
 {
 
     const BIT_PER_BYTE = 8;

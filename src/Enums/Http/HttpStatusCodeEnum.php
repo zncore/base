@@ -2,9 +2,7 @@
 
 namespace ZnCore\Base\Enums\Http;
 
-use ZnCore\Domain\Base\BaseEnum;
-
-class HttpStatusCodeEnum extends BaseEnum
+class HttpStatusCodeEnum
 {
 
     // 1xx: Informational (информационные)
