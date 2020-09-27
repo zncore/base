@@ -2,10 +2,10 @@
 
 namespace ZnCore\Base\Libs\Scenario\Collections;
 
+use Illuminate\Support\Collection;
 use php7rails\domain\values\BaseValue;
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Helpers\Helper;
-use ZnCore\Base\Libs\ArrayTools\Helpers\Collection;
 use ZnCore\Base\Libs\Scenario\Base\BaseScenario;
 use ZnCore\Base\Libs\Scenario\Exceptions\StopException;
 
@@ -14,7 +14,7 @@ class ScenarioCollection extends Collection
 
     public $event;
 
-    protected function loadItems($items)
+    /*protected function loadItems($items)
     {
         $items = $this->filterItems($items);
         return parent::loadItems($items);
@@ -33,7 +33,7 @@ class ScenarioCollection extends Collection
             }
         }
         return $result;
-    }
+    }*/
 
     public function runIs($data = null, object $event = null)
     {

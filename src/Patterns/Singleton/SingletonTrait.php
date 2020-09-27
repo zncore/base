@@ -10,12 +10,11 @@ class SingletonTrait implements SingletonInterface
      */
     private static $instances = [];
 
-    public static function instance(): object
+    public static function getInstance(): object
     {
-        $refresh = false;
         $className = static::class;
         $isNotFound = ! isset(self::$instances[$className]);
-        if ($refresh || $isNotFound) {
+        if ($isNotFound) {
             self::$instances[$className] = new $className;
         }
         return self::$instances[$className];
