@@ -1,12 +1,12 @@
 <?php
 
-namespace ZnCore\Base\Libs\Env;
+namespace ZnCore\Base\Libs\DotEnv;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use RuntimeException;
-use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\Dotenv\Dotenv as SymfonyDotenv;
 
-class DotEnvHelper
+class DotEnv
 {
 
     const ROOT_PATH = __DIR__ . '/../../../../../..';
@@ -18,10 +18,10 @@ class DotEnvHelper
         if (self::loadCachedEnvLocal($basePath)) {
             return;
         }
-        if ( ! class_exists(Dotenv::class)) {
-            throw new RuntimeException('Please run "composer require symfony/dotenv" to load the ".env" files configuring the application.');
+        if ( ! class_exists(SymfonyDotenv::class)) {
+            throw new RuntimeException('Please run "composer require symfony/SymfonyDotenv" to load the ".env" files configuring the application.');
         }
-        $dotEnv = new Dotenv(false);
+        $dotEnv = new SymfonyDotenv(false);
         // load all the .env files
         $dotEnv->loadEnv($basePath . '/.env');
     }
