@@ -8,6 +8,7 @@
 namespace ZnCore\Base\Legacy\Yii\Base;
 
 use yii\helpers\StringHelper;
+use ZnCore\Base\Exceptions\DeprecatedException;
 use ZnCore\Base\Helpers\ClassHelper;
 
 /**
@@ -98,6 +99,9 @@ use ZnCore\Base\Helpers\ClassHelper;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
+
+throw new DeprecatedException;
+
 class Component extends BaseObject
 {
     /**
