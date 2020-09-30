@@ -8,6 +8,16 @@ use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 class LoadHelper
 {
 
+    public static function loadTemplate(string $fileName, array $params = []): string
+    {
+        ob_start();
+        extract($params);
+        include($fileName);
+        $content = ob_get_contents();
+        ob_end_clean();
+        return $content;
+    }
+
     public static function loadScript(string $fileName)
     {
         return @include(FileHelper::path($fileName));
