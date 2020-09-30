@@ -5,6 +5,74 @@ namespace ZnCore\Base\Helpers;
 class PhpHelper
 {
 
+    /**
+     * Checks if PHP configuration option (from php.ini) is on.
+     * @param string $name configuration option name.
+     * @return bool option is on.
+     */
+    public static function checkPhpIniOn($name): bool
+    {
+        $value = ini_get($name);
+        if (empty($value)) {
+            return false;
+        }
+
+        return ((int)$value === 1 || strtolower($value) === 'on');
+    }
+
+    /**
+     * Checks if PHP configuration option (from php.ini) is off.
+     * @param string $name configuration option name.
+     * @return bool option is off.
+     */
+    public static function checkPhpIniOff($name): bool
+    {
+        $value = ini_get($name);
+        if (empty($value)) {
+            return true;
+        }
+
+        return (strtolower($value) === 'off');
+    }
+
+    public static function checkPhpIniEmpty($name): bool
+    {
+        $value = ini_get($name);
+        if (empty($value)) {
+            return true;
+        }
+
+        return (strlen($value) === 0);
+    }
+
+    public static function checkPhpIniNotEmpty($name): bool
+    {
+        return ! self::checkPhpIniEmpty($name);
+    }
+
+    /**
+     * Checks if the given PHP extension is available and its version matches the given one.
+     * @param string $extensionName PHP extension name.
+     * @param string $version required PHP extension version.
+     * @param string $compare comparison operator, by default '>='
+     * @return bool if PHP extension version matches.
+     */
+    public static function checkPhpExtensionVersion($extensionName, $version, $compare = '>='): bool
+    {
+        if (!extension_loaded($extensionName)) {
+            return false;
+        }
+        $extensionVersion = phpversion($extensionName);
+        if (empty($extensionVersion)) {
+            return false;
+        }
+        if (strncasecmp($extensionVersion, 'PECL-', 5) === 0) {
+            $extensionVersion = substr($extensionVersion, 5);
+        }
+
+        return version_compare($extensionVersion, $version, $compare);
+    }
+
     public static function isCallable($value)
     {
         return $value instanceof \Closure || is_callable($value);
@@ -20,7 +88,7 @@ class PhpHelper
 
     public static function isValidName($name)
     {
-        if ( ! is_string($name)) {
+        if (!is_string($name)) {
             return false;
         }
         // todo: /^[\w]{1}[\w\d_]+$/i
