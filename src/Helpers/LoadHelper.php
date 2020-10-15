@@ -4,9 +4,17 @@ namespace ZnCore\Base\Helpers;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\Store\StoreFile;
 
 class LoadHelper
 {
+
+    public static function loadConfig($mainConfigFile = null)
+    {
+        $store = new StoreFile(__DIR__ . '/../../../../../' . $mainConfigFile);
+        $config = $store->load();
+        return $config;
+    }
 
     public static function loadTemplate(string $fileName, array $params = []): string
     {
