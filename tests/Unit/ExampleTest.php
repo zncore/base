@@ -45,7 +45,7 @@ final class ExampleTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    public function testExample2()
+    /*public function testExample2()
     {
 
 
@@ -65,6 +65,6 @@ final class ExampleTest extends BaseTest
             'id' => 111,
             //'description' => null,
         ]);
-    }
+    }*/
 
 }
