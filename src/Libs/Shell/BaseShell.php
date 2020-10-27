@@ -2,6 +2,9 @@
 
 namespace ZnCore\Base\Libs\Shell;
 
+use ZnCore\Base\Enums\OsFamilyEnum;
+use ZnCore\Base\Helpers\OsHelper;
+
 abstract class BaseShell
 {
 
@@ -9,6 +12,8 @@ abstract class BaseShell
     private $path;
     /** @var  string|NULL  @internal */
     private $cwd;
+
+    private $lang = 'en_GB';
 
     /**
      * @param $path string
@@ -80,7 +85,7 @@ abstract class BaseShell
         $this->begin();
         exec("$cmd", $output, $exitCode);
         $this->end();
-        if (/*$exitCode !== 0 || */ ! is_array($output)) {
+        if (/*$exitCode !== 0 || */ !is_array($output)) {
             throw new ShellException("Command $cmd failed.");
         }
         /** @var string $filter */
@@ -95,7 +100,7 @@ abstract class BaseShell
             }
             $output = $newArray;
         }
-        if ( ! isset($output[0])) // empty array
+        if (!isset($output[0])) // empty array
         {
             return null;
         }
@@ -111,11 +116,26 @@ abstract class BaseShell
      * @throws ShellException
      */
 
+    protected function prepareCmd(string $cmd): string
+    {
+        if (OsHelper::isFamily(OsFamilyEnum::LINUX)) {
+            $cmd = 'LANG=' . $this->lang . ' ' . $cmd;
+        }
+        return $cmd;
+    }
+
+    protected function runExec(string $cmd, &$output = null)
+    {
+        $cmd = $this->prepareCmd($cmd);
+        return exec($cmd, $output);
+    }
+
     protected function run($cmd/*, $options = NULL*/)
     {
         $args = func_get_args();
         $cmd = $this->processCommand($args);
-        exec($cmd . ' 2>&1', $output, $ret);
+        $cmd = $this->prepareCmd($cmd);
+            exec($cmd . ' 2>&1', $output, $ret);
         if ($ret !== 0) {
             throw new ShellException("Command '$cmd' failed (exit-code $ret).", $ret);
         }
@@ -135,7 +155,7 @@ abstract class BaseShell
                     }
                     $cmd[] = $_c . escapeshellarg($value);
                 }
-            } elseif (is_scalar($arg) && ! is_bool($arg)) {
+            } elseif (is_scalar($arg) && !is_bool($arg)) {
                 $cmd[] = escapeshellarg($arg);
             }
         }
