@@ -102,5 +102,5 @@ class RegexpPatternEnum
      */
     const PASSWORD_STRICT_REQUIRED = '(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$';
 
-
+    const JWT_TOKEN_REQUIRED = '^jwt\s[\d\w-_]+?\.[\d\w-_]+?.[\d\w-_]+?$';
 }
