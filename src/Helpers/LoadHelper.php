@@ -16,6 +16,12 @@ class LoadHelper
         return $config;
     }
 
+    public static function saveConfig($mainConfigFile = null, $data)
+    {
+        $store = new StoreFile(__DIR__ . '/../../../../../' . $mainConfigFile);
+        $store->save($data);
+    }
+
     public static function loadTemplate(string $fileName, array $params = []): string
     {
         ob_start();
