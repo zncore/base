@@ -12,6 +12,14 @@ use yii2mod\collection\Collection;
 class ArrayHelper extends BaseArrayHelper
 {
 
+    public static function collectionExtractByKeys(array $array, array $keys = []): array
+    {
+        foreach ($array as &$item) {
+            $item = ArrayHelper::extractByKeys($item, $keys);
+        }
+        return $array;
+    }
+
     public static function sortByLen($a, $b)
     {
         if (strlen($a) < strlen($b)) {

@@ -47,5 +47,4 @@ class LoadHelper
         }
         return $config;
     }
-
 }
