@@ -9,7 +9,8 @@ class StringHelper
     const WITHOUT_CHAR = '#\s+#m';
     const NUM_CHAR = '#\D+#m';
 
-    public static function utf8ize( $mixed ) {
+    public static function utf8ize($mixed)
+    {
         if (is_array($mixed)) {
             foreach ($mixed as $key => $value) {
                 $mixed[$key] = self::utf8ize($value);
@@ -164,7 +165,7 @@ class StringHelper
         $wordArray = self::getWordArray($content);
         $result = [];
         foreach ($wordArray as $word) {
-            if ( ! is_numeric($word) && mb_strlen($word) > 1) {
+            if (!is_numeric($word) && mb_strlen($word) > 1) {
                 $result[$word] = isset($result[$word]) ? $result[$word] + 1 : 1;
             }
         }
@@ -191,9 +192,10 @@ class StringHelper
         return $text;
     }
 
-    public static function removeDoubleSpace($text)
+    public static function removeDoubleSpace($text, $symbol = '\s', $replacement = ' ')
     {
-        $text = preg_replace(self::PATTERN_SPACES, ' ', $text);
+        $pattern = '#' . $symbol . '+#m';
+        $text = preg_replace($pattern, $replacement, $text);
         return $text;
     }
 
@@ -233,7 +235,7 @@ class StringHelper
             $begin = substr($value, 0, $length);
             $end = substr($value, 0 - $length);
         }
-        $valueLength = ! empty($valueLength) ? $valueLength : strlen($value) - $length * 2;
+        $valueLength = !empty($valueLength) ? $valueLength : strlen($value) - $length * 2;
         $valueLength = $valueLength > 1 ? $valueLength : 2;
         return $begin . str_repeat('*', $valueLength) . $end;
     }
@@ -265,7 +267,7 @@ class StringHelper
         if (in_array('char', $arr)) {
             $characters .= '~!@#$^&*`_-=*/+%!?.,:;\'"\\|{}[]<>()';
         }
-        if ( ! empty($set_characters)) {
+        if (!empty($set_characters)) {
             $characters .= $set_characters;
         }
         $randstring = '';
