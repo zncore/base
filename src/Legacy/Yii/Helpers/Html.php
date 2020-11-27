@@ -168,6 +168,11 @@ class Html
         return $val;
     }
 
+    public static function generateDataUrl1($content, $mimeType) {
+        $base64code = 'data:'.$mimeType.';base64, ' . base64_encode($content);
+        return $base64code;
+    }
+
     public static function generateDataUrl($fileName) {
         $resp = RestHelper::get($fileName);
         $mimeType = $resp->getHeader('content-type', 1)[0];
