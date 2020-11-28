@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Helpers;
 
 use ZnCore\Base\Interfaces\GetLabelsInterface;
+use InvalidArgumentException;
 
 class EnumHelper
 {
@@ -15,11 +16,12 @@ class EnumHelper
         return $constants;
     }
 
-    public static function validate(string $className, $value, $prefix = null)
+    public static function validate(string $className, $value, $prefix = null, string $errorMessage = null)
     {
         if ( ! self::isValid($className, $value, $prefix)) {
             $class = static::class;
-            throw new InvalidArgumentException("Value \"$value\" not contains in \"$class\" enum");
+            $errorMessage = $errorMessage ?: "Value \"$value\" not contains in \"$class\" enum";
+            throw new InvalidArgumentException($errorMessage);
         }
     }
 
