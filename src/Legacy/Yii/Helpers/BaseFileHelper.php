@@ -31,7 +31,7 @@ abstract class BaseFileHelper
     /**
      * @var string the path (or alias) of a PHP file containing MIME type information.
      */
-    public static $mimeMagicFile = __DIR__ . '/mimeTypes.php';
+    public static $mimeMagicFile = '@yii/helpers/mimeTypes.php';
     /**
      * @var string the path (or alias) of a PHP file containing MIME aliases.
      * @since 2.0.14
@@ -228,7 +228,7 @@ abstract class BaseFileHelper
         if ($magicFile === null) {
             $magicFile = static::$mimeMagicFile;
         }
-//        $magicFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
+        $magicFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
         if ( ! isset(self::$_mimeTypes[$magicFile])) {
             self::$_mimeTypes[$magicFile] = require $magicFile;
         }

@@ -18,20 +18,6 @@ class FileHelper extends BaseFileHelper
         return $rootDir . '/' . $path;
     }*/
 
-    public static function getMimeTypeByFileExtension($ext, $magicFile = null)
-    {
-        $mimeTypes = static::loadMimeTypes($magicFile);
-
-        if ($ext !== '') {
-            $ext = strtolower($ext);
-            if (isset($mimeTypes[$ext])) {
-                return $mimeTypes[$ext];
-            }
-        }
-
-        return null;
-    }
-
     public static function path(string $path = ''): string
     {
         $root = self::rootPath();
