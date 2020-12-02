@@ -9,20 +9,22 @@ use ZnCore\Base\Libs\Store\StoreFile;
 class FileHelper extends BaseFileHelper
 {
 
-    /*public static function path($path)
+    public static function mimeTypeByExtension(string $extension, string $magicFile = null)
     {
-        $rootDir = __DIR__ . '/../../../../../../..';
-        $rootDir = realpath($rootDir);
-        $path = str_replace('\\', '/', $path);
-        $path = ltrim($path, '/');
-        return $rootDir . '/' . $path;
-    }*/
+        $magicFile = $magicFile ?: __DIR__ . '/mimeTypes.php';
+        $mimeTypes = static::loadMimeTypes($magicFile);
+        $extension = strtolower($extension);
+        if (isset($mimeTypes[$extension])) {
+            return $mimeTypes[$extension];
+        }
+        return null;
+    }
 
     public static function path(string $path = ''): string
     {
         $root = self::rootPath();
         $path = trim($path, '/');
-        if($path) {
+        if ($path) {
             $root .= DIRECTORY_SEPARATOR . $path;
         }
         return $root;
@@ -79,7 +81,7 @@ class FileHelper extends BaseFileHelper
     {
         $store = new StoreFile($name);
         $data = $store->load($key);
-        $data = ! empty($data) ? $data : $default;
+        $data = !empty($data) ? $data : $default;
         return $data;
     }
 
@@ -115,7 +117,7 @@ class FileHelper extends BaseFileHelper
             return $path;
         }
         $path = str_replace('\\', '/', $path);
-        if ( ! self::isAlias($path)) {
+        if (!self::isAlias($path)) {
             $path = '@' . $path;
         }
         return $path;
@@ -132,7 +134,7 @@ class FileHelper extends BaseFileHelper
 
     public static function isAlias($path)
     {
-        return is_string($path) && ! empty($path) && $path{0} == '@';
+        return is_string($path) && !empty($path) && $path{0} == '@';
     }
 
     public static function getAlias($path)
@@ -162,7 +164,7 @@ class FileHelper extends BaseFileHelper
         $content = self::load($file);
         $finded = [];
         preg_match_all("/{$search}/", $content, $out);
-        if ( ! empty($out[0])) {
+        if (!empty($out[0])) {
             if ($returnIndex === null) {
                 $item = $out;
             } else {
@@ -189,7 +191,7 @@ class FileHelper extends BaseFileHelper
     public static function isAbsolute($path)
     {
         $pattern = '[/\\\\]|[a-zA-Z]:[/\\\\]|[a-z][a-z0-9+.-]*://';
-        return (bool) preg_match("#$pattern#Ai", $path);
+        return (bool)preg_match("#$pattern#Ai", $path);
     }
 
     public static function rootPath()
@@ -199,7 +201,7 @@ class FileHelper extends BaseFileHelper
 
     public static function trimRootPath($path)
     {
-        if ( ! self::isAbsolute($path)) {
+        if (!self::isAbsolute($path)) {
             return $path;
         }
         $rootLen = strlen(self::rootPath());
@@ -230,7 +232,7 @@ class FileHelper extends BaseFileHelper
     public static function touch($fileName, $data = null, $flags = null, $context = null, $dirAccess = 0777)
     {
         $fileName = self::normalizePath($fileName);
-        if ( ! file_exists($fileName)) {
+        if (!file_exists($fileName)) {
             self::save($fileName, $data, $flags, $context, $dirAccess);
         }
     }
@@ -239,7 +241,7 @@ class FileHelper extends BaseFileHelper
     {
         $fileName = self::normalizePath($fileName);
         $dirName = dirname($fileName);
-        if ( ! is_dir($dirName)) {
+        if (!is_dir($dirName)) {
             self::createDirectory($dirName, $dirAccess);
         }
         return file_put_contents($fileName, $data, $flags, $context);
@@ -248,7 +250,7 @@ class FileHelper extends BaseFileHelper
     public static function load($fileName, $flags = null, $context = null, $offset = null, $maxLen = null)
     {
         $fileName = self::normalizePath($fileName);
-        if ( ! self::has($fileName)) {
+        if (!self::has($fileName)) {
             return null;
         }
         return file_get_contents($fileName, $flags, $context, $offset);
@@ -270,7 +272,7 @@ class FileHelper extends BaseFileHelper
 
     public static function scanDir($dir, $options = null)
     {
-        if ( ! self::has($dir)) {
+        if (!self::has($dir)) {
             return [];
         }
         $pathList = scandir($dir);
@@ -279,7 +281,7 @@ class FileHelper extends BaseFileHelper
         if (empty($pathList)) {
             return [];
         }
-        if ( ! empty($options)) {
+        if (!empty($options)) {
             $pathList = self::filterPathList($pathList, $options, $dir);
         }
         sort($pathList);
@@ -292,8 +294,8 @@ class FileHelper extends BaseFileHelper
             return $pathList;
         }
         $result = [];
-        if ( ! empty($options)) {
-            if ( ! isset($options['basePath']) && ! empty($basePath)) {
+        if (!empty($options)) {
+            if (!isset($options['basePath']) && !empty($basePath)) {
                 $options['basePath'] = realpath($basePath);
             }
         }
@@ -358,10 +360,10 @@ class FileHelper extends BaseFileHelper
             $source_dir = '.';
         }
         static $source_dir1;
-        if ( ! isset($source_dir1)) {
+        if (!isset($source_dir1)) {
             $source_dir1 = $source_dir;
         }
-        if ( ! file_exists($source_dir) || ! is_dir($source_dir)) {
+        if (!file_exists($source_dir) || !is_dir($source_dir)) {
             return false;
         }
         if ($fp = @opendir($source_dir)) {
@@ -370,14 +372,14 @@ class FileHelper extends BaseFileHelper
             $source_dir = rtrim($source_dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
             while (FALSE !== ($file = readdir($fp))) {
                 // Remove '.', '..', and hidden files [optional]
-                if ( ! trim($file, '.') OR ($hidden == FALSE && $file[0] == '.')) {
+                if (!trim($file, '.') OR ($hidden == FALSE && $file[0] == '.')) {
                     continue;
                 }
                 $dd = substr($source_dir, mb_strlen($source_dir1));
                 $dd = ltrim($dd, DIRECTORY_SEPARATOR);
                 if (($directory_depth < 1 OR $new_depth > 0) && @is_dir($source_dir . $file)) {
                     $dir_cont = self::findFilesWithPath($source_dir . $file . DIRECTORY_SEPARATOR, $new_depth, $hidden, $empty_dir);
-                    if ( ! empty($dir_cont)) {
+                    if (!empty($dir_cont)) {
                         $fileList = array_merge($fileList, $dir_cont);
                     } else {
                         if ($empty_dir) {
