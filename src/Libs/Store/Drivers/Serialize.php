@@ -2,7 +2,9 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
-class Serialize implements DriverInterface
+use ZnCore\Base\Interfaces\EncoderInterface;
+
+class Serialize implements EncoderInterface
 {
 
     public function decode($content)

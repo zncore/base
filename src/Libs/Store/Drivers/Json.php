@@ -2,9 +2,10 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
+use ZnCore\Base\Interfaces\EncoderInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 
-class Json implements DriverInterface
+class Json implements EncoderInterface
 {
 
     public function decode($content)
