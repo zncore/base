@@ -27,6 +27,7 @@ class ZipEncoder implements EncoderInterface
         $zip = new ZipArchive();
         $res = $zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE);
         if ($res === TRUE) {
+//            dd($oneFile);
             file_put_contents($oneFile, $data);
             $zip->addFile($oneFile, $this->oneFileName);
 //            $xmlContent = $zip->addFromString('one', $data);
@@ -60,9 +61,9 @@ class ZipEncoder implements EncoderInterface
 
     private static function getTmpDirectory(): string
     {
-        $tmpDir = __DIR__ . '/../../../../../../var/tmp/qrZip/' . StringHelper::genUuid();
+        $tmpDir = '/tmp/qrZip/' . StringHelper::genUuid();
         FileHelper::createDirectory($tmpDir);
-        return realpath($tmpDir);
+        return $tmpDir;
     }
 
     private function open(): ZipArchive
