@@ -61,6 +61,7 @@ class ZipEncoder implements EncoderInterface
 
     private static function getTmpDirectory(): string
     {
+        dd(sys_get_temp_dir());
         $tmpDir = '/tmp/qrZip/' . StringHelper::genUuid();
         FileHelper::createDirectory($tmpDir);
         return $tmpDir;
