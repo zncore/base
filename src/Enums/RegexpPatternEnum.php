@@ -16,8 +16,8 @@ class RegexpPatternEnum
     const UUID = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
     const UUID_REQUIRED = self::BEGIN_REQUIRED . self::UUID . self::END_REQUIRED;
 
-    const BASE_64_CHAR = '[A-Za-z0-9+/=]';
-    const BASE_64 = '[A-Za-z0-9+/]{2,}[=]*';
+    const BASE_64_CHAR = '[A-Za-z0-9+\/=]';
+    const BASE_64 = '[A-Za-z0-9+\/]{2,}[=]*';
     const BASE_64_REQUIRED = self::BEGIN_REQUIRED . self::BASE_64 . self::END_REQUIRED;
 
     const LOGIN = '[a-z0-9_-]{3,16}';
