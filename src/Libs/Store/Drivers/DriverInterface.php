@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
-interface DriverInterface
+interface DriverInterface1
 {
 
     public function decode($content);
