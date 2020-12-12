@@ -12,6 +12,16 @@ use yii2mod\collection\Collection;
 class ArrayHelper extends BaseArrayHelper
 {
 
+    public static function removeEmptyItems(array $data): array
+    {
+        foreach ($data as $key => $value) {
+            if (empty($value)) {
+                unset($data[$key]);
+            }
+        }
+        return $data;
+    }
+
     public static function collectionExtractByKeys(array $array, array $keys = []): array
     {
         foreach ($array as &$item) {
@@ -56,7 +66,7 @@ class ArrayHelper extends BaseArrayHelper
     {
         $result = [];
         foreach ($array as $key => $value) {
-            if ( ! is_null($value)) {
+            if (!is_null($value)) {
                 $result[$key] = $value;
             }
         }
@@ -98,7 +108,7 @@ class ArrayHelper extends BaseArrayHelper
 
     static function inArrayKey($value, $array, $default = null)
     {
-        if ( ! array_key_exists($value, $array)) {
+        if (!array_key_exists($value, $array)) {
             if (func_num_args() > 2) {
                 $value = $default;
             } else {
@@ -168,7 +178,7 @@ class ArrayHelper extends BaseArrayHelper
         if (empty($itemValue) && empty($conditionValue)) {
             return true;
         }
-        if ( ! empty($itemValue)) {
+        if (!empty($itemValue)) {
             if (is_array($conditionValue)) {
                 if (in_array($itemValue, $conditionValue)) {
                     return true;
@@ -187,7 +197,7 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Determine whether the given value is array accessible.
      *
-     * @param  mixed $value
+     * @param mixed $value
      *
      * @return bool
      */
@@ -199,9 +209,9 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Add an element to an array using "dot" notation if it doesn't exist.
      *
-     * @param  array $array
-     * @param  string $key
-     * @param  mixed $value
+     * @param array $array
+     * @param string $key
+     * @param mixed $value
      *
      * @return array
      */
@@ -230,7 +240,7 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Collapse an array of arrays into a single array.
      *
-     * @param  array $array
+     * @param array $array
      *
      * @return array
      */
@@ -241,7 +251,7 @@ class ArrayHelper extends BaseArrayHelper
         foreach ($array as $values) {
             if ($values instanceof Collection) {
                 $values = $values->all();
-            } elseif ( ! is_array($values)) {
+            } elseif (!is_array($values)) {
                 continue;
             }
 
@@ -259,7 +269,7 @@ class ArrayHelper extends BaseArrayHelper
     protected static function domNodeToArray(DOMNode $node)
     {
         $output = [];
-        if ( ! isset($node->nodeType)) {
+        if (!isset($node->nodeType)) {
             return $output;
         }
         switch ($node->nodeType) {
@@ -275,22 +285,22 @@ class ArrayHelper extends BaseArrayHelper
                         $t = $child->tagName;
                         $tExploded = explode(':', $t);
                         $t = isset($tExploded[1]) ? $tExploded[1] : $t;
-                        if ( ! isset($output[$t])) {
+                        if (!isset($output[$t])) {
                             $output[$t] = [];
                         }
                         $output[$t][] = $v;
                     } elseif ($v || $v === '0') {
-                        $output = (string) $v;
+                        $output = (string)$v;
                     }
                 }
-                if ($node->attributes->length && ! is_array($output)) { // Has attributes but isn't an array
+                if ($node->attributes->length && !is_array($output)) { // Has attributes but isn't an array
                     $output = ['@content' => $output]; // Change output into an array.
                 }
                 if (is_array($output)) {
                     if ($node->attributes->length) {
                         $a = [];
                         foreach ($node->attributes as $attrName => $attrNode) {
-                            $a[$attrName] = (string) $attrNode->value;
+                            $a[$attrName] = (string)$attrNode->value;
                         }
                         $output['@attributes'] = $a;
                     }
@@ -309,8 +319,8 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Get all of the given array except for a specified array of items.
      *
-     * @param  array $array
-     * @param  array|string $keys
+     * @param array $array
+     * @param array|string $keys
      *
      * @return array
      */
@@ -324,14 +334,14 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Remove one or many array items from a given array using "dot" notation.
      *
-     * @param  array $array
-     * @param  array|string $keys
+     * @param array $array
+     * @param array|string $keys
      */
     public static function forget(&$array, $keys)
     {
         $original = &$array;
 
-        $keys = (array) $keys;
+        $keys = (array)$keys;
 
         if (count($keys) === 0) {
             return;
@@ -360,14 +370,14 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Check if an item exists in an array using "dot" notation.
      *
-     * @param  \ArrayAccess|array $array
-     * @param  string $key
+     * @param \ArrayAccess|array $array
+     * @param string $key
      *
      * @return bool
      */
     public static function has($array, $key)
     {
-        if ( ! $array) {
+        if (!$array) {
             return false;
         }
 
@@ -405,9 +415,9 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Return the first element in an array passing a given truth test.
      *
-     * @param  array $array
-     * @param  Closure $callback
-     * @param  mixed $default
+     * @param array $array
+     * @param Closure $callback
+     * @param mixed $default
      *
      * @return mixed
      */
@@ -429,8 +439,8 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Flatten a multi-dimensional array into a single level.
      *
-     * @param  array $array
-     * @param  int $depth
+     * @param array $array
+     * @param int $depth
      *
      * @return array
      */
@@ -478,22 +488,22 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Get a subset of the items from the given array.
      *
-     * @param  array $array
-     * @param  array|string $keys
+     * @param array $array
+     * @param array|string $keys
      *
      * @return array
      */
     public static function only($array, $keys)
     {
-        return array_intersect_key($array, array_flip((array) $keys));
+        return array_intersect_key($array, array_flip((array)$keys));
     }
 
     /**
      * Pluck an array of values from an array.
      *
-     * @param  array $array
-     * @param  string|array $value
-     * @param  string|array|null $key
+     * @param array $array
+     * @param string|array $value
+     * @param string|array|null $key
      *
      * @return array
      */
@@ -524,8 +534,8 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Explode the "value" and "key" arguments passed to "pluck".
      *
-     * @param  string|array $value
-     * @param  string|array|null $key
+     * @param string|array $value
+     * @param string|array|null $key
      *
      * @return array
      */
@@ -551,9 +561,9 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Push an item onto the beginning of an array.
      *
-     * @param  array $array
-     * @param  mixed $value
-     * @param  mixed $key
+     * @param array $array
+     * @param mixed $value
+     * @param mixed $key
      *
      * @return array
      */
@@ -571,9 +581,9 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Get a value from the array, and remove it.
      *
-     * @param  array $array
-     * @param  string $key
-     * @param  mixed $default
+     * @param array $array
+     * @param string $key
+     * @param mixed $default
      *
      * @return mixed
      */
@@ -591,9 +601,9 @@ class ArrayHelper extends BaseArrayHelper
      *
      * If no key is given to the method, the entire array will be replaced.
      *
-     * @param  array $array
-     * @param  string $key
-     * @param  mixed $value
+     * @param array $array
+     * @param string $key
+     * @param mixed $value
      *
      * @return array
      */
@@ -611,7 +621,7 @@ class ArrayHelper extends BaseArrayHelper
             // If the key doesn't exist at this depth, we will just create an empty array
             // to hold the next value, allowing us to create the arrays to hold final
             // values at the correct depth. Then we'll keep digging into the array.
-            if ( ! isset($array[$key]) || ! is_array($array[$key])) {
+            if (!isset($array[$key]) || !is_array($array[$key])) {
                 $array[$key] = [];
             }
 
@@ -626,8 +636,8 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Sort the array using the given callback.
      *
-     * @param  array $array
-     * @param  Closure $callback
+     * @param array $array
+     * @param Closure $callback
      *
      * @return array
      */
@@ -639,7 +649,7 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Recursively sort an array by keys and values.
      *
-     * @param  array $array
+     * @param array $array
      *
      * @return array
      */
@@ -663,8 +673,8 @@ class ArrayHelper extends BaseArrayHelper
     /**
      * Filter the array using the given Closure.
      *
-     * @param  array $array
-     * @param  Closure $callback
+     * @param array $array
+     * @param Closure $callback
      *
      * @return array
      */
