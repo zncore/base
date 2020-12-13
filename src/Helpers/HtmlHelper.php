@@ -9,6 +9,16 @@ use ZnCore\Base\Legacy\Yii\Helpers\Url;
 class HtmlHelper
 {
 
+    public static function generateDataList(string $id, array $options, string $fieldName)
+    {
+        $optionsHtml = '';
+        foreach ($options as $option) {
+            $value = $option[$fieldName];
+            $optionsHtml .= Html::tag('option', '', ['value' => $value]);
+        }
+        return Html::tag('datalist', $optionsHtml, ['id' => $id]);
+    }
+
     public static function generateBase64Content(string $content, string $mimeType): string
     {
         $base64Content = base64_encode($content);
