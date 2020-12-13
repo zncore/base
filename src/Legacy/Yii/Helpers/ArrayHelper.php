@@ -12,6 +12,16 @@ use yii2mod\collection\Collection;
 class ArrayHelper extends BaseArrayHelper
 {
 
+    public static function nullingEmptyItems(array $data): array
+    {
+        foreach ($data as $key => $value) {
+            if (empty($value)) {
+                $data[$key] = null;
+            }
+        }
+        return $data;
+    }
+
     public static function removeEmptyItems(array $data): array
     {
         foreach ($data as $key => $value) {
