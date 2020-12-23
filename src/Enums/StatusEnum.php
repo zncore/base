@@ -11,6 +11,7 @@ class StatusEnum implements GetLabelsInterface
 
     const ENABLED = 1;
     const DISABLED = 0;
+    const DELETED = self::DISABLED;
 
     public static function getLabels()
     {
