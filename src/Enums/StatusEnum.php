@@ -1,29 +1,22 @@
 <?php
 
+//namespace Packages\Reference\Yii2\Web\Enums;
 namespace ZnCore\Base\Enums;
 
-class StatusEnum
+use ZnCore\Base\Interfaces\GetLabelsInterface;
+use ZnCore\Base\Libs\I18Next\Facades\I18Next;
+
+class StatusEnum implements GetLabelsInterface
 {
 
-    // удален
-    const DELETED = -10;
+    const ENABLED = 1;
+    const DISABLED = 0;
 
-    // отключен
-    const DISABLE = 0;
-
-    // отвергнут / отклонен
-    const REJECTED = 10;
-
-    // заблокирован
-    const BLOCKED = 20;
-
-    // ожидает одобрения / премодерация
-    const WAIT_APPROVING = 90;
-
-    // включен / одобрен
-    const ENABLE = 100;
-
-    // обработано / завершено
-    const COMPLETED = 200;
-
+    public static function getLabels()
+    {
+        return [
+            self::ENABLED => I18Next::t('core', 'status.enabled'),
+            self::DISABLED => I18Next::t('core', 'status.disabled'),
+        ];
+    }
 }
