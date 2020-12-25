@@ -2,35 +2,13 @@
 
 namespace ZnCore\Base\Helpers;
 
-use Composer\Autoload\ClassLoader;
-use ZnCore\Base\Exceptions\NotFoundDependencyException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 
 class ComposerHelper
 {
 
-    private static $autoloadPsr4;
-
-    /**
-     * @param string $className
-     * @param string $packageName
-     * @param string|null $version
-     * @throws NotFoundDependencyException
-     * @example ComposerHelper::requireAssert(ZnGroup\Package\Class::class, 'zngroup/package', 'v1.23.45');
-     */
-    public static function requireAssert(string $className, string $packageName, string $version = null): void
-    {
-        if( ! class_exists($className)) {
-            $package = $packageName;
-            if(!empty($version)) {
-                $package .= ":$version";
-            }
-            $message = "Class \"$className\" not exists!\n";
-            $message .= "\"$packageName\" package not loaded! \nRun the command: \"composer require $package\"";
-            throw new NotFoundDependencyException($message);
-        }
-    }
+    private static $autoload_psr4;
 
     public static function register(string $namespace, string $path): void
     {
@@ -63,7 +41,7 @@ class ComposerHelper
     private static function add(string $namespace, string $path)
     {
         $namespace = trim($namespace, '/\\');
-        self::$autoloadPsr4[$namespace . '\\'] = [
+        self::$autoload_psr4[$namespace . '\\'] = [
             realpath($path)
         ];
     }
@@ -84,7 +62,7 @@ class ComposerHelper
         for ($i = 0; $i <= count($pathItems) - 1; $i++) {
             $pp .= $pathItems[$i] . '\\';
             unset($pathItems[$i]);
-            $dirs = ArrayHelper::getValue(self::$autoloadPsr4, $pp);
+            $dirs = ArrayHelper::getValue(self::$autoload_psr4, $pp);
             if ($dirs) {
                 foreach ($dirs as $dir) {
                     $relativeDir = implode('\\', $pathItems);
@@ -105,10 +83,10 @@ class ComposerHelper
 
     private static function ensure()
     {
-        if (self::$autoloadPsr4) {
+        if (self::$autoload_psr4) {
             return;
         }
-        self::$autoloadPsr4 = include FileHelper::rootPath() . '/vendor/composer/autoload_psr4.php';
+        self::$autoload_psr4 = include FileHelper::rootPath() . '/vendor/composer/autoload_psr4.php';
     }
 
 }

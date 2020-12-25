@@ -3,9 +3,8 @@
 namespace ZnCore\Base\Libs\Store\Drivers;
 
 use Symfony\Component\Yaml\Yaml as SymfonyYaml;
-use ZnCore\Base\Interfaces\EncoderInterface;
 
-class Yaml implements EncoderInterface
+class Yaml implements DriverInterface
 {
 
     public function decode($content)

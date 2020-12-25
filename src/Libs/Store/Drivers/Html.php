@@ -2,10 +2,9 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
-use ZnCore\Base\Interfaces\EncoderInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 
-class Html implements EncoderInterface
+class Html implements DriverInterface
 {
 
     public function decode($code)

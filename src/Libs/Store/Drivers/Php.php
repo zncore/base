@@ -2,14 +2,13 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
-use ZnCore\Base\Interfaces\EncoderInterface;
 use ZnCore\Base\Libs\Store\Helpers\FileGeneratorHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\VarDumper;
 use ZnCore\Base\Helpers\StringHelper;
 
-class Php implements EncoderInterface
+class Php implements DriverInterface
 {
 
     public function decode($content)
