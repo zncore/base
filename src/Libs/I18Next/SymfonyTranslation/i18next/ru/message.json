@@ -1,0 +1,4 @@
+{
+  "This value should not be blank": "Это значение не должно быть пустым.",
+  "This value should be greater than {{ compared_value }}": "Это значение должно быть больше {{compared_value}}."
+}
