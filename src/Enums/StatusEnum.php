@@ -43,8 +43,13 @@ class StatusEnum
     public static function getLabels()
     {
         return [
-            self::ENABLED => I18Next::t('app', 'status.enabled'),
-            self::DISABLED => I18Next::t('app', 'status.disabled'),
+            self::DELETED => I18Next::t('core', 'status.deleted'),
+            self::DISABLED => I18Next::t('core', 'status.disabled'),
+            self::REJECTED => I18Next::t('core', 'status.rejected'),
+            self::BLOCKED => I18Next::t('core', 'status.blocked'),
+            self::WAIT_APPROVING => I18Next::t('core', 'status.wait_approving'),
+            self::ENABLED => I18Next::t('core', 'status.enabled'),
+            self::COMPLETED => I18Next::t('core', 'status.completed'),
         ];
     }
 }

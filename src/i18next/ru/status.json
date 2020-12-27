@@ -1,6 +1,10 @@
 {
-  "enabled": "Включено",
-  "disabled": "Отключено",
   "deleted": "Удалено",
-  "blocked": "Заблокировано"
+  "disabled": "Отключено",
+  "rejected": "Отклонен",
+  "blocked": "Заблокировано",
+  "wait_approving": "Ожидает одобрения",
+  "enabled": "Включено",
+  "completed": "Обработано"
 }
+
