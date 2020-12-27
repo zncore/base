@@ -3,9 +3,8 @@
 namespace ZnCore\Base\Libs\Store\Drivers;
 
 use ZnCore\Base\Helpers\StringHelper;
-use ZnCore\Base\Interfaces\EncoderInterface;
 
-class Csv implements EncoderInterface
+class Csv implements DriverInterface
 {
 
     public function decode($content)
@@ -26,4 +25,5 @@ class Csv implements EncoderInterface
         $content = trim($content);
         return $content;
     }
+
 }

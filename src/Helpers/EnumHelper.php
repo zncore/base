@@ -17,7 +17,7 @@ class EnumHelper
 
     public static function validate(string $className, $value, $prefix = null)
     {
-        if (!self::isValid($className, $value, $prefix)) {
+        if ( ! self::isValid($className, $value, $prefix)) {
             $class = static::class;
             throw new InvalidArgumentException("Value \"$value\" not contains in \"$class\" enum");
         }
@@ -27,7 +27,7 @@ class EnumHelper
     {
         return in_array($value, static::getValues($className, $prefix));
     }
-
+    
     public static function getValue(string $className, $value, $default = null, $prefix = null)
     {
         if (self::isValid($className, $value, $prefix)) {
@@ -43,7 +43,7 @@ class EnumHelper
 
     public static function all(string $className, $prefix = null): array
     {
-        if (!empty($prefix)) {
+        if ( ! empty($prefix)) {
             $constants = ReflectionHelper::getConstantsByPrefix($className, $prefix);
         } else {
             $constants = ReflectionHelper::getConstants($className);
@@ -51,16 +51,10 @@ class EnumHelper
         return $constants;
     }
 
-    public static function getLabel(string $className, $constValue): string
-    {
+    public static function getLabel(string $className, $constValue) {
         //ClassHelper::isInstanceOf($className, GetLabelsInterface::class);
-        $labels = self::getLabels($className);
+        $labels = $className::getLabels();
         return $labels[$constValue];
     }
 
-    public static function getLabels(string $className): array
-    {
-        $labels = $className::getLabels();
-        return $labels;
-    }
 }

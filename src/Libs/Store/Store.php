@@ -2,9 +2,9 @@
 
 namespace ZnCore\Base\Libs\Store;
 
-use ZnCore\Base\Interfaces\EncoderInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\Store\Drivers\DriverInterface;
 
 class Store
 {
@@ -12,7 +12,7 @@ class Store
     protected $driver;
 
     /**
-     * @var EncoderInterface
+     * @var DriverInterface
      */
     protected $driverInstance;
 
@@ -23,7 +23,7 @@ class Store
         $this->driver = $driver;
         $driverClass = 'ZnCore\\Base\\Libs\\Store\\Drivers\\' . $driver;
         $implements = class_implements($driverClass);
-        if ( ! array_key_exists(EncoderInterface::class, $implements)) {
+        if ( ! array_key_exists(DriverInterface::class, $implements)) {
             throw new \Exception('No implements interface of driver class');
         }
         $this->driverInstance = new $driverClass;
