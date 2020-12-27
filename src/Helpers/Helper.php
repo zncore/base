@@ -60,7 +60,7 @@ class Helper
         return $result;
     }
 
-    public static function post($data = null, Model $model = null)
+    /*public static function post($data = null, Model $model = null)
     {
         if (empty($data) && is_object($model)) {
             $data = \Yii::$app->request->post($model->formName());
@@ -82,7 +82,7 @@ class Helper
             return null;
         }
         return $config;
-    }
+    }*/
 
     /*public static function forgeForm(Model $model, $data = null)
     {

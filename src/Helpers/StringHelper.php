@@ -246,7 +246,7 @@ class StringHelper
         return $begin . str_repeat('*', $valueLength) . $end;
     }
 
-    private static function extractWords($text)
+    public static function extractWords($text)
     {
         $text = preg_replace('/[^0-9A-Za-zА-Яа-яЁё]/iu', ' ', $text);
         $text = self::removeDoubleSpace($text);

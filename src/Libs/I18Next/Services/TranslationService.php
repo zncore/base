@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\I18Next\Services;
 
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\I18Next\Exceptions\NotFoundBundleException;
 use ZnCore\Base\Libs\Store\StoreFile;
 use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 use ZnCore\Base\Libs\I18Next\Libs\Translator;
@@ -19,7 +20,7 @@ class TranslationService implements TranslationServiceInterface
 
     public function __construct(array $bundles = [], string $defaultLanguage = null)
     {
-        if($bundles) {
+        if ($bundles) {
             $this->bundles = $bundles;
         } else {
             $store = new StoreFile($_ENV['I18NEXT_CONFIG_FILE']);
@@ -63,10 +64,16 @@ class TranslationService implements TranslationServiceInterface
 
     private function getTranslator(string $bundleName): Translator
     {
-        if ( ! isset($this->translators[$bundleName])) {
+        if (!isset($this->translators[$bundleName])) {
+            if (!array_key_exists($bundleName, $this->bundles)) {
+                throw new NotFoundBundleException('Translation bundle "' . $bundleName . '" not found');
+            }
             $bundlePath = $this->bundles[$bundleName];
             $this->addBundle($bundleName, $bundlePath);
         }
+        /*if (!array_key_exists($bundleName, $this->translators)) {
+            throw new NotFoundBundleException('Translation bundle "' . $bundleName . '" not found');
+        }*/
         return $this->translators[$bundleName];
     }
 
