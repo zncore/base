@@ -8,3 +8,6 @@ return [
         return new Translator('symfony');
     },
 ];
+
+//config i18next bundles
+//'symfony' => 'vendor/zncore/base/src/Libs/I18Next/SymfonyTranslation/i18next/__lng__/__ns__.json',
