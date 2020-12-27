@@ -53,13 +53,14 @@ class EnumHelper
 
     public static function getLabel(string $className, $constValue): string
     {
-        //ClassHelper::isInstanceOf($className, GetLabelsInterface::class);
         $labels = self::getLabels($className);
         return $labels[$constValue];
     }
 
     public static function getLabels(string $className): array
     {
+        /** @var GetLabelsInterface $className */
+        ClassHelper::isInstanceOf($className, GetLabelsInterface::class, true);
         $labels = $className::getLabels();
         return $labels;
     }

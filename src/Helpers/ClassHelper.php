@@ -5,6 +5,7 @@ namespace ZnCore\Base\Helpers;
 use Exception;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
+use ZnCore\Base\Exceptions\NotInstanceOfException;
 
 class ClassHelper
 {
@@ -16,7 +17,7 @@ class ClassHelper
         return $className;
     }
 
-    public static function isInstanceOf($instance, $interface)
+    public static function isInstanceOf($instance, $interface, bool $allowString = false): void
     {
         if (empty($instance)) {
             throw new InvalidArgumentException("Argument \"instance\" is empty");
@@ -24,15 +25,24 @@ class ClassHelper
         if (empty($interface)) {
             throw new InvalidArgumentException("Argument \"interfaceClass\" is empty");
         }
-        if (!is_object($instance)) {
-            throw new InvalidArgumentException("Class \"$instance\" not exists");
-        }
         if (!interface_exists($interface) && !class_exists($interface)) {
-            throw new InvalidArgumentException("Class \"$interface\" not exists");
+            throw new InvalidArgumentException("Interface \"$interface\" not exists");
         }
+        if(is_string($instance) && $allowString) {
+            $reflection = new \ReflectionClass($instance);
+            $interfaces = $reflection->getInterfaces();
+            if(!array_key_exists($interface, $interfaces)) {
+                throw new NotInstanceOfException("Class \"$instance\" not instanceof \"$interface\"");
+            }
+            return;
+        }
+        if (!is_object($instance)) {
+            throw new InvalidArgumentException("Not is object");
+        }
+
         if (!$instance instanceof $interface) {
             $instanceClassName = get_class($instance);
-            throw new Exception("Class \"$instanceClassName\" not instanceof \"$interface\"");
+            throw new NotInstanceOfException("Class \"$instanceClassName\" not instanceof \"$interface\"");
         }
     }
 

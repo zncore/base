@@ -2,9 +2,10 @@
 
 namespace ZnCore\Base\Enums;
 
+use ZnCore\Base\Interfaces\GetLabelsInterface;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 
-class StatusEnum
+class StatusEnum implements GetLabelsInterface
 {
 
     // удален
