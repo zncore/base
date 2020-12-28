@@ -7,6 +7,11 @@ use ZnCore\Base\Enums\EnvEnum;
 class EnvHelper
 {
 
+    public static function isDebug(): bool
+    {
+        return self::getAppDebug();
+    }
+
     public static function isProd(): bool
     {
         return self::getAppEnv() != EnvEnum::PRODUCTION;
@@ -25,5 +30,10 @@ class EnvHelper
     public static function getAppEnv(): ?string
     {
         return $_ENV['APP_ENV'] ?? null;
+    }
+
+    public static function getAppDebug()//: ?string
+    {
+        return $_ENV['APP_DEBUG'] ?? null;
     }
 }
