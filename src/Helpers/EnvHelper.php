@@ -2,14 +2,24 @@
 
 namespace ZnCore\Base\Helpers;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Enums\EnvEnum;
 
 class EnvHelper
 {
 
     public static function isProd(): bool
     {
-        return self::getAppEnv() != 'prod';
+        return self::getAppEnv() != EnvEnum::PRODUCTION;
+    }
+
+    public static function isDev(): bool
+    {
+        return self::getAppEnv() != EnvEnum::DEVELOP;
+    }
+
+    public static function isTest(): bool
+    {
+        return self::getAppEnv() != EnvEnum::TEST;
     }
 
     public static function getAppEnv(): ?string
