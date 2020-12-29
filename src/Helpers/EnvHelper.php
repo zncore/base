@@ -7,6 +7,18 @@ use ZnCore\Base\Enums\EnvEnum;
 class EnvHelper
 {
 
+    public static function showErrors(int $level = E_ALL): void
+    {
+        error_reporting($level);
+        ini_set('display_errors', '1');
+    }
+
+    public static function hideErrors(int $level = 0): void
+    {
+        error_reporting($level);
+        ini_set('display_errors', '0');
+    }
+
     public static function isDebug(): bool
     {
         return self::getAppDebug();
@@ -32,7 +44,7 @@ class EnvHelper
         return $_ENV['APP_ENV'] ?? null;
     }
 
-    public static function getAppDebug()//: ?string
+    public static function getAppDebug(): ?string
     {
         return $_ENV['APP_DEBUG'] ?? null;
     }
