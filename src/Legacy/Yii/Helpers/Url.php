@@ -26,6 +26,12 @@ class Url
      */
     public static $urlManager;
 
+    public static function getBaseUrl(): string
+    {
+        global $_SERVER;
+        $baseUrl = explode('?', $_SERVER['REQUEST_URI'])[0];
+        return $baseUrl;
+    }
 
     /**
      * Creates a URL for the given route.
