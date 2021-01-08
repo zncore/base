@@ -1,9 +1,15 @@
 <?php
 
 use Symfony\Contracts\Translation\TranslatorInterface;
+use ZnCore\Base\Libs\I18Next\Factories\I18NextServiceFactory;
+use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 use ZnCore\Base\Libs\I18Next\SymfonyTranslation\Translator;
 
+//$translationService = new TranslationService([], Yii::$app->language);
+$translationService = I18NextServiceFactory::create('ru', 'ru');
+
 return [
+    TranslationServiceInterface::class => $translationService,
     TranslatorInterface::class => function () {
         return new Translator('symfony');
     },
