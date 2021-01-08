@@ -42,17 +42,17 @@ class EnvHelper
 
     public static function isProd(): bool
     {
-        return self::getAppEnv() != EnvEnum::PRODUCTION;
+        return self::getAppEnv() == EnvEnum::PRODUCTION;
     }
 
     public static function isDev(): bool
     {
-        return self::getAppEnv() != EnvEnum::DEVELOP;
+        return self::getAppEnv() == EnvEnum::DEVELOP;
     }
 
     public static function isTest(): bool
     {
-        return self::getAppEnv() != EnvEnum::TEST;
+        return self::getAppEnv() == EnvEnum::TEST;
     }
 
     public static function getAppEnv(): ?string
