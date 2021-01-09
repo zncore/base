@@ -7,6 +7,7 @@
 
 namespace ZnCore\Base\Legacy\Yii\Base;
 
+use ZnCore\Base\Exceptions\UnknownMethodException;
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Traits\MagicAttribute\MagicAttributeTrait;
 
