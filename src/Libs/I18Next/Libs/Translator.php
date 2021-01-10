@@ -2,6 +2,8 @@
 
 namespace ZnCore\Base\Libs\I18Next\Libs;
 
+use ZnCore\Base\Libs\I18Next\Helpers\TranslatorHelper;
+
 class Translator {
 
     /**
@@ -133,14 +135,13 @@ class Translator {
         if (!$return)
             $return = $key;
 
-        foreach ($variables as $variable => $value) {
-
+        /*foreach ($variables as $variable => $value) {
             if (is_string($value) || is_numeric($value)) {
                 $return = preg_replace('/__' . $variable . '__/', $value, $return);
                 $return = preg_replace('/{{' . $variable . '}}/', $value, $return);
             }
-
-        }
+        }*/
+        $return = TranslatorHelper::processVariables($return, $variables);
 
         return $return;
 
