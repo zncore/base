@@ -18,17 +18,20 @@ use ZnYii\App\Loader\BaseLoader;
 
 class Kernel
 {
-    private $cache;
+
+//    private $cache;
     //protected $loader;
     protected $container;
     protected $loaders;
-    protected $env;
+//    protected $env;
+    protected $appName;
 
-    public function __construct(array $env = null, LoaderInterface $loader = null)
+    public function __construct(string $appName)
     {
         define('MICRO_TIME', microtime(true));
+        $this->appName = $appName;
         //$this->loader = $loader;
-        $this->env = $env;
+        //$this->env = $env;
         //$this->initCache($env);
     }
 
@@ -63,11 +66,11 @@ class Kernel
         //$this->loader->loadYii();
     }*/
 
-    public function loadAppConfig(string $appName): array
+    public function loadAppConfig(): array
     {
         DotEnv::init(__DIR__ . '/../../../../../..');
 //        $config = parent::run($_ENV);
-        $config = $this->loadMainConfig($appName);
+        $config = $this->loadMainConfig($this->appName);
         //dd($config);
 
         $this->configure($config['container']);

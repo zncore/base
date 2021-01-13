@@ -35,6 +35,11 @@ class EnvHelper
         ini_set('display_errors', '0');
     }
 
+    public static function isConsole(): bool
+    {
+        return PHP_SAPI == 'cli';
+    }
+
     public static function isDebug(): bool
     {
         return self::getAppDebug();

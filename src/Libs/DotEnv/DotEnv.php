@@ -15,9 +15,9 @@ class DotEnv
 
     public static function init(string $basePath = self::ROOT_PATH): void
     {
-        if (self::loadCachedEnvLocal($basePath)) {
+        /*if (self::loadCachedEnvLocal($basePath)) {
             return;
-        }
+        }*/
         if ( ! class_exists(SymfonyDotenv::class)) {
             throw new RuntimeException('Please run "composer require symfony/SymfonyDotenv" to load the ".env" files configuring the application.');
         }
@@ -26,7 +26,7 @@ class DotEnv
         $dotEnv->loadEnv($basePath . '/.env');
     }
 
-    public static function get(string $path = null, $default = null)
+    /*public static function get(string $path = null, $default = null)
     {
         if (empty(self::$map)) {
             self::forgeMap();
@@ -66,6 +66,6 @@ class DotEnv
         $isHeader = 0 === strpos($key, 'HTTP_');
         $hasValueInServer = isset($_SERVER[$key]) && ! $isHeader;
         $_ENV[$key] = $hasValueInServer ? $_SERVER[$key] : $value;
-    }
+    }*/
 
 }
