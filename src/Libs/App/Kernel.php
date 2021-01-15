@@ -2,37 +2,25 @@
 
 namespace ZnCore\Base\Libs\App;
 
-use Illuminate\Container\Container;
 use Packages\Kernel\AdvancedLoader;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use ZnCore\Base\Enums\Measure\TimeEnum;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Domain\Helpers\EntityManagerHelper;
-use ZnYii\App\Constant;
-use ZnYii\App\Loader\BaseLoader;
 
 class Kernel
 {
 
-//    private $cache;
-    //protected $loader;
     protected $container;
     protected $loaders;
-//    protected $env;
     protected $appName;
 
     public function __construct(string $appName)
     {
         define('MICRO_TIME', microtime(true));
         $this->appName = $appName;
-        //$this->loader = $loader;
-        //$this->env = $env;
-        //$this->initCache($env);
     }
 
     public function setContainer(ContainerInterface $container): void
@@ -42,47 +30,22 @@ class Kernel
 
     public function setLoader(LoaderInterface $loader): void
     {
-        //$this->loader = $loader;
         $this->loaders[] = $loader;
     }
 
-    /*public function run(array $env = null)
-    {
-        if($env === null) {
-            $env = $this->env;
-        }
-        $this->init($env);
-        $appName = $env['APP_NAME'];
-        //Constant::defineBase(realpath(__DIR__ . '/../../../..'));
-        //Constant::defineApp($appName);
-        $config = $this->loadMainConfig($appName);
-        return $config;
-    }
-
-    private function init(array $env)
-    {
-        define('MICRO_TIME', microtime(true));
-        //Constant::defineEnv($env);
-        //$this->loader->loadYii();
-    }*/
-
     public function loadAppConfig(): array
     {
-        DotEnv::init(__DIR__ . '/../../../../../..');
-//        $config = parent::run($_ENV);
+//        DotEnv::init(__DIR__ . '/../../../../../..');
         $config = $this->loadMainConfig($this->appName);
-        //dd($config);
-
         $this->configure($config['container']);
         unset($config['container']['entities']);
         return $config;
     }
 
-    private function configure(array $containerConfig)
+    protected function configure(array $containerConfig)
     {
-        //$container = Container::getInstance();
         ContainerHelper::configureContainer($this->container, $containerConfig);
-        if(!empty($containerConfig['entities'])) {
+        if (!empty($containerConfig['entities'])) {
             EntityManagerHelper::bindEntityManager($this->container, $containerConfig['entities']);
         }
     }
@@ -97,10 +60,4 @@ class Kernel
         }
         return $config;
     }
-
-    /*private function initCache(array $env)
-    {
-        $cacheDirectory = FileHelper::path($env['CACHE_DIRECTORY']);
-        $this->cache = new FilesystemAdapter('kernel', TimeEnum::SECOND_PER_MINUTE * 20, $cacheDirectory);
-    }*/
 }
