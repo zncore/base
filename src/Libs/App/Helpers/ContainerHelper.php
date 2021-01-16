@@ -78,11 +78,15 @@ class ContainerHelper
         $container->singleton(Container::class, function () use ($container) {
             return $container;
         });
-        foreach ($containerConfig['definitions'] as $abstract => $concrete) {
-            $container->bind($abstract, $concrete, true);
+        if(isset($containerConfig['definitions'])) {
+            foreach ($containerConfig['definitions'] as $abstract => $concrete) {
+                $container->bind($abstract, $concrete, true);
+            }
         }
-        foreach ($containerConfig['singletons'] as $abstract => $concrete) {
-            $container->singleton($abstract, $concrete);
+        if(isset($containerConfig['singletons'])) {
+            foreach ($containerConfig['singletons'] as $abstract => $concrete) {
+                $container->singleton($abstract, $concrete);
+            }
         }
     }
 }
