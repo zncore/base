@@ -7,7 +7,6 @@ use Psr\Container\ContainerInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
-use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Domain\Helpers\EntityManagerHelper;
 
 class Kernel
@@ -35,7 +34,6 @@ class Kernel
 
     public function loadAppConfig(): array
     {
-//        DotEnv::init(__DIR__ . '/../../../../../..');
         $config = $this->loadMainConfig($this->appName);
         $this->configure($config['container']);
         unset($config['container']['entities']);
