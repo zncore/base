@@ -16,9 +16,9 @@ class ContainerHelper
         self::$container = $container;
     }
 
-    public static function importFromConfig(string $configFile): array
+    public static function importFromConfig($importList): array
     {
-        $importList = require $configFile;
+
         $containerConfig = [];
         $containerConfig = self::importFromFiles($containerConfig, $importList);
         return $containerConfig;

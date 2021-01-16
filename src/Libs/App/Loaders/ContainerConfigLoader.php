@@ -10,9 +10,13 @@ class ContainerConfigLoader implements LoaderInterface
     
     private $mapConfig;
     
-    public function __construct(string $mapConfig = null)
+    public function __construct($mapConfig = null)
     {
-        $this->mapConfig = $mapConfig/* ?: __DIR__ . '/../../../../../../../' . $_ENV['CONTAINER_CONFIG_FILE']*/;
+        if(is_string($mapConfig)) {
+            $this->mapConfig = require $mapConfig;
+        } elseif(is_array($mapConfig)) {
+            $this->mapConfig = $mapConfig;
+        }
     }
 
     public function bootstrapApp(string $appName)
