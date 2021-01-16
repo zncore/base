@@ -13,7 +13,7 @@ use ZnCore\Base\Libs\DotEnv\DotEnv;
 class ConsoleAppFacade
 {
 
-    public static function init(ContainerInterface $container, array $containerConfigArray = [])
+    public static function init(ContainerInterface $container, array $containerConfigArray = []): Application
     {
         DotEnv::init(__DIR__ . '/../../../../../../..');
         EnvHelper::setErrorVisibleFromEnv();
@@ -29,5 +29,7 @@ class ConsoleAppFacade
         $container->singleton(ContainerInterface::class, function (ContainerInterface $container) {
             return $container;
         });
+        $application = $container->get(Application::class);
+        return $application;
     }
 }
