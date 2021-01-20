@@ -42,7 +42,6 @@ class Kernel
 
     protected function configure(array $containerConfig)
     {
-//        dd($containerConfig);
         ContainerHelper::configureContainer($this->container, $containerConfig);
         if (!empty($containerConfig['entities'])) {
             EntityManagerHelper::bindEntityManager($this->container, $containerConfig['entities']);

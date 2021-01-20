@@ -19,6 +19,11 @@ class ContainerConfigLoader implements LoaderInterface
         }
     }
 
+    public function addContainerConfig(string $configFile)
+    {
+        $this->mapConfig[] = $configFile;
+    }
+
     public function bootstrapApp(string $appName)
     {
         
