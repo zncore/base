@@ -6,6 +6,7 @@ use Exception;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
 use ZnCore\Base\Exceptions\NotInstanceOfException;
+use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 
 class ClassHelper
 {
@@ -84,7 +85,9 @@ class ClassHelper
             throw new InvalidConfigException('Empty class config');
         }
         $definition = self::normalizeComponentConfig($definition);
-        $object = new $definition['class'];
+        $container = ContainerHelper::getContainer();
+        $object = $container->get($definition['class']);
+        //$object = new $definition['class'];
         self::configure($object, $params);
         self::configure($object, $definition);
         if (!empty($interface)) {
@@ -93,7 +96,7 @@ class ClassHelper
         return $object;
     }
 
-    public static function configure($object, $properties)
+    public static function configure(object $object, array $properties)
     {
         if (empty($properties)) {
             return $object;
@@ -106,7 +109,7 @@ class ClassHelper
         return $object;
     }
 
-    static function getClassName($className, $namespace)
+    static function getClassName(string $className, string $namespace)
     {
         if (empty($namespace)) {
             return $className;
@@ -117,7 +120,7 @@ class ClassHelper
         return $className;
     }
 
-    public static function getNamespace($name)
+    public static function getNamespace(string $name)
     {
         $name = trim($name, '\\');
         $arr = explode('\\', $name);
@@ -168,7 +171,7 @@ class ClassHelper
 
     static function isClass($name)
     {
-        return is_string($name) && strpos($name, '\\') !== false;
+        return is_string($name) && (strpos($name, '\\') !== false || class_exists($name));
     }
 
 
