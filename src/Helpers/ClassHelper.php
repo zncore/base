@@ -84,6 +84,9 @@ class ClassHelper
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
         }
+        if(is_object($definition)) {
+            return $definition;
+        }
         $definition = self::normalizeComponentConfig($definition);
         $container = ContainerHelper::getContainer();
         $object = $container->get($definition['class']);
