@@ -70,15 +70,21 @@ class BundleLoader implements LoaderInterface
         if ($loaderInstance->getName() == null) {
             $loaderInstance->setName($loaderName);
         }
-        $bundles = [];
-        foreach ($this->bundles as $bundle) {
-            /** @var BaseBundle $bundle */
-            $importList = $bundle->getImportList();
-            if(in_array($loaderName, $importList)) {
-                $bundles[] = $bundle;
-            }
-        }
+        $bundles = $this->filterBundlesByLoader($this->bundles, $loaderName);
         $configItem = $loaderInstance->loadAll($bundles);
         return $configItem;
+    }
+
+    private function filterBundlesByLoader(array $bundles, string $loaderName): array
+    {
+        $resultBundles = [];
+        foreach ($bundles as $bundle) {
+            /** @var BaseBundle $bundle */
+            $importList = $bundle->getImportList();
+            if (in_array($loaderName, $importList)) {
+                $resultBundles[] = $bundle;
+            }
+        }
+        return $resultBundles;
     }
 }
