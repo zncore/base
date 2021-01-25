@@ -30,6 +30,11 @@ class BundleLoader implements LoaderInterface
 
     public function loadMainConfig(string $appName): array
     {
+        if (in_array('migration', $this->import)) {
+            foreach ($this->bundles as $bundle) {
+                $this->registerBundleMigration($bundle);
+            }
+        }
         if (in_array('i18next', $this->import)) {
             foreach ($this->bundles as $bundle) {
                 $this->registerBundleI18Next($bundle);
@@ -50,9 +55,19 @@ class BundleLoader implements LoaderInterface
                 $this->registerBundleConsole($bundle);
             }
         }
+
 //        $this->mainConfig['container'] = $this->containerConfigLoader->loadMainConfig('')['container'];
         $this->mainConfig['container'] = ContainerHelper::importFromConfig($this->containerImportList);
         return $this->mainConfig;
+    }
+
+    public function registerBundleMigration(BaseBundle $bundle)
+    {
+        if (!method_exists($bundle, 'migration')) {
+            return;
+        }
+        $i18nextBundles = $bundle->migration();
+        $_ENV['ELOQUENT_MIGRATIONS'] = ArrayHelper::merge($_ENV['ELOQUENT_MIGRATIONS'] ?? [], $i18nextBundles);
     }
 
     public function registerBundleI18Next(BaseBundle $bundle)
