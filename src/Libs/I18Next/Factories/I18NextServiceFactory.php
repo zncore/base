@@ -9,8 +9,6 @@ use ZnCore\Base\Libs\I18Next\Services\TranslationService;
 class I18NextServiceFactory
 {
 
-    public static function create(string $defaultLanguage, string $language): TranslationServiceInterface
-
     public static function create(string $defaultLanguage, string $language, array $bundles = []): TranslationServiceInterface
     {
         $translationService = new TranslationService($bundles, $defaultLanguage);
