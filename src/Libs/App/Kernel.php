@@ -58,6 +58,7 @@ class Kernel
     {
         $config = [];
         foreach ($this->loaders as $loader) {
+            $loader->setContainer($this->getContainer());
             $loader->bootstrapApp($appName);
             $configItem = $loader->loadMainConfig($appName);
             $config = ArrayHelper::merge($config, $configItem);

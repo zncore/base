@@ -8,10 +8,13 @@ use Symfony\Component\Routing\Loader\PhpFileLoader;
 use Symfony\Component\Routing\RouteCollection;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
+use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
 
-class RoutingConfigLoader implements LoaderInterface
+class RoutingConfigLoader extends BaseLoader implements LoaderInterface
 {
-    
+
+    use ContainerAttributeTrait;
+
     private $configList;
     
     public function __construct(array $configList = null)

@@ -4,10 +4,13 @@ namespace ZnCore\Base\Libs\App\Loaders;
 
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
+use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
 
 class ContainerConfigLoader implements LoaderInterface
 {
-    
+
+    use ContainerAttributeTrait;
+
     private $mapConfig;
     
     public function __construct($mapConfig = null)
