@@ -19,7 +19,7 @@ class ContainerConfigLoader implements LoaderInterface
         }
     }
 
-    public function addContainerConfig(string $configFile)
+    public function addContainerConfig($configFile)
     {
         $this->mapConfig[] = $configFile;
     }

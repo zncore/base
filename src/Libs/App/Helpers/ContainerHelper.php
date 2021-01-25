@@ -16,15 +16,7 @@ class ContainerHelper
         self::$container = $container;
     }
 
-    public static function importFromConfig($importList): array
-    {
-
-        $containerConfig = [];
-        $containerConfig = self::importFromFiles($containerConfig, $importList);
-        return $containerConfig;
-    }
-
-    private static function importFromFiles(array $config, array $fileList): array
+    public static function importFromConfig($fileList, array $config = []): array
     {
         foreach ($fileList as $configFile) {
             $toKey = null;
