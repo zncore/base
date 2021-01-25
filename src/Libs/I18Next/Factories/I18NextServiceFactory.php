@@ -10,8 +10,10 @@ class I18NextServiceFactory
 {
 
     public static function create(string $defaultLanguage, string $language): TranslationServiceInterface
+
+    public static function create(string $defaultLanguage, string $language, array $bundles = []): TranslationServiceInterface
     {
-        $translationService = new TranslationService([], $defaultLanguage);
+        $translationService = new TranslationService($bundles, $defaultLanguage);
         $translationService->setLanguage($language);
         I18Next::setService($translationService);
         return $translationService;
