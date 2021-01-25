@@ -4,6 +4,7 @@ namespace ZnCore\Base\Libs\App\Loaders;
 
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\App\Base\BaseBundle;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BaseLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BundleContainerLoader;
@@ -69,7 +70,15 @@ class BundleLoader implements LoaderInterface
         if ($loaderInstance->getName() == null) {
             $loaderInstance->setName($loaderName);
         }
-        $configItem = $loaderInstance->loadAll($this->bundles);
+        $bundles = [];
+        foreach ($this->bundles as $bundle) {
+            /** @var BaseBundle $bundle */
+            $importList = $bundle->getImportList();
+            if(in_array($loaderName, $importList)) {
+                $bundles[] = $bundle;
+            }
+        }
+        $configItem = $loaderInstance->loadAll($bundles);
         return $configItem;
     }
 }
