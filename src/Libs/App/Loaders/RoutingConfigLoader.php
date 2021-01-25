@@ -10,7 +10,7 @@ use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
 
-class RoutingConfigLoader extends BaseLoader implements LoaderInterface
+class RoutingConfigLoader /*extends BaseLoader*/ implements LoaderInterface
 {
 
     use ContainerAttributeTrait;
