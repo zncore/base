@@ -57,7 +57,7 @@ class BundleLoader implements LoaderInterface
         }
 
 //        $this->mainConfig['container'] = $this->containerConfigLoader->loadMainConfig('')['container'];
-        $this->mainConfig['container'] = ContainerHelper::importFromConfig($this->containerImportList);
+//        $this->mainConfig['container'] = ContainerHelper::importFromConfig($this->containerImportList);
         return $this->mainConfig;
     }
 
@@ -81,14 +81,15 @@ class BundleLoader implements LoaderInterface
 
     }
 
-    public function registerBundleContainer(BaseBundle $bundle)
+    public function registerBundleContainer(BaseBundle $bundle, array $config = [])
     {
         if (!method_exists($bundle, 'container')) {
             return;
         }
         $containerConfigList = $bundle->container();
         foreach ($containerConfigList as $containerConfig) {
-            $this->containerImportList[] = $containerConfig;
+            $this->mainConfig['container'] = ContainerHelper::importFromConfig([$containerConfig], $this->mainConfig['container'] ?? []);
+//            $this->containerImportList[] = $containerConfig;
 //                $this->containerConfigLoader->addContainerConfig($containerConfig);
         }
     }
