@@ -13,6 +13,7 @@ use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ContainerLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\I18NextLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\MigrationLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ModuleLoader;
+use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRoutesLoader;
 use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
 
 class BundleLoader implements LoaderInterface
@@ -40,6 +41,7 @@ class BundleLoader implements LoaderInterface
             'migration' => MigrationLoader::class,
             'container' => ContainerLoader::class,
             'admin' => ModuleLoader::class,
+            'symfonyWeb' => SymfonyRoutesLoader::class,
             'console' => ConsoleLoader::class,
             'i18next' => I18NextLoader::class,
         ];
