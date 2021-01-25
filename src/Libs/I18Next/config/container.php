@@ -9,6 +9,9 @@ use ZnCore\Base\Libs\I18Next\SymfonyTranslation\Translator;
 $translationService = I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
 
 return [
+    /*TranslationServiceInterface::class => function() {
+        return I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
+    },*/
     TranslationServiceInterface::class => $translationService,
     TranslatorInterface::class => function () {
         return new Translator('symfony');

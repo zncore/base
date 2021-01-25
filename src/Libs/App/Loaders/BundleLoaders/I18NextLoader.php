@@ -3,6 +3,8 @@
 namespace ZnCore\Base\Libs\App\Loaders\BundleLoaders;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
+use ZnCore\Base\Libs\I18Next\Services\TranslationService;
 
 class I18NextLoader extends BaseLoader
 {
@@ -16,5 +18,6 @@ class I18NextLoader extends BaseLoader
         }
         $_ENV['I18NEXT_BUNDLES'] = $config;
         return [];
+//        return [$this->getName() => $config];
     }
 }

@@ -15,7 +15,7 @@ class MigrationLoader extends BaseLoader
             $config = ArrayHelper::merge($config, $i18nextBundles);
         }
         $_ENV['ELOQUENT_MIGRATIONS'] = $config;
-//        return [$this->getName() => $config];
         return [];
+//        return [$this->getName() => $config];
     }
 }

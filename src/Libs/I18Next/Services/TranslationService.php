@@ -8,6 +8,7 @@ use ZnCore\Base\Libs\I18Next\Exceptions\NotFoundBundleException;
 use ZnCore\Base\Libs\Store\StoreFile;
 use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 use ZnCore\Base\Libs\I18Next\Libs\Translator;
+use ZnLib\Telegram\Domain\Facades\Bot;
 
 class TranslationService implements TranslationServiceInterface
 {
@@ -17,17 +18,17 @@ class TranslationService implements TranslationServiceInterface
     private $bundles = [];
     private $language;
     private $defaultLanguage;
-    private $fallbackLanguage;
+    private $fallbackLanguage = 'en';
 
     public function __construct(array $bundles = [], string $defaultLanguage = null)
     {
-        $store = new StoreFile($_ENV['I18NEXT_CONFIG_FILE']);
-        $config = $store->load();
-        $defaultLanguage = $defaultLanguage ?? ($config['defaultLanguage'] ?? 'en');
-        $bundles = ArrayHelper::merge($bundles, $config['bundles'] ?? []);
+//        $store = new StoreFile($_ENV['I18NEXT_CONFIG_FILE']);
+//        $config = $store->load();
+//        $defaultLanguage = $defaultLanguage ?? ($config['defaultLanguage'] ?? 'en');
+        //$bundles = ArrayHelper::merge($bundles, $config['bundles'] ?? []);
         $this->bundles = $bundles;
-        $this->defaultLanguage = substr($defaultLanguage, 0, 2);
-        $this->language = $this->defaultLanguage;
+        $this->defaultLanguage = $defaultLanguage;
+        $this->language = $defaultLanguage;
     }
 
     public function getLanguage(): string

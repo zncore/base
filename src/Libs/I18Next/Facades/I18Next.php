@@ -13,11 +13,11 @@ class I18Next
 //    private static $container;
     private static $service;
 
-    public static function setContainer(ContainerInterface $container) {
+    /*public static function setContainer(ContainerInterface $container) {
         $container = ContainerHelper::getContainer();
 //        self::$container = $container;
         self::$service = $container->get(TranslationServiceInterface::class);
-    }
+    }*/
 
     public static function getService(): TranslationServiceInterface {
         return self::$service;
@@ -29,7 +29,6 @@ class I18Next
 
     public static function t(string $bundleName, string $key, array $variables = [])
     {
-        /** @var TranslationServiceInterface $translationService */
         $translationService = self::getService();
         return $translationService->t($bundleName, $key, $variables);
     }
@@ -40,5 +39,4 @@ class I18Next
         $translationService = self::getService();
         $translationService->addBundle($bundleName, $path);
     }
-
 }
