@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Libs\App;
 
+use Illuminate\Container\Container;
 use Packages\Kernel\AdvancedLoader;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
@@ -25,6 +26,11 @@ class Kernel
     public function setContainer(ContainerInterface $container): void
     {
         $this->container = $container;
+    }
+
+    public function getContainer(): ContainerInterface
+    {
+        return $this->container ??  ContainerHelper::getContainer();
     }
 
     public function setLoader(LoaderInterface $loader): void

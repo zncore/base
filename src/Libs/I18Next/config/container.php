@@ -6,7 +6,7 @@ use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 use ZnCore\Base\Libs\I18Next\SymfonyTranslation\Translator;
 
 //$translationService = new TranslationService([], Yii::$app->language);
-$translationService = I18NextServiceFactory::create('ru', 'ru');
+$translationService = I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
 
 return [
     TranslationServiceInterface::class => $translationService,

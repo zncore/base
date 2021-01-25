@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Libs\I18Next\Services;
 
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\I18Next\Exceptions\NotFoundBundleException;
 use ZnCore\Base\Libs\Store\StoreFile;
@@ -20,14 +21,11 @@ class TranslationService implements TranslationServiceInterface
 
     public function __construct(array $bundles = [], string $defaultLanguage = null)
     {
-        if ($bundles) {
-            $this->bundles = $bundles;
-        } else {
-            $store = new StoreFile($_ENV['I18NEXT_CONFIG_FILE']);
-            $config = $store->load();
-            $defaultLanguage = $defaultLanguage ?? ($config['defaultLanguage'] ?? 'en');
-            $this->bundles = $config['bundles'] ?? [];
-        }
+        $store = new StoreFile($_ENV['I18NEXT_CONFIG_FILE']);
+        $config = $store->load();
+        $defaultLanguage = $defaultLanguage ?? ($config['defaultLanguage'] ?? 'en');
+        $bundles = ArrayHelper::merge($bundles, $config['bundles'] ?? []);
+        $this->bundles = $bundles;
         $this->defaultLanguage = substr($defaultLanguage, 0, 2);
         $this->language = $this->defaultLanguage;
     }
@@ -53,6 +51,11 @@ class TranslationService implements TranslationServiceInterface
     {
         $translator = $this->getTranslator($bundleName);
         return $translator->getTranslation($key, $variables);
+    }
+
+    public function registerBundle(string $bundleName, string $bundlePath)
+    {
+        $this->bundles[$bundleName] = $bundlePath;
     }
 
     public function addBundle(string $bundleName, string $bundlePath)

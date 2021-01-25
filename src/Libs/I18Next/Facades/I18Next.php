@@ -4,17 +4,19 @@ namespace ZnCore\Base\Libs\I18Next\Facades;
 
 use Psr\Container\ContainerInterface;
 use Yii;
+use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 
 class I18Next
 {
 
-    private static $container;
+//    private static $container;
     private static $service;
 
     public static function setContainer(ContainerInterface $container) {
-        self::$container = $container;
-        self::$service = self::$container->get(TranslationServiceInterface::class);
+        $container = ContainerHelper::getContainer();
+//        self::$container = $container;
+        self::$service = $container->get(TranslationServiceInterface::class);
     }
 
     public static function getService(): TranslationServiceInterface {
