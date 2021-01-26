@@ -15,12 +15,14 @@ use ZnCore\Base\Libs\App\Loaders\BundleLoaders\I18NextLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\MigrationLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ModuleLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRoutesLoader;
+use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
 
 class BundleLoader implements LoaderInterface
 {
 
     use ContainerAttributeTrait;
+    use CacheAwareTrait;
 
     private $bundles;
     private $import = [];
@@ -40,11 +42,20 @@ class BundleLoader implements LoaderInterface
     {
         return [
             'migration' => MigrationLoader::class,
-            'container' => ContainerLoader::class,
+            'container' => [
+                'class' => ContainerLoader::class,
+                //'useCache' => true,
+            ],
             'admin' => ModuleLoader::class,
-            'symfonyWeb' => SymfonyRoutesLoader::class,
+            'symfonyWeb' => [
+                'class' => SymfonyRoutesLoader::class,
+                //'useCache' => true,
+            ],
             'console' => ConsoleLoader::class,
-            'i18next' => I18NextLoader::class,
+            'i18next' => [
+                'class' => I18NextLoader::class,
+                //'useCache' => true,
+            ],
         ];
     }
 
@@ -67,6 +78,9 @@ class BundleLoader implements LoaderInterface
         /** @var BaseLoader $loaderInstance */
         $loaderInstance = ClassHelper::createObject($loaderDefinition);
         $loaderInstance->setContainer($this->getContainer());
+        if ($this->getCache()) {
+            $loaderInstance->setCache($this->getCache());
+        }
         if ($loaderInstance->getName() == null) {
             $loaderInstance->setName($loaderName);
         }

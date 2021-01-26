@@ -2,16 +2,21 @@
 
 namespace ZnCore\Base\Libs\App;
 
-use Illuminate\Container\Container;
 use Packages\Kernel\AdvancedLoader;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use ZnCore\Base\Enums\Measure\TimeEnum;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
+use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Domain\Helpers\EntityManagerHelper;
 
 class Kernel
 {
+
+    use CacheAwareTrait;
 
     protected $container;
     protected $loaders;
@@ -21,6 +26,13 @@ class Kernel
     {
         define('MICRO_TIME', microtime(true));
         $this->appName = $appName;
+        //$this->initCache();
+    }
+
+    protected function initCache()
+    {
+        $cacheDirectory = FileHelper::rootPath() . '/' . $_ENV['CACHE_DIRECTORY'];
+        $this->cache = new FilesystemAdapter('kernel', TimeEnum::SECOND_PER_DAY, $cacheDirectory);
     }
 
     public function setContainer(ContainerInterface $container): void
@@ -30,7 +42,7 @@ class Kernel
 
     public function getContainer(): ContainerInterface
     {
-        return $this->container ??  ContainerHelper::getContainer();
+        return $this->container ?? ContainerHelper::getContainer();
     }
 
     public function setLoader(LoaderInterface $loader): void

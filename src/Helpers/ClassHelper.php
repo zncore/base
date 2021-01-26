@@ -7,6 +7,7 @@ use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
 use ZnCore\Base\Exceptions\NotInstanceOfException;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
+use ZnCore\Domain\Helpers\EntityHelper;
 
 class ClassHelper
 {
@@ -91,8 +92,13 @@ class ClassHelper
         $container = ContainerHelper::getContainer();
         $object = $container->get($definition['class']);
         //$object = new $definition['class'];
-        self::configure($object, $params);
-        self::configure($object, $definition);
+        if($definition['class']) {
+            unset($definition['class']);
+        }
+        EntityHelper::setAttributes($object, $params);
+        EntityHelper::setAttributes($object, $definition);
+//        self::configure($object, $params);
+//        self::configure($object, $definition);
         if (!empty($interface)) {
             self::isInstanceOf($object, $interface);
         }
