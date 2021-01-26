@@ -27,10 +27,14 @@ class BundleLoader implements LoaderInterface
     private $bundles;
     private $import = [];
 
-    public function __construct(array $bundles, array $import = [])
+    public function __construct(array $bundles = [], array $import = [])
     {
         $this->bundles = $bundles;
         $this->import = $import;
+    }
+
+    public function addBundles(array $bundles) {
+        $this->bundles = ArrayHelper::merge($this->bundles, $bundles);
     }
 
     public function bootstrapApp(string $appName)
@@ -47,6 +51,7 @@ class BundleLoader implements LoaderInterface
                 //'useCache' => true,
             ],
             'yiiAdmin' => ModuleLoader::class,
+            'yiiWeb' => ModuleLoader::class,
             'symfonyWeb' => [
                 'class' => SymfonyRoutesLoader::class,
                 //'useCache' => true,
@@ -95,7 +100,7 @@ class BundleLoader implements LoaderInterface
         foreach ($bundles as $bundle) {
             /** @var BaseBundle $bundle */
             $importList = $bundle->getImportList();
-            if (in_array($loaderName, $importList)) {
+            if (in_array($loaderName, $importList) || in_array('all', $importList)) {
                 $resultBundles[] = $bundle;
             }
         }
