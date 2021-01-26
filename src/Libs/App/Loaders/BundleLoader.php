@@ -46,7 +46,7 @@ class BundleLoader implements LoaderInterface
                 'class' => ContainerLoader::class,
                 //'useCache' => true,
             ],
-            'admin' => ModuleLoader::class,
+            'yiiAdmin' => ModuleLoader::class,
             'symfonyWeb' => [
                 'class' => SymfonyRoutesLoader::class,
                 //'useCache' => true,
