@@ -4,9 +4,7 @@ namespace ZnCore\Base\Libs\Event\Traits;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 
 trait EventDispatcherTrait
 {
@@ -18,21 +16,16 @@ trait EventDispatcherTrait
 
     public function subscribes(): array
     {
-        return [
-
-        ];
+        return [];
     }
 
-    protected function initEvent()
+    protected function initSubscribersFromDefinitions()
     {
-        if ($this->eventDispatcher == null) {
-            $this->eventDispatcher = new EventDispatcher();
-            $this->initSubscribers($this->subscribes());
+        if (empty($this->subscriberDefinittions)) {
+            return;
         }
-        if ($this->subscriberDefinittions) {
-            $this->initSubscribers($this->subscriberDefinittions);
-            $this->subscriberDefinittions = [];
-        }
+        $this->initSubscribers($this->subscriberDefinittions);
+        $this->subscriberDefinittions = [];
     }
 
     protected function initSubscribers($subscriberDefinition)
@@ -44,13 +37,17 @@ trait EventDispatcherTrait
         }
     }
 
-    protected function getEventDispatcher(): EventDispatcherInterface
+    public function getEventDispatcher(): EventDispatcherInterface
     {
-        $this->initEvent();
+        if (!isset($this->eventDispatcher)) {
+            $this->eventDispatcher = new EventDispatcher();
+            $this->initSubscribers($this->subscribes());
+        }
+        $this->initSubscribersFromDefinitions();
         return $this->eventDispatcher;
     }
 
-    public function addListener(string $eventName, $listener, int $priority = 0)
+    /*public function addListener(string $eventName, $listener, int $priority = 0)
     {
         $this->getEventDispatcher()->addListener($eventName, $listener, $priority);
     }
@@ -58,7 +55,7 @@ trait EventDispatcherTrait
     public function addSubscriber(EventSubscriberInterface $subscriber)
     {
         $this->getEventDispatcher()->addSubscriber($subscriber);
-    }
+    }*/
 
     public function addSubscriberClass(string $subscriberDefinition)
     {
