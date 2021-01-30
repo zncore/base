@@ -33,6 +33,12 @@ class I18Next
         return $translationService->t($bundleName, $key, $variables);
     }
 
+    public static function translateFromArray(array $bundleName, string $key = null, array $variables = [])
+    {
+        $translationService = self::getService();
+        return call_user_func_array([$translationService, 't'], $bundleName);
+    }
+
     public static function addBundle(string $bundleName, string $path)
     {
         /** @var TranslationServiceInterface $translationService */
