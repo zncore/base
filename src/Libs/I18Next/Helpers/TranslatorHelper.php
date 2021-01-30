@@ -2,18 +2,37 @@
 
 namespace ZnCore\Base\Libs\I18Next\Helpers;
 
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+
 class TranslatorHelper
 {
 
-    public static function processVariables(string $return, array $variables): string
+    public static function processVariables(string $template, array $attributes): string
     {
-        foreach ($variables as $variable => $value) {
+        $attributes = self::prepareVariables($template, $attributes);
+        foreach ($attributes as $variable => $value) {
             if (is_string($value) || is_numeric($value)) {
-                $return = preg_replace('/__' . $variable . '__/', $value, $return);
-                $return = preg_replace('/{{' . $variable . '}}/', $value, $return);
+                $template = preg_replace('/__' . $variable . '__/', $value, $template);
+                $template = preg_replace('/{{' . $variable . '}}/', $value, $template);
             }
         }
-        return $return;
+        return $template;
     }
 
+    private static function prepareVariables(string $template, array $attributes): array
+    {
+        if ($attributes) {
+            $attributesFromTemplate = self::parseAttributes($template);
+            foreach ($attributesFromTemplate as $varName) {
+                $attributes[$varName] = ArrayHelper::getValue($attributes, $varName);
+            }
+        }
+        return $attributes;
+    }
+
+    private static function parseAttributes(string $template): array
+    {
+        preg_match_all('/{{([\w\d\.-]+)}}/i', $template, $matches);
+        return $matches[1] ?? [];
+    }
 }
