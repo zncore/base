@@ -1,4 +1,5 @@
 {
   "This value should not be blank": "Это значение не должно быть пустым.",
-  "This value should be greater than {{ compared_value }}": "Это значение должно быть больше {{compared_value}}."
+  "This value should be greater than {{ compared_value }}": "Это значение должно быть больше {{compared_value}}.",
+  "This value is too short It should have {{ limit }} character or more": "Это значение слишком короткое. Оно должно состоять из {{limit}} или более символов."
 }

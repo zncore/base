@@ -23,6 +23,17 @@ class Translator implements TranslatorInterface
     {
         $domain = $domain ?: $this->domain;
         $parametersI18Next = $this->paramsToI18Next($parameters);
+        $ids = explode('|', $id);
+        if(count($ids) == 1) {
+            $key['singular'] = $ids[0];
+            $key['plural'] = $ids[0];
+        } else {
+            $key['singular'] = $ids[0];
+            $key['plural'] = $ids[1];
+        }
+
+        $id = $key['singular'];
+
         $translatedMessage = $this->translateMessage($domain, $id, $parametersI18Next);
         if($translatedMessage == null) {
             return strtr($id, $parameters);
@@ -53,6 +64,7 @@ class Translator implements TranslatorInterface
     private function translateMessage(string $domain, string $message, array $parameters = []): ?string
     {
         $key = $domain . '.' . $this->messageToHash($message);
+//        dd($key);
         try {
             $translatedMessage = I18Next::t($this->bundleName, $key, $parameters);
             if ($translatedMessage != $key || EnvHelper::isProd()) {
