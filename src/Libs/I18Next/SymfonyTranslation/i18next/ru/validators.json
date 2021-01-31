@@ -1,15 +1,11 @@
 {
-  "This value is not valid": "Это значение не является допустимым.",
   "This value should be false": "Значение должно быть ложным.",
   "This value should be true": "Значение должно быть истинным.",
   "This value should be of type {{ type }}": "Тип значения должен быть {{type}}",
   "This value should be blank": "Значение должно быть пустым.",
   "The value you selected is not a valid choice": "Выбранное Вами значение недопустимо.",
-
   "You must select at least {{ limit }} choice|You must select at least {{ limit }} choices": "Вы должны выбрать хотя бы {{limit}} вариант.|Вы должны выбрать хотя бы {{limit}} варианта.|Вы должны выбрать хотя бы {{limit}} вариантов.",
-
   "You must select at most {{ limit }} choice|You must select at most {{ limit }} choices": "Вы должны выбрать не более чем {{limit}} вариант.|Вы должны выбрать не более чем {{limit}} варианта.|Вы должны выбрать не более чем {{limit}} вариантов.",
-
   "One or more of the given values is invalid": "Одно или несколько заданных значений недопустимо.",
   "This field was not expected": "Это поле не ожидалось.",
   "This field is missing": "Это поле отсутствует.",
@@ -21,13 +17,9 @@
   "The file is too large ({{ size }} {{ suffix }}) Allowed maximum size is {{ limit }} {{ suffix }}": "Файл слишком большой ({{size}} {{suffix}}). Максимально допустимый размер {{limit}} {{suffix}}.",
   "The mime type of the file is invalid ({{ type }}) Allowed mime types are {{ types }}": "MIME-тип файла недопустим ({{type}}). Допустимы MIME-типы файлов {{types}}.",
   "This value should be {{ limit }} or less": "Значение должно быть {{limit}} или меньше.",
-
   "This value is too long It should have {{ limit }} character or less|This value is too long It should have {{ limit }} characters or less": "Значение слишком длинное. Должно быть равно {{limit}} символу или меньше.|Значение слишком длинное. Должно быть равно {{limit}} символам или меньше.|Значение слишком длинное. Должно быть равно {{limit}} символам или меньше.",
-
   "This value should be {{ limit }} or more": "Значение должно быть {{limit}} или больше.",
-
   "This value is too short It should have {{ limit }} character or more|This value is too short It should have {{ limit }} characters or more": "Значение слишком короткое. Должно быть равно {{limit}} символу или больше.|Значение слишком короткое. Должно быть равно {{limit}} символам или больше.|Значение слишком короткое. Должно быть равно {{limit}} символам или больше.",
-
   "This value should not be blank": "Значение не должно быть пустым.",
   "This value should not be null": "Значение не должно быть null.",
   "This value should be null": "Значение должно быть null.",
