@@ -17,7 +17,7 @@ class DeprecateHelper
         if(self::getStrictMode()) {
             throw new DeprecatedException($message);
         } else {
-            self::log($message);
+            //self::log($message);
         }
     }
 
