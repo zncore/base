@@ -2,7 +2,6 @@
   "This value should not be blank": "Это значение не должно быть пустым.",
   "This value should be greater than {{ compared_value }}": "Это значение должно быть больше {{compared_value}}.",
   "This value is too short It should have {{ limit }} character or more": "Это значение слишком короткое. Оно должно состоять из {{limit}} или более символов.",
-  "This value is too short It should have {{ limit }} characters or more": "Это значение слишком короткое. Оно должно состоять из {{limit}} или более символов.",
 
 
 
@@ -14,9 +13,6 @@
   "The value you selected is not a valid choice": "Выбранное Вами значение недопустимо.",
 
   "You must select at least {{ limit }} choice|You must select at least {{ limit }} choices": "Вы должны выбрать хотя бы {{ limit }} вариант|Вы должны выбрать хотя бы {{ limit }} варианта|Вы должны выбрать хотя бы {{ limit }} вариантов.",
-
-
-
   "You must select at most {{ limit }} choice|You must select at most {{ limit }} choices": "Вы должны выбрать не более чем {{ limit }} вариант|Вы должны выбрать не более чем {{ limit }} варианта|Вы должны выбрать не более чем {{ limit }} вариантов.",
 
   "One or more of the given values is invalid": "Одно или несколько заданных значений недопустимо.",
