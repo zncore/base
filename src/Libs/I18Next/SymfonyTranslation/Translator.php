@@ -17,11 +17,16 @@ class Translator implements TranslatorInterface
     private $domain;
     private $logger;
 
-    public function __construct(string $bundleName, string $domain = 'message', LoggerInterface $logger)
+    public function __construct(string $bundleName, string $domain = 'validators', LoggerInterface $logger)
     {
         $this->bundleName = $bundleName;
         $this->domain = $domain;
         $this->logger = $logger;
+    }
+
+    private function plural_form($number, $after) {
+        $cases = array (2, 0, 1, 1, 1, 2);
+        return $after[ ($number%100>4 && $number%100<20)? 2: $cases[min($number%10, 5)] ];
     }
 
     public function trans(string $id, array $parameters = [], string $domain = null, string $locale = null)
@@ -29,10 +34,31 @@ class Translator implements TranslatorInterface
         $domain = $domain ?: $this->domain;
         
         $parametersI18Next = TranslatorHelper::paramsToI18Next($parameters);
-        $id = TranslatorHelper::getSingularFromId($id);
-        $key = $domain . '.' . TranslatorHelper::messageToHash($id);
-        $translatedMessage = $this->translateMessage($key, $parametersI18Next);
+//        $keyArr = TranslatorHelper::splitId($id);
+//        if(count($keyArr) == 1) {
+//            $id = TranslatorHelper::getSingularFromId($id);
+//        } else {
+//            //$id = $keyArr['plural'];
+//            $id = TranslatorHelper::getSingularFromId($id);
+//            /*dd($parametersI18Next);
+//            if(isset($parameters['%count%'])) {
+//                dd($parameters['%count%']);
+//            }
+//
+//            $paramName = array_key_first($parameters);
+//            dd($paramName);*/
+//
+//        }
         
+        $key = $domain . '.' . TranslatorHelper::messageToHash($id);
+
+        $translatedMessage = $this->translateMessage($key, $parametersI18Next);
+        $translatedMessageSplitted = explode('|', $translatedMessage);
+
+        if(count($translatedMessageSplitted) > 1) {
+            $translatedMessage = $this->plural_form($parametersI18Next['count'], $translatedMessageSplitted);
+        }
+
         if($translatedMessage == null) {
             return strtr($id, $parameters);
         }

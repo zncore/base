@@ -19,7 +19,7 @@ class TranslatorHelper
         return $messageHash;
     }
     
-    public static function getSingularFromId(string $id): string
+    /*public static function getSingularFromId(string $id): string
     {
         $key = TranslatorHelper::splitId($id);
         return $key['singular'];
@@ -28,7 +28,7 @@ class TranslatorHelper
     public static function getPluralFromId(string $id): string
     {
         $key = TranslatorHelper::splitId($id);
-        return $key['plural'];
+        return $key['plural_1'];
     }
     
     public static function splitId(string $id): array
@@ -36,13 +36,17 @@ class TranslatorHelper
         $ids = explode('|', $id);
         if (count($ids) == 1) {
             $key['singular'] = $ids[0];
-            $key['plural'] = $ids[0];
+            //$key['plural'] = $ids[0];
+        } elseif(count($ids) == 2) {
+            $key['singular'] = $ids[0];
+            $key['plural_1'] = $ids[1];
         } else {
             $key['singular'] = $ids[0];
-            $key['plural'] = $ids[1];
+            $key['plural_1'] = $ids[1];
+            $key['plural_2'] = $ids[2];
         }
         return $key;
-    }
+    }*/
 
     public static function paramsToI18Next(array $parameters = []): array
     {
@@ -51,7 +55,7 @@ class TranslatorHelper
         }
         $params = [];
         foreach ($parameters as $parameterName => $parameterValue) {
-            $parameterName = trim($parameterName, ' {}');
+            $parameterName = trim($parameterName, ' {}%');
             $params[$parameterName] = $parameterValue;
         }
         return $params;
