@@ -15,7 +15,10 @@ return [
     },*/
     TranslationServiceInterface::class => $translationService,
     TranslatorInterface::class => function (ContainerInterface $container) {
-        return $container->make(Translator::class, ['bundleName' => 'symfony']);
+        return $container->make(Translator::class, [
+            'locale' => 'ru',
+            'bundleName' => 'symfony',
+        ]);
 //        return new Translator();
     },
 ];
