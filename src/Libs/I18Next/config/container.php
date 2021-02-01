@@ -5,6 +5,7 @@ use ZnCore\Base\Libs\I18Next\Factories\I18NextServiceFactory;
 use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 use ZnCore\Base\Libs\I18Next\SymfonyTranslation\Translator;
 use Psr\Container\ContainerInterface;
+use ZnCore\Base\Libs\I18Next\Services\TranslationService;
 
 //$translationService = new TranslationService([], Yii::$app->language);
 $translationService = I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
@@ -14,6 +15,7 @@ return [
         return I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
     },*/
     TranslationServiceInterface::class => $translationService,
+    TranslationService::class => $translationService,
     TranslatorInterface::class => function (ContainerInterface $container) {
         return $container->make(Translator::class, [
             'locale' => 'ru',

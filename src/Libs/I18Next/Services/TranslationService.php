@@ -20,7 +20,7 @@ class TranslationService implements TranslationServiceInterface
     private $defaultLanguage;
     private $fallbackLanguage = 'en';
 
-    public function __construct(array $bundles = [], string $defaultLanguage = null)
+    public function __construct(array $bundles = [], string $defaultLanguage)
     {
 //        $store = new StoreFile($_ENV['I18NEXT_CONFIG_FILE']);
 //        $config = $store->load();
