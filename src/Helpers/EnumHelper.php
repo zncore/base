@@ -4,6 +4,7 @@ namespace ZnCore\Base\Helpers;
 
 use ZnCore\Base\Exceptions\NotInstanceOfException;
 use ZnCore\Base\Interfaces\GetLabelsInterface;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
 
 class EnumHelper
@@ -83,6 +84,12 @@ class EnumHelper
             }, $labels);
         }
         return $labels;
+    }
+
+    public static function getOptions(string $className): array
+    {
+        $items = self::getItems($className);
+        return ArrayHelper::map($items, 'id', 'title');
     }
 
     public static function getItems(string $className): array
