@@ -2,8 +2,6 @@
 
 namespace ZnCore\Base\Libs\ArrayTools\Repositories\Base;
 
-use php7rails\domain\interfaces\repositories\CrudInterface;
-use php7rails\domain\repositories\BaseRepository;
 use ZnCore\Base\Libs\ArrayTools\Traits\ArrayModifyTrait;
 use ZnCore\Base\Libs\ArrayTools\Traits\ArrayReadTrait;
 

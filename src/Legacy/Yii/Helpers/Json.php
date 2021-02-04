@@ -7,9 +7,8 @@
 
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
-use ZnCore\Base\Legacy\Yii\Base\Model;
-use php7extension\yii\web\JsExpression;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Legacy\Yii\Base\Model;
 
 /**
  * Json is a helper class providing JSON data encoding and decoding.

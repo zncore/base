@@ -22,16 +22,17 @@ class Url
 {
 
     /**
-     * @var \php7extension\yii\web\UrlManager URL manager to use for creating URLs
+     * @var \yii\web\UrlManager URL manager to use for creating URLs
      * @since 2.0.8
      */
     public static $urlManager;
 
     public static function getBaseUrl(): string
     {
-        global $_SERVER;
-        $baseUrl = explode('?', $_SERVER['REQUEST_URI'])[0];
-        return $baseUrl;
+        return self::getRequest()->getRequestUri();
+//        global $_SERVER;
+//        $baseUrl = explode('?', $_SERVER['REQUEST_URI'])[0];
+//        return $baseUrl;
     }
 
     /**
@@ -312,9 +313,9 @@ class Url
      * @param string|array $url the URL to remember. Please refer to [[to()]] for acceptable formats.
      * If this parameter is not specified, the currently requested URL will be used.
      * @param string $name the name associated with the URL to be remembered. This can be used
-     * later by [[previous()]]. If not set, [[\php7extension\yii\web\User::setReturnUrl()]] will be used with passed URL.
+     * later by [[previous()]]. If not set, [[\yii\web\User::setReturnUrl()]] will be used with passed URL.
      * @see previous()
-     * @see \php7extension\php7extension\yii\web\User::setReturnUrl()
+     * @see \yii\web\User::setReturnUrl()
      */
     public static function remember($url = '', $name = null)
     {
@@ -331,11 +332,11 @@ class Url
      * Returns the URL previously [[remember()|remembered]].
      *
      * @param string $name the named associated with the URL that was remembered previously.
-     * If not set, [[\php7extension\yii\web\User::getReturnUrl()]] will be used to obtain remembered URL.
+     * If not set, [[\yii\web\User::getReturnUrl()]] will be used to obtain remembered URL.
      * @return string|null the URL previously remembered. Null is returned if no URL was remembered with the given name
      * and `$name` is not specified.
      * @see remember()
-     * @see \php7extension\php7extension\yii\web\User::getReturnUrl()
+     * @see \yii\web\User::getReturnUrl()
      */
     public static function previous($name = null)
     {
@@ -455,7 +456,7 @@ class Url
     }
 
     /**
-     * @return \php7extension\yii\web\UrlManager URL manager used to create URLs
+     * @return \yii\web\UrlManager URL manager used to create URLs
      * @since 2.0.8
      */
     protected static function getUrlManager()

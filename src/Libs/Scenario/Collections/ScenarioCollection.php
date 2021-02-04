@@ -3,7 +3,6 @@
 namespace ZnCore\Base\Libs\Scenario\Collections;
 
 use Illuminate\Support\Collection;
-use php7rails\domain\values\BaseValue;
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Helpers\Helper;
 use ZnCore\Base\Libs\Scenario\Base\BaseScenario;
@@ -48,8 +47,6 @@ class ScenarioCollection extends Collection
     /**
      * @param            $data
      * @param object $event
-     *
-     * @return BaseValue
      */
     public function runAll($data = null, object $event = null)
     {

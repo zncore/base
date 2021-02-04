@@ -2,13 +2,11 @@
 
 namespace ZnCore\Base\Libs\ArrayTools\Traits;
 
-use php7rails\domain\Domain;
-use ZnCore\Domain\Libs\Query;
-use ZnCore\Base\Libs\ArrayTools\Helpers\ArrayIterator;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use php7extension\yii\web\NotFoundHttpException;
-use ZnCore\Domain\Libs\Alias;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\ArrayTools\Helpers\ArrayIterator;
+use ZnCore\Domain\Libs\Alias;
+use ZnCore\Domain\Libs\Query;
 
 /**
  * Trait ArrayReadTrait

@@ -2,11 +2,10 @@
 
 namespace ZnCore\Base\Libs\ArrayTools\Traits;
 
+use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use php7extension\yii\web\NotFoundHttpException;
-use php7rails\domain\Domain;
-use ZnCore\Domain\Libs\Query;
 use ZnCore\Domain\Helpers\EntityHelper;
+use ZnCore\Domain\Libs\Query;
 
 /**
  * Trait ArrayModifyTrait
@@ -65,7 +64,7 @@ trait ArrayModifyTrait
                 return $index;
             }
         }
-        throw new NotFoundHttpException(__METHOD__ . ':' . __LINE__);
+        throw new NotFoundException(__METHOD__ . ':' . __LINE__);
     }
 
 }
