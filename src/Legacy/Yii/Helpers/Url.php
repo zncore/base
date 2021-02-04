@@ -7,6 +7,7 @@
 
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
+use Symfony\Component\HttpFoundation\Request;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 
 /**
@@ -101,7 +102,7 @@ class Url
      */
     public static function toRoute($route, $scheme = false)
     {
-        $route = (array) $route;
+        $route = (array)$route;
         $route[0] = static::normalizeRoute($route[0]);
 
         if ($scheme !== false) {
@@ -132,7 +133,7 @@ class Url
      */
     protected static function normalizeRoute($route)
     {
-        $route = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias((string) $route);
+        $route = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias((string)$route);
         if (strncmp($route, '/', 1) === 0) {
             // absolute route
             return ltrim($route, '/');
@@ -216,8 +217,12 @@ class Url
      */
     public static function to($url = '', $scheme = false)
     {
+        $basePath = self::getRequest()->getBaseUrl();
         if (is_array($url)) {
-            return static::toRoute($url, $scheme);
+
+            $path = array_splice($url, 0, 1)[0];
+            return $basePath . '/' . $path . '?' . http_build_query($url);
+//            return static::toRoute($url, $scheme);
         }
 
         $url = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($url);
@@ -237,6 +242,16 @@ class Url
         return static::ensureScheme($url, $scheme);
     }
 
+    private static $request;
+
+    private static function getRequest(): Request
+    {
+        if(!isset(self::$request)) {
+            self::$request = Request::createFromGlobals();
+        }
+        return self::$request;
+    }
+
     /**
      * Normalize URL by ensuring that it use specified scheme.
      *
@@ -250,7 +265,7 @@ class Url
      */
     public static function ensureScheme($url, $scheme)
     {
-        if (static::isRelative($url) || ! is_string($scheme)) {
+        if (static::isRelative($url) || !is_string($scheme)) {
             return $url;
         }
 
