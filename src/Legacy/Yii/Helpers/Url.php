@@ -29,10 +29,10 @@ class Url
 
     public static function getBaseUrl(): string
     {
-        return self::getRequest()->getRequestUri();
-//        global $_SERVER;
-//        $baseUrl = explode('?', $_SERVER['REQUEST_URI'])[0];
-//        return $baseUrl;
+//        return self::getRequest()->getRequestUri();
+        global $_SERVER;
+        $baseUrl = explode('?', $_SERVER['REQUEST_URI'])[0];
+        return $baseUrl;
     }
 
     /**
