@@ -50,7 +50,8 @@ class FileHelper extends BaseFileHelper
 
     public static function fileExt($name)
     {
-        $name = trim($name);
+        return pathinfo($name, \PATHINFO_EXTENSION);
+        /*$name = trim($name);
         $baseName = self::mb_basename($name);
         $start = strrpos($baseName, '.');
         if ($start) {
@@ -58,13 +59,14 @@ class FileHelper extends BaseFileHelper
             $ext = strtolower($ext);
             return $ext;
         }
-        return null;
+        return null;*/
     }
 
     public static function fileNameOnly($name)
     {
-        $file_name = self::mb_basename($name);
-        return FileHelper::fileRemoveExt($file_name);
+        return pathinfo($name, \PATHINFO_FILENAME);
+//        $file_name = self::mb_basename($name);
+//        return FileHelper::fileRemoveExt($file_name);
     }
 
     public static function fileRemoveExt($name)

@@ -222,7 +222,7 @@ class Url
         if (is_array($url)) {
 
             $path = array_splice($url, 0, 1)[0];
-            return $basePath . '/' . $path . '?' . http_build_query($url);
+            return $basePath . $path . '?' . http_build_query($url);
 //            return static::toRoute($url, $scheme);
         }
 
