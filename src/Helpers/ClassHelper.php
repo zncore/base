@@ -112,7 +112,9 @@ class ClassHelper
         }
         foreach ($properties as $name => $value) {
             if ($name != 'class') {
-                EntityHelper::setAttribute($object, $name, $value);
+                if(EntityHelper::isWritableAttribute($object, $name)) {
+                    EntityHelper::setAttribute($object, $name, $value);
+                }
 //                $object->{$name} = $value;
             }
         }
