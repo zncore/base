@@ -64,9 +64,9 @@ class FileHelper extends BaseFileHelper
 
     public static function fileNameOnly($name)
     {
-        return pathinfo($name, \PATHINFO_FILENAME);
-//        $file_name = self::mb_basename($name);
-//        return FileHelper::fileRemoveExt($file_name);
+        //return pathinfo($name, \PATHINFO_FILENAME); // проблема с кириличесикми символами
+        $file_name = self::mb_basename($name);
+        return FileHelper::fileRemoveExt($file_name);
     }
 
     public static function fileRemoveExt($name)
