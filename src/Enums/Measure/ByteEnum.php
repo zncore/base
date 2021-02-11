@@ -2,7 +2,9 @@
 
 namespace ZnCore\Base\Enums\Measure;
 
-class ByteEnum
+use ZnCore\Base\Interfaces\GetLabelsInterface;
+
+class ByteEnum implements GetLabelsInterface
 {
 
     const BIT_PER_BYTE = 8;
@@ -33,4 +35,18 @@ class ByteEnum
         ];
     }
 
+    public static function getLabels()
+    {
+        return [
+            self::B => 'B',
+            self::KB => 'KB',
+            self::MB => 'MB',
+            self::GB => 'GB',
+            self::TB => 'TB',
+            self::PB => 'PB',
+            self::EB => 'EB',
+            self::ZB => 'ZB',
+            self::YB => 'YB',
+        ];
+    }
 }

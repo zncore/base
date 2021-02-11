@@ -4,6 +4,7 @@ namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 use ZnCore\Base\Enums\Measure\ByteEnum;
 use ZnCore\Base\Helpers\ComposerHelper;
+use ZnCore\Base\Helpers\EnumHelper;
 use ZnCore\Base\Libs\Store\StoreFile;
 
 class FileHelper extends BaseFileHelper
@@ -315,7 +316,7 @@ class FileHelper extends BaseFileHelper
         $units = ByteEnum::allUnits();
         foreach ($units as $name => $value) {
             if ($sizeByte / $value < ByteEnum::STEP) {
-                return $name;
+                return $value;
             }
         }
     }
@@ -323,9 +324,9 @@ class FileHelper extends BaseFileHelper
     public static function sizeFormat(int $sizeByte, $precision = 2)
     {
         $unitKey = self::sizeUnit($sizeByte);
-        $size = $sizeByte / ByteEnum::getValue($unitKey);
-        $size = round($size, $precision);
-        return $size . ' ' . $unitKey;
+        $value = round($sizeByte / $unitKey, 2);
+        $label = EnumHelper::getLabel(ByteEnum::class, $unitKey);
+        return $value . ' ' . $label;
     }
 
     public static function dirFromTime($level = 3, $time = null)

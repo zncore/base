@@ -31,8 +31,8 @@ class HtmlHelper
         $sortParams = self::normalizeOrderBy($sortParams);
         $direction = ArrayHelper::getValue($sortParams, $fieldName);
         if($direction) {
-            $arrow = $direction == SORT_ASC ? '&#8595;' : '&#8593;';
-            $label .= $arrow;
+            $arrow = $direction == SORT_ASC ? '<i class="fas fa-sort-alpha-down"></i>' : '<i class="fas fa-sort-alpha-up"></i>';
+            $label .=  ' ' . $arrow;
         }
         $invertDirection = $direction == SORT_ASC ? SORT_DESC : SORT_ASC;
         $sortParamsString = self::sortParamsToString([$fieldName => $invertDirection]);
