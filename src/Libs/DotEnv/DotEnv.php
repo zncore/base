@@ -11,7 +11,7 @@ class DotEnv
 
     const ROOT_PATH = __DIR__ . '/../../../../../..';
 
-    static private $map = [];
+    //static private $map = [];
 
     public static function init(string $basePath = self::ROOT_PATH): void
     {
