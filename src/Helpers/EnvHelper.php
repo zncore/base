@@ -35,9 +35,14 @@ class EnvHelper
         ini_set('display_errors', '0');
     }
 
+    public static function isWeb(): bool
+    {
+        return !self::isConsole();
+    }
+
     public static function isConsole(): bool
     {
-        return PHP_SAPI == 'cli';
+        return in_array(PHP_SAPI, ['cli', 'phpdbg']);
     }
 
     public static function isDebug(): bool
