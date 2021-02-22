@@ -15,12 +15,44 @@ class XmlEncoder implements EncoderInterface
     private $formatOutput;
     private $encoding;
     private $xml;
+    private $isInline;
 
-    public function __construct(bool $formatOutput = true, string $encoding = 'UTF-8')
+    public function __construct(bool $formatOutput = true, string $encoding = 'UTF-8', bool $isInline = true)
     {
         $this->formatOutput = $formatOutput;
         $this->encoding = $encoding;
+        $this->isInline = $isInline;
         $this->xml = new SymfonyXmlEncoder();
+    }
+
+    public function isFormatOutput(): bool
+    {
+        return $this->formatOutput;
+    }
+
+    public function setFormatOutput(bool $formatOutput): void
+    {
+        $this->formatOutput = $formatOutput;
+    }
+
+    public function getEncoding(): string
+    {
+        return $this->encoding;
+    }
+
+    public function setEncoding(string $encoding): void
+    {
+        $this->encoding = $encoding;
+    }
+
+    public function isInline(): bool
+    {
+        return $this->isInline;
+    }
+
+    public function setIsInline(bool $isInline): void
+    {
+        $this->isInline = $isInline;
     }
 
     public function encode($data)
@@ -50,7 +82,11 @@ class XmlEncoder implements EncoderInterface
         $encoded = str_replace('<response>', '', $encoded);
         $encoded = str_replace('</response>', '', $encoded);
         $encoded = str_replace("\n  ", "\n", $encoded);
-        $encoded = StringHelper::removeDoubleSpace($encoded, '\n', "\n");
+        if($this->isInline) {
+            $encoded = preg_replace("#\n+#", "", $encoded);
+            $encoded = preg_replace("#\t+#", "", $encoded);
+            //$encoded = StringHelper::removeDoubleSpace($encoded, '\n', "\n");
+        }
         return $encoded;
     }
 
