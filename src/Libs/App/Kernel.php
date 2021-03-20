@@ -60,9 +60,9 @@ class Kernel
 
     protected function configure(array $containerConfig)
     {
-        ContainerHelper::configureContainer($this->container, $containerConfig);
+        ContainerHelper::configureContainer($this->getContainer(), $containerConfig);
         if (!empty($containerConfig['entities'])) {
-            EntityManagerHelper::bindEntityManager($this->container, $containerConfig['entities']);
+            EntityManagerHelper::bindEntityManager($this->getContainer(), $containerConfig['entities']);
         }
     }
 
