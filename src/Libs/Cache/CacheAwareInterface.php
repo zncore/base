@@ -2,12 +2,12 @@
 
 namespace ZnCore\Base\Libs\Cache;
 
-use Symfony\Component\Cache\Adapter\AbstractAdapter;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
 
 interface CacheAwareInterface
 {
 
-    public function getCache(): ?AbstractAdapter;
+    public function getCache(): ?AdapterInterface;
 
-    public function setCache(AbstractAdapter $cache): void;
+    public function setCache(AdapterInterface $cache): void;
 }
