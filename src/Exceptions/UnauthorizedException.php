@@ -11,7 +11,6 @@ DeprecateHelper::getStrictMode();
  * Class UnauthorizedException
  * @package ZnCore\Base\Exceptions
  * @deprecated
- * @see \ZnBundle\User\Domain\Exceptions\UnauthorizedException
  */
 class UnauthorizedException extends Exception
 {
