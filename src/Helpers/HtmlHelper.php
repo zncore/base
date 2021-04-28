@@ -9,6 +9,13 @@ use ZnCore\Base\Legacy\Yii\Helpers\Url;
 class HtmlHelper
 {
 
+    public static function getTagContent(string $string, string $tagname)
+    {
+        $pattern = "/<$tagname ?.*>(.*)<\/$tagname>/";
+        preg_match($pattern, $string, $matches);
+        return $matches[1];
+    }
+
     public static function generateDataList(string $id, array $options, string $fieldName)
     {
         $optionsHtml = '';
