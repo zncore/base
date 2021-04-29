@@ -15,7 +15,7 @@ class ArrayHelper extends BaseArrayHelper
     public static function nullingEmptyItems(array $data): array
     {
         foreach ($data as $key => $value) {
-            if (empty($value) && $value !== false) {
+            if (empty($value) && $value !== false && $value != 0) {
                 $data[$key] = null;
             }
         }
