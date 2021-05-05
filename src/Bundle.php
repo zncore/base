@@ -11,7 +11,6 @@ class Bundle extends BaseBundle
     {
         return [
             'core' => 'vendor/zncore/base/src/i18next/__lng__/__ns__.json',
-            'symfony' => 'vendor/zncore/base/src/Libs/I18Next/SymfonyTranslation/i18next/__lng__/__ns__.json',
         ];
     }
 }
