@@ -10,6 +10,8 @@ use ZnCore\Base\Libs\I18Next\Services\TranslationService;
 //$translationService = new TranslationService([], Yii::$app->language);
 //$translationService = I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
 
+\ZnCore\Base\Helpers\DeprecateHelper::softThrow();
+
 return [
     /*TranslationServiceInterface::class => function() {
         return I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
