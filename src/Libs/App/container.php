@@ -14,16 +14,23 @@ use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\EntityManager;
 use ZnLib\Db\Capsule\Manager;
 use ZnLib\Db\Factories\ManagerFactory;
+use ZnLib\Fixture\Domain\Repositories\FileRepository;
 
 return [
     'definitions' => [],
     'singletons' => [
+        ContainerInterface::class => function () {
+            return \ZnCore\Base\Libs\App\Helpers\ContainerHelper::getContainer();
+        },
         EntityManagerInterface::class => function (ContainerInterface $container) {
             return EntityManager::getInstance($container);
         },
         EventDispatcherInterface::class => function () {
             $eventDispatcher = new EventDispatcher();
             return $eventDispatcher;
+        },
+        FileRepository::class => function () {
+            return new FileRepository(DotEnv::get('ELOQUENT_CONFIG_FILE'));
         },
         Manager::class => function () {
             return ManagerFactory::createManagerFromEnv();
@@ -37,6 +44,9 @@ return [
                 $adapter->setLogger($container->get(LoggerInterface::class));
             }
             return $adapter;
+        },
+        DotEnvConfigInterface::class => function() {
+            return new DotEnvConfig($_ENV);
         },
     ],
 ];
