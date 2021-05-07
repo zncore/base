@@ -1,0 +1,42 @@
+<?php
+
+use Psr\Container\ContainerInterface;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Cache\Adapter\AdapterInterface;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\Cache\Adapter\NullAdapter;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use ZnCore\Base\Enums\Measure\TimeEnum;
+use ZnCore\Base\Helpers\EnvHelper;
+use ZnCore\Base\Libs\DotEnv\DotEnv;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
+use ZnCore\Domain\Libs\EntityManager;
+use ZnLib\Db\Capsule\Manager;
+use ZnLib\Db\Factories\ManagerFactory;
+
+return [
+    'definitions' => [],
+    'singletons' => [
+        EntityManagerInterface::class => function (ContainerInterface $container) {
+            return EntityManager::getInstance($container);
+        },
+        EventDispatcherInterface::class => function () {
+            $eventDispatcher = new EventDispatcher();
+            return $eventDispatcher;
+        },
+        Manager::class => function () {
+            return ManagerFactory::createManagerFromEnv();
+        },
+        AdapterInterface::class => function (ContainerInterface $container) {
+            if (EnvHelper::isTest() || EnvHelper::isDev()) {
+                $adapter = new NullAdapter();
+            } else {
+                $cacheDirectory = __DIR__ . '/../' . DotEnv::get('CACHE_DIRECTORY');
+                $adapter = new FilesystemAdapter('app', TimeEnum::SECOND_PER_DAY, $cacheDirectory);
+                $adapter->setLogger($container->get(LoggerInterface::class));
+            }
+            return $adapter;
+        },
+    ],
+];
