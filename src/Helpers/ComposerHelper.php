@@ -21,7 +21,7 @@ class ComposerHelper
      */
     public static function requireAssert(string $className, string $packageName, string $version = null): void
     {
-        if( ! class_exists($className)) {
+        if( ! class_exists($className) && ! interface_exists($className) && ! trait_exists($className)) {
             $package = $packageName;
             if(!empty($version)) {
                 $package .= ":$version";
