@@ -80,6 +80,15 @@ class ClassHelper
         return $name;
     }
 
+    /**
+     * Создать новый объект или использовать имеющийся в контейнере, если он singleton
+     * @param $definition
+     * @param array $params
+     * @param null $interface
+     * @return mixed
+     * @throws InvalidConfigException
+     * @throws NotInstanceOfException
+     */
     public static function createObject($definition, array $params = [], $interface = null)
     {
         if (empty($definition)) {
@@ -90,12 +99,11 @@ class ClassHelper
         }
         $definition = self::normalizeComponentConfig($definition);
         $container = ContainerHelper::getContainer();
-        $object = $container->get($definition['class']);
+        $object = $container->make($definition['class'], $params);
         //$object = new $definition['class'];
         if($definition['class']) {
             unset($definition['class']);
         }
-        EntityHelper::setAttributes($object, $params);
         EntityHelper::setAttributes($object, $definition);
 //        self::configure($object, $params);
 //        self::configure($object, $definition);

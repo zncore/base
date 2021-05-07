@@ -18,7 +18,7 @@ class I18NextServiceFactory
         $defaultLanguage = substr($defaultLanguage, 0, 2);
         $translationService = new TranslationService($bundles, $defaultLanguage);
         $translationService->setLanguage($language);
-        I18Next::setService($translationService);
+        //I18Next::setService($translationService);
         return $translationService;
     }
 }

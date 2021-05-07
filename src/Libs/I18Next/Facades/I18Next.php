@@ -20,6 +20,9 @@ class I18Next
     }*/
 
     public static function getService(): TranslationServiceInterface {
+        if(!isset(self::$service)) {
+            self::setService(ContainerHelper::getContainer()->get(TranslationServiceInterface::class));
+        }
         return self::$service;
     }
 
