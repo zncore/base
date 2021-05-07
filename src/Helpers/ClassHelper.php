@@ -81,15 +81,15 @@ class ClassHelper
     }
 
     /**
-     * Создать новый объект или использовать имеющийся в контейнере, если он singleton
-     * @param $definition
-     * @param array $params
+     * Создать объект
+     * @param string|object|array $definition Определение
+     * @param array $params Параметры конструктора
      * @param null $interface
      * @return mixed
      * @throws InvalidConfigException
      * @throws NotInstanceOfException
      */
-    public static function createObject($definition, array $params = [], $interface = null)
+    public static function createInstance($definition, array $params = [], $interface = null)
     {
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
@@ -105,6 +105,40 @@ class ClassHelper
             unset($definition['class']);
         }
         EntityHelper::setAttributes($object, $definition);
+//        self::configure($object, $params);
+//        self::configure($object, $definition);
+        if (!empty($interface)) {
+            self::isInstanceOf($object, $interface);
+        }
+        return $object;
+    }
+
+    /**
+     * Создать объект
+     * @param string|object|array $definition Определение
+     * @param array $params Атрибуты объекта
+     * @param null $interface
+     * @return mixed
+     * @throws InvalidConfigException
+     * @throws NotInstanceOfException
+     */
+    public static function createObject($definition, array $params = [], $interface = null)
+    {
+        if (empty($definition)) {
+            throw new InvalidConfigException('Empty class config');
+        }
+        if(is_object($definition)) {
+            return $definition;
+        }
+        $definition = self::normalizeComponentConfig($definition);
+        $container = ContainerHelper::getContainer();
+        $object = $container->make($definition['class']);
+        //$object = new $definition['class'];
+        if($definition['class']) {
+            unset($definition['class']);
+        }
+        EntityHelper::setAttributes($object, $definition);
+        EntityHelper::setAttributes($object, $params);
 //        self::configure($object, $params);
 //        self::configure($object, $definition);
         if (!empty($interface)) {
