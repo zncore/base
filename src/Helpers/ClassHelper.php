@@ -84,12 +84,11 @@ class ClassHelper
      * Создать объект
      * @param string|object|array $definition Определение
      * @param array $params Параметры конструктора
-     * @param null $interface
      * @return mixed
      * @throws InvalidConfigException
      * @throws NotInstanceOfException
      */
-    public static function createInstance($definition, array $params = [], $interface = null)
+    public static function createInstance($definition, array $params = [])
     {
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
@@ -99,18 +98,12 @@ class ClassHelper
         }
         $definition = self::normalizeComponentConfig($definition);
         $container = ContainerHelper::getContainer();
-        $object = $container->make($definition['class'], $params);
-        //$object = new $definition['class'];
+        $instance = $container->make($definition['class'], $params);
         if($definition['class']) {
             unset($definition['class']);
         }
-        EntityHelper::setAttributes($object, $definition);
-//        self::configure($object, $params);
-//        self::configure($object, $definition);
-        if (!empty($interface)) {
-            self::isInstanceOf($object, $interface);
-        }
-        return $object;
+        EntityHelper::setAttributes($instance, $definition);
+        return $instance;
     }
 
     /**

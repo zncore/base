@@ -5,6 +5,8 @@ namespace ZnCore\Base\Libs;
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Exceptions\NotImplementedMethodException;
+use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnLib\Rpc\Domain\Exceptions\MethodNotFoundException;
 
 class InstanceProvider
@@ -17,26 +19,33 @@ class InstanceProvider
         $this->container = $container;
     }
 
-    public function callMethod($definition, string $methodName, array $parameters)
+    public function callMethod($definition, array $constructorParameters = [], string $methodName, array $methodParameters)
     {
-        $instance = $this->createInstance($definition);
-        return $this->callMethodOfInstance($instance, $methodName, $parameters);
+        $instance = $this->createInstance($definition, $constructorParameters);
+        return $this->callMethodOfInstance($instance, $methodName, $methodParameters);
     }
 
-    public function callMethodOfInstance(object $instance, string $methodName, array $parameters)
+    public function callMethodOfInstance(object $instance, string $methodName, array $methodParameters)
     {
         $this->checkExistsMethod($instance, $methodName);
         if ($this->container instanceof Container) {
-            return $this->container->call([$instance, $methodName], $parameters);
+            return $this->container->call([$instance, $methodName], $methodParameters);
         } else {
             throw new NotImplementedMethodException('Call method of controller not implemented');
         }
     }
 
-    public function createInstance($instance): object
+    public function createInstance($definition, array $constructorParameters = []): object
     {
-        if (!is_object($instance)) {
-            $instance = $this->container->get($instance);
+        if (is_object($definition)) {
+            $instance = $definition;
+        } else {
+            $definition = ClassHelper::normalizeComponentConfig($definition);
+            if(isset($definition['__construct'])) {
+                $constructorParameters = ArrayHelper::merge($constructorParameters, $definition['__construct']);
+            }
+            $instance = ClassHelper::createInstance($definition, $constructorParameters);
+            //$instance = $this->container->make($definition, $constructorParameters);
         }
         return $instance;
     }
