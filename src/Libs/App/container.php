@@ -7,6 +7,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\NullAdapter;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 use ZnCore\Base\Enums\Measure\TimeEnum;
 use ZnCore\Base\Helpers\EnvHelper;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
@@ -15,6 +16,8 @@ use ZnCore\Domain\Libs\EntityManager;
 use ZnLib\Db\Capsule\Manager;
 use ZnLib\Db\Factories\ManagerFactory;
 use ZnLib\Fixture\Domain\Repositories\FileRepository;
+use ZnCore\Base\Libs\DotEnv\DotEnvConfig;
+use ZnCore\Base\Libs\DotEnv\DotEnvConfigInterface;
 
 return [
     'definitions' => [],
@@ -23,7 +26,10 @@ return [
             return \ZnCore\Base\Libs\App\Helpers\ContainerHelper::getContainer();
         },
         EntityManagerInterface::class => function (ContainerInterface $container) {
-            return EntityManager::getInstance($container);
+            $em = EntityManager::getInstance($container);
+//            $eloquentOrm = $container->get(EloquentOrm::class);
+//            $em->addOrm($eloquentOrm);
+            return $em;
         },
         EventDispatcherInterface::class => function () {
             $eventDispatcher = new EventDispatcher();
@@ -45,6 +51,7 @@ return [
             }
             return $adapter;
         },
+        CacheInterface::class => AdapterInterface::class,
         DotEnvConfigInterface::class => function() {
             return new DotEnvConfig($_ENV);
         },
