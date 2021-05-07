@@ -26,6 +26,15 @@ class DotEnv
         $dotEnv->loadEnv($basePath . '/.env');
     }
 
+    public static function get(string $name = null, $default = null)
+    {
+        $name = mb_strtoupper($name);
+        if(!isset($_ENV[$name])) {
+            throw new DotEnvNotFoundException("Not found DotEnv value for key \"{$name}\"");
+        }
+        return $_ENV[$name];
+    }
+
     /*public static function get(string $path = null, $default = null)
     {
         if (empty(self::$map)) {
