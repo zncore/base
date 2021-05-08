@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\App\Factories;
 
-use Packages\Application\Libs\Kernel;
+use ZnCore\Base\Libs\App\Kernel;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
 use ZnLib\Console\Symfony4\Helpers\CommandHelper;
