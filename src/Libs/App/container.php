@@ -51,6 +51,8 @@ return [
             }
             return $adapter;
         },
+        //LoggerInterface::class => NullLogger::class,
+        //\Symfony\Component\Cache\Adapter\AbstractAdapter::class => AdapterInterface::class,
         CacheInterface::class => AdapterInterface::class,
         DotEnvConfigInterface::class => function() {
             return new DotEnvConfig($_ENV);
