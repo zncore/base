@@ -41,8 +41,8 @@ class ApplicationFactory
         return $application;
     }
 
-    public static function createTest(Kernel $kernel): MicroApp
+    public static function createTest(Kernel $kernel)//: MicroApp
     {
-        $config = $kernel->loadAppConfig();
+        self::createConsole($kernel);
     }
 }
