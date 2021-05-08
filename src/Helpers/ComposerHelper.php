@@ -13,6 +13,7 @@ class ComposerHelper
     private static $autoloadPsr4;
 
     /**
+     * Требовать установку composer-пакета
      * @param string $className
      * @param string $packageName
      * @param string|null $version
@@ -32,6 +33,12 @@ class ComposerHelper
         }
     }
 
+    /**
+     * Зарегистрировать пространство имен
+     * @param string $namespace
+     * @param string $path
+     * @example ComposerHelper::register('App', __DIR__ . '/../src');
+     */
     public static function register(string $namespace, string $path): void
     {
         //$path = realpath($path);
