@@ -7,6 +7,16 @@ use ZnCore\Base\Enums\EnvEnum;
 class EnvHelper
 {
 
+    public static function prepareTestEnv()
+    {
+        global $_GET, $argv;
+        $isConsoleTest = isset($argv) && in_array('--env=test', $argv);
+        $isWebTest = isset($_GET['env']) && $_GET['env'] == 'test';
+        if ($isConsoleTest || $isWebTest) {
+            $_ENV['APP_ENV'] = 'test';
+        }
+    }
+
     public static function setErrorVisibleFromEnv(): void
     {
         $isDebug = EnvHelper::isDebug();
