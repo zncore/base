@@ -40,4 +40,9 @@ class ApplicationFactory
         $application = new MicroApp($container, $config['routeCollection']);
         return $application;
     }
+
+    public static function createTest(Kernel $kernel): MicroApp
+    {
+        $config = $kernel->loadAppConfig();
+    }
 }
