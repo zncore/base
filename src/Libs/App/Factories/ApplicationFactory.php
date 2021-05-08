@@ -2,10 +2,11 @@
 
 namespace ZnCore\Base\Libs\App\Factories;
 
-use ZnCore\Base\Libs\App\Kernel;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
+use ZnCore\Base\Libs\App\Kernel;
 use ZnLib\Console\Symfony4\Helpers\CommandHelper;
+use ZnLib\Web\Symfony4\MicroApp\MicroApp;
 
 class ApplicationFactory
 {
@@ -29,6 +30,14 @@ class ApplicationFactory
         if (!empty($config['consoleCommands'])) {
             CommandHelper::registerFromNamespaceList($config['consoleCommands'], $kernel->getContainer(), $application);
         }
+        return $application;
+    }
+    
+    public static function createWeb(Kernel $kernel): MicroApp
+    {
+        $config = $kernel->loadAppConfig();
+        $container = $kernel->getContainer();
+        $application = new MicroApp($container, $config['routeCollection']);
         return $application;
     }
 }
