@@ -77,6 +77,9 @@ class ContainerHelper
         }
         if(isset($containerConfig['singletons'])) {
             foreach ($containerConfig['singletons'] as $abstract => $concrete) {
+                if(is_integer($abstract)) {
+                    $abstract = $concrete;
+                }
                 $container->singleton($abstract, $concrete);
             }
         }

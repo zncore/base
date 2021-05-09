@@ -39,7 +39,7 @@ class KernelFactory
         return $kernel;
     }
 
-    protected static function init() {
+    public static function init() {
         EnvHelper::prepareTestEnv();
         DotEnv::init();
         self::initVarDumper();

@@ -42,26 +42,33 @@ class BundleLoader implements LoaderInterface
 
     }
 
+    private $loadersConfig = [
+        'migration' => MigrationLoader::class,
+        'container' => [
+            'class' => ContainerLoader::class,
+            //'useCache' => true,
+        ],
+        'yiiAdmin' => ModuleLoader::class,
+        'yiiWeb' => ModuleLoader::class,
+        'symfonyWeb' => [
+            'class' => SymfonyRoutesLoader::class,
+            //'useCache' => true,
+        ],
+        'console' => ConsoleLoader::class,
+        'i18next' => [
+            'class' => I18NextLoader::class,
+            //'useCache' => true,
+        ],
+    ];
+    
     public function getLoadersConfig()
     {
-        return [
-            'migration' => MigrationLoader::class,
-            'container' => [
-                'class' => ContainerLoader::class,
-                //'useCache' => true,
-            ],
-            'yiiAdmin' => ModuleLoader::class,
-            'yiiWeb' => ModuleLoader::class,
-            'symfonyWeb' => [
-                'class' => SymfonyRoutesLoader::class,
-                //'useCache' => true,
-            ],
-            'console' => ConsoleLoader::class,
-            'i18next' => [
-                'class' => I18NextLoader::class,
-                //'useCache' => true,
-            ],
-        ];
+        return $this->loadersConfig;
+    }
+
+    public function addLoaderConfig(string $name, $loader)
+    {
+        $this->loadersConfig[$name] = $loader;
     }
 
     public function loadMainConfig(string $appName): array
