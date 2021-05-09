@@ -13,6 +13,9 @@ class KernelFactory
 
     public static function initVarDumper()
     {
+        if(!class_exists(SymfonyDumperFacade::class)) {
+            return;
+        }
         if (isset($_ENV['VAR_DUMPER_OUTPUT'])) {
             SymfonyDumperFacade::dumpInConsole($_ENV['VAR_DUMPER_OUTPUT']);
         }
@@ -20,8 +23,7 @@ class KernelFactory
 
     public static function createConsoleKernel(array $bundles = []): Kernel
     {
-        EnvHelper::prepareTestEnv();
-        DotEnv::init();
+        self::init();
         $bundleLoader = new BundleLoader($bundles, ['i18next', 'container', 'console', 'migration']);
         $kernel = new Kernel('console');
         $kernel->setLoader($bundleLoader);
@@ -30,13 +32,18 @@ class KernelFactory
 
     public static function createWebKernel(array $bundles = []): Kernel
     {
-        EnvHelper::prepareTestEnv();
-        DotEnv::init();
-        //CorsHelper::autoload();
-        //EnvHelper::setErrorVisibleFromEnv();
+        self::init();
         $bundleLoader = new BundleLoader($bundles, ['i18next', 'container', 'symfonyWeb']);
         $kernel = new Kernel('web');
         $kernel->setLoader($bundleLoader);
         return $kernel;
+    }
+
+    protected static function init() {
+        EnvHelper::prepareTestEnv();
+        DotEnv::init();
+        self::initVarDumper();
+        //CorsHelper::autoload();
+        EnvHelper::setErrorVisibleFromEnv();
     }
 }
