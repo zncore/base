@@ -24,8 +24,8 @@ class ConfigureEntityManagerSubscriber implements EventSubscriberInterface
     {
         $config = $event->getConfig();
         $container = $event->getKernel()->getContainer();
-        EntityManagerHelper::bindEntityManager($container, $config['container']['entities']);
         if (isset($config['container']['entities'])) {
+            EntityManagerHelper::bindEntityManager($container, $config['container']['entities']);
             unset($config['container']['entities']);
         }
         $event->setConfig($config);
