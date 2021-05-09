@@ -2,23 +2,27 @@
 
 namespace ZnCore\Base\Libs\App;
 
-use Packages\Kernel\AdvancedLoader;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use ZnCore\Base\Enums\Measure\TimeEnum;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
+use ZnCore\Base\Libs\App\Events\LoadConfigEvent;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
+use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
 use ZnCore\Domain\Helpers\EntityManagerHelper;
 
 class Kernel
 {
 
     use CacheAwareTrait;
+    use EventDispatcherTrait;
 
     protected $container;
+    /** @var LoaderInterface[] */
     protected $loaders;
     protected $appName;
 
@@ -53,6 +57,11 @@ class Kernel
     public function loadAppConfig(): array
     {
         $config = $this->loadMainConfig($this->appName);
+
+        $requestEvent = new LoadConfigEvent($this, $config);
+        $this->getEventDispatcher()->dispatch($requestEvent, KernelEventEnum::AFTER_LOAD_CONFIG);
+        $config = $requestEvent->getConfig();
+
         $this->configure($config['container']);
         unset($config['container']['entities']);
         return $config;
