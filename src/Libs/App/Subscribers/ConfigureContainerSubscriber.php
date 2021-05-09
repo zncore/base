@@ -24,7 +24,9 @@ class ConfigureContainerSubscriber implements EventSubscriberInterface
     {
         $config = $event->getConfig();
         $container = $event->getKernel()->getContainer();
-        ContainerHelper::configureContainer($container, $config['container']);
+        if(!empty($config['container'])) {
+            ContainerHelper::configureContainer($container, $config['container']);
+        }
         $event->setConfig($config);
     }
 }
