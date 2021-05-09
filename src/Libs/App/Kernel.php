@@ -15,7 +15,6 @@ use ZnCore\Base\Libs\App\Subscribers\ConfigureContainerSubscriber;
 use ZnCore\Base\Libs\App\Subscribers\ConfigureEntityManagerSubscriber;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
-use ZnYii\App\Subscribers\PrepareConfigSubscriber;
 
 class Kernel
 {
@@ -68,9 +67,9 @@ class Kernel
     {
         $config = $this->loadMainConfig($this->appName);
 
-        $requestEvent = new LoadConfigEvent($this, $config);
-        $this->getEventDispatcher()->dispatch($requestEvent, KernelEventEnum::AFTER_LOAD_CONFIG);
-        $config = $requestEvent->getConfig();
+        $event = new LoadConfigEvent($this, $config);
+        $this->getEventDispatcher()->dispatch($event, KernelEventEnum::AFTER_LOAD_CONFIG);
+        $config = $event->getConfig();
 
         return $config;
     }
