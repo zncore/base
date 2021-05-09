@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\App\Factories;
 
 use ZnCore\Base\Helpers\EnvHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Kernel;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
@@ -40,6 +41,7 @@ class KernelFactory
     }
 
     public static function init() {
+        $_ENV['ROOT_PATH'] = FileHelper::rootPath();
         EnvHelper::prepareTestEnv();
         DotEnv::init();
         self::initVarDumper();
