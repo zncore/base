@@ -11,9 +11,11 @@ use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
 use ZnCore\Base\Libs\App\Events\LoadConfigEvent;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
+use ZnCore\Base\Libs\App\Subscribers\ConfigureContainerSubscriber;
+use ZnCore\Base\Libs\App\Subscribers\ConfigureEntityManagerSubscriber;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
-use ZnCore\Domain\Helpers\EntityManagerHelper;
+use ZnYii\App\Subscribers\PrepareConfigSubscriber;
 
 class Kernel
 {
@@ -31,6 +33,14 @@ class Kernel
         define('MICRO_TIME', microtime(true));
         $this->appName = $appName;
         //$this->initCache();
+    }
+
+    public function subscribes(): array
+    {
+        return [
+            ConfigureContainerSubscriber::class,
+            ConfigureEntityManagerSubscriber::class,
+        ];
     }
 
     protected function initCache()
@@ -62,17 +72,7 @@ class Kernel
         $this->getEventDispatcher()->dispatch($requestEvent, KernelEventEnum::AFTER_LOAD_CONFIG);
         $config = $requestEvent->getConfig();
 
-        $this->configure($config['container']);
-        unset($config['container']['entities']);
         return $config;
-    }
-
-    protected function configure(array $containerConfig)
-    {
-        ContainerHelper::configureContainer($this->getContainer(), $containerConfig);
-        if (!empty($containerConfig['entities'])) {
-            EntityManagerHelper::bindEntityManager($this->getContainer(), $containerConfig['entities']);
-        }
     }
 
     protected function loadMainConfig(string $appName): array
