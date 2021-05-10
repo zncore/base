@@ -43,6 +43,7 @@ class InstanceProvider
             $definition = ClassHelper::normalizeComponentConfig($definition);
             if(isset($definition['__construct'])) {
                 $constructorParameters = ArrayHelper::merge($constructorParameters, $definition['__construct']);
+                unset($definition['__construct']);
             }
             $instance = ClassHelper::createInstance($definition, $constructorParameters);
             //$instance = $this->container->make($definition, $constructorParameters);
