@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Helpers;
 
 use Exception;
+use Psr\Container\ContainerInterface;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
 use ZnCore\Base\Exceptions\NotInstanceOfException;
@@ -88,7 +89,7 @@ class ClassHelper
      * @throws InvalidConfigException
      * @throws NotInstanceOfException
      */
-    public static function createInstance($definition, array $params = [])
+    public static function createInstance($definition, array $params = [], ContainerInterface $container = null)
     {
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
@@ -97,7 +98,9 @@ class ClassHelper
             return $definition;
         }
         $definition = self::normalizeComponentConfig($definition);
-        $container = ContainerHelper::getContainer();
+        if($container == null) {
+            $container = ContainerHelper::getContainer();
+        }
         $instance = $container->make($definition['class'], $params);
         if($definition['class']) {
             unset($definition['class']);

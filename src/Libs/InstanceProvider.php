@@ -45,7 +45,7 @@ class InstanceProvider
                 $constructorParameters = ArrayHelper::merge($constructorParameters, $definition['__construct']);
                 unset($definition['__construct']);
             }
-            $instance = ClassHelper::createInstance($definition, $constructorParameters);
+            $instance = ClassHelper::createInstance($definition, $constructorParameters, $this->container);
             //$instance = $this->container->make($definition, $constructorParameters);
         }
         return $instance;
