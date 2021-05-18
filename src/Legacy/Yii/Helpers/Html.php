@@ -7,6 +7,7 @@
 
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
+use Symfony\Component\HttpFoundation\Request;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Legacy\Yii\Base\Model;
 
@@ -439,18 +440,19 @@ class Html
 
         $hiddenInputs = [];
 
-        $request = Yii::$app->getRequest();
+        //$request = Yii::$app->getRequest();
+        $request = Request::createFromGlobals();
         if ($request instanceof Request) {
             if (strcasecmp($method, 'get') && strcasecmp($method, 'post')) {
                 // simulate PUT, DELETE, etc. via POST
-                $hiddenInputs[] = static::hiddenInput($request->methodParam, $method);
+                $hiddenInputs[] = static::hiddenInput($request->getMethod(), $method);
                 $method = 'post';
             }
             $csrf = ArrayHelper::remove($options, 'csrf', true);
 
-            if ($csrf && $request->enableCsrfValidation && strcasecmp($method, 'post') === 0) {
+            /*if ($csrf && $request->enableCsrfValidation && strcasecmp($method, 'post') === 0) {
                 $hiddenInputs[] = static::hiddenInput($request->csrfParam, $request->getCsrfToken());
-            }
+            }*/
         }
 
         if ( ! strcasecmp($method, 'get') && ($pos = strpos($action, '?')) !== false) {
