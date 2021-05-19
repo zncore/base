@@ -30,6 +30,9 @@ class DotEnv
     {
         $name = mb_strtoupper($name);
         if(!isset($_ENV[$name])) {
+            if(func_get_args() > 1) {
+                return $default;
+            }
             throw new DotEnvNotFoundException("Not found DotEnv value for key \"{$name}\"");
         }
         return $_ENV[$name];
