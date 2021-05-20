@@ -10,6 +10,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
+    "zncore/contract": "v0.0.*",
     "symfony/property-access": "4.*|5.*",
     "symfony/dotenv": "4.*|5.*",
     "symfony/yaml": "4.*|5.*",
@@ -19,8 +20,7 @@
   "autoload": {
     "psr-4": {
       "ZnCore\\Base\\": "src",
-      "ZnCore\\Base\\Tests\\": "tests",
-      "ZnCore\\Domain\\": "src/Domain"
+      "ZnCore\\Base\\Tests\\": "tests"
     }
   }
 }
