@@ -1,6 +1,9 @@
 <?php
 
 use Symfony\Component\Dotenv\Dotenv;
+use ZnCore\Base\Helpers\DeprecateHelper;
+
+DeprecateHelper::hardThrow();
 
 // Load cached env vars if the .env.local.php file exists
 // Run "composer dump-env prod" to create it (requires symfony/flex >=1.2)

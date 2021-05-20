@@ -2,7 +2,10 @@
 
 namespace ZnCore\Base\Libs\DotEnv;
 
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+
+DeprecateHelper::hardThrow();
 
 class DotEnvConfig implements DotEnvConfigInterface
 {

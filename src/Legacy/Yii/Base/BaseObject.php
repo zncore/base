@@ -9,6 +9,7 @@ namespace ZnCore\Base\Legacy\Yii\Base;
 
 use ZnCore\Base\Exceptions\UnknownMethodException;
 use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Traits\MagicAttribute\MagicAttributeTrait;
 
 /**
@@ -76,6 +77,7 @@ use ZnCore\Base\Traits\MagicAttribute\MagicAttributeTrait;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0.13
  */
+
 class BaseObject
 {
 
