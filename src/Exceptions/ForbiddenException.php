@@ -2,9 +2,11 @@
 
 namespace ZnCore\Base\Exceptions;
 
-use Exception;
-
-class ForbiddenException extends Exception
+/**
+ * @deprecated
+ * @see \ZnCore\Contract\User\Exceptions\ForbiddenException
+ */
+class ForbiddenException extends \ZnCore\Contract\User\Exceptions\ForbiddenException
 {
 
 }

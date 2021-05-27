@@ -2,17 +2,15 @@
 
 namespace ZnCore\Base\Exceptions;
 
-use Exception;
 use ZnCore\Base\Helpers\DeprecateHelper;
 
-DeprecateHelper::getStrictMode();
+DeprecateHelper::softThrow();
 
 /**
- * Class UnauthorizedException
- * @package ZnCore\Base\Exceptions
  * @deprecated
+ * @see \ZnCore\Contract\User\Exceptions\UnauthorizedException
  */
-class UnauthorizedException extends Exception
+class UnauthorizedException extends \ZnCore\Contract\User\Exceptions\UnauthorizedException
 {
 
 }
