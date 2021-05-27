@@ -2,11 +2,10 @@
 
 namespace ZnCore\Base\Interfaces;
 
-interface EncoderInterface
+/**
+ * @deprecated
+ */
+interface EncoderInterface extends \ZnCore\Contract\Encoder\Interfaces\EncoderInterface
 {
-
-    public function encode($data);
-
-    public function decode($encodedData);
 
 }

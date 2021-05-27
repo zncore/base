@@ -2,9 +2,10 @@
 
 namespace ZnCore\Base\Interfaces;
 
-interface GetLabelsInterface
+/**
+ * @deprecated
+ */
+interface GetLabelsInterface extends \ZnCore\Contract\Enum\Interfaces\GetLabelsInterface
 {
-
-    public static function getLabels();
 
 }
