@@ -7,7 +7,10 @@
 
 namespace ZnCore\Base\Legacy\Yii\Base;
 
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\StringHelper;
+
+DeprecateHelper::hardThrow();
 
 /**
  * Security provides a set of methods to handle common security-related tasks.

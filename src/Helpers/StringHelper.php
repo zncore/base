@@ -254,7 +254,7 @@ class StringHelper
         return $text;
     }
 
-    static function generateRandomString($length = 8, $set = null, $set_characters = null, $hight_quality = false)
+    static function generateRandomString($length = 8, $set = null, $set_characters = null, $hightQuality = false)
     {
         if (empty($set) && empty($set_characters)) {
             $set = 'num|lower|upper';
@@ -277,24 +277,24 @@ class StringHelper
             $characters .= $set_characters;
         }
         $randstring = '';
-        if ($hight_quality) {
-            $char_arr = array();
-            $characters_len = mb_strlen($characters, 'utf-8');
+        if ($hightQuality) {
+            $charArr = array();
+            $charactersLen = mb_strlen($characters, 'utf-8');
         }
         for ($i = 0; $i < $length; $i++) {
-            $r = mt_rand(0, strlen($characters) - 1);
-            if ($hight_quality) {
-                if (in_array($r, $char_arr)) {
-                    while (in_array($r, $char_arr)) {
-                        $r = mt_rand(0, strlen($characters) - 1);
+            $randomNumber = mt_rand(0, strlen($characters) - 1);
+            if ($hightQuality) {
+                if (in_array($randomNumber, $charArr)) {
+                    while (in_array($randomNumber, $charArr)) {
+                        $randomNumber = mt_rand(0, strlen($characters) - 1);
                     }
                 }
-                $char_arr[] = $r;
-                if (count($char_arr) >= $characters_len) {
-                    $char_arr = array();
+                $charArr[] = $randomNumber;
+                if (count($charArr) >= $charactersLen) {
+                    $charArr = array();
                 }
             }
-            $randstring .= $characters[$r];
+            $randstring .= $characters[$randomNumber];
         }
         return $randstring;
     }
