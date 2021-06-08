@@ -166,7 +166,7 @@ class Translator {
         $dir = glob($path);
 
         if (count($dir) === 0)
-            throw new \Exception('Translation file not found');
+            throw new \Exception('Translation file not found in "' . $path . '"');
 
         foreach ($dir as $file) {
 

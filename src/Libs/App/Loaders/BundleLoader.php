@@ -54,6 +54,9 @@ class BundleLoader implements LoaderInterface
             'class' => SymfonyRoutesLoader::class,
             //'useCache' => true,
         ],
+        'symfonyAdmin' => [
+            'class' => SymfonyRoutesLoader::class,
+        ],
         'console' => ConsoleLoader::class,
         'i18next' => [
             'class' => I18NextLoader::class,

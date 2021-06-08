@@ -31,10 +31,10 @@ class KernelFactory
         return $kernel;
     }
 
-    public static function createWebKernel(array $bundles = []): Kernel
+    public static function createWebKernel(array $bundles = [], $load = ['i18next', 'container', 'symfonyWeb']): Kernel
     {
         self::init();
-        $bundleLoader = new BundleLoader($bundles, ['i18next', 'container', 'symfonyWeb']);
+        $bundleLoader = new BundleLoader($bundles, $load);
         $kernel = new Kernel('web');
         $kernel->setLoader($bundleLoader);
         return $kernel;
