@@ -220,9 +220,13 @@ class Url
     {
         $basePath = self::getRequest()->getBaseUrl();
         if (is_array($url)) {
-
             $path = array_splice($url, 0, 1)[0];
-            return $basePath . $path . '?' . http_build_query($url);
+            $query = http_build_query($url);
+            $url = $basePath . $path;
+            if($query) {
+                $url .= '?' . $query;
+            }
+            return $url;
 //            return static::toRoute($url, $scheme);
         }
 
