@@ -1,4 +1,5 @@
 {
   "not_found": "Не найдено",
-  "saved_success": "Успешно сохранено!"
+  "saved_success": "Успешно сохранено!",
+  "deleted_success": "Успешно удалено!"
 }
