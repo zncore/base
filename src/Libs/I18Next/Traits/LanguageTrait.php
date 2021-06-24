@@ -10,11 +10,10 @@ trait LanguageTrait
 
     protected $_language = "ru";
 
-    public function __construct(RuntimeLanguageServiceInterface $languageService)
-    {
+    protected function setRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService) {
         $this->_language = $languageService->getLanguage();
     }
-
+    
     protected function i18n(string $attribute): string
     {
         $name = $attribute . 'I18n';
