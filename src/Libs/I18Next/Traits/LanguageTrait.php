@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Libs\I18Next\Traits;
 
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\I18Next\Enums\LanguageI18nEnum;
 use ZnBundle\Language\Domain\Interfaces\Services\RuntimeLanguageServiceInterface;
 
@@ -18,11 +19,9 @@ trait LanguageTrait
     {
         $name = $attribute . 'I18n';
         if (!empty($this->$name)) {
-            $translations = !is_array($this->$name) ? json_decode($this->$name) : $this->$name;
+            $translations = !is_array($this->$name) ? json_decode($this->$name, JSON_OBJECT_AS_ARRAY) : $this->$name;
             $currentLanguage = LanguageI18nEnum::encode($this->_language);
-            if (isset($translations[$currentLanguage])) {
-                return $translations[$currentLanguage];
-            }
+            return ArrayHelper::getValue($translations, $currentLanguage);
         }
         return $this->$attribute;
     }
