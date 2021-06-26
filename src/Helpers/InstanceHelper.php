@@ -60,17 +60,29 @@ class InstanceHelper
             $reflectionClass = new \ReflectionClass($className);
             $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
             $flatParameters = [];
-            foreach ($constructorParameters as $constructorParameter) {
-                $parameterName = $constructorParameter->name;
+            foreach ($constructorParameters as $index => $constructorParameter) {
                 /** @var ReflectionNamedType $parameterType */
                 $parameterType = $constructorParameter->getType();
-                $parameterTypeName = $parameterType ? $parameterType->getName() : null;
+                if($parameterType && array_key_exists($parameterType->getName(), $constructionArgs)) {
+                    $parameterName = $parameterType->getName();
+                } else {
+                    $parameterName = $constructorParameter->name;
+                }
                 if (array_key_exists($parameterName, $constructionArgs)) {
-                    $flatParameters[] = $constructionArgs[$parameterName];
-                } elseif (!empty($parameterTypeName) && array_key_exists($parameterTypeName, $constructionArgs)) {
-                    $flatParameters[] = $constructionArgs[$parameterTypeName];
+                    $flatParameters[$index] = $constructionArgs[$parameterName];
+                    unset($constructionArgs[$parameterName]);
                 }
             }
+            foreach ($constructorParameters as $index => $constructorParameter) {
+                if(!isset($flatParameters[$index])) {
+                    foreach ($constructionArgs as $constructionArgName => $constructionArgValue) {
+                        if(is_int($constructionArgName)) {
+                            $flatParameters[$index] = $constructionArgValue;
+                        }
+                    }
+                }
+            }
+            ksort($flatParameters);
             $constructionArgs = $flatParameters;
         }
         return $constructionArgs;
