@@ -13,7 +13,9 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
 {
 
     private $drivers = [
-        Container::class => IlluminateContainerConfigurator::class,
+        Container::class => [
+            'class' => IlluminateContainerConfigurator::class,
+        ]
     ];
     /** @var Container */
     private $container;
@@ -43,13 +45,13 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
     private function getContainerConfiguratorByContainer(ContainerInterface $container): ContainerConfiguratorInterface
     {
         /** @var ContainerConfiguratorInterface $configurator */
-        foreach ($this->drivers as $containerClass => $configuratorClass) {
+        foreach ($this->drivers as $containerClass => $configuratorDefinition) {
             if ($container instanceof $containerClass) {
-                $configurator = InstanceHelper::create($configuratorClass, [Container::class => $container]);
-                //return new $configuratorClass($container);
+                $configurator = InstanceHelper::create($configuratorDefinition['class'], [Container::class => $container]);
+                //return new $configuratorDefinition($container);
             }
         }
-        if(!isset($configurator)) {
+        if (!isset($configurator)) {
             throw new NotFoundException('Not found driver for ContainerConfigurator');
         }
         return $configurator;
