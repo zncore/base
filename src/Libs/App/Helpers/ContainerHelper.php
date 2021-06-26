@@ -7,7 +7,6 @@ use Psr\Container\ContainerInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\App\Libs\ContainerConfigurator;
-use ZnCore\Base\Libs\App\Libs\ContainerConfigurators\IlluminateContainerConfigurator;
 
 class ContainerHelper
 {
@@ -39,16 +38,9 @@ class ContainerHelper
         return null;
     }
 
-    public static function getContainerConfiguratorByContainer(ContainerInterface $container): ContainerConfiguratorInterface {
+    public static function getContainerConfiguratorByContainer(ContainerInterface $container): ContainerConfiguratorInterface
+    {
         return new ContainerConfigurator($container);
-
-//        $cc = new ContainerConfigurator($container);
-//        return $cc->getContainerConfiguratorByContainer($container);
-
-        /*if($container instanceof Container) {
-            $configurator = new IlluminateContainerConfigurator($container);
-        }
-        return $configurator;*/
     }
 
     public static function configureContainer(ContainerInterface $container, array $containerConfig)
@@ -64,15 +56,15 @@ class ContainerHelper
         $container->singleton(Container::class, function () use ($container) {
             return $container;
         });*/
-        if(isset($containerConfig['definitions'])) {
+        if (isset($containerConfig['definitions'])) {
             foreach ($containerConfig['definitions'] as $abstract => $concrete) {
                 $configurator->bind($abstract, $concrete, true);
                 //$container->bind($abstract, $concrete, true);
             }
         }
-        if(isset($containerConfig['singletons'])) {
+        if (isset($containerConfig['singletons'])) {
             foreach ($containerConfig['singletons'] as $abstract => $concrete) {
-                if(is_integer($abstract)) {
+                if (is_integer($abstract)) {
                     $abstract = $concrete;
                 }
                 $configurator->singleton($abstract, $concrete);
@@ -104,7 +96,7 @@ class ContainerHelper
     public static function mergeFromFiles(array $config, array $fileList, string $toKey = null): array
     {
         foreach ($fileList as $configFile) {
-            if($toKey) {
+            if ($toKey) {
                 $sourceConfig = ArrayHelper::getValue($config, $toKey);
             } else {
                 $sourceConfig = $config;

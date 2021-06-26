@@ -4,7 +4,8 @@ namespace ZnCore\Base\Libs\App\Libs;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\App\Libs\ContainerConfigurators\IlluminateContainerConfigurator;
 
@@ -24,28 +25,6 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
         $this->configurator = $this->getContainerConfiguratorByContainer($container);
     }
 
-    public function getContainerConfiguratorByContainer(ContainerInterface $container): ContainerConfiguratorInterface
-    {
-        /*if($container instanceof Container) {
-            $configurator = new IlluminateContainerConfigurator($container);
-        }*/
-        foreach ($this->drivers as $containerClass => $configuratorClass) {
-            if ($container instanceof $containerClass) {
-                /** @var ContainerConfiguratorInterface $configurator */
-//                $configurator = $container->make($configuratorClass);
-                //dd($configuratorClass);
-                $configurator = new $configuratorClass($container);
-//                $configurator = ClassHelper::createInstance($configuratorClass, [], $container);
-            }
-        }
-        //dd($configurator);
-        /*if ($container instanceof Container) {
-            $configurator = new IlluminateContainerConfigurator($container);
-//            $container->singleton(ContainerConfiguratorInterface::class, IlluminateContainerConfigurator::class);
-        }*/
-        return $configurator;
-    }
-
     public function singleton($abstract, $concrete): void
     {
         $this->configurator->singleton($abstract, $concrete);
@@ -54,5 +33,25 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
     public function bind($abstract, $concrete, bool $shared = false): void
     {
         $this->configurator->bind($abstract, $concrete, $shared);
+    }
+
+    public function alias($abstract, $alias): void
+    {
+        $this->configurator->alias($abstract, $alias);
+    }
+
+    private function getContainerConfiguratorByContainer(ContainerInterface $container): ContainerConfiguratorInterface
+    {
+        /** @var ContainerConfiguratorInterface $configurator */
+        foreach ($this->drivers as $containerClass => $configuratorClass) {
+            if ($container instanceof $containerClass) {
+                $configurator = InstanceHelper::create($configuratorClass, [Container::class => $container]);
+                //return new $configuratorClass($container);
+            }
+        }
+        if(!isset($configurator)) {
+            throw new NotFoundException('Not found driver for ContainerConfigurator');
+        }
+        return $configurator;
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Exceptions\NotImplementedMethodException;
 use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnLib\Rpc\Domain\Exceptions\MethodNotFoundException;
 
@@ -28,11 +29,13 @@ class InstanceProvider
     public function callMethodOfInstance(object $instance, string $methodName, array $methodParameters)
     {
         $this->checkExistsMethod($instance, $methodName);
-        if ($this->container instanceof Container) {
+        return InstanceHelper::callMethod($instance, $methodName, $methodParameters);
+        /*if ($this->container instanceof Container) {
             return $this->container->call([$instance, $methodName], $methodParameters);
         } else {
-            throw new NotImplementedMethodException('Call method of controller not implemented');
-        }
+            return InstanceHelper::callMethod($instance, $methodName, $methodParameters);
+//            throw new NotImplementedMethodException('Call method of controller not implemented');
+        }*/
     }
 
     public function createInstance($definition, array $constructorParameters = []): object

@@ -24,4 +24,9 @@ class IlluminateContainerConfigurator implements ContainerConfiguratorInterface
     {
         $this->container->bind($abstract, $concrete, $shared);
     }
+
+    public function alias($abstract, $alias): void
+    {
+        $this->container->alias($abstract, $alias);
+    }
 }
