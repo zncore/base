@@ -5,11 +5,15 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\NullAdapter;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Cache\CacheInterface;
 use ZnCore\Base\Enums\Measure\TimeEnum;
 use ZnCore\Base\Helpers\EnvHelper;
+use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
+use ZnCore\Base\Libs\App\Libs\ConfigManager;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\EntityManager;
@@ -31,6 +35,7 @@ return [
 //            $em->addOrm($eloquentOrm);
             return $em;
         },
+//        ConfigManagerInterface::class => ConfigManager::class,
         EventDispatcherInterface::class => function () {
             $eventDispatcher = new EventDispatcher();
             return $eventDispatcher;

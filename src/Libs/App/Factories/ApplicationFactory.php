@@ -4,6 +4,7 @@ namespace ZnCore\Base\Libs\App\Factories;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
+use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Kernel;
 use ZnLib\Console\Symfony4\Helpers\CommandHelper;
 use ZnLib\Web\Symfony4\MicroApp\MicroApp;
@@ -15,7 +16,12 @@ class ApplicationFactory
     {
         $config = $kernel->loadAppConfig();
         $container = $kernel->getContainer();
-        $container->bind(Application::class, Application::class, true);
+
+        $containerConfigurator = ContainerHelper::getContainerConfiguratorByContainer($container);
+        $containerConfigurator->bind(Application::class, Application::class, true);
+
+//        $container->bind(Application::class, Application::class, true);
+
         /** @var Application $application */
         $application = $container->get(Application::class);
         $application->getDefinition()->addOptions([

@@ -5,15 +5,80 @@ namespace ZnCore\Base\Libs\App\Helpers;
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Base\Libs\App\Libs\ContainerConfigurator;
+use ZnCore\Base\Libs\App\Libs\ContainerConfigurators\IlluminateContainerConfigurator;
 
-class ContainerHelper 
+class ContainerHelper
 {
 
     private static $container;
 
+    public static function getContainerConfigurator(): ContainerConfiguratorInterface
+    {
+        return self::getContainerConfiguratorByContainer(self::getContainer());
+    }
+
     public static function setContainer(object $container)
     {
         self::$container = $container;
+    }
+
+    /**
+     * @return ContainerInterface|null
+     */
+    public static function getContainer(): ?object
+    {
+        if (isset(self::$container)) {
+            return self::$container;
+        }
+        if (class_exists(Container::class)) {
+            return Container::getInstance();
+        }
+
+        return null;
+    }
+
+    public static function getContainerConfiguratorByContainer(ContainerInterface $container): ContainerConfiguratorInterface {
+        return new ContainerConfigurator($container);
+
+//        $cc = new ContainerConfigurator($container);
+//        return $cc->getContainerConfiguratorByContainer($container);
+
+        /*if($container instanceof Container) {
+            $configurator = new IlluminateContainerConfigurator($container);
+        }
+        return $configurator;*/
+    }
+
+    public static function configureContainer(ContainerInterface $container, array $containerConfig)
+    {
+        $configurator = self::getContainerConfiguratorByContainer($container);
+//        /** @var ContainerConfiguratorInterface $configurator */
+//        $configurator = $container->get(ContainerConfiguratorInterface::class);
+        $configurator->singleton(ContainerInterface::class, Container::class);
+        $configurator->singleton(Container::class, function () use ($container) {
+            return $container;
+        });
+        /*$container->singleton(ContainerInterface::class, Container::class);
+        $container->singleton(Container::class, function () use ($container) {
+            return $container;
+        });*/
+        if(isset($containerConfig['definitions'])) {
+            foreach ($containerConfig['definitions'] as $abstract => $concrete) {
+                $configurator->bind($abstract, $concrete, true);
+                //$container->bind($abstract, $concrete, true);
+            }
+        }
+        if(isset($containerConfig['singletons'])) {
+            foreach ($containerConfig['singletons'] as $abstract => $concrete) {
+                if(is_integer($abstract)) {
+                    $abstract = $concrete;
+                }
+                $configurator->singleton($abstract, $concrete);
+                //$container->singleton($abstract, $concrete);
+            }
+        }
     }
 
     public static function importFromConfig($fileList, array $config = []): array
@@ -50,38 +115,4 @@ class ContainerHelper
         return $config;
     }
 
-    /**
-     * @return ContainerInterface|null
-     */
-    public static function getContainer(): ?object
-    {
-        if (isset(self::$container)) {
-            return self::$container;
-        }
-        if (class_exists(Container::class)) {
-            return Container::getInstance();
-        }
-        return null;
-    }
-
-    public static function configureContainer(ContainerInterface $container, array $containerConfig)
-    {
-        $container->singleton(ContainerInterface::class, Container::class);
-        $container->singleton(Container::class, function () use ($container) {
-            return $container;
-        });
-        if(isset($containerConfig['definitions'])) {
-            foreach ($containerConfig['definitions'] as $abstract => $concrete) {
-                $container->bind($abstract, $concrete, true);
-            }
-        }
-        if(isset($containerConfig['singletons'])) {
-            foreach ($containerConfig['singletons'] as $abstract => $concrete) {
-                if(is_integer($abstract)) {
-                    $abstract = $concrete;
-                }
-                $container->singleton($abstract, $concrete);
-            }
-        }
-    }
 }
