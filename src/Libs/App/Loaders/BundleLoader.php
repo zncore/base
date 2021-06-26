@@ -15,6 +15,7 @@ use ZnCore\Base\Libs\App\Loaders\BundleLoaders\I18NextLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\MigrationLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ModuleLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRoutesLoader;
+use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRpcRoutesLoader;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
 
@@ -52,6 +53,10 @@ class BundleLoader implements LoaderInterface
         'yiiWeb' => ModuleLoader::class,
         'symfonyWeb' => [
             'class' => SymfonyRoutesLoader::class,
+            //'useCache' => true,
+        ],
+        'symfonyRpc' => [
+            'class' => SymfonyRpcRoutesLoader::class,
             //'useCache' => true,
         ],
         'symfonyAdmin' => [

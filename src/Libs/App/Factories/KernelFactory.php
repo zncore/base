@@ -22,19 +22,19 @@ class KernelFactory
         }
     }
 
-    public static function createConsoleKernel(array $bundles = []): Kernel
+    public static function createConsoleKernel(array $bundles = [], $import = ['i18next', 'container', 'console', 'migration']): Kernel
     {
         self::init();
-        $bundleLoader = new BundleLoader($bundles, ['i18next', 'container', 'console', 'migration']);
+        $bundleLoader = new BundleLoader($bundles, $import);
         $kernel = new Kernel('console');
         $kernel->setLoader($bundleLoader);
         return $kernel;
     }
 
-    public static function createWebKernel(array $bundles = [], $load = ['i18next', 'container', 'symfonyWeb']): Kernel
+    public static function createWebKernel(array $bundles = [], $import = ['i18next', 'container', 'symfonyWeb']): Kernel
     {
         self::init();
-        $bundleLoader = new BundleLoader($bundles, $load);
+        $bundleLoader = new BundleLoader($bundles, $import);
         $kernel = new Kernel('web');
         $kernel->setLoader($bundleLoader);
         return $kernel;
