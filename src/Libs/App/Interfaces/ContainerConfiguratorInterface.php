@@ -9,5 +9,7 @@ interface ContainerConfiguratorInterface
 
     public function bind($abstract, $concrete, bool $shared = false): void;
 
+    public function bindContainerSingleton(): void;
+
     public function alias($abstract, $alias): void;
 }

@@ -3,6 +3,8 @@
 namespace ZnCore\Base\Libs\App\Libs\ContainerConfigurators;
 
 use Illuminate\Container\Container;
+use Psr\Container\ContainerInterface;
+use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
 
 class IlluminateContainerConfigurator implements ContainerConfiguratorInterface
@@ -10,9 +12,10 @@ class IlluminateContainerConfigurator implements ContainerConfiguratorInterface
 
     private $container;
 
-    public function __construct(Container $container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
+        ClassHelper::isInstanceOf($container, Container::class);
     }
 
     public function singleton($abstract, $concrete): void
@@ -23,6 +26,14 @@ class IlluminateContainerConfigurator implements ContainerConfiguratorInterface
     public function bind($abstract, $concrete, bool $shared = false): void
     {
         $this->container->bind($abstract, $concrete, $shared);
+    }
+
+    public function bindContainerSingleton(): void
+    {
+        $this->container->singleton(ContainerInterface::class, Container::class);
+        $this->container->singleton(Container::class, function () {
+            return $this->container;
+        });
     }
 
     public function alias($abstract, $alias): void

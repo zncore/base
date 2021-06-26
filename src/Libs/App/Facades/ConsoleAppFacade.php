@@ -30,10 +30,12 @@ class ConsoleAppFacade
         $mainConfig = $kernel->loadAppConfig();
 
         $containerConfigurator = ContainerHelper::getContainerConfiguratorByContainer($container);
-        $containerConfigurator->singleton(Application::class, Application::class);
+        $containerConfigurator->bindContainerSingleton();
+
+        /*$containerConfigurator->singleton(Application::class, Application::class);
         $containerConfigurator->singleton(ContainerInterface::class, function (ContainerInterface $container) {
             return $container;
-        });
+        });*/
 
         /*$container->singleton(Application::class, Application::class);
         $container->singleton(ContainerInterface::class, function (ContainerInterface $container) {

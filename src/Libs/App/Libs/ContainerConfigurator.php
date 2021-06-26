@@ -37,6 +37,14 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
         $this->configurator->bind($abstract, $concrete, $shared);
     }
 
+    public function bindContainerSingleton(): void
+    {
+        $this->configurator->singleton(ContainerConfiguratorInterface::class, function () {
+            return $this->container;
+        });
+        $this->configurator->bindContainerSingleton();
+    }
+
     public function alias($abstract, $alias): void
     {
         $this->configurator->alias($abstract, $alias);
@@ -47,7 +55,7 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
         /** @var ContainerConfiguratorInterface $configurator */
         foreach ($this->drivers as $containerClass => $configuratorDefinition) {
             if ($container instanceof $containerClass) {
-                $configurator = InstanceHelper::create($configuratorDefinition['class'], [Container::class => $container]);
+                $configurator = InstanceHelper::create($configuratorDefinition['class'], [ContainerInterface::class => $container]);
                 //return new $configuratorDefinition($container);
             }
         }

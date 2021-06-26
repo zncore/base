@@ -46,12 +46,13 @@ class ContainerHelper
     public static function configureContainer(ContainerInterface $container, array $containerConfig)
     {
         $configurator = self::getContainerConfiguratorByContainer($container);
+        $configurator->bindContainerSingleton();
 //        /** @var ContainerConfiguratorInterface $configurator */
 //        $configurator = $container->get(ContainerConfiguratorInterface::class);
-        $configurator->singleton(ContainerInterface::class, Container::class);
+        /*$configurator->singleton(ContainerInterface::class, Container::class);
         $configurator->singleton(Container::class, function () use ($container) {
             return $container;
-        });
+        });*/
         /*$container->singleton(ContainerInterface::class, Container::class);
         $container->singleton(Container::class, function () use ($container) {
             return $container;
