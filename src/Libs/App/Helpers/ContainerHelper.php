@@ -4,6 +4,7 @@ namespace ZnCore\Base\Libs\App\Helpers;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\App\Libs\ContainerConfigurator;
@@ -13,6 +14,10 @@ class ContainerHelper
 
     private static $container;
 
+    /**
+     * @return ContainerConfiguratorInterface
+     * @deprecated
+     */
     public static function getContainerConfigurator(): ContainerConfiguratorInterface
     {
         return self::getContainerConfiguratorByContainer(self::getContainer());
@@ -76,6 +81,7 @@ class ContainerHelper
 
     public static function importFromConfig($fileList, array $config = []): array
     {
+        DeprecateHelper::softThrow();
         foreach ($fileList as $configFile) {
             $toKey = null;
             if (is_array($configFile)) {
@@ -94,6 +100,13 @@ class ContainerHelper
         return $config;
     }
 
+    /**
+     * @param array $config
+     * @param array $fileList
+     * @param string|null $toKey
+     * @return array
+     * @deprecated
+     */
     public static function mergeFromFiles(array $config, array $fileList, string $toKey = null): array
     {
         foreach ($fileList as $configFile) {
