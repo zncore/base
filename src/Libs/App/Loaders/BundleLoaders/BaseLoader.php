@@ -7,6 +7,7 @@ use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Base\BaseBundle;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
+use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
 
@@ -19,7 +20,7 @@ abstract class BaseLoader
     protected $useCache = false;
     protected $name;
 
-    protected $configManager;
+    private $configManager;
 
     protected function loadFromCache($callback) {
         if($this->useCache && $this->getCache() instanceof AbstractAdapter) {
@@ -49,6 +50,21 @@ abstract class BaseLoader
     public function setName(string $name): void
     {
         $this->name = $name;
+    }
+
+    public function hasConfigManager(): bool
+    {
+        return isset($this->configManager);
+    }
+
+    public function getConfigManager(): ConfigManagerInterface
+    {
+        return $this->configManager;
+    }
+
+    public function setConfigManager(ConfigManagerInterface $configManager): void
+    {
+        $this->configManager = $configManager;
     }
 
     abstract public function loadAll(array $bundles): array;

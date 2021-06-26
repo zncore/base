@@ -6,7 +6,9 @@ use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Base\Libs\App\Libs\ConfigManager;
 use ZnCore\Base\Libs\App\Libs\ContainerConfigurator;
 
 class ContainerHelper
@@ -33,14 +35,14 @@ class ContainerHelper
      */
     public static function getContainer(): ?object
     {
-        if (isset(self::$container)) {
-            return self::$container;
+        if (!isset(self::$container)) {
+            if (class_exists(Container::class)) {
+                self::$container = Container::getInstance();
+                $configurator = self::getContainerConfiguratorByContainer(self::$container);
+                $configurator->singleton(ConfigManagerInterface::class, ConfigManager::class);
+            }
         }
-        if (class_exists(Container::class)) {
-            return Container::getInstance();
-        }
-
-        return null;
+        return self::$container;
     }
 
     public static function getContainerConfiguratorByContainer(ContainerInterface $container): ContainerConfiguratorInterface

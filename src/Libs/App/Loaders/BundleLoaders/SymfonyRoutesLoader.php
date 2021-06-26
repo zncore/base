@@ -6,9 +6,15 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\Loader\PhpFileLoader;
 use Symfony\Component\Routing\RouteCollection;
+use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 
 class SymfonyRoutesLoader extends BaseLoader
 {
+
+    public function __construct(ConfigManagerInterface $configManager)
+    {
+        $this->setConfigManager($configManager);
+    }
 
     public function loadAll(array $bundles): array
     {
@@ -27,6 +33,9 @@ class SymfonyRoutesLoader extends BaseLoader
             }
         }
         $config['routeCollection'] = $routes;
+        if($this->hasConfigManager()) {
+            $this->getConfigManager()->set('routeCollection', $routes);
+        }
         return $config;
     }
 }

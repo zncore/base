@@ -5,6 +5,7 @@ namespace ZnCore\Base\Libs\App\Loaders;
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Base\BaseBundle;
+use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BaseLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ConsoleLoader;
@@ -96,6 +97,12 @@ class BundleLoader implements LoaderInterface
         /** @var BaseLoader $loaderInstance */
         $loaderInstance = ClassHelper::createObject($loaderDefinition);
         $loaderInstance->setContainer($this->getContainer());
+
+        /*if(method_exists($loaderInstance, 'setConfigManager') && $this->getContainer()->has(ConfigManagerInterface::class)) {
+            $configManager = $this->getContainer()->get(ConfigManagerInterface::class);
+            $loaderInstance->setConfigManager($configManager);
+        }*/
+
         if ($this->getCache()) {
             $loaderInstance->setCache($this->getCache());
         }
@@ -103,6 +110,12 @@ class BundleLoader implements LoaderInterface
             $loaderInstance->setName($loaderName);
         }
         $bundles = $this->filterBundlesByLoader($this->bundles, $loaderName);
+
+        if($this->getContainer()->has(ConfigManagerInterface::class)) {
+            $configManager = $this->getContainer()->get(ConfigManagerInterface::class);
+            $configManager->set('bundles', $bundles);
+        }
+
         $configItem = $loaderInstance->loadAll($bundles);
         return $configItem;
     }
