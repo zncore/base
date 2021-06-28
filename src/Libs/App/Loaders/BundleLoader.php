@@ -36,10 +36,13 @@ class BundleLoader implements LoaderInterface
     public function addBundles(array $bundles) {
         /** @var BaseBundle $bundleInstance */
         foreach ($bundles as $bundleInstance) {
-            if($bundleInstance->deps()) {
-                $this->addBundles($bundleInstance->deps());
+            $bundleClass = get_class($bundleInstance);
+            if(!isset($this->bundles[$bundleClass])) {
+                if($bundleInstance->deps()) {
+                    $this->addBundles($bundleInstance->deps());
+                }
+                $this->bundles[$bundleClass] = $bundleInstance;
             }
-            $this->bundles[] = $bundleInstance;
         }
         //$this->bundles = ArrayHelper::merge($this->bundles, $bundles);
     }
