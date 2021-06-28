@@ -24,17 +24,24 @@ class BundleLoader implements LoaderInterface
     use ContainerAttributeTrait;
     use CacheAwareTrait;
 
-    private $bundles;
+    private $bundles = [];
     private $import = [];
 
     public function __construct(array $bundles = [], array $import = [])
     {
-        $this->bundles = $bundles;
+        $this->addBundles($bundles);
         $this->import = $import;
     }
 
     public function addBundles(array $bundles) {
-        $this->bundles = ArrayHelper::merge($this->bundles, $bundles);
+        /** @var BaseBundle $bundleInstance */
+        foreach ($bundles as $bundleInstance) {
+            if($bundleInstance->deps()) {
+                $this->addBundles($bundleInstance->deps());
+            }
+            $this->bundles[] = $bundleInstance;
+        }
+        //$this->bundles = ArrayHelper::merge($this->bundles, $bundles);
     }
 
     public function bootstrapApp(string $appName)

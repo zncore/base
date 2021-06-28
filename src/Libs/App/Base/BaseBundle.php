@@ -7,6 +7,11 @@ abstract class BaseBundle
 
     private $importList;
 
+    public function deps(): array
+    {
+        return [];
+    }
+
     public function getImportList(): array
     {
         return $this->importList;
