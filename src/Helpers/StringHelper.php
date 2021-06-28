@@ -28,11 +28,11 @@ class StringHelper
         return $mixed;
     }
 
-    public static function renderTemplate(string $mask, array $data = [])
+    public static function renderTemplate(string $mask, array $data = [], string $beginBlock = '{', string $endBlock = '}')
     {
         $newParams = [];
         foreach ($data as $name => $value) {
-            $name = '{' . $name . '}';
+            $name = $beginBlock . $name . $endBlock;
             $newParams[$name] = $value;
         }
         return strtr($mask, $newParams);
