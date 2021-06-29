@@ -15,6 +15,7 @@ class DotEnv
 
     public static function init(string $basePath = self::ROOT_PATH): void
     {
+        $_ENV['ROOT_DIRECTORY'] = realpath(__DIR__ . '/../../../../../..');
         /*if (self::loadCachedEnvLocal($basePath)) {
             return;
         }*/
