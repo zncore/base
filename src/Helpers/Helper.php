@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Helpers;
 
+use ZnCore\Base\Exceptions\ReadOnlyException;
 use ZnCore\Base\Legacy\Yii\Base\Model;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Domain\Exceptions\UnprocessableEntityHttpException;
@@ -9,6 +10,12 @@ use ZnCore\Domain\Helpers\EntityHelper;
 
 class Helper
 {
+
+    public static function checkReadOnly($attribute, $value) {
+        if(isset($attribute) && $attribute !== $value) {
+            throw new ReadOnlyException('Content is read only!');
+        }
+    }
 
     public static function idsToArray($param)
     {
