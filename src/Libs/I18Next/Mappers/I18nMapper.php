@@ -18,7 +18,7 @@ class I18nMapper implements MapperInterface
         $this->attributes = $attributes;
     }
 
-    public function encode(object $entity): array
+    public function encode($entity): array
     {
         $data = EntityHelper::toArrayForTablize($entity);
 
@@ -29,7 +29,7 @@ class I18nMapper implements MapperInterface
         return $data;
     }
 
-    public function decode(array $row): object
+    public function decode(array $row)
     {
         foreach ($this->attributes as $attribute) {
             $row[$attribute] = json_decode($row[$attribute], JSON_OBJECT_AS_ARRAY);
