@@ -65,7 +65,7 @@ class XmlEncoder implements EncoderInterface
         }
         $encoded = $this->xml->encode($data, 'xml', $this->getContext());
         $encoded = $this->fixEncode($encoded);
-        return $encoded;
+        return trim($encoded);
     }
 
     public function decode($encoded)
