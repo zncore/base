@@ -21,6 +21,19 @@ class FileHelper extends BaseFileHelper
         return null;
     }
 
+    public static function extensionsByMimeType(string $mimeType, string $magicFile = null)
+    {
+        $magicFile = $magicFile ?: __DIR__ . '/mimeTypes.php';
+        $mimeTypes = static::loadMimeTypes($magicFile);
+        $mimeType = strtolower($mimeType);
+        foreach ($mimeTypes as $ext => $mimeTypeValue) {
+            if($mimeTypeValue == $mimeType) {
+                return $ext;
+            }
+        }
+        return null;
+    }
+
     public static function path(string $path = ''): string
     {
         $root = self::rootPath();
