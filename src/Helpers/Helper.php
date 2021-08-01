@@ -8,8 +8,15 @@ use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Domain\Exceptions\UnprocessableEntityHttpException;
 use ZnCore\Domain\Helpers\EntityHelper;
 
+
+
 class Helper
 {
+
+    public static function isBinary($str) {
+        //return preg_match('~[^\x20-\x7E\t\r\n]~', $str) > 0;
+        return !ctype_print($str);
+    }
 
     public static function checkReadOnly($attribute, $value) {
         if(isset($attribute) && $attribute !== $value) {
