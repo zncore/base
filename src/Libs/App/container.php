@@ -35,7 +35,7 @@ return [
 //            $em->addOrm($eloquentOrm);
             return $em;
         },
-//        ConfigManagerInterface::class => ConfigManager::class,
+        ConfigManagerInterface::class => ConfigManager::class,
         EventDispatcherInterface::class => function () {
             $eventDispatcher = new EventDispatcher();
             return $eventDispatcher;
