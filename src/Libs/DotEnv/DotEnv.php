@@ -13,6 +13,11 @@ class DotEnv
 
     //static private $map = [];
 
+    public static function isInited(): bool
+    {
+        return isset($_ENV['ROOT_DIRECTORY']);
+    }
+    
     public static function init(string $basePath = self::ROOT_PATH): void
     {
         $_ENV['ROOT_DIRECTORY'] = realpath(__DIR__ . '/../../../../../..');
@@ -29,6 +34,9 @@ class DotEnv
 
     public static function get(string $name = null, $default = null)
     {
+        if(!self::isInited()) {
+            self::init();
+        }
         $name = mb_strtoupper($name);
         if(!isset($_ENV[$name])) {
             if(func_get_args() > 1) {
