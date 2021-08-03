@@ -50,7 +50,7 @@ return [
             if (EnvHelper::isTest() || EnvHelper::isDev()) {
                 $adapter = new NullAdapter();
             } else {
-                $cacheDirectory = __DIR__ . '/../' . DotEnv::get('CACHE_DIRECTORY');
+                $cacheDirectory = __DIR__ . '/../../../../../../' . DotEnv::get('CACHE_DIRECTORY');
                 $adapter = new FilesystemAdapter('app', TimeEnum::SECOND_PER_DAY, $cacheDirectory);
                 $adapter->setLogger($container->get(LoggerInterface::class));
             }
