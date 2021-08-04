@@ -3,17 +3,16 @@
 namespace ZnCore\Base\Libs\I18Next\Libs;
 
 use ZnCore\Base\Libs\I18Next\Helpers\TranslatorHelper;
-use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
-use ZnCore\Base\Libs\I18Next\Libs\TranslationLoaders\JsonLoader;
 
-class Translator {
+class Translator
+{
 
     /**
      * Primary language to use
      * @var string Code for the current language
      */
     private $language = null;
-    
+
     private $translationService = null;
 
     /**
@@ -53,7 +52,8 @@ class Translator {
      * @param string $language New default language
      * @param string $fallback Fallback language
      */
-    public function setLanguage($language, $fallback = null) {
+    public function setLanguage($language, $fallback = null)
+    {
 
         $this->language = $language;
 
@@ -72,7 +72,8 @@ class Translator {
      *
      * @return array Missing translations
      */
-    public function getMissingTranslations() {
+    public function getMissingTranslations()
+    {
 
         return $this->missingTranslation;
 
@@ -95,6 +96,11 @@ class Translator {
 
     }*/
 
+    private function addMissingTranslation(string $language, string $key): void
+    {
+        array_push($this->missingTranslation, array('language' => $language, 'key' => $key));
+    }
+
     /**
      * Get translation for given key
      *
@@ -102,37 +108,39 @@ class Translator {
      * @param array $variables Variables
      * @return mixed Translated string or array
      */
-    public function getTranslation($key, $variables = array()) {
+    public function getTranslation($key, $variables = array())
+    {
 
         $return = self::_getKey($key, $variables);
 
         // Log missing translation
-        if (!$return && array_key_exists('lng', $variables))
-            array_push($this->missingTranslation, array('language' => $variables['lng'], 'key' => $key));
-
-        else if (!$return)
-            array_push($this->missingTranslation, array('language' => $this->language, 'key' => $key));
-
-        // fallback language check
-        if (!$return && !isset($variables['lng']) && !empty($this->fallbackLanguage))
-            $return = self::_getKey($key, array_merge($variables, array('lng'=>  $this->fallbackLanguage)));
-
-        if (!$return && array_key_exists('defaultValue', $variables))
-            $return = $variables['defaultValue'];
-
-        if ($return && isset($variables['postProcess']) && $variables['postProcess'] === 'sprintf' && isset($variables['sprintf'])) {
-
-            if (is_array($variables['sprintf']))
-                $return = vsprintf($return, $variables['sprintf']);
-
-            else
-                $return = sprintf($return, $variables['sprintf']);
-
+        if (!$return && array_key_exists('lng', $variables)) {
+            $this->addMissingTranslation($variables['lng'], $key);
+        } elseif (!$return) {
+            $this->addMissingTranslation($this->language, $key);
         }
 
-        if (!$return)
-            $return = $key;
+        // fallback language check
+        if (!$return && !isset($variables['lng']) && !empty($this->fallbackLanguage)) {
+            $return = self::_getKey($key, array_merge($variables, array('lng' => $this->fallbackLanguage)));
+        }
+        
+        if (!$return && array_key_exists('defaultValue', $variables)) {
+            $return = $variables['defaultValue'];
+        }
 
+        if ($return && isset($variables['postProcess']) && $variables['postProcess'] === 'sprintf' && isset($variables['sprintf'])) {
+            if (is_array($variables['sprintf'])) {
+                $return = vsprintf($return, $variables['sprintf']);
+            } else {
+                $return = sprintf($return, $variables['sprintf']);
+            }
+        }
+
+        if (!$return) {
+            $return = $key;
+        }
+        
         /*foreach ($variables as $variable => $value) {
             if (is_string($value) || is_numeric($value)) {
                 $return = preg_replace('/__' . $variable . '__/', $value, $return);
@@ -155,7 +163,8 @@ class Translator {
      * @param array $variables Variables
      * @return mixed Translated string or array if requested. False if translation doesn't exist
      */
-    private function _getKey($key, $variables = array()) {
+    private function _getKey($key, $variables = array())
+    {
 
         $return = false;
 
@@ -177,8 +186,7 @@ class Translator {
 
                 $translation = $translation[$path];
 
-            }
-            else if (array_key_exists($path, $translation)) {
+            } else if (array_key_exists($path, $translation)) {
 
                 // Request has context
                 if (array_key_exists('context', $variables)) {
@@ -203,8 +211,7 @@ class Translator {
 
                 break;
 
-            }
-            else {
+            } else {
 
                 return false;
 

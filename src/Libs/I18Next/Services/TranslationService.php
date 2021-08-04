@@ -73,7 +73,7 @@ class TranslationService implements TranslationServiceInterface
 
     public function addBundle(string $bundleName, $loaderDefinition)
     {
-        $translation = $this->loadTranstation($loaderDefinition, $this->language);
+        $translation = $this->loadTranslation($loaderDefinition, $this->language);
         /** @var Translator $translator */
         $translator = InstanceHelper::create(Translator::class, [
             TranslationServiceInterface::class => $this,
@@ -85,14 +85,19 @@ class TranslationService implements TranslationServiceInterface
         //$this->translators[$bundleName] = new Translator($translation, $this->language);
     }
 
-    private function loadTranstation($loaderDefinition, string $language): array
-    {
+    private function normalizeDefinition($loaderDefinition): array {
         if (is_string($loaderDefinition)) {
             $loaderDefinition = [
                 'class' => JsonLoader::class,
                 'pathMask' => $loaderDefinition,
             ];
         }
+        return $loaderDefinition;
+    }
+
+    private function loadTranslation($loaderDefinition, string $language): array
+    {
+        $loaderDefinition = $this->normalizeDefinition($loaderDefinition);
         /** @var TranslationLoaderInterface $loader */
         $loader = ClassHelper::createObject($loaderDefinition);
         return $loader->load($this->language);

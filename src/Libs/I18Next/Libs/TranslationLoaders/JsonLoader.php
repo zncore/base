@@ -17,25 +17,16 @@ class JsonLoader implements TranslationLoaderInterface
 
     public function setPathMask(string $pathMask): void
     {
-        $this->pathMask = $this->forgePath($pathMask);
+        $this->pathMask = $pathMask;
     }
 
     public function load(string $language): array
     {
         $translationResult = [];
-        $pathMask = $this->pathMask;
+        $pathMask = $this->forgePath($this->pathMask);
+        $pathMask = $this->normalizePath($pathMask);
         $path = preg_replace('/__(.+?)__/', '*', $pathMask, 2, $hasNs);
-
-        if (!preg_match('/\.json$/', $path)) {
-            $path = $path . 'translation.json';
-            $pathMask = $pathMask . 'translation.json';
-        }
-
-        $dir = glob($path);
-
-        if (count($dir) === 0) {
-            throw new \Exception('Translation file not found in "' . $path . '"');
-        }
+        $dir = $this->scan($path);
         foreach ($dir as $file) {
             $translationData = $this->loadFromFile($file);
             if ($hasNs) {
@@ -43,21 +34,7 @@ class JsonLoader implements TranslationLoaderInterface
                 if (empty($lng)) {
                     $lng = $language;
                 }
-                if (!empty($ns)) {
-                    if (array_key_exists($lng, $translationResult) && array_key_exists($ns, $translationResult[$lng])) {
-                        $translationResult[$lng][$ns] = array_merge($translationResult[$lng][$ns], [$ns => $translationData]);
-                    } elseif (array_key_exists($lng, $translationResult)) {
-                        $translationResult[$lng] = array_merge($translationResult[$lng], [$ns => $translationData]);
-                    } else {
-                        $translationResult[$lng] = [$ns => $translationData];
-                    }
-                } else {
-                    if (array_key_exists($lng, $translationResult)) {
-                        $translationResult[$lng] = array_merge($translationResult[$lng], $translationData);
-                    } else {
-                        $translationResult[$lng] = $translationData;
-                    }
-                }
+                $this->mergeTranslations($lng, $ns, $translationData, $translationResult);
             } else {
                 if (array_key_exists($language, $translationData)) {
                     $translationResult = $translationData;
@@ -67,6 +44,43 @@ class JsonLoader implements TranslationLoaderInterface
             }
         }
         return $translationResult;
+    }
+
+    private function mergeTranslations(string $lng, string $ns, array $translationData, array &$translationResult)
+    {
+        if (!empty($ns)) {
+            if (array_key_exists($lng, $translationResult) && array_key_exists($ns, $translationResult[$lng])) {
+                $translationResult[$lng][$ns] = array_merge($translationResult[$lng][$ns], [$ns => $translationData]);
+            } elseif (array_key_exists($lng, $translationResult)) {
+                $translationResult[$lng] = array_merge($translationResult[$lng], [$ns => $translationData]);
+            } else {
+                $translationResult[$lng] = [$ns => $translationData];
+            }
+        } else {
+            if (array_key_exists($lng, $translationResult)) {
+                $translationResult[$lng] = array_merge($translationResult[$lng], $translationData);
+            } else {
+                $translationResult[$lng] = $translationData;
+            }
+        }
+    }
+
+    private function scan(string $path)
+    {
+        $path = $this->normalizePath($path);
+        $dir = glob($path);
+        if (count($dir) === 0) {
+            throw new \Exception('Translation file not found in "' . $path . '"');
+        }
+        return $dir;
+    }
+
+    private function normalizePath(string $path): string
+    {
+        if (!preg_match('/\.json$/', $path)) {
+            $path = $path . 'translation.json';
+        }
+        return $path;
     }
 
     private function forgePath(string $bundlePath): string

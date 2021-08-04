@@ -11,15 +11,16 @@ class DotEnv
 
     const ROOT_PATH = __DIR__ . '/../../../../../..';
 
-    //static private $map = [];
+    static private $isInited = false;
 
     public static function isInited(): bool
     {
-        return isset($_ENV['ROOT_DIRECTORY']);
+        return self::$isInited;
     }
     
     public static function init(string $basePath = self::ROOT_PATH): void
     {
+        self::$isInited = true;
         $_ENV['ROOT_DIRECTORY'] = realpath(__DIR__ . '/../../../../../..');
         /*if (self::loadCachedEnvLocal($basePath)) {
             return;
