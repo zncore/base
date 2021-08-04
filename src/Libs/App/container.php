@@ -48,7 +48,7 @@ return [
         },
         AdapterInterface::class => function (ContainerInterface $container) {
             if (EnvHelper::isTest() || EnvHelper::isDev()) {
-                $adapter = new NullAdapter();
+                $adapter = new \Symfony\Component\Cache\Adapter\ArrayAdapter();
             } else {
                 $cacheDirectory = __DIR__ . '/../../../../../../' . DotEnv::get('CACHE_DIRECTORY');
                 $adapter = new FilesystemAdapter('app', TimeEnum::SECOND_PER_DAY, $cacheDirectory);
