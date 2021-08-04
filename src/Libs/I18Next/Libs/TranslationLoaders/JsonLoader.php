@@ -1,0 +1,101 @@
+<?php
+
+namespace ZnCore\Base\Libs\I18Next\Libs\TranslationLoaders;
+
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\I18Next\Interfaces\TranslationLoaders\TranslationLoaderInterface;
+
+class JsonLoader implements TranslationLoaderInterface
+{
+
+    private $pathMask;
+
+    public function getPathMask(): string
+    {
+        return $this->pathMask;
+    }
+
+    public function setPathMask(string $pathMask): void
+    {
+        $this->pathMask = $this->forgePath($pathMask);
+    }
+
+    public function load(string $language): array
+    {
+        $translationResult = [];
+        $pathMask = $this->pathMask;
+        $path = preg_replace('/__(.+?)__/', '*', $pathMask, 2, $hasNs);
+
+        if (!preg_match('/\.json$/', $path)) {
+            $path = $path . 'translation.json';
+            $pathMask = $pathMask . 'translation.json';
+        }
+
+        $dir = glob($path);
+
+        if (count($dir) === 0) {
+            throw new \Exception('Translation file not found in "' . $path . '"');
+        }
+        foreach ($dir as $file) {
+            $translationData = $this->loadFromFile($file);
+            if ($hasNs) {
+                list($lng, $ns) = $this->matchPath($pathMask, $file);
+                if (empty($lng)) {
+                    $lng = $language;
+                }
+                if (!empty($ns)) {
+                    if (array_key_exists($lng, $translationResult) && array_key_exists($ns, $translationResult[$lng])) {
+                        $translationResult[$lng][$ns] = array_merge($translationResult[$lng][$ns], [$ns => $translationData]);
+                    } elseif (array_key_exists($lng, $translationResult)) {
+                        $translationResult[$lng] = array_merge($translationResult[$lng], [$ns => $translationData]);
+                    } else {
+                        $translationResult[$lng] = [$ns => $translationData];
+                    }
+                } else {
+                    if (array_key_exists($lng, $translationResult)) {
+                        $translationResult[$lng] = array_merge($translationResult[$lng], $translationData);
+                    } else {
+                        $translationResult[$lng] = $translationData;
+                    }
+                }
+            } else {
+                if (array_key_exists($language, $translationData)) {
+                    $translationResult = $translationData;
+                } else {
+                    $translationResult = array_merge($translationResult, $translationData);
+                }
+            }
+        }
+        return $translationResult;
+    }
+
+    private function forgePath(string $bundlePath): string
+    {
+        $rootDir = FileHelper::rootPath();
+        $rootDir = rtrim($rootDir, '/');
+        $bundlePath = ltrim($bundlePath, '/');
+        $fileMask = "$rootDir/$bundlePath";
+        return $fileMask;
+    }
+
+    private function loadFromFile(string $file): array
+    {
+        $translationJson = file_get_contents($file);
+        $translationData = json_decode($translationJson, true);
+        if ($translationData === null) {
+            throw new \Exception('Invalid json ' . $file);
+        }
+        return $translationData;
+    }
+
+    private function matchPath(string $pathMask, string $file): array
+    {
+        $regexp = preg_replace('/__(.+?)__/', '(?<$1>.+)?', preg_quote($pathMask, '/'));
+        preg_match('/^' . $regexp . '$/', $file, $ns);
+        return [
+            $ns['lng'] ?? null,
+            $ns['ns'] ?? null,
+        ];
+    }
+
+}

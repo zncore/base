@@ -2,13 +2,13 @@
 
 namespace ZnCore\Base\Libs\I18Next\Services;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Libs\I18Next\Exceptions\NotFoundBundleException;
-use ZnCore\Base\Libs\Store\StoreFile;
 use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
+use ZnCore\Base\Libs\I18Next\Interfaces\TranslationLoaders\TranslationLoaderInterface;
+use ZnCore\Base\Libs\I18Next\Libs\TranslationLoaders\JsonLoader;
 use ZnCore\Base\Libs\I18Next\Libs\Translator;
-use ZnLib\Telegram\Domain\Facades\Bot;
 
 class TranslationService implements TranslationServiceInterface
 {
@@ -20,15 +20,14 @@ class TranslationService implements TranslationServiceInterface
     private $defaultLanguage;
     private $fallbackLanguage = 'en';
 
-    public function __construct(array $bundles = [], string $defaultLanguage)
+    public function getBundles(): array
     {
-//        $store = new StoreFile($_ENV['I18NEXT_CONFIG_FILE']);
-//        $config = $store->load();
-//        $defaultLanguage = $defaultLanguage ?? ($config['defaultLanguage'] ?? 'en');
-        //$bundles = ArrayHelper::merge($bundles, $config['bundles'] ?? []);
+        return $this->bundles;
+    }
+
+    public function setBundles(array $bundles): void
+    {
         $this->bundles = $bundles;
-        $this->defaultLanguage = $defaultLanguage;
-        $this->language = $defaultLanguage;
     }
 
     public function getLanguage(): string
@@ -48,22 +47,55 @@ class TranslationService implements TranslationServiceInterface
         }
     }
 
+    public function getDefaultLanguage(): string
+    {
+        return $this->defaultLanguage;
+    }
+
+    public function setDefaultLanguage(string $defaultLanguage): void
+    {
+        $this->defaultLanguage = $defaultLanguage;
+        if(empty($this->language)) {
+            $this->language = $defaultLanguage;
+        }
+    }
+
     public function t(string $bundleName, string $key, array $variables = [])
     {
         $translator = $this->getTranslator($bundleName);
         return $translator->getTranslation($key, $variables);
     }
 
-    public function registerBundle(string $bundleName, string $bundlePath)
+    /*public function registerBundle(string $bundleName, string $bundlePath)
     {
         $this->bundles[$bundleName] = $bundlePath;
+    }*/
+
+    public function addBundle(string $bundleName, $loaderDefinition)
+    {
+        $translation = $this->loadTranstation($loaderDefinition, $this->language);
+        /** @var Translator $translator */
+        $translator = InstanceHelper::create(Translator::class, [
+            TranslationServiceInterface::class => $this,
+        ]);
+        $translator->setTranslation($translation);
+        $translator->setLanguage($this->language, $this->fallbackLanguage);
+
+        $this->translators[$bundleName] = $translator;
+        //$this->translators[$bundleName] = new Translator($translation, $this->language);
     }
 
-    public function addBundle(string $bundleName, string $bundlePath)
+    private function loadTranstation($loaderDefinition, string $language): array
     {
-        $path = $this->forgePath($bundlePath);
-        $i18n = new Translator($path, $this->language);
-        $this->translators[$bundleName] = $i18n;
+        if (is_string($loaderDefinition)) {
+            $loaderDefinition = [
+                'class' => JsonLoader::class,
+                'pathMask' => $loaderDefinition,
+            ];
+        }
+        /** @var TranslationLoaderInterface $loader */
+        $loader = ClassHelper::createObject($loaderDefinition);
+        return $loader->load($this->language);
     }
 
     private function getTranslator(string $bundleName): Translator
@@ -72,20 +104,12 @@ class TranslationService implements TranslationServiceInterface
             if (!array_key_exists($bundleName, $this->bundles)) {
                 throw new NotFoundBundleException('Translation bundle "' . $bundleName . '" not found');
             }
-            $bundlePath = $this->bundles[$bundleName];
-            $this->addBundle($bundleName, $bundlePath);
+            $loaderDefinition = $this->bundles[$bundleName];
+            $this->addBundle($bundleName, $loaderDefinition);
         }
         /*if (!array_key_exists($bundleName, $this->translators)) {
             throw new NotFoundBundleException('Translation bundle "' . $bundleName . '" not found');
         }*/
         return $this->translators[$bundleName];
     }
-
-    private function forgePath(string $bundlePath): string
-    {
-        $rootDir = FileHelper::rootPath();
-        $fileMask = "$rootDir/$bundlePath";
-        return $fileMask;
-    }
-
 }

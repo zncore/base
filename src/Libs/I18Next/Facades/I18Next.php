@@ -42,10 +42,10 @@ class I18Next
         return call_user_func_array([$translationService, 't'], $bundleName);
     }
 
-    public static function addBundle(string $bundleName, string $path)
+    public static function addBundle(string $bundleName, $loaderDefinition)
     {
         /** @var TranslationServiceInterface $translationService */
         $translationService = self::getService();
-        $translationService->addBundle($bundleName, $path);
+        $translationService->addBundle($bundleName, $loaderDefinition);
     }
 }

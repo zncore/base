@@ -58,32 +58,34 @@ class InstanceHelper
     {
         if (!ArrayHelper::isIndexed($constructionArgs)) {
             $reflectionClass = new \ReflectionClass($className);
-            $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
-            $flatParameters = [];
-            foreach ($constructorParameters as $index => $constructorParameter) {
-                /** @var ReflectionNamedType $parameterType */
-                $parameterType = $constructorParameter->getType();
-                if($parameterType && array_key_exists($parameterType->getName(), $constructionArgs)) {
-                    $parameterName = $parameterType->getName();
-                } else {
-                    $parameterName = $constructorParameter->name;
+            try {
+                $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
+                $flatParameters = [];
+                foreach ($constructorParameters as $index => $constructorParameter) {
+                    /** @var ReflectionNamedType $parameterType */
+                    $parameterType = $constructorParameter->getType();
+                    if($parameterType && array_key_exists($parameterType->getName(), $constructionArgs)) {
+                        $parameterName = $parameterType->getName();
+                    } else {
+                        $parameterName = $constructorParameter->name;
+                    }
+                    if (array_key_exists($parameterName, $constructionArgs)) {
+                        $flatParameters[$index] = $constructionArgs[$parameterName];
+                        unset($constructionArgs[$parameterName]);
+                    }
                 }
-                if (array_key_exists($parameterName, $constructionArgs)) {
-                    $flatParameters[$index] = $constructionArgs[$parameterName];
-                    unset($constructionArgs[$parameterName]);
-                }
-            }
-            foreach ($constructorParameters as $index => $constructorParameter) {
-                if(!isset($flatParameters[$index])) {
-                    foreach ($constructionArgs as $constructionArgName => $constructionArgValue) {
-                        if(is_int($constructionArgName)) {
-                            $flatParameters[$index] = $constructionArgValue;
+                foreach ($constructorParameters as $index => $constructorParameter) {
+                    if(!isset($flatParameters[$index])) {
+                        foreach ($constructionArgs as $constructionArgName => $constructionArgValue) {
+                            if(is_int($constructionArgName)) {
+                                $flatParameters[$index] = $constructionArgValue;
+                            }
                         }
                     }
                 }
-            }
-            ksort($flatParameters);
-            $constructionArgs = $flatParameters;
+                ksort($flatParameters);
+                $constructionArgs = $flatParameters;
+            } catch (\ReflectionException $e) {}
         }
         return $constructionArgs;
     }

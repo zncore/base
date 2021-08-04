@@ -7,15 +7,18 @@ use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 class TranslatorHelper
 {
 
-    public static function processVariables(string $template, array $attributes): string
+    public static function processVariables($template, array $attributes)
     {
-        $attributes = self::prepareVariables($template, $attributes);
-        foreach ($attributes as $variable => $value) {
-            if (is_string($value) || is_numeric($value)) {
-                $template = preg_replace('/__' . $variable . '__/', $value, $template);
-                $template = preg_replace('/{{' . $variable . '}}/', $value, $template);
+        if(is_string($template)) {
+            $attributes = self::prepareVariables($template, $attributes);
+            foreach ($attributes as $variable => $value) {
+                if (is_string($value) || is_numeric($value)) {
+                    $template = preg_replace('/__' . $variable . '__/', $value, $template);
+                    $template = preg_replace('/{{' . $variable . '}}/', $value, $template);
+                }
             }
         }
+        
         return $template;
     }
 

@@ -3,20 +3,18 @@
 namespace ZnCore\Base\Libs\I18Next\Libs;
 
 use ZnCore\Base\Libs\I18Next\Helpers\TranslatorHelper;
+use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
+use ZnCore\Base\Libs\I18Next\Libs\TranslationLoaders\JsonLoader;
 
 class Translator {
-
-    /**
-     * Path for the translation files
-     * @var string Path
-     */
-    private $path = null;
 
     /**
      * Primary language to use
      * @var string Code for the current language
      */
     private $language = null;
+    
+    private $translationService = null;
 
     /**
      * Fallback language for translations not found in current language
@@ -44,14 +42,9 @@ class Translator {
      * @param string $language Locale language code
      * @param string $path Path to locale json files
      */
-    public function __construct($path = null, $language = 'en') {
-
-        $this->language = $language;
-        $this->path = $path;
-
-        self::loadTranslation();
-
-    }
+    /*public function __construct(TranslationServiceInterface $translationService) {
+        $this->translationService = $translationService;
+    }*/
 
     /**
      * Change default language and fallback language
@@ -67,6 +60,11 @@ class Translator {
         if (!empty($fallback))
             $this->fallbackLanguage = $fallback;
 
+    }
+
+    public function setTranslation(array $translation): void
+    {
+        $this->translation = $translation;
     }
 
     /**
@@ -86,7 +84,7 @@ class Translator {
      * @param string $key Key for translation
      * @return boolean Stating the result
      */
-    public function existTranslation($key) {
+    /*public function existTranslation($key) {
 
         $return = self::_getKey($key);
 
@@ -95,7 +93,7 @@ class Translator {
 
         return $return;
 
-    }
+    }*/
 
     /**
      * Get translation for given key
@@ -144,82 +142,6 @@ class Translator {
         $return = TranslatorHelper::processVariables($return, $variables);
 
         return $return;
-
-    }
-
-    /**
-     * Loads translation(s)
-     * @throws \Exception
-     */
-    private function loadTranslation() {
-
-        $path = preg_replace('/__(.+?)__/', '*', $this->path, 2, $hasNs);
-
-        if (!preg_match('/\.json$/', $path)) {
-
-            $path = $path . 'translation.json';
-
-            $this->path = $this->path . 'translation.json';
-
-        }
-
-        $dir = glob($path);
-
-        if (count($dir) === 0)
-            throw new \Exception('Translation file not found in "' . $path . '"');
-
-        foreach ($dir as $file) {
-
-            $translation = file_get_contents($file);
-
-            $translation = json_decode($translation, true);
-
-            if ($translation === null)
-                throw new \Exception('Invalid json ' . $file);
-
-            if ($hasNs) {
-
-                $regexp = preg_replace('/__(.+?)__/', '(?<$1>.+)?', preg_quote($this->path, '/'));
-
-                preg_match('/^' . $regexp . '$/', $file, $ns);
-
-                if (!array_key_exists('lng', $ns))
-                    $ns['lng'] = $this->language;
-
-                if (array_key_exists('ns', $ns)) {
-
-                    if (array_key_exists($ns['lng'], $this->translation) && array_key_exists($ns['ns'], $this->translation[$ns['lng']]))
-                        $this->translation[$ns['lng']][$ns['ns']] = array_merge($this->translation[$ns['lng']][$ns['ns']], array($ns['ns'] => $translation));
-
-                    else if (array_key_exists($ns['lng'], $this->translation))
-                        $this->translation[$ns['lng']] = array_merge($this->translation[$ns['lng']], array($ns['ns'] => $translation));
-
-                    else
-                        $this->translation[$ns['lng']] = array($ns['ns'] => $translation);
-
-                }
-                else {
-
-                    if (array_key_exists($ns['lng'], $this->translation))
-                        $this->translation[$ns['lng']] = array_merge($this->translation[$ns['lng']], $translation);
-
-                    else
-                        $this->translation[$ns['lng']] = $translation;
-
-                }
-
-            }
-            else {
-
-                if (array_key_exists($this->language, $translation))
-                    $this->translation = $translation;
-
-                else
-                    $this->translation = array_merge($this->translation, $translation);
-
-            }
-
-        }
 
     }
 

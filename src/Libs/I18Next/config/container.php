@@ -18,7 +18,13 @@ return [
     },*/
     TranslationServiceInterface::class => TranslationService::class,
     TranslationService::class => function (ContainerInterface $container) {
-        return I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
+        /** @var TranslationServiceInterface $translationService */
+        $translationService = new TranslationService();
+        $translationService->setLanguage('ru');
+        $translationService->setBundles($_ENV['I18NEXT_BUNDLES'] ?? []);
+        $translationService->setDefaultLanguage('ru');
+        return $translationService;
+        //return I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
     },
     TranslatorInterface::class => function (ContainerInterface $container) {
         return $container->make(Translator::class, [
