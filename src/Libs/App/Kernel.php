@@ -15,8 +15,9 @@ use ZnCore\Base\Libs\App\Subscribers\ConfigureContainerSubscriber;
 use ZnCore\Base\Libs\App\Subscribers\ConfigureEntityManagerSubscriber;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
+use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
 
-class Kernel
+class Kernel implements KernelInterface
 {
 
     use CacheAwareTrait;
@@ -50,12 +51,17 @@ class Kernel
 
     public function setContainer(ContainerInterface $container): void
     {
+        $containerConfigurator = ContainerHelper::getContainerConfiguratorByContainer($container);
+        $containerConfigurator->singleton(KernelInterface::class, $this);
         $this->container = $container;
     }
 
     public function getContainer(): ContainerInterface
     {
-        return $this->container ?? ContainerHelper::getContainer();
+        if(!isset($this->container)) {
+            $this->setContainer(ContainerHelper::getContainer());
+        }
+        return $this->container;
     }
 
     public function setLoader(LoaderInterface $loader): void
@@ -66,7 +72,6 @@ class Kernel
     public function loadAppConfig(): array
     {
         $config = $this->loadMainConfig($this->appName);
-
         $event = new LoadConfigEvent($this, $config);
         $this->getEventDispatcher()->dispatch($event, KernelEventEnum::AFTER_LOAD_CONFIG);
         $config = $event->getConfig();

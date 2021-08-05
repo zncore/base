@@ -7,6 +7,7 @@ use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Kernel;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
+use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
 use ZnTool\Dev\VarDumper\Facades\SymfonyDumperFacade;
 
 class KernelFactory
@@ -22,7 +23,7 @@ class KernelFactory
         }
     }
 
-    public static function createConsoleKernel(array $bundles = [], $import = ['i18next', 'container', 'console', 'migration']): Kernel
+    public static function createConsoleKernel(array $bundles = [], $import = ['i18next', 'container', 'console', 'migration']): KernelInterface
     {
         self::init();
         $bundleLoader = new BundleLoader($bundles, $import);
@@ -31,7 +32,7 @@ class KernelFactory
         return $kernel;
     }
 
-    public static function createWebKernel(array $bundles = [], $import = ['i18next', 'container', 'symfonyWeb']): Kernel
+    public static function createWebKernel(array $bundles = [], $import = ['i18next', 'container', 'symfonyWeb']): KernelInterface
     {
         self::init();
         $bundleLoader = new BundleLoader($bundles, $import);

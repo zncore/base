@@ -7,14 +7,14 @@ use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
-use ZnCore\Base\Libs\App\Kernel;
+use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
 use ZnLib\Console\Symfony4\Helpers\CommandHelper;
 use ZnLib\Web\Symfony4\MicroApp\MicroApp;
 
 class ApplicationFactory
 {
 
-    public static function createConsole(Kernel $kernel): Application
+    public static function createConsole(KernelInterface $kernel): Application
     {
         $config = $kernel->loadAppConfig();
         $container = $kernel->getContainer();
@@ -41,7 +41,7 @@ class ApplicationFactory
         return $application;
     }
     
-    public static function createWeb(Kernel $kernel): MicroApp
+    public static function createWeb(KernelInterface $kernel): MicroApp
     {
         $config = $kernel->loadAppConfig();
         $container = $kernel->getContainer();
@@ -51,7 +51,7 @@ class ApplicationFactory
         return $application;
     }
 
-    public static function createTest(Kernel $kernel)//: MicroApp
+    public static function createTest(KernelInterface $kernel)//: MicroApp
     {
         self::createConsole($kernel);
     }
