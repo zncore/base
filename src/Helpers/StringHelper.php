@@ -35,7 +35,7 @@ class StringHelper
      * @param string $endBlock
      * @return string
      * @deprecated
-     * @see TemplateHelper::renderTemplate()
+     * @see TemplateHelper::render()
      */
     public static function renderTemplate(string $mask, array $data = [], string $beginBlock = '{', string $endBlock = '}')
     {

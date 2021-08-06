@@ -5,7 +5,7 @@ namespace ZnCore\Base\Helpers;
 class TemplateHelper
 {
 
-    public static function renderTemplate(string $mask, array $data = [], string $beginBlock = '{', string $endBlock = '}')
+    public static function render(string $mask, array $data = [], string $beginBlock = '{', string $endBlock = '}')
     {
         $newParams = [];
         foreach ($data as $name => $value) {
