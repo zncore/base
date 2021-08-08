@@ -2,22 +2,18 @@
 <?php
 
 use ZnCore\Base\Helpers\InstanceHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Factories\ApplicationFactory;
 use ZnCore\Base\Libs\App\Factories\KernelFactory;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 
 require __DIR__ . '/../../../autoload.php';
 
-DotEnv::init();
-
-if(DotEnv::has('BUNDLES_CONFIG_FILE')) {
-    $bundles = include __DIR__ . '/../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE');
-} else {
-    $bundles = [];
-}
+$bundles = [
+    new ZnCore\Base\Libs\App\Bundle(['all']),
+];
 
 $bundleClasses = [
-    ZnCore\Base\Libs\App\Bundle::class,
     ZnTool\Package\Bundle::class,
     ZnLib\Db\Bundle::class,
     ZnLib\Fixture\Bundle::class,
@@ -29,20 +25,12 @@ $bundleClasses = [
 
 foreach ($bundleClasses as $bundleClass) {
     if(class_exists($bundleClass)) {
-        $isDefined = false;
-        foreach ($bundles as $bundleInstance) {
-            if($bundleInstance instanceof $bundleClass) {
-                $isDefined = true;
-                break;
-            }
-        }
-        if(!$isDefined) {
-            $bundleInstance = InstanceHelper::create($bundleClass, [['all']]);
-            $bundles[] = $bundleInstance;
-        }
+        $bundleInstance = InstanceHelper::create($bundleClass, [['all']]);
+        $bundles[] = $bundleInstance;
     }
 }
 
+$bundles = ArrayHelper::merge($bundles, include __DIR__ . '/../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE'));
 $kernel = KernelFactory::createConsoleKernel($bundles);
 $application = ApplicationFactory::createConsole($kernel);
 $application->run();

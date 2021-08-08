@@ -57,8 +57,7 @@ class EnvHelper
 
     public static function isDebug(): bool
     {
-        //return self::getAppDebug();
-        return !empty($_ENV['APP_DEBUG'] ?? null);
+        return self::getAppDebug();
     }
 
     public static function isProd(): bool
