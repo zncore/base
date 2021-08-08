@@ -17,6 +17,9 @@
     "illuminate/support": "^6.1",
     "illuminate/container": "^6.1"
   },
+  "bin": [
+    "bin/zn"
+  ],
   "autoload": {
     "psr-4": {
       "ZnCore\\Base\\": "src",
