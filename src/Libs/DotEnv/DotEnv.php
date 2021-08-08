@@ -21,7 +21,9 @@ class DotEnv
     public static function init(string $basePath = self::ROOT_PATH): void
     {
         self::$isInited = true;
-        $_ENV['ROOT_DIRECTORY'] = realpath(__DIR__ . '/../../../../../..');
+        $_ENV['ROOT_DIRECTORY'] = realpath(self::ROOT_PATH);
+        $envFileName = $basePath . '/.env';
+
         /*if (self::loadCachedEnvLocal($basePath)) {
             return;
         }*/
@@ -29,8 +31,13 @@ class DotEnv
             throw new RuntimeException('Please run "composer require symfony/SymfonyDotenv" to load the ".env" files configuring the application.');
         }
         $dotEnv = new SymfonyDotenv(false);
+
+        //dd(file_exists($envFileName));
+        if(!file_exists($envFileName)) {
+            return;
+        }
         // load all the .env files
-        $dotEnv->loadEnv($basePath . '/.env');
+        $dotEnv->loadEnv($envFileName);
     }
 
     public static function get(string $name = null, $default = null)
@@ -39,13 +46,18 @@ class DotEnv
             self::init();
         }
         $name = mb_strtoupper($name);
-        if(!isset($_ENV[$name])) {
+        if(!self::has($name)) {
             if(func_get_args() > 1) {
                 return $default;
             }
             throw new DotEnvNotFoundException("Not found DotEnv value for key \"{$name}\"");
         }
         return $_ENV[$name];
+    }
+
+    public static function has(string $name = null): bool
+    {
+        return isset($_ENV[$name]);
     }
 
     /*public static function get(string $path = null, $default = null)
