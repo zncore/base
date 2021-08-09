@@ -13,4 +13,11 @@ class Bundle extends BaseBundle
             'core' => 'vendor/zncore/base/src/i18next/__lng__/__ns__.json',
         ];
     }
+
+    /*public function container(): array
+    {
+        return [
+            __DIR__ . '/Libs/App/container.php',
+        ];
+    }*/
 }
