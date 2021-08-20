@@ -8,6 +8,7 @@
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 use InvalidArgumentException;
+use function foo\func;
 
 /**
  * BaseArrayHelper provides concrete implementation for [[ArrayHelper]].
@@ -286,6 +287,35 @@ abstract class BaseArrayHelper
         }
 
         $array[array_shift($keys)] = $value;
+    }
+
+    public static function removeItem(&$array, $path)
+    {
+        if ($path === null) {
+            //$array = $value;
+            return;
+        }
+
+        $keys = is_array($path) ? $path : explode('.', $path);
+        self::getItemLink($array, $keys, function(&$array, $lastKey) {
+            unset($array[$lastKey]);
+        });
+    }
+
+    public static function getItemLink(array &$array, array $keys, callable $callback)
+    {
+        while (count($keys) > 1) {
+            $key = array_shift($keys);
+            if ( ! isset($array[$key])) {
+                $array[$key] = [];
+            }
+            if ( ! is_array($array[$key])) {
+                $array[$key] = [$array[$key]];
+            }
+            $array = &$array[$key];
+        }
+        $lastKey = array_shift($keys);
+        return $callback($array, $lastKey);
     }
 
     /**
