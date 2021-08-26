@@ -15,7 +15,7 @@ trait LanguageTrait
         $this->_language = $languageService->getLanguage();
     }
     
-    protected function i18n(string $attribute): string
+    protected function i18n(string $attribute): ?string
     {
         $name = $attribute . 'I18n';
         if (!empty($this->$name)) {
@@ -25,5 +25,4 @@ trait LanguageTrait
         }
         return $this->$attribute;
     }
-
 }
