@@ -67,7 +67,7 @@ class HtmlHelper
         $columns = preg_split('/\s*,\s*/', trim($columns), -1, PREG_SPLIT_NO_EMPTY);
         $result = [];
         foreach ($columns as $column) {
-            if($column{0} == '-') {
+            if($column[0] == '-') {
                 $column = trim($column, '-');
                 $result[$column] = SORT_DESC;
             } else {
