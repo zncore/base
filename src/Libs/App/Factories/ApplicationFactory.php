@@ -57,7 +57,7 @@ class ApplicationFactory
         self::createConsole($kernel);
     }
 
-    private static function getConfigManager(ContainerInterface $container): ConfigManagerInterface {
+    /*private static function getConfigManager(ContainerInterface $container): ConfigManagerInterface {
         return $container->get(ConfigManagerInterface::class);
-    }
+    }*/
 }
