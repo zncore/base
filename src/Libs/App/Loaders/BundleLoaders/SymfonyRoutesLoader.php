@@ -18,7 +18,7 @@ class SymfonyRoutesLoader extends BaseLoader
 
     public function loadAll(array $bundles): array
     {
-        $routes = new RouteCollection();
+        $routes = $this->container->get(RouteCollection::class); //new RouteCollection();
         $fileLocator = new FileLocator();
         $fileLoader = new PhpFileLoader($fileLocator);
         $routingConfigurator = new RoutingConfigurator($routes, $fileLoader, __FILE__, __FILE__);

@@ -9,6 +9,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\RequestContext;
+use Symfony\Component\Routing\RouteCollection;
 use Symfony\Contracts\Cache\CacheInterface;
 use ZnCore\Base\Enums\Measure\TimeEnum;
 use ZnCore\Base\Helpers\EnvHelper;
@@ -26,6 +29,9 @@ use ZnCore\Base\Libs\DotEnv\DotEnvConfigInterface;
 return [
     'definitions' => [],
     'singletons' => [
+        Request::class => Request::class,
+        RequestContext::class => RequestContext::class,
+        RouteCollection::class => RouteCollection::class,
         ContainerInterface::class => function () {
             return \ZnCore\Base\Libs\App\Helpers\ContainerHelper::getContainer();
         },
