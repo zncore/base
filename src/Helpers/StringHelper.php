@@ -122,6 +122,7 @@ class StringHelper
 
     public static function genUuid()
     {
+        // composer require ramsey/uuid:"^3 || ^4"
         $uuid = array(
             'time_low' => 0,
             'time_mid' => 0,
