@@ -8,26 +8,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 require __DIR__ . '/../../../autoload.php';
 
 $config = require __DIR__ . '/../../../../environments/index.php';
-$taskList = [
-    'copyFiles' => 'ZnLib\Init\Tasks\CopyFilesTask',
-    'random' => [
-        'class' => 'ZnLib\Init\Tasks\RandomTask',
-        'length' => 64,
-        'charSet' => 'num|lower|upper',
-        'quote' => '"',
-        'quoteChars' => [
-            '"',
-            '$',
-        ],
-        'placeHolders' => [
-            'CSRF_TOKEN_ID',
-        ],
-    ],
-//    'setCookieValidationKey' => 'ZnLib\Init\Tasks\GenerateCookieValidationKeyTask',
-    'setWritable' => 'ZnLib\Init\Tasks\SetWritableTask',
-    'setExecutable' => 'ZnLib\Init\Tasks\SetExecutableTask',
-    'createSymlink' => 'ZnLib\Init\Tasks\CreateSymlinkTask',
-];
+$taskList = require __DIR__ . '/../../../../environments/config.php';
 $input = new ArgvInput;
 $output = new ConsoleOutput;
 $initLib = new Init($input, $output, $config, $taskList);
