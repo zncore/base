@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Helpers;
 
+use Symfony\Component\HttpFoundation\Request;
 use ZnCore\Base\Enums\EnvEnum;
 
 class EnvHelper
@@ -9,9 +10,10 @@ class EnvHelper
 
     public static function prepareTestEnv()
     {
-        global $_GET, $argv;
+        global $_GET, $_SERVER, $argv;
         $isConsoleTest = isset($argv) && in_array('--env=test', $argv);
-        $isWebTest = isset($_GET['env']) && $_GET['env'] == 'test';
+//        $isWebTest = isset($_GET['env']) && $_GET['env'] == 'test';
+        $isWebTest = (isset($_SERVER['HTTP_ENV_NAME']) && $_SERVER['HTTP_ENV_NAME'] == 'test') || (isset($_GET['env']) && $_GET['env'] == 'test');
         if ($isConsoleTest || $isWebTest) {
             $_ENV['APP_ENV'] = 'test';
         }
