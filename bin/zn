@@ -30,7 +30,9 @@ foreach ($bundleClasses as $bundleClass) {
     }
 }
 
-$bundles = ArrayHelper::merge($bundles, include __DIR__ . '/../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE'));
+if(DotEnv::get('BUNDLES_CONFIG_FILE')) {
+    $bundles = ArrayHelper::merge($bundles, include __DIR__ . '/../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE'));
+}
 
 $kernel = KernelFactory::createConsoleKernel($bundles, ['i18next', 'container', 'console', 'migration', 'symfonyRpc']);
 $application = ApplicationFactory::createConsole($kernel);
