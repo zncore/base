@@ -49,6 +49,11 @@ class RandomString
         $this->characters .= '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
     }
 
+    public function addCustomChar(string $chars): void
+    {
+        $this->characters .= $chars;
+    }
+
     public function addCharactersAll(): void
     {
         $this->addCharactersNumber();
