@@ -31,7 +31,7 @@ return [
     'singletons' => [
         Request::class => Request::class,
         RequestContext::class => RequestContext::class,
-        RouteCollection::class => RouteCollection::class,
+//        RouteCollection::class => RouteCollection::class,
         ContainerInterface::class => function () {
             return \ZnCore\Base\Libs\App\Helpers\ContainerHelper::getContainer();
         },

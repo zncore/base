@@ -29,7 +29,10 @@ class RoutingConfigLoader /*extends BaseLoader*/ implements LoaderInterface
 
     public function loadMainConfig(string $appName): array
     {
-        $routes = new RouteCollection();
+
+        //$routes = new RouteCollection();
+        $routes = $this->container->get(RouteCollection::class);
+        //dd($routes);
         $fileLocator = new FileLocator();
         $fileLoader = new PhpFileLoader($fileLocator);
         $routingConfigurator = new RoutingConfigurator($routes, $fileLoader, __FILE__, __FILE__);
