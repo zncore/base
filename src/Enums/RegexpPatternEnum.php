@@ -26,6 +26,9 @@ class RegexpPatternEnum
     const EMAIL = '[-\w.]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}';
     const EMAIL_REQUIRED = self::BEGIN_REQUIRED . self::EMAIL . self::END_REQUIRED;
 
+    const PHONE = '(\+7|8)[- _]*\(?[- _]*(\d{3}[- _]*\)?([- _]*\d){7}|\d\d[- _]*\d\d[- _]*\)?([- _]*\d){6})';
+    const PHONE_REQUIRED = self::BEGIN_REQUIRED . self::PHONE . self::END_REQUIRED;
+
     const URL = '(?:(?:https?|ftp|telnet)://(?:[a-z0-9_-]{1,32}(?::[a-z0-9_-]{1,32})?@)?)?(?:(?:[a-z0-9-]{1,128}\.)+(?:ru|su|com|net|org|mil|edu|arpa|gov|biz|info|aero|inc|name|[a-z]{2})|(?!0)(?:(?!0[^.]|255)[0-9]{1,3}\.){3}(?!0|255)[0-9]{1,3})(?:/[a-z0-9.,_@%&?+=\~/-]*)?(?:#[^ \'\"&]*)?';
     const URL_REQUIRED = self::BEGIN_REQUIRED . self::EMAIL . self::END_REQUIRED . self::IGNORE_CASE;
 
