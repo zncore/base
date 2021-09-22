@@ -28,7 +28,8 @@ $defaultDefinitions = [
     'createSymlink' => 'ZnLib\Init\Tasks\CreateSymlinkTask',
 ];
 
-$config = require __DIR__ . '/../../../../environments/config.php';
+$configFile = $_ENV['ENVIRONMENTS_CONFIG_FILE'] ?? __DIR__ . '/../../../../environments/config.php';
+$config = require $configFile;
 
 if(empty($config['definitions'])) {
     $config['definitions'] = $defaultDefinitions;
