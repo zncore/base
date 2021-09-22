@@ -7,6 +7,8 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 
 require __DIR__ . '/../../../autoload.php';
 
+\ZnCore\Base\Libs\DotEnv\DotEnv::init();
+
 $defaultDefinitions = [
     'copyFiles' => 'ZnLib\Init\Tasks\CopyFilesTask',
     'random' => [
@@ -28,7 +30,8 @@ $defaultDefinitions = [
     'createSymlink' => 'ZnLib\Init\Tasks\CreateSymlinkTask',
 ];
 
-$configFile = $_ENV['ENVIRONMENTS_CONFIG_FILE'] ?? __DIR__ . '/../../../../environments/config.php';
+//$configFile = $_ENV['ENVIRONMENTS_CONFIG_FILE'] ?? __DIR__ . '/../../../../environments/config.php';
+$configFile = $_ENV['ENVIRONMENTS_CONFIG_FILE'];
 $config = require $configFile;
 
 if(empty($config['definitions'])) {
