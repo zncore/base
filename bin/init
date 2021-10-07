@@ -31,13 +31,8 @@ $defaultDefinitions = [
 ];
 
 //$configFile = $_ENV['ENVIRONMENTS_CONFIG_FILE'] ?? __DIR__ . '/../../../../environments/config.php';
-$configFile = $_ENV['ENVIRONMENTS_CONFIG_FILE'] ?? null;
-if($configFile) {
-    $config = require $configFile;
-} else {
-    $config = [];
-}
-
+$configFile = $_ENV['ENVIRONMENTS_CONFIG_FILE'];
+$config = require $configFile;
 
 if(empty($config['definitions'])) {
     $config['definitions'] = $defaultDefinitions;
