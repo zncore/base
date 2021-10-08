@@ -8,6 +8,8 @@ use ZnCore\Base\Libs\App\Kernel;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
+use ZnLib\Telegram\Domain\Libs\Loaders\BundleLoaders\TelegramRoutesLoader;
+use ZnLib\Telegram\Domain\Subscribers\LoadTelegramRoutesSubscriber;
 use ZnTool\Dev\VarDumper\Facades\SymfonyDumperFacade;
 
 class KernelFactory
@@ -28,6 +30,10 @@ class KernelFactory
         self::init();
         $bundleLoader = new BundleLoader($bundles, $import);
         $kernel = new Kernel('console');
+        if(in_array('telegramRoutes', $import)) {
+            $bundleLoader->addLoaderConfig('telegramRoutes', TelegramRoutesLoader::class);
+            $kernel->addSubscriber(LoadTelegramRoutesSubscriber::class);
+        }
         $kernel->setLoader($bundleLoader);
         return $kernel;
     }
