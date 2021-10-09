@@ -30,7 +30,7 @@ class KernelFactory
         self::init();
         $bundleLoader = new BundleLoader($bundles, $import);
         $kernel = new Kernel('console');
-        if(in_array('telegramRoutes', $import)) {
+        if(in_array('telegramRoutes', $import) && class_exists(LoadTelegramRoutesSubscriber::class)) {
             $bundleLoader->addLoaderConfig('telegramRoutes', TelegramRoutesLoader::class);
             $kernel->addSubscriber(LoadTelegramRoutesSubscriber::class);
         }
