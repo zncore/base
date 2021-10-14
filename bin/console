@@ -7,8 +7,6 @@ use ZnCore\Base\Libs\App\Factories\ApplicationFactory;
 use ZnCore\Base\Libs\App\Factories\KernelFactory;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 
-require __DIR__ . '/../../../autoload.php';
-
 $bundles = [
     new ZnCore\Base\Libs\App\Bundle(['all']),
 ];

@@ -5,8 +5,6 @@ use ZnLib\Init\Libs\Init;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-require __DIR__ . '/../../../autoload.php';
-
 \ZnCore\Base\Libs\DotEnv\DotEnv::init();
 
 $defaultDefinitions = [
