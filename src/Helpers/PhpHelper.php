@@ -7,13 +7,17 @@ use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 class PhpHelper
 {
 
-    public static function requireFromDirectory(string $directory) {
+    public static function requireFromDirectory(string $directory, bool $isRecursive = false) {
         $directory = rtrim($directory, '/');
         $libs = FileHelper::scanDir($directory);
         foreach ($libs as $lib) {
             $path = $directory . '/' . $lib;
-            if(is_file($path) && FileHelper::fileExt($lib) == 'php') {
-                require_once $path;
+            if(is_file($path)) {
+                if(is_file($path) && FileHelper::fileExt($lib) == 'php') {
+                    require_once $path;
+                }
+            } elseif(is_dir($path)) {
+                self::requireFromDirectory($path, $isRecursive);
             }
         }
     }
