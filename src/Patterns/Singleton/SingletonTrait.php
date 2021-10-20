@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Patterns\Singleton;
 
-trait SingletonTrait implements SingletonInterface
+trait SingletonTrait //implements SingletonInterface
 {
 
     /**
