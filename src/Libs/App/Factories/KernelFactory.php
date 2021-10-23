@@ -15,16 +15,6 @@ use ZnTool\Dev\VarDumper\Facades\SymfonyDumperFacade;
 class KernelFactory
 {
 
-    public static function initVarDumper()
-    {
-        if(!class_exists(SymfonyDumperFacade::class)) {
-            return;
-        }
-        if (isset($_ENV['VAR_DUMPER_OUTPUT'])) {
-            SymfonyDumperFacade::dumpInConsole($_ENV['VAR_DUMPER_OUTPUT']);
-        }
-    }
-
     public static function createConsoleKernel(array $bundles = [], $import = ['i18next', 'container', 'console', 'migration']): KernelInterface
     {
         self::init();
@@ -47,12 +37,23 @@ class KernelFactory
         return $kernel;
     }
 
-    public static function init() {
+    protected static function init() {
         $_ENV['ROOT_PATH'] = FileHelper::rootPath();
         EnvHelper::prepareTestEnv();
         DotEnv::init();
-        self::initVarDumper();
+        //self::initVarDumper();
         //CorsHelper::autoload();
         EnvHelper::setErrorVisibleFromEnv();
     }
+
+    protected static function initVarDumper()
+    {
+        if(!class_exists(SymfonyDumperFacade::class)) {
+            return;
+        }
+        if (isset($_ENV['VAR_DUMPER_OUTPUT'])) {
+            SymfonyDumperFacade::dumpInConsole($_ENV['VAR_DUMPER_OUTPUT']);
+        }
+    }
+
 }

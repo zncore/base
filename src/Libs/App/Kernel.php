@@ -61,7 +61,7 @@ class Kernel implements KernelInterface
 
     public function getContainer(): ContainerInterface
     {
-        if(!isset($this->container)) {
+        if (!isset($this->container)) {
             $this->setContainer(ContainerHelper::getContainer());
         }
         return $this->container;
