@@ -38,7 +38,7 @@ class KernelFactory
     }
 
     protected static function init() {
-        $_ENV['ROOT_PATH'] = FileHelper::rootPath();
+//        $_ENV['ROOT_PATH'] = FileHelper::rootPath();
         EnvHelper::prepareTestEnv();
         DotEnv::init();
         //self::initVarDumper();
