@@ -8,7 +8,8 @@ use Symfony\Component\Cache\Adapter\NullAdapter;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+//use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
@@ -42,10 +43,12 @@ return [
             return $em;
         },
         //ConfigManagerInterface::class => ConfigManager::class,
-        EventDispatcherInterface::class => function () {
+        EventDispatcherInterface::class => \Symfony\Component\EventDispatcher\EventDispatcher::class,
+        \Symfony\Component\EventDispatcher\EventDispatcherInterface::class => \Symfony\Component\EventDispatcher\EventDispatcher::class,
+        /*EventDispatcherInterface::class => function () {
             $eventDispatcher = new EventDispatcher();
             return $eventDispatcher;
-        },
+        },*/
         FileRepository::class => function () {
             return new FileRepository(DotEnv::get('ELOQUENT_CONFIG_FILE'));
         },
