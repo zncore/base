@@ -3,7 +3,8 @@
 namespace ZnCore\Base\Libs\Event\Traits;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+//use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use ZnCore\Base\Helpers\ClassHelper;
 
@@ -18,6 +19,14 @@ trait EventDispatcherTrait
     public function subscribes(): array
     {
         return [];
+    }
+
+    /**
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    protected function setEventDispatcher(EventDispatcherInterface $eventDispatcher): void
+    {
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     public function getEventDispatcher(): EventDispatcherInterface
