@@ -3,9 +3,8 @@
 namespace ZnCore\Base\Libs\Event\Traits;
 
 use Symfony\Component\EventDispatcher\EventDispatcher;
-//use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Helpers\ClassHelper;
 
 trait EventDispatcherTrait
@@ -27,18 +26,24 @@ trait EventDispatcherTrait
     protected function setEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
+        $this->initEventDispatcher();
     }
 
     public function getEventDispatcher(): EventDispatcherInterface
     {
         if (!isset($this->eventDispatcher)) {
-            $this->eventDispatcher = new EventDispatcher();
-            foreach ($this->subscribes() as $subscriberDefinition) {
-                $subscriberInstance = $this->forgeSubscriberInstance($subscriberDefinition);
-                $this->eventDispatcher->addSubscriber($subscriberInstance);
-            }
+            $eventDispatcher = new EventDispatcher();
+            $this->setEventDispatcher($eventDispatcher);
         }
         return $this->eventDispatcher;
+    }
+
+    private function initEventDispatcher(): void
+    {
+        foreach ($this->subscribes() as $subscriberDefinition) {
+            $subscriberInstance = $this->forgeSubscriberInstance($subscriberDefinition);
+            $this->eventDispatcher->addSubscriber($subscriberInstance);
+        }
     }
 
     public function addSubscriber($subscriberDefinition): void
@@ -47,7 +52,8 @@ trait EventDispatcherTrait
         $this->getEventDispatcher()->addSubscriber($subscriberInstance);
     }
 
-    private function forgeSubscriberInstance($subscriberDefinition): EventSubscriberInterface {
+    private function forgeSubscriberInstance($subscriberDefinition): EventSubscriberInterface
+    {
         if ($subscriberDefinition instanceof EventSubscriberInterface) {
             $subscriberInstance = $subscriberDefinition;
         } else {
