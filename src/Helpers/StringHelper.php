@@ -9,6 +9,11 @@ class StringHelper
     const WITHOUT_CHAR = '#\s+#m';
     const NUM_CHAR = '#\D+#m';
 
+    public static function implode(array $list, string $begin, string $end, string $spliter = ' '): string
+    {
+        return $begin . implode("{$end}{$spliter}{$begin}", $list) . $end;
+    }
+
     public static function getMicroTime(): int
     {
         $microtimeFloat = microtime(true) * 10000;

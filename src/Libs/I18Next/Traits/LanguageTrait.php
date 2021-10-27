@@ -21,7 +21,15 @@ trait LanguageTrait
         if (!empty($this->$name)) {
             $translations = !is_array($this->$name) ? json_decode($this->$name, JSON_OBJECT_AS_ARRAY) : $this->$name;
             $currentLanguage = LanguageI18nEnum::encode($this->_language);
-            return ArrayHelper::getValue($translations, $currentLanguage);
+            $result = ArrayHelper::getValue($translations, $currentLanguage);
+            if(empty($result)) {
+                foreach ($translations as $code => $translation) {
+                    if(trim($translation) != '') {
+                        return $translation;
+                    }
+                }
+            }
+            return $result;
         }
         return $this->$attribute;
     }
