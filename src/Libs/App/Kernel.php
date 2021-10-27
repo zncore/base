@@ -29,6 +29,7 @@ class Kernel implements KernelInterface
     /** @var LoaderInterface[] */
     protected $loaders;
     protected $appName;
+    protected $config;
 
     public function __construct(string $appName)
     {
@@ -72,14 +73,22 @@ class Kernel implements KernelInterface
         $this->loaders[] = $loader;
     }
 
+    public function getConfig()
+    {
+        return $this->config;
+    }
+
+    public function init(): void
+    {
+        $this->config = $this->loadAppConfig();
+    }
+
     public function loadAppConfig(): array
     {
         $config = $this->loadMainConfig($this->appName);
         $event = new LoadConfigEvent($this, $config);
         $this->getEventDispatcher()->dispatch($event, KernelEventEnum::AFTER_LOAD_CONFIG);
-        $config = $event->getConfig();
-
-        return $config;
+        return $event->getConfig();
     }
 
     protected function loadMainConfig(string $appName): array
