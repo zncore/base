@@ -9,6 +9,12 @@ class EnvServerHelper
     {
         return trim($_SERVER['REQUEST_URI'], '/') == trim($name, '/');
     }
+
+    public static function isPostMethod(): bool
+    {
+        global $_SERVER;
+        return $_SERVER['REQUEST_METHOD'] == 'POST';
+    }
     
     public static function isContainsSegmentUri(string $name)
     {
