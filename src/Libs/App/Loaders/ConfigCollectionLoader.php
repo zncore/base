@@ -21,7 +21,7 @@ class ConfigCollectionLoader implements LoaderInterface
 
     public function __construct(ContainerInterface $container = null)
     {
-        $this->setContainer($container ?? ContainerHelper::getContainer());
+        $this->setContainer($container);
     }
 
     public function bootstrapApp(string $appName)
@@ -32,7 +32,7 @@ class ConfigCollectionLoader implements LoaderInterface
     public function loadMainConfig(string $appName): array
     {
         $config = [];
-        if($this->loaders) {
+        if ($this->loaders) {
             foreach ($this->loaders as $loader) {
                 $loader->setContainer($this->getContainer());
                 $loader->bootstrapApp($appName);
@@ -44,8 +44,6 @@ class ConfigCollectionLoader implements LoaderInterface
         $event = new LoadConfigEvent($this, $config);
         $this->getEventDispatcher()->dispatch($event, KernelEventEnum::AFTER_LOAD_CONFIG);
         return $event->getConfig();
-
-//        return $config;
     }
 
     public function setLoader(LoaderInterface $loader): void
