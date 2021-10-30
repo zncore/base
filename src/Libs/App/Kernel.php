@@ -94,11 +94,13 @@ class Kernel implements KernelInterface
     protected function loadMainConfig(string $appName): array
     {
         $config = [];
-        foreach ($this->loaders as $loader) {
-            $loader->setContainer($this->getContainer());
-            $loader->bootstrapApp($appName);
-            $configItem = $loader->loadMainConfig($appName);
-            $config = ArrayHelper::merge($config, $configItem);
+        if($this->loaders) {
+            foreach ($this->loaders as $loader) {
+                $loader->setContainer($this->getContainer());
+                $loader->bootstrapApp($appName);
+                $configItem = $loader->loadMainConfig($appName);
+                $config = ArrayHelper::merge($config, $configItem);
+            }
         }
         return $config;
     }
