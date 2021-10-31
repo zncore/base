@@ -4,12 +4,15 @@ namespace ZnCore\Base\Libs\App\Helpers;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\App\Libs\ConfigManager;
 use ZnCore\Base\Libs\App\Libs\ContainerConfigurator;
+use ZnSandbox\Sandbox\App\Libs\ZnCore;
 
 class ContainerHelper
 {
@@ -64,7 +67,7 @@ class ContainerHelper
         $container->singleton(Container::class, function () use ($container) {
             return $container;
         });*/
-        if (isset($containerConfig['definitions'])) {
+        /*if (isset($containerConfig['definitions'])) {
             foreach ($containerConfig['definitions'] as $abstract => $concrete) {
                 $configurator->bind($abstract, $concrete, true);
                 //$container->bind($abstract, $concrete, true);
@@ -77,6 +80,24 @@ class ContainerHelper
                 }
                 $configurator->singleton($abstract, $concrete);
                 //$container->singleton($abstract, $concrete);
+            }
+        }*/
+        self::configContainerFromArray($configurator, $containerConfig);
+    }
+
+    public static function configContainerFromArray(ContainerConfiguratorInterface $containerConfigurator, array $containerConfig): void
+    {
+        if (isset($containerConfig['definitions'])) {
+            foreach ($containerConfig['definitions'] as $abstract => $concrete) {
+                $containerConfigurator->bind($abstract, $concrete, true);
+            }
+        }
+        if (isset($containerConfig['singletons'])) {
+            foreach ($containerConfig['singletons'] as $abstract => $concrete) {
+                if (is_integer($abstract)) {
+                    $abstract = $concrete;
+                }
+                $containerConfigurator->singleton($abstract, $concrete);
             }
         }
     }
