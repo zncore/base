@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 
+use ZnCore\Base\Helpers\EnvHelper;
 use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Factories\ApplicationFactory;
@@ -27,6 +28,8 @@ foreach ($bundleClasses as $bundleClass) {
         $bundles[] = $bundleInstance;
     }
 }
+
+EnvHelper::prepareTestEnv();
 
 if(DotEnv::get('BUNDLES_CONFIG_FILE')) {
     $bundles = ArrayHelper::merge($bundles, include __DIR__ . '/../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE'));
