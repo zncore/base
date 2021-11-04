@@ -14,10 +14,11 @@ class DeprecateHelper
 
     public static function softThrow(string $message = '')
     {
+        $messageText = 'Deprecated: ' . $message;
         if (self::isStrictMode()) {
-            throw new DeprecatedException('Deprecated: ' . $message);
+            throw new DeprecatedException($messageText);
         } else {
-            //self::log($message);
+            //self::log($messageText);
         }
     }
 
@@ -52,7 +53,7 @@ class DeprecateHelper
         }
         /** @var LoggerInterface $logger */
         $logger = $container->get(LoggerInterface::class);
-        $noticeMessage = 'Deprecated functional';
+        $noticeMessage = 'Deprecated';
         if ($message) {
             $noticeMessage .= ': ' . $message;
         }
