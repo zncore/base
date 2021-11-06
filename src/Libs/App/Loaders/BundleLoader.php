@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\App\Loaders;
 
 use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Base\BaseBundle;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
@@ -34,8 +35,16 @@ class BundleLoader implements LoaderInterface
     }
 
     public function addBundles(array $bundles) {
-        /** @var BaseBundle $bundleInstance */
-        foreach ($bundles as $bundleInstance) {
+        foreach ($bundles as $bundleDefinition) {
+            /** @var BaseBundle $bundleInstance */
+            if(is_object($bundleDefinition)) {
+                $bundleInstance = $bundleDefinition;
+            } elseif (is_string($bundleDefinition)) {
+                $bundleInstance = InstanceHelper::create($bundleDefinition, [['all']]);
+            } elseif (is_array($bundleDefinition)) {
+                $bundleInstance = InstanceHelper::create($bundleDefinition);
+            }
+
             $bundleClass = get_class($bundleInstance);
             if(!isset($this->bundles[$bundleClass])) {
                 if($bundleInstance->deps()) {

@@ -7,12 +7,34 @@ use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Factories\ApplicationFactory;
 use ZnCore\Base\Libs\App\Factories\KernelFactory;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
+use Symfony\Component\Console\Application;
+
+//$container = \Illuminate\Container\Container::getInstance();
+//$znCore = new \ZnSandbox\Sandbox\App\Libs\ZnCore($container);
+//$znCore->init();
+//
+///** @var \ZnSandbox\Sandbox\App\Interfaces\AppInterface $appFactory */
+//$appFactory = $container->get(\App\AppConsole\Libs\ConsoleApp::class);
+//$appFactory->init();
+//
+//$application = $container->get(Application::class);
+//$application->run();
+
+
 
 $bundles = [
     new ZnCore\Base\Libs\App\Bundle(['all']),
+
+    ZnTool\Package\Bundle::class,
+    ZnLib\Db\Bundle::class,
+    ZnLib\Fixture\Bundle::class,
+    ZnLib\Migration\Bundle::class,
+    ZnTool\Generator\Bundle::class,
+    ZnTool\Stress\Bundle::class,
+    ZnBundle\Queue\Bundle::class,
 ];
 
-$bundleClasses = [
+/*$bundleClasses = [
     ZnTool\Package\Bundle::class,
     ZnLib\Db\Bundle::class,
     ZnLib\Fixture\Bundle::class,
@@ -27,7 +49,7 @@ foreach ($bundleClasses as $bundleClass) {
         $bundleInstance = InstanceHelper::create($bundleClass, [['all']]);
         $bundles[] = $bundleInstance;
     }
-}
+}*/
 
 EnvHelper::prepareTestEnv();
 
