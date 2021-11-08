@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Libs\App\Loaders;
 
+use ZnCore\Base\Exceptions\ClassNotFoundException;
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
@@ -34,23 +35,32 @@ class BundleLoader implements LoaderInterface
         $this->import = $import;
     }
 
-    public function addBundles(array $bundles) {
-        foreach ($bundles as $bundleDefinition) {
-            /** @var BaseBundle $bundleInstance */
-            if(is_object($bundleDefinition)) {
-                $bundleInstance = $bundleDefinition;
-            } elseif (is_string($bundleDefinition)) {
-                $bundleInstance = InstanceHelper::create($bundleDefinition, [['all']]);
-            } elseif (is_array($bundleDefinition)) {
-                $bundleInstance = InstanceHelper::create($bundleDefinition);
-            }
+    private function createBundleInstance($bundleDefinition): BaseBundle
+    {
+        /** @var BaseBundle $bundleInstance */
+        if (is_object($bundleDefinition)) {
+            $bundleInstance = $bundleDefinition;
+        } elseif (is_string($bundleDefinition)) {
+            $bundleInstance = InstanceHelper::create($bundleDefinition, [['all']]);
+        } elseif (is_array($bundleDefinition)) {
+            $bundleInstance = InstanceHelper::create($bundleDefinition);
+        }
+        return $bundleInstance;
+    }
 
-            $bundleClass = get_class($bundleInstance);
-            if(!isset($this->bundles[$bundleClass])) {
-                if($bundleInstance->deps()) {
-                    $this->addBundles($bundleInstance->deps());
+    public function addBundles(array $bundles)
+    {
+        foreach ($bundles as $bundleDefinition) {
+            try {
+                $bundleInstance = $this->createBundleInstance($bundleDefinition);
+                $bundleClass = get_class($bundleInstance);
+                if (!isset($this->bundles[$bundleClass])) {
+                    if ($bundleInstance->deps()) {
+                        $this->addBundles($bundleInstance->deps());
+                    }
+                    $this->bundles[$bundleClass] = $bundleInstance;
                 }
-                $this->bundles[$bundleClass] = $bundleInstance;
+            } catch (ClassNotFoundException $e) {
             }
         }
         //$this->bundles = ArrayHelper::merge($this->bundles, $bundles);
@@ -86,7 +96,7 @@ class BundleLoader implements LoaderInterface
             //'useCache' => true,
         ],
     ];
-    
+
     public function getLoadersConfig()
     {
         return $this->loadersConfig;
@@ -130,7 +140,7 @@ class BundleLoader implements LoaderInterface
         }
         $bundles = $this->filterBundlesByLoader($this->bundles, $loaderName);
 
-        if($this->getContainer()->has(ConfigManagerInterface::class)) {
+        if ($this->getContainer()->has(ConfigManagerInterface::class)) {
             $configManager = $this->getContainer()->get(ConfigManagerInterface::class);
             $configManager->set('bundles', $bundles);
         }

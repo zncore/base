@@ -3,14 +3,24 @@
 namespace ZnCore\Base\Helpers;
 
 use ReflectionNamedType;
+use ZnCore\Base\Exceptions\ClassNotFoundException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 
 class InstanceHelper
 {
 
+    /**
+     * @param string $className
+     * @param array $constructionArgs
+     * @return object
+     * @throws ClassNotFoundException
+     */
     private static function createObject(string $className, array $constructionArgs = []): object
     {
+        if(!class_exists($className)) {
+            throw new ClassNotFoundException();
+        }
         $constructionArgs = self::prepareParameters($className, '__construct', $constructionArgs);
         return self::createObjectInstance($className, $constructionArgs);
     }
