@@ -15,6 +15,12 @@ class EnvServerHelper
         global $_SERVER;
         return $_SERVER['REQUEST_METHOD'] == 'POST';
     }
+
+    public static function isOptionsMethod(): bool
+    {
+        global $_SERVER;
+        return $_SERVER['REQUEST_METHOD'] == 'OPTIONS';
+    }
     
     public static function isContainsSegmentUri(string $name)
     {
