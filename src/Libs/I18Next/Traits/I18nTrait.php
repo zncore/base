@@ -6,18 +6,12 @@ use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\I18Next\Enums\LanguageI18nEnum;
 use ZnBundle\Language\Domain\Interfaces\Services\RuntimeLanguageServiceInterface;
 
-/**
- * Trait LanguageTrait
- * @package ZnCore\Base\Libs\I18Next\Traits
- * @deprecated
- * @see I18nTrait
- */
-trait LanguageTrait
+trait I18nTrait
 {
 
     protected $_language = "ru";
 
-    protected function setRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService) {
+    protected function _setRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService) {
         $this->_language = $languageService->getLanguage();
     }
 
@@ -29,11 +23,6 @@ trait LanguageTrait
         $this->$attribute = $value;
         $i18nAttribute = $attribute . 'I18n';
         $this->{$i18nAttribute}[$this->_language] = $value;
-    }
-
-    protected function i18n(string $attribute): ?string
-    {
-        return $this->_getI18n($attribute);
     }
 
     protected function _getI18n(string $attribute): ?string
