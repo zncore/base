@@ -42,6 +42,9 @@ class EnvServerHelper
 
     public static function fixUri(string $name)
     {
+        if(ltrim($_SERVER['REQUEST_URI'], '/') === $name) {
+            $_SERVER['REQUEST_URI'] .= '/';
+        }
         $_SERVER['SCRIPT_NAME'] = "/$name/index.php";
         $_SERVER['PHP_SELF'] = "/$name/index.php";
     }
