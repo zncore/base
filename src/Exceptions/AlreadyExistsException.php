@@ -8,6 +8,7 @@ class AlreadyExistsException extends Exception
 {
 
     private $entity;
+    private $fields = [];
 
     public function getEntity(): ?object
     {
@@ -17,5 +18,15 @@ class AlreadyExistsException extends Exception
     public function setEntity(object $entity): void
     {
         $this->entity = $entity;
+    }
+
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+    public function setFields($fields): void
+    {
+        $this->fields = $fields;
     }
 }
