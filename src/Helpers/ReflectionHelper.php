@@ -32,6 +32,13 @@ class ReflectionHelper
         return $constants;
     }
 
+    public static function getProperties($class)
+    {
+        $class = new ReflectionClass($class);
+        $properties = $class->getProperties();
+        return $properties;
+    }
+
     private static function filterByPrefix($constants, $prefix)
     {
         $result = [];
