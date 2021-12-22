@@ -102,7 +102,16 @@ class InstanceHelper
 
     private static function createObjectInstance(string $className, array $constructionArgs): object
     {
-        switch (count($constructionArgs)) {
+        if(count($constructionArgs) && method_exists($className, '__construct')) {
+//            $instance = new $className(...$constructionArgs);
+            $instance = (new \ReflectionClass ( $className ))->newInstanceArgs ( $constructionArgs );
+        } else {
+            $instance = new $className();
+        }
+
+
+
+        /*switch (count($constructionArgs)) {
             case 0:
                 $instance = new $className();
                 break;
@@ -176,7 +185,7 @@ class InstanceHelper
                 break;
             default:
                 throw new \Exception('Count parameters not supported!');
-        }
+        }*/
         return $instance;
     }
 
