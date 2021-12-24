@@ -16,16 +16,16 @@ trait I18nTrait
     protected $_language = "ru";
 
     /** @var Collection | LanguageEntity[] */
-    protected $_languages = null;
+    static protected $_languages = null;
 
     protected function _forgeLlanguages(LanguageServiceInterface $languageService = null) {
-        if($this->_languages) {
+        if(self::$_languages) {
             return;
         }
         if(!$languageService) {
             $languageService = ContainerHelper::getContainer()->get(LanguageServiceInterface::class);
         }
-        $this->_languages = $languageService->allEnabled();
+        self::$_languages = $languageService->allEnabled();
     }
 
     protected function _setRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService) {
@@ -80,7 +80,7 @@ trait I18nTrait
             ];
         }
         $this->_forgeLlanguages();
-        foreach ($this->_languages as $languageEntity) {
+        foreach (self::$_languages as $languageEntity) {
             $code = $languageEntity->getCode();
             if(empty($result[$code])) {
                 $result[$code] = ArrayHelper::first($result);
