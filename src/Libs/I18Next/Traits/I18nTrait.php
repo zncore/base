@@ -2,7 +2,11 @@
 
 namespace ZnCore\Base\Libs\I18Next\Traits;
 
+use Illuminate\Support\Collection;
+use ZnBundle\Language\Domain\Entities\LanguageEntity;
+use ZnBundle\Language\Domain\Interfaces\Services\LanguageServiceInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\I18Next\Enums\LanguageI18nEnum;
 use ZnBundle\Language\Domain\Interfaces\Services\RuntimeLanguageServiceInterface;
 
@@ -10,6 +14,19 @@ trait I18nTrait
 {
 
     protected $_language = "ru";
+
+    /** @var Collection | LanguageEntity[] */
+    protected $_languages = null;
+
+    protected function _forgeLlanguages(LanguageServiceInterface $languageService = null) {
+        if($this->_languages) {
+            return;
+        }
+        if(!$languageService) {
+            $languageService = ContainerHelper::getContainer()->get(LanguageServiceInterface::class);
+        }
+        $this->_languages = $languageService->allEnabled();
+    }
 
     protected function _setRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService) {
         $this->_setCurrentLanguage($languageService->getLanguage());
@@ -56,11 +73,19 @@ trait I18nTrait
         $language = $this->_getCurrentLanguage($language);
         $i18nAttribute = $attribute . 'I18n';
         if(!empty($this->$i18nAttribute)) {
-            return $this->$i18nAttribute;
+            $result = $this->$i18nAttribute;
         } elseif(!empty($this->$attribute)) {
-            return [
+            $result = [
                 $language => $this->$attribute
             ];
         }
+        $this->_forgeLlanguages();
+        foreach ($this->_languages as $languageEntity) {
+            $code = $languageEntity->getCode();
+            if(empty($result[$code])) {
+                $result[$code] = ArrayHelper::first($result);
+            }
+        }
+        return $result;
     }
 }
