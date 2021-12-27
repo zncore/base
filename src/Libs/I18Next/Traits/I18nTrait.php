@@ -72,6 +72,7 @@ trait I18nTrait
     protected function _getI18nArray(string $attribute, string $language = null) {
         $language = $this->_getCurrentLanguage($language);
         $i18nAttribute = $attribute . 'I18n';
+        $result = [];
         if(!empty($this->$i18nAttribute)) {
             $result = $this->$i18nAttribute;
         } elseif(!empty($this->$attribute)) {
