@@ -44,6 +44,7 @@ return [
         },
         //ConfigManagerInterface::class => ConfigManager::class,
         EventDispatcherInterface::class => \Symfony\Component\EventDispatcher\EventDispatcher::class,
+        \Psr\EventDispatcher\EventDispatcherInterface::class => EventDispatcherInterface::class,
         \Symfony\Component\EventDispatcher\EventDispatcherInterface::class => \Symfony\Component\EventDispatcher\EventDispatcher::class,
         /*EventDispatcherInterface::class => function () {
             $eventDispatcher = new EventDispatcher();

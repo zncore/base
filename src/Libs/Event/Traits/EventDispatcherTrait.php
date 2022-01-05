@@ -2,9 +2,10 @@
 
 namespace ZnCore\Base\Libs\Event\Traits;
 
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+//use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Helpers\ClassHelper;
 
 trait EventDispatcherTrait
