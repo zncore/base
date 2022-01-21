@@ -91,4 +91,21 @@ trait I18nTrait
         }
         return $result;
     }
+
+    protected function _setI18nArray(string $attribute, array $valueI18n, string $language = null): void {
+        $language = $this->_getCurrentLanguage($language);
+        $i18nAttribute = $attribute . 'I18n';
+        $this->$i18nAttribute = $valueI18n;
+        if(!empty($valueI18n[$language])) {
+            $this->$attribute = $valueI18n[$language];
+        } else {
+            $this->_forgeLlanguages();
+            foreach (self::$_languages as $languageEntity) {
+                $code = $languageEntity->getCode();
+                if(!empty($valueI18n[$code])) {
+                    $this->$attribute = $valueI18n[$code];
+                }
+            }
+        }
+    }
 }
