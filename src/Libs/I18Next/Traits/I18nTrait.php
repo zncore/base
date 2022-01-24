@@ -92,7 +92,7 @@ trait I18nTrait
         return $result;
     }
 
-    protected function _setI18nArray(string $attribute, array $valueI18n, string $language = null): void {
+    protected function _setI18nArray(string $attribute, ?array $valueI18n, string $language = null): void {
         $language = $this->_getCurrentLanguage($language);
         $i18nAttribute = $attribute . 'I18n';
         $this->$i18nAttribute = $valueI18n;
