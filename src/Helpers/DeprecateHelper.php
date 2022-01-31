@@ -2,6 +2,8 @@
 
 namespace ZnCore\Base\Helpers;
 
+use Composer\Autoload\ClassLoader;
+use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use ZnCore\Base\Exceptions\DeprecatedException;
@@ -14,9 +16,10 @@ class DeprecateHelper
 
     public static function softThrow(string $message = '')
     {
-        $messageText = 'Deprecated: ' . $message;
+//        $messageText = 'Deprecated: ' . $message;
         if (self::isStrictMode()) {
-            throw new DeprecatedException($messageText);
+            self::hardThrow($message);
+            //throw new DeprecatedException($messageText);
         } else {
             //self::log($messageText);
         }
@@ -24,6 +27,7 @@ class DeprecateHelper
 
     public static function hardThrow(string $message = '')
     {
+        self::log($message, debug_backtrace(), \Monolog\Logger::CRITICAL);
         throw new DeprecatedException('Deprecated: ' . $message);
     }
 
@@ -42,7 +46,7 @@ class DeprecateHelper
         return $_ENV['DEPRECATE_STRICT_MODE'] ?? self::$isStrictMode;
     }
 
-    private static function log(string $message = '')
+    private static function log(string $message = '', $trace = [], $level = \Monolog\Logger::NOTICE)
     {
         $container = ContainerHelper::getContainer();
         if (!$container instanceof ContainerInterface) {
@@ -57,8 +61,14 @@ class DeprecateHelper
         if ($message) {
             $noticeMessage .= ': ' . $message;
         }
-        $logger->notice($noticeMessage, [
+
+        $logger->log($level, $noticeMessage, [
             'message' => $message,
+            'trace' => $trace,
         ]);
+        /*$logger->notice($noticeMessage, [
+            'message' => $message,
+            'trace' => $trace,
+        ]);*/
     }
 }
