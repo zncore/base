@@ -10,6 +10,7 @@
   ],
   "minimum-stability": "dev",
   "require": {
+    "psr/event-dispatcher": "^1",
     "zncore/contract": "v0.0.*",
     "symfony/property-access": "4.*|5.*",
     "symfony/dotenv": "4.*|5.*",
