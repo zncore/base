@@ -2,6 +2,9 @@
 
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
+use Illuminate\Support\Collection;
+use ZnCore\Base\Entities\DirectoryEntity;
+use ZnCore\Base\Entities\FileEntity;
 use ZnCore\Base\Enums\Measure\ByteEnum;
 use ZnCore\Base\Helpers\ComposerHelper;
 use ZnCore\Base\Helpers\EnumHelper;
@@ -284,6 +287,31 @@ class FileHelper extends BaseFileHelper
             $path = self::normalizePath($path);
         }
         return $list;
+    }
+
+    public static function scanDirTree($dir, $options = null)
+    {
+        $collection = new Collection();
+
+        $list = self::scanDir($dir);
+        foreach ($list as $name) {
+            $path = $dir . '/' . $name;
+            if(is_dir($path)) {
+                $entity = new DirectoryEntity();
+                $entity->setItems(self::scanDirTree($path, $options));
+            } elseif(is_file($path)) {
+                $entity = new FileEntity();
+                $entity->setSize(filesize($path));
+            } else {
+                throw new \Exception();
+            }
+            $entity->setName($name);
+            $entity->setPath($path);
+            if ($entity instanceof DirectoryEntity || static::filterPath($path, $options)) {
+                $collection->add($entity);
+            }
+        }
+        return $collection;
     }
 
     public static function scanDir($dir, $options = null)
