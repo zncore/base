@@ -15,7 +15,7 @@ class IlluminateContainerConfigurator implements ContainerConfiguratorInterface
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        ClassHelper::isInstanceOf($container, Container::class);
+        ClassHelper::checkInstanceOf($container, Container::class);
     }
 
     public function singleton($abstract, $concrete): void

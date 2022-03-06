@@ -23,14 +23,14 @@ class ClassHelper
     public static function instanceOf($instance, $interface, bool $allowString = false): bool
     {
         try {
-            self::isInstanceOf($instance, $interface, $allowString);
-            require true;
+            self::checkInstanceOf($instance, $interface, $allowString);
+            return true;
         } catch (NotInstanceOfException $e) {
             return false;
         }
     }
 
-    public static function isInstanceOf($instance, $interface, bool $allowString = false): void
+    public static function checkInstanceOf($instance, $interface, bool $allowString = false): void
     {
         if (empty($instance)) {
             throw new InvalidArgumentException("Argument \"instance\" is empty");
@@ -38,25 +38,47 @@ class ClassHelper
         if (empty($interface)) {
             throw new InvalidArgumentException("Argument \"interfaceClass\" is empty");
         }
+        if (!is_object($instance) && !is_string($instance)) {
+            throw new InvalidArgumentException("Instance not is object and not is string");
+        }
         if (!interface_exists($interface) && !class_exists($interface)) {
             throw new InvalidArgumentException("Interface \"$interface\" not exists");
         }
-        if(is_string($instance) && $allowString) {
+        if(is_string($instance) && !$allowString) {
+            throw new InvalidArgumentException("Instance as string not allowed");
+        }
+
+        if(is_string($instance)) {
             $reflection = new \ReflectionClass($instance);
             $interfaces = $reflection->getInterfaces();
             if(!array_key_exists($interface, $interfaces)) {
-                throw new NotInstanceOfException("Class \"$instance\" not instanceof \"$interface\"");
+                self::throwNotInstanceOfException($instance, $interface);
+//                throw new NotInstanceOfException("Class \"$instance\" not instanceof \"$interface\"");
             }
-            return;
+        } elseif (!$instance instanceof $interface) {
+            self::throwNotInstanceOfException($instance, $interface);
+//            $instanceClassName = get_class($instance);
+//            throw new NotInstanceOfException("Class \"$instanceClassName\" not instanceof \"$interface\"");
         }
-        if (!is_object($instance)) {
-            throw new InvalidArgumentException("Not is object");
-        }
+    }
 
-        if (!$instance instanceof $interface) {
-            $instanceClassName = get_class($instance);
-            throw new NotInstanceOfException("Class \"$instanceClassName\" not instanceof \"$interface\"");
-        }
+    private static function throwNotInstanceOfException($instanceClassName, string $interface) {
+        $instanceClassName = is_object($instanceClassName) ? get_class($instanceClassName) : $instanceClassName;
+        throw new NotInstanceOfException("Class \"$instanceClassName\" not instanceof \"$interface\"");
+    }
+
+    /**
+     * @param $instance
+     * @param $interface
+     * @param bool $allowString
+     * @throws NotInstanceOfException
+     * @deprecated
+     * @todo переделать на тип bool
+     */
+    public static function isInstanceOf($instance, $interface, bool $allowString = false): void
+    {
+        DeprecateHelper::softThrow();
+        self::checkInstanceOf($instance, $interface, $allowString);
     }
 
     public static function getInstanceOfClassName($class, $classname)
@@ -148,7 +170,7 @@ class ClassHelper
 //        self::configure($object, $params);
 //        self::configure($object, $definition);
         if (!empty($interface)) {
-            self::isInstanceOf($object, $interface);
+            self::checkInstanceOf($object, $interface);
         }
         return $object;
     }

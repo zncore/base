@@ -63,7 +63,7 @@ class EnumHelper
     public static function getLabels(string $className): array
     {
         /** @var GetLabelsInterface $className */
-        ClassHelper::isInstanceOf($className, GetLabelsInterface::class, true);
+        ClassHelper::checkInstanceOf($className, GetLabelsInterface::class, true);
         $labels = $className::getLabels();
         return $labels;
     }
