@@ -20,6 +20,16 @@ class ClassHelper
         return $className;
     }
 
+    public static function instanceOf($instance, $interface, bool $allowString = false): bool
+    {
+        try {
+            self::isInstanceOf($instance, $interface, $allowString);
+            require true;
+        } catch (NotInstanceOfException $e) {
+            return false;
+        }
+    }
+
     public static function isInstanceOf($instance, $interface, bool $allowString = false): void
     {
         if (empty($instance)) {
