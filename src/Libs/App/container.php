@@ -23,7 +23,7 @@ use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\EntityManager;
 use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Factories\ManagerFactory;
-use ZnLib\Fixture\Domain\Repositories\FileRepository;
+use ZnDatabase\Fixture\Domain\Repositories\FileRepository;
 use ZnCore\Base\Libs\DotEnv\DotEnvConfig;
 use ZnCore\Base\Libs\DotEnv\DotEnvConfigInterface;
 
