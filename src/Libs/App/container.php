@@ -21,7 +21,7 @@ use ZnCore\Base\Libs\App\Libs\ConfigManager;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\EntityManager;
-use ZnLib\Db\Capsule\Manager;
+use ZnDatabase\Eloquent\Domain\Capsule\Manager;
 use ZnDatabase\Eloquent\Domain\Factories\ManagerFactory;
 use ZnLib\Fixture\Domain\Repositories\FileRepository;
 use ZnCore\Base\Libs\DotEnv\DotEnvConfig;
