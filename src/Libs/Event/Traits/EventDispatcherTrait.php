@@ -30,6 +30,9 @@ trait EventDispatcherTrait
         $this->initEventDispatcher();
     }
 
+    /**
+     * @return EventDispatcherInterface | \Symfony\Component\EventDispatcher\EventDispatcherInterface
+     */
     public function getEventDispatcher(): EventDispatcherInterface
     {
         if (!isset($this->eventDispatcher)) {
