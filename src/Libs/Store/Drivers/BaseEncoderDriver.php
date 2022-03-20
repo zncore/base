@@ -21,6 +21,6 @@ abstract class BaseEncoderDriver implements DriverInterface
 
     public function encode($data)
     {
-        return $this->encoder->decode($data);
+        return $this->encoder->encode($data);
     }
 }
