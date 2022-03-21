@@ -9,6 +9,53 @@ use function GuzzleHttp\Psr7\parse_query;
 class UrlHelper
 {
 
+    public static function generateUrlFromParams(array $data): string {
+
+//    scheme - e.g. http
+//    host
+//    port
+//    user
+//    pass
+//    path
+//    query - after the question mark ?
+//    fragment - after the hashmark #
+
+        // $url = 'http://usr:pss@example.com:81/mypath/myfile.html?a=b&b[]=2&b[]=3#myfragment';
+
+        $url = '';
+        if(!empty($data['scheme'])) {
+            $url .=  $data['scheme'] . '://';
+        }
+        if(!empty($data['user'])) {
+            $url .=  $data['user'];
+            if(!empty($data['pass'])) {
+                $url .=  ':' . $data['pass'];
+            }
+            $url .= '@';
+        }
+        if(!empty($data['host'])) {
+            $url .=  $data['host'];
+        }
+        if(!empty($data['port'])) {
+            $url .=  ':' . $data['port'];
+        }
+        if(!empty($data['path'])) {
+            $data['path'] = ltrim($data['path'], '/');
+            $url .=  '/' . $data['path'];
+        }
+        if(!empty($data['query'])) {
+            if(is_array($data['query'])) {
+                $data['query'] = http_build_query($data['query']);
+            }
+            $url .=  '?' . $data['query'];
+        }
+        if(!empty($data['fragment'])) {
+            $url .=  '#' . $data['fragment'];
+        }
+
+        return $url;
+    }
+
     public static function splitUri(string $uri): array
     {
         $uri = trim($uri, '/');

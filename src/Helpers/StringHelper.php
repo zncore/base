@@ -230,7 +230,13 @@ class StringHelper
 
     public static function removeDoubleSpace($text)
     {
-        $text = preg_replace(self::PATTERN_SPACES, ' ', $text);
+        return preg_replace(self::PATTERN_SPACES, ' ', $text);
+//        return self::removeDoubleChar($text, self::PATTERN_SPACES);
+    }
+
+    public static function removeDoubleChar($text, string $char)
+    {
+        $text = preg_replace('#'.preg_quote($char).'+#m', $char, $text);
         return $text;
     }
 
