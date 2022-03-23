@@ -21,6 +21,7 @@ class SymfonyRpcRoutesLoader extends BaseLoader
             $config = ArrayHelper::merge($config, $loadedConfig);
         }
         $_ENV['RPC_ROUTES'] = $config;
+        $this->getConfigManager()->set('rpcRoutes', $config);
         return [];
 //        return $config ? ['rpcRoutes' => $config] : [];
     }
