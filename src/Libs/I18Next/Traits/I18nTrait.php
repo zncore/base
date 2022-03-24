@@ -5,46 +5,74 @@ namespace ZnCore\Base\Libs\I18Next\Traits;
 use Illuminate\Support\Collection;
 use ZnBundle\Language\Domain\Entities\LanguageEntity;
 use ZnBundle\Language\Domain\Interfaces\Services\LanguageServiceInterface;
+use ZnBundle\Language\Domain\Interfaces\Services\RuntimeLanguageServiceInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\I18Next\Enums\LanguageI18nEnum;
-use ZnBundle\Language\Domain\Interfaces\Services\RuntimeLanguageServiceInterface;
 use ZnCore\Domain\Helpers\EntityHelper;
 
 trait I18nTrait
 {
 
     protected $_language = "ru";
+    protected $_languageService;
+    protected $_runtimeLanguageService;
 
     /** @var Collection | LanguageEntity[] */
     static protected $_languages = null;
 
-    protected function _forgeLlanguages(LanguageServiceInterface $languageService = null) {
-        if(self::$_languages) {
+    protected function _forgeLlanguages(LanguageServiceInterface $languageService = null)
+    {
+        if (self::$_languages) {
             return;
         }
-        if(!$languageService) {
-            $languageService = ContainerHelper::getContainer()->get(LanguageServiceInterface::class);
-        }
+        $languageService = $this->_forgeLanguageService($languageService);
         self::$_languages = $languageService->allEnabled();
     }
 
-    protected function _setRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService) {
+    protected function _forgeLanguageService(LanguageServiceInterface $languageService = null): LanguageServiceInterface
+    {
+        if(!$this->_languageService) {
+            if (!$languageService) {
+                $languageService = ContainerHelper::getContainer()->get(LanguageServiceInterface::class);
+            }
+            $this->_languageService = $languageService;
+        }
+        return $this->_languageService;
+    }
+
+    protected function _forgeRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService = null): RuntimeLanguageServiceInterface
+    {
+        if(!$this->_runtimeLanguageService) {
+            if (!$languageService) {
+                $languageService = ContainerHelper::getContainer()->get(RuntimeLanguageServiceInterface::class);
+            }
+            $this->_runtimeLanguageService = $languageService;
+        }
+        return $this->_runtimeLanguageService;
+    }
+
+    protected function _setRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService = null)
+    {
+        $languageService = $this->_forgeRuntimeLanguageService($languageService);
         $this->_setCurrentLanguage($languageService->getLanguage());
     }
 
-    protected function _setCurrentLanguage(string $language) {
+    protected function _setCurrentLanguage(string $language)
+    {
         $this->_language = LanguageI18nEnum::encode($language);
     }
 
-    protected function _getCurrentLanguage(string $defaultLanguage = null): string {
+    protected function _getCurrentLanguage(string $defaultLanguage = null): string
+    {
         $language = $defaultLanguage ?: $this->_language;
         $encodedLanguage = LanguageI18nEnum::encode($language);
         $language = $encodedLanguage ?: $language;
         return $language;
     }
 
-    protected function _setI18n(string $attribute, $value, string $language = null): void {
+    protected function _setI18n(string $attribute, $value, string $language = null): void
+    {
         $this->$attribute = $value;
         $i18nAttribute = $attribute . 'I18n';
         $language = $this->_getCurrentLanguage($language);
@@ -59,9 +87,9 @@ trait I18nTrait
             $translations = !is_array($value) ? json_decode($value, JSON_OBJECT_AS_ARRAY) : $value;
             $language = $this->_getCurrentLanguage($language);
             $result = ArrayHelper::getValue($translations, $language);
-            if(empty($result)) {
+            if (empty($result)) {
                 foreach ($translations as $code => $translation) {
-                    if(trim($translation) != '') {
+                    if (trim($translation) != '') {
                         return $translation;
                     }
                 }
@@ -71,13 +99,14 @@ trait I18nTrait
         return $this->$attribute;
     }
 
-    protected function _getI18nArray(string $attribute, string $language = null) {
+    protected function _getI18nArray(string $attribute, string $language = null)
+    {
         $language = $this->_getCurrentLanguage($language);
         $i18nAttribute = $attribute . 'I18n';
         $result = [];
-        if(!empty($this->$i18nAttribute)) {
+        if (!empty($this->$i18nAttribute)) {
             $result = $this->$i18nAttribute;
-        } elseif(!empty($this->$attribute)) {
+        } elseif (!empty($this->$attribute)) {
             $result = [
                 $language => $this->$attribute
             ];
@@ -85,24 +114,25 @@ trait I18nTrait
         $this->_forgeLlanguages();
         foreach (self::$_languages as $languageEntity) {
             $code = $languageEntity->getCode();
-            if(empty($result[$code])) {
+            if (empty($result[$code])) {
                 $result[$code] = ArrayHelper::first($result);
             }
         }
         return $result;
     }
 
-    protected function _setI18nArray(string $attribute, ?array $valueI18n, string $language = null): void {
+    protected function _setI18nArray(string $attribute, ?array $valueI18n, string $language = null): void
+    {
         $language = $this->_getCurrentLanguage($language);
         $i18nAttribute = $attribute . 'I18n';
         $this->$i18nAttribute = $valueI18n;
-        if(!empty($valueI18n[$language])) {
+        if (!empty($valueI18n[$language])) {
             $this->$attribute = $valueI18n[$language];
         } else {
             $this->_forgeLlanguages();
             foreach (self::$_languages as $languageEntity) {
                 $code = $languageEntity->getCode();
-                if(!empty($valueI18n[$code])) {
+                if (!empty($valueI18n[$code])) {
                     $this->$attribute = $valueI18n[$code];
                 }
             }
