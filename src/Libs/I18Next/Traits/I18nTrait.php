@@ -21,7 +21,7 @@ trait I18nTrait
     /** @var Collection | LanguageEntity[] */
     static protected $_languages = null;
 
-    protected function _forgeLlanguages(LanguageServiceInterface $languageService = null)
+    protected function _forgeLanguages(LanguageServiceInterface $languageService = null)
     {
         if (self::$_languages) {
             return;
@@ -65,7 +65,13 @@ trait I18nTrait
 
     protected function _getCurrentLanguage(string $defaultLanguage = null): string
     {
-        $language = $defaultLanguage ?: $this->_language;
+        if($defaultLanguage) {
+            $language = $defaultLanguage;
+        } else {
+            $this->_setRuntimeLanguageService();
+            $language = $this->_language;
+        }
+
         $encodedLanguage = LanguageI18nEnum::encode($language);
         $language = $encodedLanguage ?: $language;
         return $language;
@@ -111,7 +117,7 @@ trait I18nTrait
                 $language => $this->$attribute
             ];
         }
-        $this->_forgeLlanguages();
+        $this->_forgeLanguages();
         foreach (self::$_languages as $languageEntity) {
             $code = $languageEntity->getCode();
             if (empty($result[$code])) {
@@ -129,7 +135,7 @@ trait I18nTrait
         if (!empty($valueI18n[$language])) {
             $this->$attribute = $valueI18n[$language];
         } else {
-            $this->_forgeLlanguages();
+            $this->_forgeLanguages();
             foreach (self::$_languages as $languageEntity) {
                 $code = $languageEntity->getCode();
                 if (!empty($valueI18n[$code])) {
