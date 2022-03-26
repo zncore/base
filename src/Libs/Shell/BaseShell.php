@@ -83,6 +83,7 @@ abstract class BaseShell
         $output = [];
         $exitCode = null;
         $this->begin();
+        $cmd = $this->prepareCmd($cmd);
         exec("$cmd", $output, $exitCode);
         $this->end();
         if (/*$exitCode !== 0 || */ !is_array($output)) {
