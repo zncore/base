@@ -6,6 +6,6 @@ require __DIR__ . '/../../../autoload.php';
 if ($argv[1] == 'init') {
     require __DIR__ . '/init';
 } else {
-//    require __DIR__ . '/console';
-    require __DIR__ . '/console2.php';
+    require __DIR__ . '/console';
+//    require __DIR__ . '/console2.php';
 }
