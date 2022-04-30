@@ -15,6 +15,7 @@ use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ContainerLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\I18NextLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\MigrationLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ModuleLoader;
+use ZnCore\Base\Libs\App\Loaders\BundleLoaders\RbacConfigLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRoutesLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRpcRoutesLoader;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
@@ -85,6 +86,10 @@ class BundleLoader implements LoaderInterface
         ],
         'symfonyRpc' => [
             'class' => SymfonyRpcRoutesLoader::class,
+            //'useCache' => true,
+        ],
+        'rbac' => [
+            'class' => RbacConfigLoader::class,
             //'useCache' => true,
         ],
         'symfonyAdmin' => [
