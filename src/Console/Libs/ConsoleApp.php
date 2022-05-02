@@ -16,7 +16,8 @@ class ConsoleApp extends BaseConsoleApp
 //            new ZnCore\Base\Libs\App\Bundle(['all']),
 
             ZnTool\Package\Bundle::class,
-            ZnLib\Db\Bundle::class,
+            ZnDatabase\Base\Bundle::class,
+            ZnDatabase\Tool\Bundle::class,
             ZnLib\Fixture\Bundle::class,
             ZnDatabase\Migration\Bundle::class,
             ZnTool\Generator\Bundle::class,
