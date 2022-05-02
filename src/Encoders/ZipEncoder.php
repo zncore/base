@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Encoders;
 
 use ZnCore\Base\Helpers\StringHelper;
-use ZnCore\Base\Interfaces\EncoderInterface;
+use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use Exception;
 use ZipArchive;

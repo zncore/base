@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Enums\Measure;
 
-use ZnCore\Base\Interfaces\GetLabelsInterface;
+use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 
 class ByteEnum implements GetLabelsInterface
 {

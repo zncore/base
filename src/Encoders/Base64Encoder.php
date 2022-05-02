@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Encoders;
 
-use ZnCore\Base\Interfaces\EncoderInterface;
+use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 
 class Base64Encoder implements EncoderInterface
 {

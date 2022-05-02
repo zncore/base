@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Encoders;
 
 use Illuminate\Support\Collection;
-use ZnCore\Base\Interfaces\EncoderInterface;
+use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 use ZnCore\Base\Helpers\InstanceHelper;
 
 class AggregateEncoder implements EncoderInterface

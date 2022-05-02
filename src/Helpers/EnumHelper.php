@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Helpers;
 
 use ZnCore\Base\Exceptions\NotInstanceOfException;
-use ZnCore\Base\Interfaces\GetLabelsInterface;
+use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
 
