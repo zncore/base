@@ -22,7 +22,7 @@ class ConsoleApp extends BaseConsoleApp
             ZnTool\Package\Bundle::class,
             ZnDatabase\Base\Bundle::class,
             ZnDatabase\Tool\Bundle::class,
-            ZnLib\Fixture\Bundle::class,
+            ZnDatabase\Fixture\Bundle::class,
             ZnDatabase\Migration\Bundle::class,
             ZnTool\Generator\Bundle::class,
             ZnTool\Stress\Bundle::class,
