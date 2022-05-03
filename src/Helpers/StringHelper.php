@@ -33,7 +33,7 @@ class StringHelper
         return $mixed;
     }
 
-    /**
+    /*
      * @param string $mask
      * @param array $data
      * @param string $beginBlock
@@ -42,7 +42,7 @@ class StringHelper
      * @deprecated
      * @see TemplateHelper::render()
      */
-    public static function renderTemplate(string $mask, array $data = [], string $beginBlock = '{', string $endBlock = '}')
+    /*public static function renderTemplate(string $mask, array $data = [], string $beginBlock = '{', string $endBlock = '}')
     {
         $newParams = [];
         foreach ($data as $name => $value) {
@@ -50,9 +50,9 @@ class StringHelper
             $newParams[$name] = $value;
         }
         return strtr($mask, $newParams);
-    }
+    }*/
 
-    /**
+    /*
      * @param string $content
      * @param string $beginBlock
      * @param string $endBlock
@@ -60,11 +60,11 @@ class StringHelper
      * @deprecated
      * @see TemplateHelper::getVariableFromTemplate()
      */
-    public static function getVariableFromTemplate(string $content, string $beginBlock = '{', string $endBlock = '}'): array
+    /*public static function getVariableFromTemplate(string $content, string $beginBlock = '{', string $endBlock = '}'): array
     {
         preg_match_all('/'.$beginBlock.'([a-z-_.]+)'.$endBlock.'/i', $content, $matches);
         return $matches[1];
-    }
+    }*/
 
     /**
      * Векторизует текст для получения хэша или подписи.

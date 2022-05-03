@@ -19,14 +19,14 @@ class ContainerHelper
 
     private static $container;
 
-    /**
+    /*
      * @return ContainerConfiguratorInterface
      * @deprecated
      */
-    public static function getContainerConfigurator(): ContainerConfiguratorInterface
+    /*public static function getContainerConfigurator(): ContainerConfiguratorInterface
     {
         return self::getContainerConfiguratorByContainer(self::getContainer());
-    }
+    }*/
 
     public static function setContainer(object $container)
     {
@@ -123,14 +123,14 @@ class ContainerHelper
         return $config;
     }
 
-    /**
+    /*
      * @param array $config
      * @param array $fileList
      * @param string|null $toKey
      * @return array
      * @deprecated
      */
-    public static function mergeFromFiles(array $config, array $fileList, string $toKey = null): array
+    /*public static function mergeFromFiles(array $config, array $fileList, string $toKey = null): array
     {
         foreach ($fileList as $configFile) {
             if ($toKey) {
@@ -142,6 +142,6 @@ class ContainerHelper
             ArrayHelper::setValue($config, $toKey, $mergedConfig);
         }
         return $config;
-    }
+    }*/
 
 }

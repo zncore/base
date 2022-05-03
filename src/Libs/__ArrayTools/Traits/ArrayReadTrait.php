@@ -95,19 +95,19 @@ trait ArrayReadTrait
         return $entity;
     }
 
-    /**
+    /*
      * @param Query|null $query
      *
      * @return array|mixed
      * @deprecated
      */
-    public function allArray(Query $query = null)
+    /*public function allArray(Query $query = null)
     {
         $iterator = $this->getIterator();
         $array = $iterator->all($query);
         $array = $this->forgeEntity($array);
         return $array;
-    }
+    }*/
 
     public function all(Query $query = null)
     {

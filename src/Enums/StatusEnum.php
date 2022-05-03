@@ -2,20 +2,14 @@
 
 namespace ZnCore\Base\Enums;
 
-use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
+use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 
 class StatusEnum implements GetLabelsInterface
 {
 
     // удален
     const DELETED = -10;
-
-    /**
-     * @deprecated
-     * @see DISABLED
-     */
-    const DISABLE = 0;
 
     // отключен
     const DISABLED = 0;
@@ -28,12 +22,6 @@ class StatusEnum implements GetLabelsInterface
 
     // ожидает одобрения / премодерация
     const WAIT_APPROVING = 90;
-
-    /**
-     * @deprecated
-     * @see ENABLED
-     */
-    const ENABLE = 100;
 
     // включен / одобрен
     const ENABLED = 100;

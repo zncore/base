@@ -67,7 +67,7 @@ class ClassHelper
         throw new NotInstanceOfException("Class \"$instanceClassName\" not instanceof \"$interface\"");
     }
 
-    /**
+    /*
      * @param $instance
      * @param $interface
      * @param bool $allowString
@@ -75,11 +75,11 @@ class ClassHelper
      * @deprecated
      * @todo переделать на тип bool
      */
-    public static function isInstanceOf($instance, $interface, bool $allowString = false): void
+    /*public static function isInstanceOf($instance, $interface, bool $allowString = false): void
     {
         DeprecateHelper::softThrow();
         self::checkInstanceOf($instance, $interface, $allowString);
-    }
+    }*/
 
     public static function getInstanceOfClassName($class, $classname)
     {
