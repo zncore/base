@@ -13,12 +13,12 @@ use ZnCore\Domain\Helpers\EntityHelper;
 class ClassHelper
 {
 
-    public static function normalizeClassName($className)
+    /*public static function normalizeClassName($className)
     {
         $className = trim($className, '@/\\');
         $className = str_replace('/', '\\', $className);
         return $className;
-    }
+    }*/
 
     public static function instanceOf($instance, $interface, bool $allowString = false): bool
     {
@@ -255,6 +255,4 @@ class ClassHelper
     {
         return is_string($name) && (strpos($name, '\\') !== false || class_exists($name));
     }
-
-
 }

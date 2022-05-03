@@ -6,6 +6,8 @@ use DateTime;
 use DateTimeZone;
 use InvalidArgumentException;
 
+DeprecateHelper::hardThrow();
+
 class TimeHelper
 {
 

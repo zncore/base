@@ -9,7 +9,16 @@ use ZnCore\Base\Libs\Container\ContainerAwareInterface;
 class DiHelper
 {
 
-    public static function make(string $className, ContainerInterface $container = null): object
+    /**
+     * Создать объект
+     *
+     * Пример: $widget = DiHelper::make($widgetClass, $this->container);
+     *
+     * @param string $className
+     * @param ContainerInterface $container
+     * @return object
+     */
+    public static function make(string $className, ContainerInterface $container): object
     {
         if ($container->has($className)) {
             $instance = $container->get($className);
@@ -26,5 +35,4 @@ class DiHelper
             $instance->setContainer($container);
         }
     }
-
 }

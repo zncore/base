@@ -2,10 +2,11 @@
 
 namespace ZnCore\Base\Helpers;
 
+use InvalidArgumentException;
 use ZnCore\Base\Exceptions\NotInstanceOfException;
-use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
+use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 
 class EnumHelper
 {
@@ -75,7 +76,7 @@ class EnumHelper
         } catch (NotInstanceOfException $e) {
             $labels = null;
         }
-        if(empty($labels)) {
+        if (empty($labels)) {
             $all = $all ?: EnumHelper::all($className);
             $labels = array_flip($all);
             $labels = array_map(function ($value) {

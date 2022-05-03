@@ -8,7 +8,7 @@ use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 class StatusSimpleEnum implements GetLabelsInterface
 {
 
-    const ENABLED = 1;
+    const ENABLED = 100;
     const DISABLED = 0;
     const DELETED = self::DISABLED;
 

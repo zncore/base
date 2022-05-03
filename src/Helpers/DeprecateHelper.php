@@ -16,12 +16,8 @@ class DeprecateHelper
 
     public static function softThrow(string $message = '')
     {
-//        $messageText = 'Deprecated: ' . $message;
         if (self::isStrictMode()) {
             self::hardThrow($message);
-            //throw new DeprecatedException($messageText);
-        } else {
-            //self::log($messageText);
         }
     }
 
