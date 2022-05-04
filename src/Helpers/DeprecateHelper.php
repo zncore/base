@@ -2,8 +2,6 @@
 
 namespace ZnCore\Base\Helpers;
 
-use Composer\Autoload\ClassLoader;
-use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use ZnCore\Base\Exceptions\DeprecatedException;

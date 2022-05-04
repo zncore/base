@@ -2,12 +2,16 @@
 
 namespace ZnCore\Base\Helpers;
 
-use Composer\Autoload\ClassLoader;
 use ZnCore\Base\Exceptions\NotFoundDependencyException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 
-class ComposerHelper
+class ComposerHelper extends NewComposerHelper
+{
+
+}
+
+class ComposerHelper111
 {
 
     private static $autoloadPsr4;
