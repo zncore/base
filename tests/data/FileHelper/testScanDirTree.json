@@ -5,30 +5,25 @@
             {
                 "type": "file",
                 "size": 481,
-                "name": "action.json",
-                "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/kz\/action.json"
+                "name": "action.json"
             },
             {
                 "type": "file",
                 "size": 544,
-                "name": "main.json",
-                "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/kz\/main.json"
+                "name": "main.json"
             },
             {
                 "type": "file",
                 "size": 193,
-                "name": "message.json",
-                "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/kz\/message.json"
+                "name": "message.json"
             },
             {
                 "type": "file",
                 "size": 274,
-                "name": "status.json",
-                "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/kz\/status.json"
+                "name": "status.json"
             }
         ],
-        "name": "kz",
-        "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/kz"
+        "name": "kz"
     },
     {
         "type": "directory",
@@ -36,35 +31,29 @@
             {
                 "type": "file",
                 "size": 523,
-                "name": "action.json",
-                "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/ru\/action.json"
+                "name": "action.json"
             },
             {
                 "type": "file",
                 "size": 93,
-                "name": "domain.json",
-                "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/ru\/domain.json"
+                "name": "domain.json"
             },
             {
                 "type": "file",
                 "size": 637,
-                "name": "main.json",
-                "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/ru\/main.json"
+                "name": "main.json"
             },
             {
                 "type": "file",
                 "size": 202,
-                "name": "message.json",
-                "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/ru\/message.json"
+                "name": "message.json"
             },
             {
                 "type": "file",
                 "size": 368,
-                "name": "status.json",
-                "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/ru\/status.json"
+                "name": "status.json"
             }
         ],
-        "name": "ru",
-        "path": "\/home\/vitaliy\/common\/var\/www\/social\/server.soc\/vendor\/zncore\/base\/tests\/Unit\/..\/..\/src\/i18next\/ru"
+        "name": "ru"
     }
 ]
