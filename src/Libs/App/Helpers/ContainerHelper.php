@@ -101,47 +101,4 @@ class ContainerHelper
             }
         }
     }
-
-    public static function importFromConfig($fileList, array $config = []): array
-    {
-        DeprecateHelper::softThrow();
-        foreach ($fileList as $configFile) {
-            $toKey = null;
-            if (is_array($configFile)) {
-                $toKey = $configFile[1];
-                $configFile = $configFile[0];
-            }
-            if ($toKey) {
-                $sourceConfig = ArrayHelper::getValue($config, $toKey);
-            } else {
-                $sourceConfig = $config;
-            }
-            $requiredConfig = require($configFile);
-            $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
-            ArrayHelper::setValue($config, $toKey, $mergedConfig);
-        }
-        return $config;
-    }
-
-    /*
-     * @param array $config
-     * @param array $fileList
-     * @param string|null $toKey
-     * @return array
-     * @deprecated
-     */
-    /*public static function mergeFromFiles(array $config, array $fileList, string $toKey = null): array
-    {
-        foreach ($fileList as $configFile) {
-            if ($toKey) {
-                $sourceConfig = ArrayHelper::getValue($config, $toKey);
-            } else {
-                $sourceConfig = $config;
-            }
-            $mergedConfig = ArrayHelper::merge($sourceConfig, require($configFile));
-            ArrayHelper::setValue($config, $toKey, $mergedConfig);
-        }
-        return $config;
-    }*/
-
 }
