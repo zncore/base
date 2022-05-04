@@ -7,6 +7,11 @@ class FileEntity extends BaseEntity
 
     protected $size = null;
 
+    public function getType()
+    {
+        return self::TYPE_FILE;
+    }
+
     public function getSize()
     {
         return $this->size;

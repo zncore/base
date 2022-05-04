@@ -2,40 +2,11 @@
 
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
-use Illuminate\Support\Collection;
-use ZnCore\Base\Entities\DirectoryEntity;
-use ZnCore\Base\Entities\FileEntity;
-use ZnCore\Base\Enums\Measure\ByteEnum;
 use ZnCore\Base\Helpers\ComposerHelper;
-use ZnCore\Base\Helpers\EnumHelper;
 use ZnCore\Base\Libs\Store\StoreFile;
 
 class FileHelper extends BaseFileHelper
 {
-
-    public static function mimeTypeByExtension(string $extension, string $magicFile = null)
-    {
-        $magicFile = $magicFile ?: __DIR__ . '/mimeTypes.php';
-        $mimeTypes = static::loadMimeTypes($magicFile);
-        $extension = strtolower($extension);
-        if (isset($mimeTypes[$extension])) {
-            return $mimeTypes[$extension];
-        }
-        return null;
-    }
-
-    public static function extensionsByMimeType(string $mimeType, string $magicFile = null)
-    {
-        $magicFile = $magicFile ?: __DIR__ . '/mimeTypes.php';
-        $mimeTypes = static::loadMimeTypes($magicFile);
-        $mimeType = strtolower($mimeType);
-        foreach ($mimeTypes as $ext => $mimeTypeValue) {
-            if($mimeTypeValue == $mimeType) {
-                return $ext;
-            }
-        }
-        return null;
-    }
 
     public static function path(string $path = ''): string
     {
@@ -104,32 +75,6 @@ class FileHelper extends BaseFileHelper
         return $data;
     }
 
-    static function getPath($name)
-    {
-        if (self::isAlias($name)) {
-            $name = str_replace('\\', '/', $name);
-            $fileName = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($name);
-        } else {
-            if (self::isAbsolute($name)) {
-                $fileName = $name;
-            } else {
-                $fileName = self::rootPath() . DIRECTORY_SEPARATOR . $name;
-            }
-        }
-        $fileName = self::normalizePath($fileName);
-        return $fileName;
-    }
-
-    public static function dirLevelUp($class, $upLevel = 1)
-    {
-        $class = self::normalizePath($class);
-        $arr = explode(DIRECTORY_SEPARATOR, $class);
-        for ($i = 0; $i < $upLevel; $i++) {
-            $arr = array_splice($arr, 0, -1);
-        }
-        return implode(DIRECTORY_SEPARATOR, $arr);
-    }
-
     public static function normalizeAlias($path)
     {
         if (empty($path)) {
@@ -160,38 +105,11 @@ class FileHelper extends BaseFileHelper
     {
         if (self::isAlias($path)) {
             $path = self::normalizeAlias($path);
-
             $dir = ComposerHelper::getPsr4Path($path);
-
-            /*if (class_exists('Yii')) {
-                $dir = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($path);
-            } else {
-                $path = trim($path, '@/\\');
-                if ($pos = strpos($path, 'root') === 0) {
-                    $path = substr($path, 4);
-                }
-                $dir = self::rootPath() . DIRECTORY_SEPARATOR . $path;
-            }*/
         } else {
             $dir = self::pathToAbsolute($path);
         }
         return self::normalizePath($dir);
-    }
-
-    public static function findInFileByExp($file, $search, $returnIndex = null)
-    {
-        $content = self::load($file);
-        $finded = [];
-        preg_match_all("/{$search}/", $content, $out);
-        if (!empty($out[0])) {
-            if ($returnIndex === null) {
-                $item = $out;
-            } else {
-                $item = $out[$returnIndex];
-            }
-            $finded[] = $item;
-        }
-        return $finded;
     }
 
     public static function remove($path)
@@ -237,11 +155,6 @@ class FileHelper extends BaseFileHelper
         return $dir;
     }
 
-    public static function isEqualContent($sourceFile, $targetFile)
-    {
-        return self::load($sourceFile) === self::load($targetFile);
-    }
-
     public static function copy($sourceFile, $targetFile, $dirAccess = 0777)
     {
         $sourceData = FileHelper::load($sourceFile);
@@ -275,43 +188,89 @@ class FileHelper extends BaseFileHelper
         return file_get_contents($fileName, $flags, $context, $offset);
     }
 
-    public static function has($fileName)
+    public static function has($fileName): bool
     {
         $fileName = self::normalizePath($fileName);
         return is_file($fileName) || is_dir($fileName);
     }
 
-    public static function normalizePathList($list)
+    /*public static function mimeTypeByExtension(string $extension, string $magicFile = null)
+    {
+        $magicFile = $magicFile ?: __DIR__ . '/mimeTypes.php';
+        $mimeTypes = static::loadMimeTypes($magicFile);
+        $extension = strtolower($extension);
+        if (isset($mimeTypes[$extension])) {
+            return $mimeTypes[$extension];
+        }
+        return null;
+    }
+
+    public static function extensionsByMimeType(string $mimeType, string $magicFile = null)
+    {
+        $magicFile = $magicFile ?: __DIR__ . '/mimeTypes.php';
+        $mimeTypes = static::loadMimeTypes($magicFile);
+        $mimeType = strtolower($mimeType);
+        foreach ($mimeTypes as $ext => $mimeTypeValue) {
+            if ($mimeTypeValue == $mimeType) {
+                return $ext;
+            }
+        }
+        return null;
+    }*/
+
+    /*public static function isEqualContent($sourceFile, $targetFile)
+    {
+        return self::load($sourceFile) === self::load($targetFile);
+    }*/
+
+    /*static function getPath($name)
+    {
+        if (self::isAlias($name)) {
+            $name = str_replace('\\', '/', $name);
+            $fileName = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($name);
+        } else {
+            if (self::isAbsolute($name)) {
+                $fileName = $name;
+            } else {
+                $fileName = self::rootPath() . DIRECTORY_SEPARATOR . $name;
+            }
+        }
+        $fileName = self::normalizePath($fileName);
+        return $fileName;
+    }
+
+    public static function dirLevelUp($class, $upLevel = 1)
+    {
+        $class = self::normalizePath($class);
+        $arr = explode(DIRECTORY_SEPARATOR, $class);
+        for ($i = 0; $i < $upLevel; $i++) {
+            $arr = array_splice($arr, 0, -1);
+        }
+        return implode(DIRECTORY_SEPARATOR, $arr);
+    }*/
+
+    /*public static function findInFileByExp($file, $search, $returnIndex = null)
+    {
+        $content = self::load($file);
+        $finded = [];
+        preg_match_all("/{$search}/", $content, $out);
+        if (!empty($out[0])) {
+            if ($returnIndex === null) {
+                $item = $out;
+            } else {
+                $item = $out[$returnIndex];
+            }
+            $finded[] = $item;
+        }
+        return $finded;
+    }*/
+
+    /*public static function normalizePathList($list)
     {
         foreach ($list as &$path) {
             $path = self::normalizePath($path);
         }
         return $list;
-    }
-
-    public static function scanDirTree($dir, $options = null)
-    {
-        $collection = new Collection();
-
-        $list = self::scanDir($dir);
-        foreach ($list as $name) {
-            $path = $dir . '/' . $name;
-            if(is_dir($path)) {
-                $entity = new DirectoryEntity();
-                $entity->setItems(self::scanDirTree($path, $options));
-            } elseif(is_file($path)) {
-                $entity = new FileEntity();
-                $entity->setSize(filesize($path));
-            } else {
-                throw new \Exception();
-            }
-            $entity->setName($name);
-            $entity->setPath($path);
-            if ($entity instanceof DirectoryEntity || static::filterPath($path, $options)) {
-                $collection->add($entity);
-            }
-        }
-        return $collection;
     }
 
     public static function scanDir($dir, $options = null)
@@ -444,6 +403,6 @@ class FileHelper extends BaseFileHelper
             return $fileList;
         }
         return FALSE;
-    }
+    }*/
 
 }

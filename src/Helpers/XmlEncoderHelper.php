@@ -10,7 +10,7 @@ class XmlEncoderHelper
     public static function createMedia(string $mimeType, $content, string $caption = null)
     {
         if (empty($caption)) {
-            $ext = FileHelper::extensionsByMimeType($mimeType);
+            $ext = MimeTypeHelper::getExtensionByMime($mimeType);
             $caption = 'document.' . $ext;
         }
 

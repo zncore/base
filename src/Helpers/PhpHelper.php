@@ -9,7 +9,7 @@ class PhpHelper
 
     public static function requireFromDirectory(string $directory, bool $isRecursive = false) {
         $directory = rtrim($directory, '/');
-        $libs = FileHelper::scanDir($directory);
+        $libs = FindFileHelper::scanDir($directory);
         foreach ($libs as $lib) {
             $path = $directory . '/' . $lib;
             if(is_file($path)) {

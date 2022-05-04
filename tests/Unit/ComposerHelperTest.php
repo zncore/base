@@ -11,7 +11,6 @@ final class ComposerHelperTest extends TestCase
     public function testBasics()
     {
         ComposerHelper::register('App1', __DIR__ . '/../classes');
-//        ComposerHelper::getComposerVendorClassLoader()->addPsr4('App1\\', __DIR__ . '/../classes');
         $cc = new \App1\Cc;
         $this->assertEquals(\App1\Cc::class, get_class($cc));
 

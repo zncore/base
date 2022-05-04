@@ -5,15 +5,15 @@ namespace ZnCore\Base\Helpers;
 use Composer\Autoload\ClassLoader;
 use ZnCore\Base\Exceptions\NotFoundDependencyException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 
 class NewComposerHelper
 {
 
     private static $composerVendorClassLoader;
 
-    public static function getComposerVendorClassLoader(): ClassLoader {
-        if(!self::$composerVendorClassLoader) {
+    public static function getComposerVendorClassLoader(): ClassLoader
+    {
+        if (!self::$composerVendorClassLoader) {
             $loaders = \Composer\Autoload\ClassLoader::getRegisteredLoaders();
             $vendorDir = realpath(__DIR__ . '/../../../..');
             self::$composerVendorClassLoader = $loaders[$vendorDir];
@@ -53,27 +53,13 @@ class NewComposerHelper
         self::getComposerVendorClassLoader()->addPsr4($namespace . '\\', $path);
     }
 
-    public static function getPsr4Path_new($path)
-    {
-        $prefixes = self::getComposerVendorClassLoader()->getPrefixesPsr4();
-        if(empty($prefixes[$path . '\\'])) {
-            dd($prefixes, $path);
-        }
-        $dir = $prefixes[$path . '\\'];
-        return realpath($dir[0]);
-    }
-
     public static function getPsr4Path($path)
     {
-        $path = self::normalizePath($path);
+        $path = str_replace('/', '\\', $path);
         $paths = self::find($path);
-
         $resPath = ArrayHelper::first($paths);
         $resPath = str_replace('\\', '/', $resPath);
         return realpath($resPath);
-
-//        dd(realpath($resPath));
-//        return FileHelper::normalizePath($resPath);
     }
 
     private static function find($path): array
@@ -96,12 +82,5 @@ class NewComposerHelper
             }
         }
         return $paths;
-    }
-
-    private static function normalizePath(string $path): string
-    {
-        $path = str_replace('/', '\\', $path);
-//        $path = trim($path, '\\@');
-        return $path;
     }
 }
