@@ -2,6 +2,8 @@
 
 namespace ZnCore\Base\Helpers;
 
+use Symfony\Component\Uid\Uuid;
+
 class StringHelper
 {
 
@@ -92,6 +94,11 @@ class StringHelper
         return $data;
     }
 
+    /**
+     * @return array
+     * @deprecated
+     * @see Uuid::v4()
+     */
     public static function genUuid()
     {
         // composer require ramsey/uuid:"^3 || ^4"

@@ -41,7 +41,7 @@ class LoadHelper
     {
         foreach ($fileNames as $fileName) {
             $itemConfig = self::loadScript($fileName);
-            if(is_array($itemConfig)) {
+            if (is_array($itemConfig)) {
                 $config = ArrayHelper::merge($config, $itemConfig);
             }
         }

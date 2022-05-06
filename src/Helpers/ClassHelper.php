@@ -2,7 +2,6 @@
 
 namespace ZnCore\Base\Helpers;
 
-use Exception;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
@@ -12,13 +11,6 @@ use ZnCore\Domain\Helpers\EntityHelper;
 
 class ClassHelper
 {
-
-    /*public static function normalizeClassName($className)
-    {
-        $className = trim($className, '@/\\');
-        $className = str_replace('/', '\\', $className);
-        return $className;
-    }*/
 
     public static function instanceOf($instance, $interface, bool $allowString = false): bool
     {
@@ -66,20 +58,6 @@ class ClassHelper
         $instanceClassName = is_object($instanceClassName) ? get_class($instanceClassName) : $instanceClassName;
         throw new NotInstanceOfException("Class \"$instanceClassName\" not instanceof \"$interface\"");
     }
-
-    /*
-     * @param $instance
-     * @param $interface
-     * @param bool $allowString
-     * @throws NotInstanceOfException
-     * @deprecated
-     * @todo переделать на тип bool
-     */
-    /*public static function isInstanceOf($instance, $interface, bool $allowString = false): void
-    {
-        DeprecateHelper::softThrow();
-        self::checkInstanceOf($instance, $interface, $allowString);
-    }*/
 
     public static function getInstanceOfClassName($class, $classname)
     {

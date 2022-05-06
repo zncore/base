@@ -44,24 +44,17 @@ class InstanceHelper
         }
 
         $handlerInstance = self::createObject($definition['class'], $constructParams);
-        //$handlerInstance = new $definition['class'];
 
-        /*if ($interfaceClass) {
-            ClassHelper::isInstanceOf($handlerInstance, $interfaceClass);
-        }*/
         ClassHelper::configure($handlerInstance, $definition);
         return $handlerInstance;
     }
 
-    public static function ensure($definition, $constructParams = []/*, $interfaceClass = null*/): object
+    public static function ensure($definition, $constructParams = []): object
     {
         if (is_object($definition)) {
-            /*if ($interfaceClass) {
-                ClassHelper::isInstanceOf($definition, $interfaceClass);
-            }*/
             return $definition;
         }
-        return self::create($definition, $constructParams/*, $interfaceClass*/);
+        return self::create($definition, $constructParams);
     }
 
     private static function prepareParameters(string $className, string $methodName, array $constructionArgs): array
@@ -108,85 +101,6 @@ class InstanceHelper
         } else {
             $instance = new $className();
         }
-
-
-
-        /*switch (count($constructionArgs)) {
-            case 0:
-                $instance = new $className();
-                break;
-            case 1:
-                $instance = new $className(
-                    array_shift($constructionArgs)
-                );
-                break;
-            case 2:
-                $instance = new $className(
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs)
-                );
-                break;
-            case 3:
-                $instance = new $className(
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs)
-                );
-                break;
-            case 4:
-                $instance = new $className(
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs)
-                );
-                break;
-            case 5:
-                $instance = new $className(
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs)
-                );
-                break;
-            case 6:
-                $instance = new $className(
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs)
-                );
-                break;
-            case 7:
-                $instance = new $className(
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs)
-                );
-                break;
-            case 8:
-                $instance = new $className(
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs),
-                    array_shift($constructionArgs)
-                );
-                break;
-            default:
-                throw new \Exception('Count parameters not supported!');
-        }*/
         return $instance;
     }
-
 }
