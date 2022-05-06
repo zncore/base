@@ -1,4 +1,7 @@
 <?php
+
+\ZnCore\Base\Helpers\DeprecateHelper::hardThrow();
+
 /**
  * MIME aliases.
  *

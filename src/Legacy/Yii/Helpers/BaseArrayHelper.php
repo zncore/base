@@ -8,6 +8,8 @@
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 use InvalidArgumentException;
+use ZnCore\Base\Legacy\Yii\ArrayValues\ReplaceArrayValue;
+use ZnCore\Base\Legacy\Yii\ArrayValues\UnsetArrayValue;
 use function foo\func;
 
 /**

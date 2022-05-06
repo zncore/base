@@ -9,6 +9,7 @@ namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 use Symfony\Component\HttpFoundation\Request;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Helpers\MimeTypeHelper;
 use ZnCore\Base\Legacy\Yii\Base\Model;
 
 /**
@@ -179,7 +180,8 @@ class Html
             return null;
         }
         $content = FileHelper::load($fileName);
-        $mimeType = FileHelper::getMimeType($fileName);
+        $mimeType = MimeTypeHelper::getMimeTypeByFileName($fileName);
+//        $mimeType = FileHelper::getMimeType($fileName);
         $base64code = 'data:'.$mimeType.';base64, ' . base64_encode($content);
         return $base64code;
     }

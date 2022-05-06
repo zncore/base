@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace ZnCore\Base\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\ArrayValues;
 
 /**
  * Object that represents the removal of array value while performing [[ArrayHelper::merge()]].

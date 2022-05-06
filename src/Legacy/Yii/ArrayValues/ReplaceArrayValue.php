@@ -5,7 +5,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace ZnCore\Base\Legacy\Yii\Helpers;
+namespace ZnCore\Base\Legacy\Yii\ArrayValues;
 
 use ZnCore\Base\Exceptions\InvalidConfigException;
 

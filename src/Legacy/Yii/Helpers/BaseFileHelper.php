@@ -10,6 +10,7 @@ namespace ZnCore\Base\Legacy\Yii\Helpers;
 use ErrorException;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
+use ZnCore\Base\Helpers\DeprecateHelper;
 
 /**
  * BaseFileHelper provides concrete implementation for [[FileHelper]].
@@ -150,6 +151,7 @@ abstract class BaseFileHelper
      */
     public static function getMimeType($file, $magicFile = null, $checkExtension = true)
     {
+        DeprecateHelper::hardThrow();
         if ($magicFile !== null) {
             $magicFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
         }
@@ -182,8 +184,9 @@ abstract class BaseFileHelper
      * If this is not set, the file specified by [[mimeMagicFile]] will be used.
      * @return string|null the MIME type. Null is returned if the MIME type cannot be determined.
      */
-    public static function getMimeTypeByExtension($file, $magicFile = null)
+    private static function getMimeTypeByExtension($file, $magicFile = null)
     {
+        DeprecateHelper::hardThrow();
         $mimeTypes = static::loadMimeTypes($magicFile);
 
         if (($ext = pathinfo($file, PATHINFO_EXTENSION)) !== '') {
@@ -206,6 +209,7 @@ abstract class BaseFileHelper
      */
     public static function getExtensionsByMimeType($mimeType, $magicFile = null)
     {
+        DeprecateHelper::hardThrow();
         $aliases = static::loadMimeAliases(static::$mimeAliasesFile);
         if (isset($aliases[$mimeType])) {
             $mimeType = $aliases[$mimeType];
@@ -225,6 +229,7 @@ abstract class BaseFileHelper
      */
     protected static function loadMimeTypes($magicFile)
     {
+        DeprecateHelper::hardThrow();
         if ($magicFile === null) {
             $magicFile = static::$mimeMagicFile;
         }
@@ -247,6 +252,7 @@ abstract class BaseFileHelper
      */
     protected static function loadMimeAliases($aliasesFile)
     {
+        DeprecateHelper::hardThrow();
         if ($aliasesFile === null) {
             $aliasesFile = static::$mimeAliasesFile;
         }
