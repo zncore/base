@@ -6,7 +6,6 @@ use Psr\Container\ContainerInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
 use ZnCore\Base\Libs\App\Events\LoadConfigEvent;
-use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;

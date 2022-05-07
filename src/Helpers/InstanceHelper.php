@@ -18,7 +18,7 @@ class InstanceHelper
      */
     private static function createObject(string $className, array $constructionArgs = []): object
     {
-        if(!class_exists($className)) {
+        if (!class_exists($className)) {
             throw new ClassNotFoundException();
         }
         $constructionArgs = self::prepareParameters($className, '__construct', $constructionArgs);
@@ -31,14 +31,14 @@ class InstanceHelper
         return call_user_func_array([$instance, $methodName], $parameters);
     }
 
-    public static function create($definition, array $constructParams = []/*, $interfaceClass = null*/): object
+    public static function create($definition, array $constructParams = []): object
     {
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
         }
         $definition = ClassHelper::normalizeComponentConfig($definition);
 
-        if(empty($constructParams) && array_key_exists('__construct', $definition)) {
+        if (empty($constructParams) && array_key_exists('__construct', $definition)) {
             $constructParams = $definition['__construct'];
             unset($definition['__construct']);
         }
@@ -67,7 +67,7 @@ class InstanceHelper
                 foreach ($constructorParameters as $index => $constructorParameter) {
                     /** @var ReflectionNamedType $parameterType */
                     $parameterType = $constructorParameter->getType();
-                    if($parameterType && array_key_exists($parameterType->getName(), $constructionArgs)) {
+                    if ($parameterType && array_key_exists($parameterType->getName(), $constructionArgs)) {
                         $parameterName = $parameterType->getName();
                     } else {
                         $parameterName = $constructorParameter->name;
@@ -78,9 +78,9 @@ class InstanceHelper
                     }
                 }
                 foreach ($constructorParameters as $index => $constructorParameter) {
-                    if(!isset($flatParameters[$index])) {
+                    if (!isset($flatParameters[$index])) {
                         foreach ($constructionArgs as $constructionArgName => $constructionArgValue) {
-                            if(is_int($constructionArgName)) {
+                            if (is_int($constructionArgName)) {
                                 $flatParameters[$index] = $constructionArgValue;
                             }
                         }
@@ -88,16 +88,17 @@ class InstanceHelper
                 }
                 ksort($flatParameters);
                 $constructionArgs = $flatParameters;
-            } catch (\ReflectionException $e) {}
+            } catch (\ReflectionException $e) {
+            }
         }
         return $constructionArgs;
     }
 
     private static function createObjectInstance(string $className, array $constructionArgs): object
     {
-        if(count($constructionArgs) && method_exists($className, '__construct')) {
+        if (count($constructionArgs) && method_exists($className, '__construct')) {
 //            $instance = new $className(...$constructionArgs);
-            $instance = (new \ReflectionClass ( $className ))->newInstanceArgs ( $constructionArgs );
+            $instance = (new \ReflectionClass ($className))->newInstanceArgs($constructionArgs);
         } else {
             $instance = new $className();
         }

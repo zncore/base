@@ -137,7 +137,7 @@ class ArrayHelper extends BaseArrayHelper
     }
 
     static function recursiveIterator(array $array, $callback)
-    { //����������� ����� �������
+    {
         foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $array[$key] = self::recursiveIterator($value, $callback);
