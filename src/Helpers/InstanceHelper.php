@@ -10,21 +10,6 @@ use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 class InstanceHelper
 {
 
-    /**
-     * @param string $className
-     * @param array $constructionArgs
-     * @return object
-     * @throws ClassNotFoundException
-     */
-    private static function createObject(string $className, array $constructionArgs = []): object
-    {
-        if (!class_exists($className)) {
-            throw new ClassNotFoundException();
-        }
-        $constructionArgs = self::prepareParameters($className, '__construct', $constructionArgs);
-        return self::createObjectInstance($className, $constructionArgs);
-    }
-
     public static function callMethod(object $instance, string $methodName, array $parameters = [])
     {
         $parameters = self::prepareParameters(get_class($instance), $methodName, $parameters);
@@ -92,6 +77,21 @@ class InstanceHelper
             }
         }
         return $constructionArgs;
+    }
+
+    /**
+     * @param string $className
+     * @param array $constructionArgs
+     * @return object
+     * @throws ClassNotFoundException
+     */
+    private static function createObject(string $className, array $constructionArgs = []): object
+    {
+        if (!class_exists($className)) {
+            throw new ClassNotFoundException();
+        }
+        $constructionArgs = self::prepareParameters($className, '__construct', $constructionArgs);
+        return self::createObjectInstance($className, $constructionArgs);
     }
 
     private static function createObjectInstance(string $className, array $constructionArgs): object

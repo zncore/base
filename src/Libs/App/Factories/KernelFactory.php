@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\App\Factories;
 
-use ZnCore\Base\Helpers\EnvHelper;
+use ZnCore\Base\Libs\App\Helpers\EnvHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Kernel;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;

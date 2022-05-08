@@ -70,7 +70,7 @@ class Store
 
     public function load($fileAlias, $key = null)
     {
-        $fileName = FilePathHelper::normalize($fileAlias);
+        $fileName = FilePathHelper::pathToAbsolute($fileAlias);
         if (!FileStorageHelper::has($fileName)) {
             return null;
         }
@@ -89,7 +89,7 @@ class Store
 
     public function save($fileAlias, $data)
     {
-        $fileName = FilePathHelper::normalize($fileAlias);
+        $fileName = FilePathHelper::pathToAbsolute($fileAlias);
         if (method_exists($this->driverInstance, 'save')) {
             return $this->driverInstance->save($fileName, $data);
         }

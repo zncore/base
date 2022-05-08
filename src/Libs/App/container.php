@@ -15,7 +15,7 @@ use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Contracts\Cache\CacheInterface;
 use ZnCore\Base\Enums\Measure\TimeEnum;
-use ZnCore\Base\Helpers\EnvHelper;
+use ZnCore\Base\Libs\App\Helpers\EnvHelper;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\App\Libs\ConfigManager;
 use ZnCore\Base\Libs\DotEnv\DotEnv;

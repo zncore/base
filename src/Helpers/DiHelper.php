@@ -6,6 +6,8 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface as SymfonyContainerAwareInterface;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerAwareInterface;
 
+DeprecateHelper::hardThrow();
+
 class DiHelper
 {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Helpers;
+namespace ZnCore\Base\Libs\App\Helpers;
 
 use Symfony\Component\HttpFoundation\Request;
 use ZnCore\Base\Enums\EnvEnum;
