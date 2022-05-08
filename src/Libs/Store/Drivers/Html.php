@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\Store\Drivers;
 
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
 
 class Html implements DriverInterface
 {
@@ -20,15 +21,15 @@ class Html implements DriverInterface
     public function save($fileName, $data)
     {
         $content = $this->encode($data);
-        FileHelper::save($fileName, $content);
+        FileStorageHelper::save($fileName, $content);
     }
 
     public function load($fileName, $key = null)
     {
-        if ( ! FileHelper::has($fileName)) {
+        if ( ! FileStorageHelper::has($fileName)) {
             return null;
         }
-        $data = FileHelper::load($fileName);
+        $data = FileStorageHelper::load($fileName);
         return $data;
     }
 

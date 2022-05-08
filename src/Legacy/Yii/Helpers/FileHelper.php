@@ -5,7 +5,7 @@ namespace ZnCore\Base\Legacy\Yii\Helpers;
 use ZnCore\Base\Helpers\ComposerHelper;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
-use ZnCore\Base\Libs\Store\StoreFile;
+//use ZnCore\Base\Libs\Store\StoreFile;
 
 class FileHelper extends BaseFileHelper
 {
@@ -119,51 +119,17 @@ class FileHelper extends BaseFileHelper
         return $dir;
     }*/
 
-
-
-
-    // ======================
-
-
-
-
-    public static function loadData($name, $key = null, $default = null)
+    /*public static function loadData($name, $key = null, $default = null)
     {
         $store = new StoreFile($name);
         $data = $store->load($key);
         $data = !empty($data) ? $data : $default;
         return $data;
-    }
+    }*/
 
-    public static function normalizeAlias($path)
-    {
-        if (empty($path)) {
-            return $path;
-        }
-        $path = str_replace('\\', '/', $path);
-        if (!self::isAlias($path)) {
-            $path = '@' . $path;
-        }
-        return $path;
-    }
 
-    public static function isAlias($path)
-    {
-        return is_string($path) && !empty($path) && $path{0} == '@';
-    }
 
-    public static function getAlias($path)
-    {
-        if (self::isAlias($path)) {
-            $path = self::normalizeAlias($path);
-            $dir = ComposerHelper::getPsr4Path($path);
-        } else {
-            $dir = FilePathHelper::pathToAbsolute($path);
-        }
-        return self::normalizePath($dir);
-    }
-
-    public static function remove($path)
+    /*public static function remove($path)
     {
         $path = FilePathHelper::pathToAbsolute($path);
         if (is_dir($path)) {
@@ -213,7 +179,54 @@ class FileHelper extends BaseFileHelper
     {
         $fileName = self::normalizePath($fileName);
         return is_file($fileName) || is_dir($fileName);
+    }*/
+
+
+    // ======================
+
+
+
+
+
+
+
+
+
+
+
+    public static function getAlias($path)
+    {
+        if (self::isAlias($path)) {
+            $path = self::normalizeAlias($path);
+            $dir = ComposerHelper::getPsr4Path($path);
+        } else {
+            $dir = FilePathHelper::pathToAbsolute($path);
+        }
+        return self::normalizePath($dir);
     }
+
+
+
+
+
+    protected static function normalizeAlias($path)
+    {
+        if (empty($path)) {
+            return $path;
+        }
+        $path = str_replace('\\', '/', $path);
+        if (!self::isAlias($path)) {
+            $path = '@' . $path;
+        }
+        return $path;
+    }
+
+    protected static function isAlias($path)
+    {
+        return is_string($path) && !empty($path) && $path{0} == '@';
+    }
+
+
 
     /*public static function mimeTypeByExtension(string $extension, string $magicFile = null)
     {

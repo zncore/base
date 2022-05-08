@@ -5,17 +5,22 @@ namespace ZnCore\Base\Libs\Store\Helpers;
 use Yii;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
 
 class FileGeneratorHelper {
 	
 	public static function generate($data) {
 		$code = self::generateCode($data);
-		if(!empty($data['dirAlias']) && !empty($data['baseName'])) {
+
+        $fileName = $data['fileName'];
+
+		/*if(!empty($data['dirAlias']) && !empty($data['baseName'])) {
 			$fileName = FileHelper::getAlias($data['dirAlias'].'/'.$data['baseName'].'.php');
 		} elseif(!empty($data['fileName'])) {
 			$fileName = $data['fileName'];
-		}
-		FileHelper::save($fileName, $code);
+		}*/
+
+        FileStorageHelper::save($fileName, $code);
 	}
 	
 	private static function generateCode($data) {

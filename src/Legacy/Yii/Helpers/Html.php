@@ -9,6 +9,7 @@ namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 use Symfony\Component\HttpFoundation\Request;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\MimeTypeHelper;
 use ZnCore\Base\Legacy\Yii\Base\Model;
 
@@ -176,10 +177,10 @@ class Html
 
     public static function getDataUrl($fileName) {
         $fileName = FileHelper::normalizePath($fileName);
-        if(!FileHelper::has($fileName)) {
+        if(!FileStorageHelper::has($fileName)) {
             return null;
         }
-        $content = FileHelper::load($fileName);
+        $content = FileStorageHelper::load($fileName);
         $mimeType = MimeTypeHelper::getMimeTypeByFileName($fileName);
 //        $mimeType = FileHelper::getMimeType($fileName);
         $base64code = 'data:'.$mimeType.';base64, ' . base64_encode($content);

@@ -7,6 +7,12 @@ use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 class FilePathHelper
 {
 
+    public static function normalize($path)
+    {
+        $path = FilePathHelper::pathToAbsolute($path);
+        return FileHelper::normalizePath($path);
+    }
+
     public static function path(string $path = ''): string
     {
         $root = self::rootPath();

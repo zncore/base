@@ -35,7 +35,7 @@ class Url
         return $baseUrl;
     }
 
-    /**
+    /*
      * Creates a URL for the given route.
      *
      * This method will use [[\yii\web\UrlManager]] to create a URL.
@@ -101,7 +101,7 @@ class Url
      * @return string the generated URL
      * @throws InvalidArgumentException a relative route is given while there is no active controller
      */
-    public static function toRoute($route, $scheme = false)
+    /*public static function toRoute($route, $scheme = false)
     {
         $route = (array)$route;
         $route[0] = static::normalizeRoute($route[0]);
@@ -111,9 +111,9 @@ class Url
         }
 
         return static::getUrlManager()->createUrl($route);
-    }
+    }*/
 
-    /**
+    /*
      * Normalizes route and makes it suitable for UrlManager. Absolute routes are staying as is
      * while relative routes are converted to absolute ones.
      *
@@ -132,7 +132,7 @@ class Url
      * @return string normalized route suitable for UrlManager
      * @throws InvalidArgumentException a relative route is given while there is no active controller
      */
-    protected static function normalizeRoute($route)
+    /*protected static function normalizeRoute($route)
     {
         $route = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias((string)$route);
         if (strncmp($route, '/', 1) === 0) {
@@ -152,7 +152,7 @@ class Url
 
         // relative to module
         return ltrim(Yii::$app->controller->module->getUniqueId() . '/' . $route, '/');
-    }
+    }*/
 
     /**
      * Creates a URL based on the given parameters.
@@ -230,7 +230,7 @@ class Url
 //            return static::toRoute($url, $scheme);
         }
 
-        $url = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($url);
+//        $url = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($url);
         if ($url === '') {
             $url = Yii::$app->getRequest()->getUrl();
         }
@@ -407,7 +407,7 @@ class Url
         return strncmp($url, '//', 2) && strpos($url, '://') === false;
     }
 
-    /**
+    /*
      * Creates a URL by using the current route and the GET parameters.
      *
      * You may modify or remove some of the GET parameters, or add additional query parameters through
@@ -451,13 +451,13 @@ class Url
      * @return string the generated URL
      * @since 2.0.3
      */
-    public static function current(array $params = [], $scheme = false)
+    /*public static function current(array $params = [], $scheme = false)
     {
         $currentParams = Yii::$app->getRequest()->getQueryParams();
         $currentParams[0] = '/' . Yii::$app->controller->getRoute();
         $route = array_replace_recursive($currentParams, $params);
         return static::toRoute($route, $scheme);
-    }
+    }*/
 
     /**
      * @return \yii\web\UrlManager URL manager used to create URLs

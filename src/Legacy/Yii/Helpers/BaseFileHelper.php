@@ -29,15 +29,15 @@ abstract class BaseFileHelper
     const PATTERN_NEGATIVE = 16;
     const PATTERN_CASE_INSENSITIVE = 32;
 
-    /**
+    /*
      * @var string the path (or alias) of a PHP file containing MIME type information.
      */
-    public static $mimeMagicFile = '@yii/helpers/mimeTypes.php';
-    /**
+//    public static $mimeMagicFile = '@yii/helpers/mimeTypes.php';
+    /*
      * @var string the path (or alias) of a PHP file containing MIME aliases.
      * @since 2.0.14
      */
-    public static $mimeAliasesFile = '@yii/helpers/mimeAliases.php';
+//    public static $mimeAliasesFile = '@yii/helpers/mimeAliases.php';
 
 
     /**
@@ -134,7 +134,7 @@ abstract class BaseFileHelper
         return is_file($desiredFile) ? $desiredFile : $file;
     }
 
-    /**
+    /*
      * Determines the MIME type of the specified file.
      * This method will first try to determine the MIME type based on
      * [finfo_open](https://secure.php.net/manual/en/function.finfo-open.php). If the `fileinfo` extension is not installed,
@@ -149,7 +149,7 @@ abstract class BaseFileHelper
      * @return string the MIME type (e.g. `text/plain`). Null is returned if the MIME type cannot be determined.
      * @throws InvalidConfigException when the `fileinfo` PHP extension is not installed and `$checkExtension` is `false`.
      */
-    public static function getMimeType($file, $magicFile = null, $checkExtension = true)
+    /*public static function getMimeType($file, $magicFile = null, $checkExtension = true)
     {
         DeprecateHelper::hardThrow();
         if ($magicFile !== null) {
@@ -174,9 +174,9 @@ abstract class BaseFileHelper
         }
 
         return $checkExtension ? static::getMimeTypeByExtension($file, $magicFile) : null;
-    }
+    }*/
 
-    /**
+    /*
      * Determines the MIME type based on the extension name of the specified file.
      * This method will use a local map between extension names and MIME types.
      * @param string $file the file name.
@@ -184,7 +184,7 @@ abstract class BaseFileHelper
      * If this is not set, the file specified by [[mimeMagicFile]] will be used.
      * @return string|null the MIME type. Null is returned if the MIME type cannot be determined.
      */
-    private static function getMimeTypeByExtension($file, $magicFile = null)
+    /*private static function getMimeTypeByExtension($file, $magicFile = null)
     {
         DeprecateHelper::hardThrow();
         $mimeTypes = static::loadMimeTypes($magicFile);
@@ -197,9 +197,9 @@ abstract class BaseFileHelper
         }
 
         return null;
-    }
+    }*/
 
-    /**
+    /*
      * Determines the extensions by given MIME type.
      * This method will use a local map between extension names and MIME types.
      * @param string $mimeType file MIME type.
@@ -207,7 +207,7 @@ abstract class BaseFileHelper
      * If this is not set, the file specified by [[mimeMagicFile]] will be used.
      * @return array the extensions corresponding to the specified MIME type
      */
-    public static function getExtensionsByMimeType($mimeType, $magicFile = null)
+    /*public static function getExtensionsByMimeType($mimeType, $magicFile = null)
     {
         DeprecateHelper::hardThrow();
         $aliases = static::loadMimeAliases(static::$mimeAliasesFile);
@@ -217,17 +217,17 @@ abstract class BaseFileHelper
 
         $mimeTypes = static::loadMimeTypes($magicFile);
         return array_keys($mimeTypes, mb_strtolower($mimeType, 'UTF-8'), true);
-    }
+    }*/
 
-    private static $_mimeTypes = [];
+//    private static $_mimeTypes = [];
 
-    /**
+    /*
      * Loads MIME types from the specified file.
      * @param string $magicFile the path (or alias) of the file that contains all available MIME type information.
      * If this is not set, the file specified by [[mimeMagicFile]] will be used.
      * @return array the mapping from file extensions to MIME types
      */
-    protected static function loadMimeTypes($magicFile)
+    /*protected static function loadMimeTypes($magicFile)
     {
         DeprecateHelper::hardThrow();
         if ($magicFile === null) {
@@ -239,18 +239,18 @@ abstract class BaseFileHelper
         }
 
         return self::$_mimeTypes[$magicFile];
-    }
+    }*/
 
     private static $_mimeAliases = [];
 
-    /**
+    /*
      * Loads MIME aliases from the specified file.
      * @param string $aliasesFile the path (or alias) of the file that contains MIME type aliases.
      * If this is not set, the file specified by [[mimeAliasesFile]] will be used.
      * @return array the mapping from file extensions to MIME types
      * @since 2.0.14
      */
-    protected static function loadMimeAliases($aliasesFile)
+    /*protected static function loadMimeAliases($aliasesFile)
     {
         DeprecateHelper::hardThrow();
         if ($aliasesFile === null) {
@@ -262,7 +262,7 @@ abstract class BaseFileHelper
         }
 
         return self::$_mimeAliases[$aliasesFile];
-    }
+    }*/
 
     /**
      * Copies a whole directory as another one.

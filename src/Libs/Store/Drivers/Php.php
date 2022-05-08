@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
+use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
 use ZnCore\Base\Libs\Store\Helpers\FileGeneratorHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
@@ -30,7 +31,7 @@ class Php implements DriverInterface
     {
         $content = $this->encode($data);
         $code = PHP_EOL . PHP_EOL . 'return ' . $content . ';';
-        FileHelper::save($fileName, $code);
+        FileStorageHelper::save($fileName, $code);
         $data['fileName'] = $fileName;
         $data['code'] = $code;
         FileGeneratorHelper::generate($data);
@@ -38,7 +39,7 @@ class Php implements DriverInterface
 
     public function load($fileName, $key = null)
     {
-        if ( ! FileHelper::has($fileName)) {
+        if ( ! FileStorageHelper::has($fileName)) {
             return null;
         }
         $data = include($fileName);

@@ -7,10 +7,12 @@ use ZnCore\Base\Libs\Store\StoreFile;
 class StoreHelper
 {
 
-    public static function load($fileName = null)
+    public static function load($fileName = null, $key = null, $default = null)
     {
         $store = new StoreFile($fileName);
-        return $store->load();
+        $data = $store->load($key);
+        $data = $data !== null ? $data : $default;
+        return $data;
     }
 
     public static function save($fileName = null, $data): void

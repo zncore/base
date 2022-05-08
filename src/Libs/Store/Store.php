@@ -5,6 +5,8 @@ namespace ZnCore\Base\Libs\Store;
 use ZnCore\Base\Exceptions\ClassNotFoundException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
 use ZnCore\Base\Libs\Store\Drivers\DriverInterface;
 
 class Store
@@ -69,8 +71,8 @@ class Store
 
     public function load($fileAlias, $key = null)
     {
-        $fileName = FileHelper::getAlias($fileAlias);
-        if ( ! FileHelper::has($fileName)) {
+        $fileName = FilePathHelper::normalize($fileAlias);
+        if ( ! FileStorageHelper::has($fileName)) {
             return null;
         }
         if (method_exists($this->driverInstance, 'load')) {
@@ -79,7 +81,7 @@ class Store
             }
             return $this->driverInstance->load($fileName);
         }
-        $content = FileHelper::load($fileName);
+        $content = FileStorageHelper::load($fileName);
         if (func_num_args() > 1) {
             return $this->decode($content, $key);
         }
@@ -88,12 +90,12 @@ class Store
 
     public function save($fileAlias, $data)
     {
-        $fileName = FileHelper::getAlias($fileAlias);
+        $fileName = FilePathHelper::normalize($fileAlias);
         if (method_exists($this->driverInstance, 'save')) {
             return $this->driverInstance->save($fileName, $data);
         }
         $content = $this->encode($data);
-        FileHelper::save($fileName, $content);
+        FileStorageHelper::save($fileName, $content);
     }
 
 }
