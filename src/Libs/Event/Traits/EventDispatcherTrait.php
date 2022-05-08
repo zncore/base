@@ -5,7 +5,6 @@ namespace ZnCore\Base\Libs\Event\Traits;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-//use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Helpers\ClassHelper;
 
 trait EventDispatcherTrait
@@ -13,8 +12,6 @@ trait EventDispatcherTrait
 
     /** @var EventDispatcher */
     private $eventDispatcher;
-
-    //private $subscriberDefinittions = [];
 
     public function subscribes(): array
     {
@@ -65,42 +62,4 @@ trait EventDispatcherTrait
         }
         return $subscriberInstance;
     }
-
-    /*protected function initSubscribersFromDefinitions(): void
-    {
-        if (empty($this->subscriberDefinittions)) {
-            return;
-        }
-        $this->initSubscribers($this->subscriberDefinittions);
-        $this->subscriberDefinittions = [];
-    }
-
-    protected function initSubscribers(array $subscriberDefinition): void
-    {
-        foreach ($subscriberDefinition as $subscriberDefinition) {
-            $this->addSubscriber($subscriberDefinition);
-        }
-    }*/
-
-    /*public function addListener(string $eventName, $listener, int $priority = 0)
-    {
-        $this->getEventDispatcher()->addListener($eventName, $listener, $priority);
-    }
-
-    public function addSubscriber(EventSubscriberInterface $subscriber)
-    {
-        $this->getEventDispatcher()->addSubscriber($subscriber);
-    }
-
-    public function addSubscriberClass(string $subscriberDefinition): void
-    {
-        $this->subscriberDefinittions[] = $subscriberDefinition;
-    }*/
-
-    /*protected function getED(): EventDispatcherInterface {
-        if (!isset($this->eventDispatcher)) {
-            $this->eventDispatcher = new EventDispatcher();
-        }
-        return $this->eventDispatcher;
-    }*/
 }

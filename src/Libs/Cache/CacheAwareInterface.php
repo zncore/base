@@ -3,6 +3,9 @@
 namespace ZnCore\Base\Libs\Cache;
 
 use Symfony\Component\Cache\Adapter\AdapterInterface;
+use ZnCore\Base\Helpers\DeprecateHelper;
+
+DeprecateHelper::hardThrow();
 
 interface CacheAwareInterface
 {
