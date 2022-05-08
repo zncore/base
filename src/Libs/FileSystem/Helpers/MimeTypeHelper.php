@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Helpers;
+namespace ZnCore\Base\Libs\FileSystem\Helpers;
 
 use Symfony\Component\Mime\MimeTypes;
 use ZnCore\Base\Enums\Measure\ByteEnum;

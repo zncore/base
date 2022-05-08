@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Helpers;
 
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 
 class PhpHelper
 {
@@ -13,7 +14,7 @@ class PhpHelper
         foreach ($libs as $lib) {
             $path = $directory . '/' . $lib;
             if(is_file($path)) {
-                if(is_file($path) && FileHelper::fileExt($lib) == 'php') {
+                if(is_file($path) && FilePathHelper::fileExt($lib) == 'php') {
                     require_once $path;
                 }
             } elseif(is_dir($path)) {

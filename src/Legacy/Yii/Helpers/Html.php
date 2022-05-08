@@ -9,7 +9,7 @@ namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 use Symfony\Component\HttpFoundation\Request;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
-use ZnCore\Base\Helpers\MimeTypeHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\MimeTypeHelper;
 use ZnCore\Base\Legacy\Yii\Base\Model;
 
 /**

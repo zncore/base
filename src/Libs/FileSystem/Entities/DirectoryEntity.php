@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Entities;
+namespace ZnCore\Base\Libs\FileSystem\Entities;
 
 class DirectoryEntity extends BaseEntity
 {

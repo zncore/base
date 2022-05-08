@@ -2,9 +2,9 @@
 
 namespace ZnCore\Base\Tests\Unit;
 
-use ZnCore\Base\Helpers\FileSizeHelper;
-use ZnCore\Base\Helpers\FindFileHelper;
-use ZnCore\Base\Helpers\MimeTypeHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FileSizeHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FindFileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\MimeTypeHelper;
 use ZnCore\Domain\Helpers\EntityHelper;
 use ZnTool\Test\Asserts\DataAssert;
 use ZnTool\Test\Asserts\DataTestCase;

@@ -6,6 +6,7 @@ use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use RuntimeException;
 use Symfony\Component\Dotenv\Dotenv as SymfonyDotenv;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 
 class DotEnv
 {
@@ -22,7 +23,7 @@ class DotEnv
     public static function init(string $basePath = self::ROOT_PATH): void
     {
         self::$isInited = true;
-        $_ENV['ROOT_PATH'] = FileHelper::rootPath();
+        $_ENV['ROOT_PATH'] = FilePathHelper::rootPath();
         $_ENV['ROOT_DIRECTORY'] = realpath(__DIR__ . '/../../../../../..');
         /*if (self::loadCachedEnvLocal($basePath)) {
             return;

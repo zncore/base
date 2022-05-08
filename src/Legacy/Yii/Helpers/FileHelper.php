@@ -3,13 +3,16 @@
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
 use ZnCore\Base\Helpers\ComposerHelper;
+use ZnCore\Base\Helpers\DeprecateHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Libs\Store\StoreFile;
 
 class FileHelper extends BaseFileHelper
 {
 
-    public static function path(string $path = ''): string
+    /*public static function path(string $path = ''): string
     {
+        DeprecateHelper::hardThrow();
         $root = self::rootPath();
         $path = trim($path, '/');
         if ($path) {
@@ -20,6 +23,7 @@ class FileHelper extends BaseFileHelper
 
     public static function prepareRootPath($path)
     {
+        DeprecateHelper::hardThrow();
         $rootDir = __DIR__ . '/../../../../../../..';
         $path = str_replace('\\', '/', $path);
         if ($path{0} == '/') {
@@ -30,35 +34,39 @@ class FileHelper extends BaseFileHelper
 
     public static function mb_basename($name, $ds = DIRECTORY_SEPARATOR)
     {
+        DeprecateHelper::hardThrow();
         $name = self::normalizePath($name);
         $nameArray = explode($ds, $name);
         $name = end($nameArray);
         return $name;
-    }
+    }*/
 
-    public static function fileExt($name)
-    {
-        return pathinfo($name, \PATHINFO_EXTENSION);
-        /*$name = trim($name);
-        $baseName = self::mb_basename($name);
-        $start = strrpos($baseName, '.');
-        if ($start) {
-            $ext = substr($baseName, $start + 1);
-            $ext = strtolower($ext);
-            return $ext;
-        }
-        return null;*/
-    }
+//    public static function fileExt($name)
+//    {
+//        DeprecateHelper::hardThrow();
+//        return pathinfo($name, \PATHINFO_EXTENSION);
+//        /*$name = trim($name);
+//        $baseName = self::mb_basename($name);
+//        $start = strrpos($baseName, '.');
+//        if ($start) {
+//            $ext = substr($baseName, $start + 1);
+//            $ext = strtolower($ext);
+//            return $ext;
+//        }
+//        return null;*/
+//    }
 
-    public static function fileNameOnly($name)
+    /*public static function fileNameOnly($name)
     {
+        DeprecateHelper::hardThrow();
         //return pathinfo($name, \PATHINFO_FILENAME); // проблема с кириличесикми символами
         $file_name = self::mb_basename($name);
-        return FileHelper::fileRemoveExt($file_name);
+        return FilePathHelper::fileRemoveExt($file_name);
     }
 
     public static function fileRemoveExt($name)
     {
+        DeprecateHelper::hardThrow();
         $ext = self::fileExt($name);
         $extLen = strlen($ext);
         if ($extLen) {
@@ -66,6 +74,58 @@ class FileHelper extends BaseFileHelper
         }
         return $name;
     }
+
+    public static function pathToAbsolute($path)
+    {
+        DeprecateHelper::hardThrow();
+        $path = self::normalizePath($path);
+        if (self::isAbsolute($path)) {
+            return $path;
+        }
+        return self::rootPath() . DIRECTORY_SEPARATOR . $path;
+    }
+
+    public static function isAbsolute($path)
+    {
+        DeprecateHelper::hardThrow();
+        $pattern = '[/\\\\]|[a-zA-Z]:[/\\\\]|[a-z][a-z0-9+.-]*://';
+        return (bool)preg_match("#$pattern#Ai", $path);
+    }
+
+    public static function rootPath()
+    {
+        DeprecateHelper::hardThrow();
+        return self::up(__DIR__, 7);
+    }*/
+
+    /*public static function trimRootPath($path)
+    {
+        DeprecateHelper::hardThrow();
+        if (!self::isAbsolute($path)) {
+            return $path;
+        }
+        $rootLen = strlen(self::rootPath());
+        return substr($path, $rootLen + 1);
+    }
+
+    public static function up($dir, $level = 1)
+    {
+        DeprecateHelper::hardThrow();
+        $dir = self::normalizePath($dir);
+        $dir = rtrim($dir, DIRECTORY_SEPARATOR);
+        for ($i = 0; $i < $level; $i++) {
+            $dir = dirname($dir);
+        }
+        return $dir;
+    }*/
+
+
+
+
+    // ======================
+
+
+
 
     public static function loadData($name, $key = null, $default = null)
     {
@@ -87,15 +147,6 @@ class FileHelper extends BaseFileHelper
         return $path;
     }
 
-    public static function pathToAbsolute($path)
-    {
-        $path = self::normalizePath($path);
-        if (self::isAbsolute($path)) {
-            return $path;
-        }
-        return self::rootPath() . DIRECTORY_SEPARATOR . $path;
-    }
-
     public static function isAlias($path)
     {
         return is_string($path) && !empty($path) && $path{0} == '@';
@@ -107,14 +158,14 @@ class FileHelper extends BaseFileHelper
             $path = self::normalizeAlias($path);
             $dir = ComposerHelper::getPsr4Path($path);
         } else {
-            $dir = self::pathToAbsolute($path);
+            $dir = FilePathHelper::pathToAbsolute($path);
         }
         return self::normalizePath($dir);
     }
 
     public static function remove($path)
     {
-        $path = self::pathToAbsolute($path);
+        $path = FilePathHelper::pathToAbsolute($path);
         if (is_dir($path)) {
             FileHelper::removeDirectory($path);
             return true;
@@ -123,36 +174,6 @@ class FileHelper extends BaseFileHelper
             return true;
         }
         return false;
-    }
-
-    public static function isAbsolute($path)
-    {
-        $pattern = '[/\\\\]|[a-zA-Z]:[/\\\\]|[a-z][a-z0-9+.-]*://';
-        return (bool)preg_match("#$pattern#Ai", $path);
-    }
-
-    public static function rootPath()
-    {
-        return self::up(__DIR__, 7);
-    }
-
-    public static function trimRootPath($path)
-    {
-        if (!self::isAbsolute($path)) {
-            return $path;
-        }
-        $rootLen = strlen(self::rootPath());
-        return substr($path, $rootLen + 1);
-    }
-
-    public static function up($dir, $level = 1)
-    {
-        $dir = self::normalizePath($dir);
-        $dir = rtrim($dir, DIRECTORY_SEPARATOR);
-        for ($i = 0; $i < $level; $i++) {
-            $dir = dirname($dir);
-        }
-        return $dir;
     }
 
     public static function copy($sourceFile, $targetFile, $dirAccess = 0777)

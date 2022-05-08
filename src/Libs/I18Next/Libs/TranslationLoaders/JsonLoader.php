@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\I18Next\Libs\TranslationLoaders;
 
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Libs\I18Next\Interfaces\TranslationLoaders\TranslationLoaderInterface;
 
 class JsonLoader implements TranslationLoaderInterface
@@ -85,7 +86,7 @@ class JsonLoader implements TranslationLoaderInterface
 
     private function forgePath(string $bundlePath): string
     {
-        $rootDir = FileHelper::rootPath();
+        $rootDir = FilePathHelper::rootPath();
         $rootDir = rtrim($rootDir, '/');
         $bundlePath = ltrim($bundlePath, '/');
         $fileMask = "$rootDir/$bundlePath";

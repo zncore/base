@@ -5,6 +5,7 @@ namespace ZnCore\Base\Helpers;
 use ZnCore\Base\Exceptions\NotFoundDependencyException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 
 class ComposerHelper extends NewComposerHelper
 {
@@ -119,7 +120,7 @@ class ComposerHelper111
         if (self::$autoloadPsr4) {
             return;
         }
-        self::$autoloadPsr4 = include FileHelper::rootPath() . '/vendor/composer/autoload_psr4.php';
+        self::$autoloadPsr4 = include FilePathHelper::rootPath() . '/vendor/composer/autoload_psr4.php';
     }
 
 }

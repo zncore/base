@@ -1,10 +1,10 @@
 <?php
 
-namespace ZnCore\Base\Helpers;
+namespace ZnCore\Base\Libs\FileSystem\Helpers;
 
 use Illuminate\Support\Collection;
-use ZnCore\Base\Entities\DirectoryEntity;
-use ZnCore\Base\Entities\FileEntity;
+use ZnCore\Base\Libs\FileSystem\Entities\DirectoryEntity;
+use ZnCore\Base\Libs\FileSystem\Entities\FileEntity;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 

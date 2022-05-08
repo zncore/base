@@ -17,6 +17,7 @@ use ZnCore\Base\Libs\App\Subscribers\ConfigureContainerSubscriber;
 use ZnCore\Base\Libs\App\Subscribers\ConfigureEntityManagerSubscriber;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
 
 class Kernel implements KernelInterface
@@ -48,7 +49,7 @@ class Kernel implements KernelInterface
 
     protected function initCache()
     {
-        $cacheDirectory = FileHelper::rootPath() . '/' . $_ENV['CACHE_DIRECTORY'];
+        $cacheDirectory = FilePathHelper::rootPath() . '/' . $_ENV['CACHE_DIRECTORY'];
         $this->cache = new FilesystemAdapter('kernel', TimeEnum::SECOND_PER_DAY, $cacheDirectory);
     }
 

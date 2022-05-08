@@ -1,8 +1,9 @@
 <?php
 
-namespace ZnCore\Base\Helpers;
+namespace ZnCore\Base\Libs\FileSystem\Helpers;
 
 use ZnCore\Base\Enums\Measure\ByteEnum;
+use ZnCore\Base\Helpers\EnumHelper;
 
 class FileSizeHelper
 {

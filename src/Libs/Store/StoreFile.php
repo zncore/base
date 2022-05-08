@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\Store;
 
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 
 class StoreFile
 {
@@ -13,7 +14,7 @@ class StoreFile
     public function __construct($file, $driver = null)
     {
         //parent::__construct();
-        $driver = $driver ?: FileHelper::fileExt($file);
+        $driver = $driver ?: FilePathHelper::fileExt($file);
         $this->store = new Store($driver);
         $this->file = $file;
     }
