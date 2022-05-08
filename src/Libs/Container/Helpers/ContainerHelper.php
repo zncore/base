@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\App\Helpers;
+namespace ZnCore\Base\Libs\Container\Helpers;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
@@ -9,9 +9,9 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
-use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\App\Libs\ConfigManager;
-use ZnCore\Base\Libs\App\Libs\ContainerConfigurator;
+use ZnCore\Base\Libs\Container\Libs\ContainerConfigurator;
 use ZnSandbox\Sandbox\App\Libs\ZnCore;
 
 class ContainerHelper

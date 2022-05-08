@@ -19,7 +19,7 @@ use ZnCore\Base\Libs\App\Loaders\BundleLoaders\RbacConfigLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRoutesLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRpcRoutesLoader;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
-use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
+use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 
 class BundleLoader implements LoaderInterface
 {

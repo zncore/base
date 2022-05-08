@@ -1,11 +1,11 @@
 <?php
 
-namespace ZnCore\Base\Libs\App\Libs\ContainerConfigurators;
+namespace ZnCore\Base\Libs\Container\Libs\ContainerConfigurators;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 
 class IlluminateContainerConfigurator implements ContainerConfiguratorInterface
 {

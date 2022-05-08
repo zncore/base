@@ -4,7 +4,7 @@ namespace ZnCore\Base\Libs\I18Next\Facades;
 
 use Psr\Container\ContainerInterface;
 use Yii;
-use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 
 class I18Next

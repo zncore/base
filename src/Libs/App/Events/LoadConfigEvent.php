@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\App\Events;
 
 use Symfony\Contracts\EventDispatcher\Event;
-use ZnCore\Base\Libs\Container\ContainerAttributeInterface;
+use ZnCore\Base\Libs\Container\Interfaces\ContainerAttributeInterface;
 use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
 use ZnCore\Domain\Traits\Event\EventSkipHandleTrait;
 

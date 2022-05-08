@@ -5,7 +5,7 @@ namespace ZnCore\Base\Helpers;
 use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use ZnCore\Base\Exceptions\DeprecatedException;
-use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 
 class DeprecateHelper
 {

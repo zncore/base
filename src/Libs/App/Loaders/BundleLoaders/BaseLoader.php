@@ -6,10 +6,10 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Base\BaseBundle;
-use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
-use ZnCore\Base\Libs\Container\ContainerAttributeTrait;
+use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 
 abstract class BaseLoader
 {

@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\App\Loaders\BundleLoaders;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 
 class ContainerLoader extends BaseLoader
 {

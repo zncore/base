@@ -34,7 +34,7 @@ return [
         RequestContext::class => RequestContext::class,
 //        RouteCollection::class => RouteCollection::class,
         ContainerInterface::class => function () {
-            return \ZnCore\Base\Libs\App\Helpers\ContainerHelper::getContainer();
+            return \ZnCore\Base\Libs\Container\Helpers\ContainerHelper::getContainer();
         },
         EntityManagerInterface::class => function (ContainerInterface $container) {
             $em = EntityManager::getInstance($container);

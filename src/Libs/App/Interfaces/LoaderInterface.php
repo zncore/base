@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\App\Interfaces;
 
-use ZnCore\Base\Libs\Container\ContainerAttributeInterface;
+use ZnCore\Base\Libs\Container\Interfaces\ContainerAttributeInterface;
 
 interface LoaderInterface extends ContainerAttributeInterface
 {

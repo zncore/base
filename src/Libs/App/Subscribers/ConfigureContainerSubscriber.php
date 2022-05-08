@@ -5,7 +5,7 @@ namespace ZnCore\Base\Libs\App\Subscribers;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
 use ZnCore\Base\Libs\App\Events\LoadConfigEvent;
-use ZnCore\Base\Libs\App\Helpers\ContainerHelper;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Domain\Traits\EntityManagerTrait;
 
 class ConfigureContainerSubscriber implements EventSubscriberInterface

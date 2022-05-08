@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\Container;
+namespace ZnCore\Base\Libs\Container\Interfaces;
 
 use Psr\Container\ContainerInterface;
 

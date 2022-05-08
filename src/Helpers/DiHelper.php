@@ -4,7 +4,7 @@ namespace ZnCore\Base\Helpers;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface as SymfonyContainerAwareInterface;
-use ZnCore\Base\Libs\Container\ContainerAwareInterface;
+use ZnCore\Base\Libs\Container\Interfaces\ContainerAwareInterface;
 
 class DiHelper
 {

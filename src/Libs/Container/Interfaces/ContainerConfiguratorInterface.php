@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\App\Interfaces;
+namespace ZnCore\Base\Libs\Container\Interfaces;
 
 interface ContainerConfiguratorInterface
 {

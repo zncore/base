@@ -4,7 +4,7 @@ use Illuminate\Container\Container;
 use Symfony\Component\Console\Application;
 use ZnCore\Base\Helpers\EnvHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnLib\Console\Symfony4\Base\BaseConsoleApp;
 use ZnSandbox\Sandbox\App\Interfaces\AppInterface;

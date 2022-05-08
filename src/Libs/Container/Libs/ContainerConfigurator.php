@@ -1,13 +1,13 @@
 <?php
 
-namespace ZnCore\Base\Libs\App\Libs;
+namespace ZnCore\Base\Libs\Container\Libs;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Helpers\InstanceHelper;
-use ZnCore\Base\Libs\App\Interfaces\ContainerConfiguratorInterface;
-use ZnCore\Base\Libs\App\Libs\ContainerConfigurators\IlluminateContainerConfigurator;
+use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Base\Libs\Container\Libs\ContainerConfigurators\IlluminateContainerConfigurator;
 
 class ContainerConfigurator implements ContainerConfiguratorInterface
 {
