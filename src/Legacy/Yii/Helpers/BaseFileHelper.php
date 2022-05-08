@@ -29,17 +29,6 @@ abstract class BaseFileHelper
     const PATTERN_NEGATIVE = 16;
     const PATTERN_CASE_INSENSITIVE = 32;
 
-    /*
-     * @var string the path (or alias) of a PHP file containing MIME type information.
-     */
-//    public static $mimeMagicFile = '@yii/helpers/mimeTypes.php';
-    /*
-     * @var string the path (or alias) of a PHP file containing MIME aliases.
-     * @since 2.0.14
-     */
-//    public static $mimeAliasesFile = '@yii/helpers/mimeAliases.php';
-
-
     /**
      * Normalizes a file/directory path.
      *
@@ -87,182 +76,6 @@ abstract class BaseFileHelper
         $path = implode($ds, $parts);
         return $path === '' ? '.' : $path;
     }
-
-    /**
-     * Returns the localized version of a specified file.
-     *
-     * The searching is based on the specified language code. In particular,
-     * a file with the same name will be looked for under the subdirectory
-     * whose name is the same as the language code. For example, given the file "path/to/view.php"
-     * and language code "zh-CN", the localized file will be looked for as
-     * "path/to/zh-CN/view.php". If the file is not found, it will try a fallback with just a language code that is
-     * "zh" i.e. "path/to/zh/view.php". If it is not found as well the original file will be returned.
-     *
-     * If the target and the source language codes are the same,
-     * the original file will be returned.
-     *
-     * @param string $file the original file
-     * @param string $language the target language that the file should be localized to.
-     * If not set, the value of [[\yii\base\Application::language]] will be used.
-     * @param string $sourceLanguage the language that the original file is in.
-     * If not set, the value of [[\yii\base\Application::sourceLanguage]] will be used.
-     * @return string the matching localized file, or the original file if the localized version is not found.
-     * If the target and the source language codes are the same, the original file will be returned.
-     */
-    public static function localize($file, $language = null, $sourceLanguage = null)
-    {
-        if ($language === null) {
-            $language = Yii::$app->language;
-        }
-        if ($sourceLanguage === null) {
-            $sourceLanguage = Yii::$app->sourceLanguage;
-        }
-        if ($language === $sourceLanguage) {
-            return $file;
-        }
-        $desiredFile = dirname($file) . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . basename($file);
-        if (is_file($desiredFile)) {
-            return $desiredFile;
-        }
-
-        $language = substr($language, 0, 2);
-        if ($language === $sourceLanguage) {
-            return $file;
-        }
-        $desiredFile = dirname($file) . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . basename($file);
-
-        return is_file($desiredFile) ? $desiredFile : $file;
-    }
-
-    /*
-     * Determines the MIME type of the specified file.
-     * This method will first try to determine the MIME type based on
-     * [finfo_open](https://secure.php.net/manual/en/function.finfo-open.php). If the `fileinfo` extension is not installed,
-     * it will fall back to [[getMimeTypeByExtension()]] when `$checkExtension` is true.
-     * @param string $file the file name.
-     * @param string $magicFile name of the optional magic database file (or alias), usually something like `/path/to/magic.mime`.
-     * This will be passed as the second parameter to [finfo_open()](https://secure.php.net/manual/en/function.finfo-open.php)
-     * when the `fileinfo` extension is installed. If the MIME type is being determined based via [[getMimeTypeByExtension()]]
-     * and this is null, it will use the file specified by [[mimeMagicFile]].
-     * @param bool $checkExtension whether to use the file extension to determine the MIME type in case
-     * `finfo_open()` cannot determine it.
-     * @return string the MIME type (e.g. `text/plain`). Null is returned if the MIME type cannot be determined.
-     * @throws InvalidConfigException when the `fileinfo` PHP extension is not installed and `$checkExtension` is `false`.
-     */
-    /*public static function getMimeType($file, $magicFile = null, $checkExtension = true)
-    {
-        DeprecateHelper::hardThrow();
-        if ($magicFile !== null) {
-            $magicFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
-        }
-        if ( ! extension_loaded('fileinfo')) {
-            if ($checkExtension) {
-                return static::getMimeTypeByExtension($file, $magicFile);
-            }
-
-            throw new InvalidConfigException('The fileinfo PHP extension is not installed.');
-        }
-        $info = finfo_open(FILEINFO_MIME_TYPE, $magicFile);
-
-        if ($info) {
-            $result = finfo_file($info, $file);
-            finfo_close($info);
-
-            if ($result !== false) {
-                return $result;
-            }
-        }
-
-        return $checkExtension ? static::getMimeTypeByExtension($file, $magicFile) : null;
-    }*/
-
-    /*
-     * Determines the MIME type based on the extension name of the specified file.
-     * This method will use a local map between extension names and MIME types.
-     * @param string $file the file name.
-     * @param string $magicFile the path (or alias) of the file that contains all available MIME type information.
-     * If this is not set, the file specified by [[mimeMagicFile]] will be used.
-     * @return string|null the MIME type. Null is returned if the MIME type cannot be determined.
-     */
-    /*private static function getMimeTypeByExtension($file, $magicFile = null)
-    {
-        DeprecateHelper::hardThrow();
-        $mimeTypes = static::loadMimeTypes($magicFile);
-
-        if (($ext = pathinfo($file, PATHINFO_EXTENSION)) !== '') {
-            $ext = strtolower($ext);
-            if (isset($mimeTypes[$ext])) {
-                return $mimeTypes[$ext];
-            }
-        }
-
-        return null;
-    }*/
-
-    /*
-     * Determines the extensions by given MIME type.
-     * This method will use a local map between extension names and MIME types.
-     * @param string $mimeType file MIME type.
-     * @param string $magicFile the path (or alias) of the file that contains all available MIME type information.
-     * If this is not set, the file specified by [[mimeMagicFile]] will be used.
-     * @return array the extensions corresponding to the specified MIME type
-     */
-    /*public static function getExtensionsByMimeType($mimeType, $magicFile = null)
-    {
-        DeprecateHelper::hardThrow();
-        $aliases = static::loadMimeAliases(static::$mimeAliasesFile);
-        if (isset($aliases[$mimeType])) {
-            $mimeType = $aliases[$mimeType];
-        }
-
-        $mimeTypes = static::loadMimeTypes($magicFile);
-        return array_keys($mimeTypes, mb_strtolower($mimeType, 'UTF-8'), true);
-    }*/
-
-//    private static $_mimeTypes = [];
-
-    /*
-     * Loads MIME types from the specified file.
-     * @param string $magicFile the path (or alias) of the file that contains all available MIME type information.
-     * If this is not set, the file specified by [[mimeMagicFile]] will be used.
-     * @return array the mapping from file extensions to MIME types
-     */
-    /*protected static function loadMimeTypes($magicFile)
-    {
-        DeprecateHelper::hardThrow();
-        if ($magicFile === null) {
-            $magicFile = static::$mimeMagicFile;
-        }
-        $magicFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
-        if ( ! isset(self::$_mimeTypes[$magicFile])) {
-            self::$_mimeTypes[$magicFile] = require $magicFile;
-        }
-
-        return self::$_mimeTypes[$magicFile];
-    }*/
-
-    private static $_mimeAliases = [];
-
-    /*
-     * Loads MIME aliases from the specified file.
-     * @param string $aliasesFile the path (or alias) of the file that contains MIME type aliases.
-     * If this is not set, the file specified by [[mimeAliasesFile]] will be used.
-     * @return array the mapping from file extensions to MIME types
-     * @since 2.0.14
-     */
-    /*protected static function loadMimeAliases($aliasesFile)
-    {
-        DeprecateHelper::hardThrow();
-        if ($aliasesFile === null) {
-            $aliasesFile = static::$mimeAliasesFile;
-        }
-        $aliasesFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($aliasesFile);
-        if ( ! isset(self::$_mimeAliases[$aliasesFile])) {
-            self::$_mimeAliases[$aliasesFile] = require $aliasesFile;
-        }
-
-        return self::$_mimeAliases[$aliasesFile];
-    }*/
 
     /**
      * Copies a whole directory as another one.
@@ -542,43 +355,6 @@ abstract class BaseFileHelper
     }
 
     /**
-     * @param string $dir
-     */
-    private static function setBasePath($dir, $options)
-    {
-        if ( ! isset($options['basePath'])) {
-            // this should be done only once
-            $options['basePath'] = realpath($dir);
-            $options = static::normalizeOptions($options);
-        }
-
-        return $options;
-    }
-
-    /**
-     * @param string $dir
-     */
-    private static function openDir($dir)
-    {
-        $handle = opendir($dir);
-        if ($handle === false) {
-            throw new InvalidArgumentException("Unable to open directory: $dir");
-        }
-        return $handle;
-    }
-
-    /**
-     * @param string $dir
-     */
-    private static function clearDir($dir)
-    {
-        if ( ! is_dir($dir)) {
-            throw new InvalidArgumentException("The dir argument must be a directory: $dir");
-        }
-        return rtrim($dir, DIRECTORY_SEPARATOR);
-    }
-
-    /**
      * Checks if the given file path satisfies the filtering options.
      * @param string $path the path of the file or directory to be checked
      * @param array $options the filtering options. See [[findFiles()]] for explanations of
@@ -655,6 +431,71 @@ abstract class BaseFileHelper
         } catch (\Exception $e) {
             throw new \Exception("Failed to change permissions for directory \"$path\": " . $e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    /**
+     * @param array $options raw options
+     * @return array normalized options
+     * @since 2.0.12
+     */
+    public static function normalizeOptions(array $options)
+    {
+        if ( ! array_key_exists('caseSensitive', $options)) {
+            $options['caseSensitive'] = true;
+        }
+        if (isset($options['except'])) {
+            foreach ($options['except'] as $key => $value) {
+                if (is_string($value)) {
+                    $options['except'][$key] = self::parseExcludePattern($value, $options['caseSensitive']);
+                }
+            }
+        }
+        if (isset($options['only'])) {
+            foreach ($options['only'] as $key => $value) {
+                if (is_string($value)) {
+                    $options['only'][$key] = self::parseExcludePattern($value, $options['caseSensitive']);
+                }
+            }
+        }
+
+        return $options;
+    }
+
+    /**
+     * @param string $dir
+     */
+    private static function setBasePath($dir, $options)
+    {
+        if ( ! isset($options['basePath'])) {
+            // this should be done only once
+            $options['basePath'] = realpath($dir);
+            $options = static::normalizeOptions($options);
+        }
+
+        return $options;
+    }
+
+    /**
+     * @param string $dir
+     */
+    private static function openDir($dir)
+    {
+        $handle = opendir($dir);
+        if ($handle === false) {
+            throw new InvalidArgumentException("Unable to open directory: $dir");
+        }
+        return $handle;
+    }
+
+    /**
+     * @param string $dir
+     */
+    private static function clearDir($dir)
+    {
+        if ( ! is_dir($dir)) {
+            throw new InvalidArgumentException("The dir argument must be a directory: $dir");
+        }
+        return rtrim($dir, DIRECTORY_SEPARATOR);
     }
 
     /**
@@ -852,31 +693,194 @@ abstract class BaseFileHelper
         return array_reduce($wildcards, $wildcardSearch, false);
     }
 
-    /**
-     * @param array $options raw options
-     * @return array normalized options
-     * @since 2.0.12
+
+
+
+
+    /*
+     * @var string the path (or alias) of a PHP file containing MIME type information.
      */
-    public static function normalizeOptions(array $options)
+//    public static $mimeMagicFile = '@yii/helpers/mimeTypes.php';
+    /*
+     * @var string the path (or alias) of a PHP file containing MIME aliases.
+     * @since 2.0.14
+     */
+//    public static $mimeAliasesFile = '@yii/helpers/mimeAliases.php';
+
+    /*
+     * Returns the localized version of a specified file.
+     *
+     * The searching is based on the specified language code. In particular,
+     * a file with the same name will be looked for under the subdirectory
+     * whose name is the same as the language code. For example, given the file "path/to/view.php"
+     * and language code "zh-CN", the localized file will be looked for as
+     * "path/to/zh-CN/view.php". If the file is not found, it will try a fallback with just a language code that is
+     * "zh" i.e. "path/to/zh/view.php". If it is not found as well the original file will be returned.
+     *
+     * If the target and the source language codes are the same,
+     * the original file will be returned.
+     *
+     * @param string $file the original file
+     * @param string $language the target language that the file should be localized to.
+     * If not set, the value of [[\yii\base\Application::language]] will be used.
+     * @param string $sourceLanguage the language that the original file is in.
+     * If not set, the value of [[\yii\base\Application::sourceLanguage]] will be used.
+     * @return string the matching localized file, or the original file if the localized version is not found.
+     * If the target and the source language codes are the same, the original file will be returned.
+     */
+    /*public static function localize($file, $language = null, $sourceLanguage = null)
     {
-        if ( ! array_key_exists('caseSensitive', $options)) {
-            $options['caseSensitive'] = true;
+        if ($language === null) {
+            $language = Yii::$app->language;
         }
-        if (isset($options['except'])) {
-            foreach ($options['except'] as $key => $value) {
-                if (is_string($value)) {
-                    $options['except'][$key] = self::parseExcludePattern($value, $options['caseSensitive']);
-                }
+        if ($sourceLanguage === null) {
+            $sourceLanguage = Yii::$app->sourceLanguage;
+        }
+        if ($language === $sourceLanguage) {
+            return $file;
+        }
+        $desiredFile = dirname($file) . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . basename($file);
+        if (is_file($desiredFile)) {
+            return $desiredFile;
+        }
+
+        $language = substr($language, 0, 2);
+        if ($language === $sourceLanguage) {
+            return $file;
+        }
+        $desiredFile = dirname($file) . DIRECTORY_SEPARATOR . $language . DIRECTORY_SEPARATOR . basename($file);
+
+        return is_file($desiredFile) ? $desiredFile : $file;
+    }*/
+
+    /*
+     * Determines the MIME type of the specified file.
+     * This method will first try to determine the MIME type based on
+     * [finfo_open](https://secure.php.net/manual/en/function.finfo-open.php). If the `fileinfo` extension is not installed,
+     * it will fall back to [[getMimeTypeByExtension()]] when `$checkExtension` is true.
+     * @param string $file the file name.
+     * @param string $magicFile name of the optional magic database file (or alias), usually something like `/path/to/magic.mime`.
+     * This will be passed as the second parameter to [finfo_open()](https://secure.php.net/manual/en/function.finfo-open.php)
+     * when the `fileinfo` extension is installed. If the MIME type is being determined based via [[getMimeTypeByExtension()]]
+     * and this is null, it will use the file specified by [[mimeMagicFile]].
+     * @param bool $checkExtension whether to use the file extension to determine the MIME type in case
+     * `finfo_open()` cannot determine it.
+     * @return string the MIME type (e.g. `text/plain`). Null is returned if the MIME type cannot be determined.
+     * @throws InvalidConfigException when the `fileinfo` PHP extension is not installed and `$checkExtension` is `false`.
+     */
+    /*public static function getMimeType($file, $magicFile = null, $checkExtension = true)
+    {
+        DeprecateHelper::hardThrow();
+        if ($magicFile !== null) {
+            $magicFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
+        }
+        if ( ! extension_loaded('fileinfo')) {
+            if ($checkExtension) {
+                return static::getMimeTypeByExtension($file, $magicFile);
             }
+
+            throw new InvalidConfigException('The fileinfo PHP extension is not installed.');
         }
-        if (isset($options['only'])) {
-            foreach ($options['only'] as $key => $value) {
-                if (is_string($value)) {
-                    $options['only'][$key] = self::parseExcludePattern($value, $options['caseSensitive']);
-                }
+        $info = finfo_open(FILEINFO_MIME_TYPE, $magicFile);
+
+        if ($info) {
+            $result = finfo_file($info, $file);
+            finfo_close($info);
+
+            if ($result !== false) {
+                return $result;
             }
         }
 
-        return $options;
-    }
+        return $checkExtension ? static::getMimeTypeByExtension($file, $magicFile) : null;
+    }*/
+
+    /*
+     * Determines the MIME type based on the extension name of the specified file.
+     * This method will use a local map between extension names and MIME types.
+     * @param string $file the file name.
+     * @param string $magicFile the path (or alias) of the file that contains all available MIME type information.
+     * If this is not set, the file specified by [[mimeMagicFile]] will be used.
+     * @return string|null the MIME type. Null is returned if the MIME type cannot be determined.
+     */
+    /*private static function getMimeTypeByExtension($file, $magicFile = null)
+    {
+        DeprecateHelper::hardThrow();
+        $mimeTypes = static::loadMimeTypes($magicFile);
+
+        if (($ext = pathinfo($file, PATHINFO_EXTENSION)) !== '') {
+            $ext = strtolower($ext);
+            if (isset($mimeTypes[$ext])) {
+                return $mimeTypes[$ext];
+            }
+        }
+
+        return null;
+    }*/
+
+    /*
+     * Determines the extensions by given MIME type.
+     * This method will use a local map between extension names and MIME types.
+     * @param string $mimeType file MIME type.
+     * @param string $magicFile the path (or alias) of the file that contains all available MIME type information.
+     * If this is not set, the file specified by [[mimeMagicFile]] will be used.
+     * @return array the extensions corresponding to the specified MIME type
+     */
+    /*public static function getExtensionsByMimeType($mimeType, $magicFile = null)
+    {
+        DeprecateHelper::hardThrow();
+        $aliases = static::loadMimeAliases(static::$mimeAliasesFile);
+        if (isset($aliases[$mimeType])) {
+            $mimeType = $aliases[$mimeType];
+        }
+
+        $mimeTypes = static::loadMimeTypes($magicFile);
+        return array_keys($mimeTypes, mb_strtolower($mimeType, 'UTF-8'), true);
+    }*/
+
+//    private static $_mimeTypes = [];
+
+    /*
+     * Loads MIME types from the specified file.
+     * @param string $magicFile the path (or alias) of the file that contains all available MIME type information.
+     * If this is not set, the file specified by [[mimeMagicFile]] will be used.
+     * @return array the mapping from file extensions to MIME types
+     */
+    /*protected static function loadMimeTypes($magicFile)
+    {
+        DeprecateHelper::hardThrow();
+        if ($magicFile === null) {
+            $magicFile = static::$mimeMagicFile;
+        }
+        $magicFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($magicFile);
+        if ( ! isset(self::$_mimeTypes[$magicFile])) {
+            self::$_mimeTypes[$magicFile] = require $magicFile;
+        }
+
+        return self::$_mimeTypes[$magicFile];
+    }*/
+
+//    private static $_mimeAliases = [];
+
+    /*
+     * Loads MIME aliases from the specified file.
+     * @param string $aliasesFile the path (or alias) of the file that contains MIME type aliases.
+     * If this is not set, the file specified by [[mimeAliasesFile]] will be used.
+     * @return array the mapping from file extensions to MIME types
+     * @since 2.0.14
+     */
+    /*protected static function loadMimeAliases($aliasesFile)
+    {
+        DeprecateHelper::hardThrow();
+        if ($aliasesFile === null) {
+            $aliasesFile = static::$mimeAliasesFile;
+        }
+        $aliasesFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::getAlias($aliasesFile);
+        if ( ! isset(self::$_mimeAliases[$aliasesFile])) {
+            self::$_mimeAliases[$aliasesFile] = require $aliasesFile;
+        }
+
+        return self::$_mimeAliases[$aliasesFile];
+    }*/
+
 }

@@ -194,7 +194,7 @@ class FileHelper extends BaseFileHelper
 
 
 
-    public static function getAlias($path)
+    /*public static function getAlias($path)
     {
         if (self::isAlias($path)) {
             $path = self::normalizeAlias($path);
@@ -204,10 +204,6 @@ class FileHelper extends BaseFileHelper
         }
         return self::normalizePath($dir);
     }
-
-
-
-
 
     protected static function normalizeAlias($path)
     {
@@ -224,7 +220,7 @@ class FileHelper extends BaseFileHelper
     protected static function isAlias($path)
     {
         return is_string($path) && !empty($path) && $path{0} == '@';
-    }
+    }*/
 
 
 
