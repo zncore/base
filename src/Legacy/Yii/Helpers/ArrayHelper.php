@@ -701,14 +701,14 @@ class ArrayHelper extends BaseArrayHelper
         return $filtered;
     }
 
-    /**
+    /*
      * @param $xmlString
      * @param bool $tagName
      * @param bool $elementCount
      *
      * @return array
      */
-    public static function xmlStrToArray($xmlString, $tagName = false, $elementCount = false)
+    /*public static function xmlStrToArray($xmlString, $tagName = false, $elementCount = false)
     {
         $doc = new DOMDocument();
         try {
@@ -731,6 +731,6 @@ class ArrayHelper extends BaseArrayHelper
         }
 
         return $result;
-    }
+    }*/
 
 }

@@ -2,20 +2,24 @@
 
 namespace ZnCore\Base\Helpers;
 
+use Composer\Autoload\ClassLoader;
 use ZnCore\Base\Exceptions\NotFoundDependencyException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
-use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 
-class ComposerHelper extends NewComposerHelper
+class ComposerHelper
 {
 
-}
+    private static $composerVendorClassLoader;
 
-class ComposerHelper111
-{
-
-    private static $autoloadPsr4;
+    public static function getComposerVendorClassLoader(): ClassLoader
+    {
+        if (!self::$composerVendorClassLoader) {
+            $loaders = \Composer\Autoload\ClassLoader::getRegisteredLoaders();
+            $vendorDir = realpath(__DIR__ . '/../../../..');
+            self::$composerVendorClassLoader = $loaders[$vendorDir];
+        }
+        return self::$composerVendorClassLoader;
+    }
 
     /**
      * Требовать установку composer-пакета
@@ -27,9 +31,9 @@ class ComposerHelper111
      */
     public static function requireAssert(string $className, string $packageName, string $version = null): void
     {
-        if( ! class_exists($className) && ! interface_exists($className) && ! trait_exists($className)) {
+        if (!class_exists($className) && !interface_exists($className) && !trait_exists($className)) {
             $package = $packageName;
-            if(!empty($version)) {
+            if (!empty($version)) {
                 $package .= ":$version";
             }
             $message = "Class \"$className\" not exists!\n";
@@ -46,81 +50,37 @@ class ComposerHelper111
      */
     public static function register(string $namespace, string $path): void
     {
-        //$path = realpath($path);
-        $function = function ($className) use ($namespace, $path) {
-            if (strpos($className, $namespace . '\\') !== 0 || $className == $namespace) {
-                return;
-            }
-            $fileName = str_replace($namespace, $path, $className);
-            if (strpos($path, '.php') === false) {
-                $fileName .= '.php';
-            }
-            if (strpos($path, 'phar://') === 0) {
-                include_once $fileName;
-            } else {
-                $fileName = str_replace('\\', '/', $fileName);
-                if (!file_exists($fileName)) {
-                    //exit($fileName);
-
-                    exit('Class "' . $className . '" not found!');
-                    //throw new FileNotFoundException('Class "' . $className . '" not found!');
-                }
-                include_once $fileName;
-            }
-        };
-        spl_autoload_register($function);
-        self::add($namespace, $path);
-    }
-
-    private static function add(string $namespace, string $path)
-    {
-        $namespace = trim($namespace, '/\\');
-        self::$autoloadPsr4[$namespace . '\\'] = [
-            realpath($path)
-        ];
+        self::getComposerVendorClassLoader()->addPsr4($namespace . '\\', $path);
     }
 
     public static function getPsr4Path($path)
     {
-        self::ensure();
-        $path = self::normalizePath($path);
-        $pathItems = explode('\\', $path);
-        $paths = self::find($pathItems);
-        return FileHelper::normalizePath(ArrayHelper::first($paths));
+        $path = str_replace('/', '\\', $path);
+        $paths = self::find($path);
+        $resPath = ArrayHelper::first($paths);
+        $resPath = str_replace('\\', '/', $resPath);
+        return realpath($resPath);
     }
 
-    private static function find(array $pathItems): array
+    private static function find($path): array
     {
+        $pathItems = explode('\\', $path);
         $paths = [];
-        $pp = '';
+        $prependPath = '';
+        $autoloadPsr4 = self::getComposerVendorClassLoader()->getPrefixesPsr4();
         for ($i = 0; $i <= count($pathItems) - 1; $i++) {
-            $pp .= $pathItems[$i] . '\\';
+            $prependPath .= $pathItems[$i] . '\\';
             unset($pathItems[$i]);
-            $dirs = ArrayHelper::getValue(self::$autoloadPsr4, $pp);
+            $dirs = ArrayHelper::getValue($autoloadPsr4, $prependPath);
             if ($dirs) {
                 foreach ($dirs as $dir) {
                     $relativeDir = implode('\\', $pathItems);
                     $path = trim($dir . '\\' . $relativeDir, '\\');
-                    $paths[$pp . $relativeDir] = $path;
+                    $absolutPath = $prependPath . $relativeDir;
+                    $paths[$absolutPath] = $path;
                 }
             }
         }
         return $paths;
     }
-
-    private static function normalizePath(string $path): string
-    {
-        $path = str_replace('/', '\\', $path);
-        $path = trim($path, '\\@');
-        return $path;
-    }
-
-    private static function ensure()
-    {
-        if (self::$autoloadPsr4) {
-            return;
-        }
-        self::$autoloadPsr4 = include FilePathHelper::rootPath() . '/vendor/composer/autoload_psr4.php';
-    }
-
 }
