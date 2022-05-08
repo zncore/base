@@ -4,7 +4,6 @@ namespace ZnCore\Base\Libs\Store;
 
 use ZnCore\Base\Exceptions\ClassNotFoundException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
 use ZnCore\Base\Libs\Store\Drivers\DriverInterface;
@@ -25,11 +24,11 @@ class Store
         $driver = ucfirst($driver);
         $this->driver = $driver;
         $driverClass = 'ZnCore\\Base\\Libs\\Store\\Drivers\\' . $driver;
-        if(!class_exists($driverClass)) {
+        if (!class_exists($driverClass)) {
             throw new ClassNotFoundException($driverClass);
         }
         $implements = class_implements($driverClass);
-        if ( ! array_key_exists(DriverInterface::class, $implements)) {
+        if (!array_key_exists(DriverInterface::class, $implements)) {
             throw new \Exception('No implements interface of driver class');
         }
         $this->driverInstance = new $driverClass;
@@ -72,7 +71,7 @@ class Store
     public function load($fileAlias, $key = null)
     {
         $fileName = FilePathHelper::normalize($fileAlias);
-        if ( ! FileStorageHelper::has($fileName)) {
+        if (!FileStorageHelper::has($fileName)) {
             return null;
         }
         if (method_exists($this->driverInstance, 'load')) {

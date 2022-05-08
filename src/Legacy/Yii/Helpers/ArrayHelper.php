@@ -410,9 +410,6 @@ class ArrayHelper extends BaseArrayHelper
         return true;
     }
 
-    /**
-     * @inheritdoc
-     */
     public static function getValue($array, $key, $default = null)
     {
         if ($key === null) {
