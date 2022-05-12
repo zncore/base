@@ -8,8 +8,9 @@ use Exception;
 use InvalidArgumentException;
 use DomainException;
 use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
+use ZnCore\Contract\Encoder\Interfaces\PrettifyInterface;
 
-class XmlEncoder implements EncoderInterface
+class XmlEncoder implements EncoderInterface, PrettifyInterface
 {
 
     private $formatOutput;
@@ -75,6 +76,14 @@ class XmlEncoder implements EncoderInterface
         return [
             $rootName => $decoded,
         ];
+    }
+
+    public function prettify($encoded)
+    {
+        $xmlEncoder = clone $this;
+        $xmlEncoder->setIsInline(false);
+        $decoded = $xmlEncoder->decode($encoded);
+        return $xmlEncoder->encode($decoded);
     }
 
     private function fixEncode(string $encoded): string
