@@ -78,6 +78,13 @@ class XmlEncoder implements EncoderInterface, PrettifyInterface
         ];
     }
 
+    public function c14nify($encoded)
+    {
+        $d = new \DOMDocument();
+        $d->loadXML($encoded);
+        return $d->C14N();
+    }
+
     public function prettify($encoded)
     {
         $xmlEncoder = clone $this;
