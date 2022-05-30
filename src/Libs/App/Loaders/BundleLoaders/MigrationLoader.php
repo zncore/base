@@ -20,7 +20,7 @@ class MigrationLoader extends BaseLoader
             $i18nextBundles = $this->load($bundle);
             $config = ArrayHelper::merge($config, $i18nextBundles);
         }
-        $_ENV['ELOQUENT_MIGRATIONS'] = $config;
+//        $_ENV['ELOQUENT_MIGRATIONS'] = $config;
         if($this->hasConfigManager()) {
             $this->getConfigManager()->set('ELOQUENT_MIGRATIONS', $config);
         }

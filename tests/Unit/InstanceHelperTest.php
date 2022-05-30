@@ -92,8 +92,6 @@ final class InstanceHelperTest extends BaseTest
         $this->assertEquals(4, $instance->plus(1,3));
     }
 
-
-
     public function testCallMethodFromIndexArgs()
     {
         $instance = InstanceHelper::create(Class2::class, [new Class1()]);
