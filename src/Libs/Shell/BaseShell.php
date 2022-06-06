@@ -116,7 +116,6 @@ abstract class BaseShell
      * @return static
      * @throws ShellException
      */
-
     protected function prepareCmd(string $cmd): string
     {
         if (OsHelper::isFamily(OsFamilyEnum::LINUX)) {
