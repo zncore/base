@@ -34,7 +34,7 @@ class Kernel implements KernelInterface
 
     public function __construct(string $appName)
     {
-        define('MICRO_TIME', microtime(true));
+        defined('MICRO_TIME') || define('MICRO_TIME', microtime(true));
         $this->appName = $appName;
         //$this->initCache();
     }

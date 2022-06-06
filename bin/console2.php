@@ -11,6 +11,8 @@ use ZnSandbox\Sandbox\App\Interfaces\AppInterface;
 use ZnSandbox\Sandbox\App\Libs\ZnCore;
 //use ZnCore\Base\Console\Libs\ConsoleApp;
 
+define('MICRO_TIME', microtime(true));
+
 class ConsoleApp extends BaseConsoleApp
 {
 
@@ -38,8 +40,6 @@ class ConsoleApp extends BaseConsoleApp
         return $bundles;
     }
 }
-
-define('MICRO_TIME', microtime(true));
 
 require __DIR__ . '/../../../../vendor/autoload.php';
 
