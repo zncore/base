@@ -17,24 +17,15 @@ abstract class BaseLoader
     use ContainerAttributeTrait;
     use CacheAwareTrait;
 
+    private $configManager;
     protected $useCache = false;
     protected $name;
 
-    private $configManager;
+    abstract public function loadAll(array $bundles): array;
 
     public function __construct(ConfigManagerInterface $configManager)
     {
         $this->setConfigManager($configManager);
-    }
-
-    protected function loadFromCache($callback) {
-        if($this->useCache && $this->getCache() instanceof AbstractAdapter) {
-            $key = 'kernel_bundle_loader2_' . $this->getName();
-            $config = $this->cache->get($key, $callback);
-        } else {
-            $config = call_user_func($callback);
-        }
-        return $config;
     }
 
     public function isUseCache(): bool
@@ -57,24 +48,32 @@ abstract class BaseLoader
         $this->name = $name;
     }
 
-    public function hasConfigManager(): bool
-    {
-        return isset($this->configManager);
+    protected function loadFromCache($callback) {
+        if($this->useCache && $this->getCache() instanceof AbstractAdapter) {
+            $key = 'kernel_bundle_loader2_' . $this->getName();
+            $config = $this->cache->get($key, $callback);
+        } else {
+            $config = call_user_func($callback);
+        }
+        return $config;
     }
 
-    public function getConfigManager(): ConfigManagerInterface
+    /*protected function hasConfigManager(): bool
+    {
+        return isset($this->configManager);
+    }*/
+
+    protected function getConfigManager(): ConfigManagerInterface
     {
         return $this->configManager;
     }
 
-    public function setConfigManager(ConfigManagerInterface $configManager): void
+    protected function setConfigManager(ConfigManagerInterface $configManager): void
     {
         $this->configManager = $configManager;
     }
 
-    abstract public function loadAll(array $bundles): array;
-
-    public function load(BaseBundle $bundle): array
+    protected function load(BaseBundle $bundle): array
     {
         if (!$this->isAllow($bundle)) {
             return [];
@@ -82,7 +81,7 @@ abstract class BaseLoader
         return call_user_func([$bundle, $this->getName()]);
     }
 
-    public function isAllow(BaseBundle $bundle): bool
+    protected function isAllow(BaseBundle $bundle): bool
     {
         return method_exists($bundle, $this->getName());
     }

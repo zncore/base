@@ -2,23 +2,30 @@
 
 namespace ZnCore\Base\Helpers;
 
+use Psr\Container\ContainerInterface;
 use ZnCore\Base\Exceptions\ClassNotFoundException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
+use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnCore\Base\Libs\Code\MethodParametersResolver;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 
 class InstanceHelper
 {
 
-    public static function callMethod(object $instance, string $methodName, array $parameters = [])
+    public static function callMethod(object $instance, string $methodName, array $parameters = [], ContainerInterface $container = null)
     {
-        $parameters = self::prepareParameters(get_class($instance), $methodName, $parameters);
-        return call_user_func_array([$instance, $methodName], $parameters);
+        return self::getInstanceResolver($container)->callMethod($instance, $methodName, $parameters);
+
+        /*$container = $container ?: ContainerHelper::getContainer();
+        $parameters = self::prepareParameters(get_class($instance), $methodName, $parameters, $container);
+        return call_user_func_array([$instance, $methodName], $parameters);*/
     }
 
-    public static function create($definition, array $constructParams = []): object
+    public static function create($definition, array $constructParams = [], ContainerInterface $container = null): object
     {
-        if (empty($definition)) {
+        return self::getInstanceResolver($container)->create($definition, $constructParams);
+
+        /*if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
         }
         $definition = ClassHelper::normalizeComponentConfig($definition);
@@ -27,94 +34,66 @@ class InstanceHelper
             $constructParams = $definition['__construct'];
             unset($definition['__construct']);
         }
-
-        $handlerInstance = self::createObject($definition['class'], $constructParams);
+        $container = $container ?: ContainerHelper::getContainer();
+        $handlerInstance = self::createObject($definition['class'], $constructParams, $container);
 
         ClassHelper::configure($handlerInstance, $definition);
-        return $handlerInstance;
+        return $handlerInstance;*/
     }
 
-    public static function ensure($definition, $constructParams = []): object
+    public static function ensure($definition, $constructParams = [], ContainerInterface $container = null): object
     {
-        if (is_object($definition)) {
+        return self::getInstanceResolver($container)->ensure($definition, $constructParams);
+
+        /*if (is_object($definition)) {
             return $definition;
         }
-        return self::create($definition, $constructParams);
+        return self::create($definition, $constructParams);*/
     }
 
-    private static function prepareParameters(string $className, string $methodName, array $constructionArgs): array
+    protected static function getInstanceResolver(ContainerInterface $container = null): InstanceResolver
     {
-        $methodParametersResolver = new MethodParametersResolver(ContainerHelper::getContainer());
-        return $methodParametersResolver->resolve($className, $methodName, $constructionArgs);
+        $container = $container ?: ContainerHelper::getContainer();
+        return new InstanceResolver($container);
+    }
 
-//        return MethodParametersHelper::prepareParameters($className, $methodName, $constructionArgs);
 
 
-//        if (!ArrayHelper::isIndexed($constructionArgs)) {
-//            $reflectionClass = new \ReflectionClass($className);
-//            try {
-//                $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
-//                $flatParameters = [];
-//                foreach ($constructorParameters as $index => $constructorParameter) {
-//                    /** @var ReflectionNamedType $parameterType */
-//                    $parameterType = $constructorParameter->getType();
-//                    if ($parameterType && array_key_exists($parameterType->getName(), $constructionArgs)) {
-//                        $parameterName = $parameterType->getName();
-//                    } else {
-//                        $parameterName = $constructorParameter->name;
-//                    }
-//                    if (array_key_exists($parameterName, $constructionArgs)) {
-//                        $flatParameters[$index] = $constructionArgs[$parameterName];
-//                        unset($constructionArgs[$parameterName]);
-//                    } else {
-//                        if(!$constructorParameter->getType()->allowsNull()) {
-//                            try {
-//                                $flatParameters[$index] = ContainerHelper::getContainer()->get($constructorParameter->getType()->getName());
-//                            } catch (\Exception $e) {
-//                            }
-//                        }
-//                    }
-//                }
-//                foreach ($constructorParameters as $index => $constructorParameter) {
-//                    if (!isset($flatParameters[$index])) {
-//                        foreach ($constructionArgs as $constructionArgName => $constructionArgValue) {
-//                            if (is_int($constructionArgName)) {
-//                                $flatParameters[$index] = $constructionArgValue;
-//                            }
-//                        }
-//                    }
-//                }
-//                ksort($flatParameters);
-//                $constructionArgs = $flatParameters;
-//            } catch (\ReflectionException $e) {
-//            }
+
+//    private static function prepareParameters(string $className, string $methodName, array $constructionArgs, ContainerInterface $container = null): array
+//    {
+//        $container = $container ?: ContainerHelper::getContainer();
+//        $methodParametersResolver = new MethodParametersResolver($container);
+//        return $methodParametersResolver->resolve($className, $methodName, $constructionArgs);
+//
+////        return MethodParametersHelper::prepareParameters($className, $methodName, $constructionArgs);
+//    }
+//
+//    /**
+//     * @param string $className
+//     * @param array $constructionArgs
+//     * @return object
+//     * @throws ClassNotFoundException
+//     */
+//    private static function createObject(string $className, array $constructionArgs = [], ContainerInterface $container = null): object
+//    {
+//        if (!class_exists($className)) {
+//            throw new ClassNotFoundException();
 //        }
-//        return $constructionArgs;
-    }
+//        $container = $container ?: ContainerHelper::getContainer();
+//        $constructionArgs = self::prepareParameters($className, '__construct', $constructionArgs, $container);
+//        return self::createObjectInstance($className, $constructionArgs);
+//    }
+//
+//    private static function createObjectInstance(string $className, array $constructionArgs): object
+//    {
+//        if (count($constructionArgs) && method_exists($className, '__construct')) {
+////            $instance = new $className(...$constructionArgs);
+//            $instance = (new \ReflectionClass ($className))->newInstanceArgs($constructionArgs);
+//        } else {
+//            $instance = new $className();
+//        }
+//        return $instance;
+//    }
 
-    /**
-     * @param string $className
-     * @param array $constructionArgs
-     * @return object
-     * @throws ClassNotFoundException
-     */
-    private static function createObject(string $className, array $constructionArgs = []): object
-    {
-        if (!class_exists($className)) {
-            throw new ClassNotFoundException();
-        }
-        $constructionArgs = self::prepareParameters($className, '__construct', $constructionArgs);
-        return self::createObjectInstance($className, $constructionArgs);
-    }
-
-    private static function createObjectInstance(string $className, array $constructionArgs): object
-    {
-        if (count($constructionArgs) && method_exists($className, '__construct')) {
-//            $instance = new $className(...$constructionArgs);
-            $instance = (new \ReflectionClass ($className))->newInstanceArgs($constructionArgs);
-        } else {
-            $instance = new $className();
-        }
-        return $instance;
-    }
 }

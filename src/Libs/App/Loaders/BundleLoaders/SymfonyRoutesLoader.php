@@ -36,9 +36,9 @@ class SymfonyRoutesLoader extends BaseLoader
             }
         }
         $config['routeCollection'] = $routes;
-        if($this->hasConfigManager()) {
+        //if($this->hasConfigManager()) {
             $this->getConfigManager()->set('routeCollection', $routes);
-        }
+        //}
         return $config;
     }
 }

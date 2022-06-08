@@ -8,16 +8,19 @@ use ZnCore\Base\Exceptions\NotImplementedMethodException;
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnLib\Rpc\Domain\Exceptions\MethodNotFoundException;
 
 class InstanceProvider
 {
 
     private $container;
+    private $instanceResolver;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, InstanceResolver $instanceResolver)
     {
         $this->container = $container;
+        $this->instanceResolver = $instanceResolver;
     }
 
     public function callMethod($definition, array $constructorParameters = [], string $methodName, array $methodParameters)
@@ -29,7 +32,8 @@ class InstanceProvider
     public function callMethodOfInstance(object $instance, string $methodName, array $methodParameters)
     {
         $this->checkExistsMethod($instance, $methodName);
-        return InstanceHelper::callMethod($instance, $methodName, $methodParameters);
+        return $this->instanceResolver->callMethod($instance, $methodName, $methodParameters);
+//        return InstanceHelper::callMethod($instance, $methodName, $methodParameters);
         /*if ($this->container instanceof Container) {
             return $this->container->call([$instance, $methodName], $methodParameters);
         } else {
