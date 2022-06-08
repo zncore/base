@@ -6,6 +6,7 @@ use ReflectionNamedType;
 use ZnCore\Base\Exceptions\ClassNotFoundException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 
 class InstanceHelper
 {
@@ -60,6 +61,13 @@ class InstanceHelper
                     if (array_key_exists($parameterName, $constructionArgs)) {
                         $flatParameters[$index] = $constructionArgs[$parameterName];
                         unset($constructionArgs[$parameterName]);
+                    } else {
+                        if(!$constructorParameter->getType()->allowsNull()) {
+                            try {
+                                $flatParameters[$index] = ContainerHelper::getContainer()->get($constructorParameter->getType()->getName());
+                            } catch (\Exception $e) {
+                            }
+                        }
                     }
                 }
                 foreach ($constructorParameters as $index => $constructorParameter) {
