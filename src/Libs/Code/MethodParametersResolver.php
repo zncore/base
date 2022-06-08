@@ -30,36 +30,18 @@ class MethodParametersResolver
 
     public function resolve(string $className, string $methodName, array $constructionArgs = []): array
     {
-
-
         if (!ArrayHelper::isIndexed($constructionArgs) || empty($constructionArgs)) {
-//            $reflectionClass = new ReflectionClass($className);
             try {
-//                $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
                 $constructorParameters = $this->extractMethodParameters($className, $methodName);
-
-//                if(empty($constructionArgs)) {
-//                    $constructorParameters = $this-
-
-//                    dd($constructionArgs);
-                    $constructionArgs = $this->extractParams($constructorParameters, $constructionArgs);
-//                    dd($constructionArgs);
-                    /*foreach ($constructorParameters as $constructorParameter) {
-
-                    }*/
-
-                    //dd($className, $methodName, $constructionArgs, $constructorParameters);
-//                }
-
-
-//                $constructionArgs = $this->extractParams($constructorParameters, $constructionArgs);
+                $constructionArgs = $this->extractParams($constructorParameters, $constructionArgs);
             } catch (ReflectionException $e) {
             }
         }
         return $constructionArgs;
     }
 
-    protected function extractMethodParameters(string $className, string $methodName): array {
+    protected function extractMethodParameters(string $className, string $methodName): array
+    {
         $reflectionClass = new ReflectionClass($className);
         $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
         return $constructorParameters;
@@ -94,7 +76,6 @@ class MethodParametersResolver
                 }
             } else {
                 return $constructorParameter->getDefaultValue();
-//                dd($constructorParameter->getDefaultValue());
             }
         }
     }
@@ -114,7 +95,6 @@ class MethodParametersResolver
             } catch (Exception $e) {
             }
         }
-//        dd($flatParameters);
         $flatParameters = $this->fillEmptyParameters($constructorParameters, $flatParameters, $constructionArgs);
         ksort($flatParameters);
         return $flatParameters;

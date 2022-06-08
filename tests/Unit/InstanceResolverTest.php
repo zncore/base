@@ -5,13 +5,13 @@ namespace ZnCore\Base\Tests\Unit;
 use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnTool\Test\Base\BaseTest;
-use App1\Class0;
-use App1\Class1;
-use App1\Class2;
+use App1\ClassSum;
+use App1\ClassMultiplication;
+use App1\ClassPow;
 
-require_once __DIR__ . '/../classes/Class0.php';
-require_once __DIR__ . '/../classes/Class1.php';
-require_once __DIR__ . '/../classes/Class2.php';
+require_once __DIR__ . '/../classes/ClassSum.php';
+require_once __DIR__ . '/../classes/ClassMultiplication.php';
+require_once __DIR__ . '/../classes/ClassPow.php';
 
 final class InstanceResolverTest extends BaseTest
 {
@@ -19,60 +19,79 @@ final class InstanceResolverTest extends BaseTest
     public function testCreateAll()
     {
         $instanceResolver = new InstanceResolver();
-        $instance = $instanceResolver->create(Class2::class);
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create(ClassPow::class);
 
-        $this->assertInstanceOf(Class2::class, $instance);
+        $this->assertInstanceOf(ClassPow::class, $instance);
         $this->assertEquals(4, $instance->plus(1,3));
+
+        /** @var ClassMultiplication $instance */
+        $instance = $instanceResolver->create(ClassMultiplication::class);
+        $this->assertInstanceOf(ClassMultiplication::class, $instance);
+        $this->assertEquals(3, $instance->multiplication(1,3));
+        $this->assertEquals(60, $instance->multiplication(20,3));
+
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create(ClassPow::class);
+        $this->assertInstanceOf(ClassPow::class, $instance);
+        $this->assertEquals(1, $instance->pow(1,3));
+        $this->assertEquals(8000, $instance->pow(20,3));
+        $this->assertEquals(83521, $instance->pow(17,4));
     }
 
     public function testCreateInstanceFromClassName()
     {
         $instanceResolver = new InstanceResolver();
-        $class1 = $instanceResolver->create(Class1::class);
-        $instance = $instanceResolver->create(Class2::class, [Class1::class => $class1]);
+        $multiplication = $instanceResolver->create(ClassMultiplication::class);
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create(ClassPow::class, [ClassMultiplication::class => $multiplication]);
 
-        $this->assertInstanceOf(Class2::class, $instance);
+        $this->assertInstanceOf(ClassPow::class, $instance);
         $this->assertEquals(4, $instance->plus(1,3));
     }
 
     public function testCreateInstanceFromIndexArgs()
     {
         $definition = [
-            'class' => Class2::class,
+            'class' => ClassPow::class,
         ];
         $instanceResolver = new InstanceResolver();
 
-        $class1 = $instanceResolver->create(Class1::class);
-        $instance = $instanceResolver->create($definition, [$class1]);
+        $multiplication = $instanceResolver->create(ClassMultiplication::class);
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create($definition, [$multiplication]);
 
-        $this->assertInstanceOf(Class2::class, $instance);
+        $this->assertInstanceOf(ClassPow::class, $instance);
         $this->assertEquals(4, $instance->plus(1,3));
     }
 
     public function testCreateInstanceFromNamedArgs()
     {
         $definition = [
-            'class' => Class2::class,
+            'class' => ClassPow::class,
         ];
         $instanceResolver = new InstanceResolver();
 
-        $class1 = $instanceResolver->create(Class1::class);
-        $instance = $instanceResolver->create($definition, ['class1' => $class1]);
+        /** @var ClassMultiplication $multiplication */
+        $multiplication = $instanceResolver->create(ClassMultiplication::class);
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create($definition, ['class1' => $multiplication]);
 
-        $this->assertInstanceOf(Class2::class, $instance);
+        $this->assertInstanceOf(ClassPow::class, $instance);
         $this->assertEquals(4, $instance->plus(1,3));
     }
 
     public function testCreateInstanceFromDefinition()
     {
         $definition = [
-            'class' => Class2::class,
+            'class' => ClassPow::class,
         ];
         $instanceResolver = new InstanceResolver();
-        $class1 = $instanceResolver->create(Class1::class);
-        $instance = $instanceResolver->create($definition, [Class1::class => $class1]);
+        $multiplication = $instanceResolver->create(ClassMultiplication::class);
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create($definition, [ClassMultiplication::class => $multiplication]);
 
-        $this->assertInstanceOf(Class2::class, $instance);
+        $this->assertInstanceOf(ClassPow::class, $instance);
         $this->assertEquals(4, $instance->plus(1,3));
     }
 
@@ -80,27 +99,31 @@ final class InstanceResolverTest extends BaseTest
     {
 
         $instanceResolver = new InstanceResolver();
-        $class1 = $instanceResolver->create(Class1::class);
+        $multiplication = $instanceResolver->create(ClassMultiplication::class);
 
         $definition = [
-            'class' => Class2::class,
+            'class' => ClassPow::class,
             '__construct' => [
-                Class1::class => $class1
+                ClassMultiplication::class => $multiplication
             ],
         ];
+        /** @var ClassPow $instance */
         $instance = $instanceResolver->create($definition);
-        $this->assertInstanceOf(Class2::class, $instance);
+        $this->assertInstanceOf(ClassPow::class, $instance);
         $this->assertEquals(4, $instance->plus(1,3));
     }
 
     public function testCallMethodFromIndexArgs()
     {
         $instanceResolver = new InstanceResolver();
-        $class1 = $instanceResolver->create(Class1::class);
-        $instance = $instanceResolver->create(Class2::class, [$class1]);
+
+        /** @var ClassMultiplication $multiplication */
+        $multiplication = $instanceResolver->create(ClassMultiplication::class);
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create(ClassPow::class, [$multiplication]);
         $args = [
             'a' => 7,
-            Class1::class => $class1,
+            ClassMultiplication::class => $multiplication,
             'b' => 3,
         ];
         $sum = $instanceResolver->callMethod($instance, 'method1', $args);
@@ -115,11 +138,14 @@ final class InstanceResolverTest extends BaseTest
     {
         $instanceResolver = new InstanceResolver();
 
-        $class1 = $instanceResolver->create(Class1::class);
-        $instance = $instanceResolver->create(Class2::class, [$class1]);
+        /** @var ClassMultiplication $multiplication */
+        $multiplication = $instanceResolver->create(ClassMultiplication::class);
+
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create(ClassPow::class, [$multiplication]);
         $args = [
             'a' => 7,
-            Class1::class => $class1,
+            ClassMultiplication::class => $multiplication,
             'b' => 3,
         ];
         $sum = $instanceResolver->callMethod($instance, 'method1', $args);
@@ -130,11 +156,12 @@ final class InstanceResolverTest extends BaseTest
     {
         $instanceResolver = new InstanceResolver();
 
-        $class1 = $instanceResolver->create(Class1::class);
-        $instance = $instanceResolver->create(Class2::class, [$class1]);
+        $multiplication = $instanceResolver->create(ClassMultiplication::class);
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create(ClassPow::class, [$multiplication]);
         $args = [
             'a' => 7,
-            'class1' => $class1,
+            'class1' => $multiplication,
             'b' => 3,
         ];
         $sum = $instanceResolver->callMethod($instance, 'method1', $args);
@@ -152,11 +179,12 @@ final class InstanceResolverTest extends BaseTest
     {
         $instanceResolver = new InstanceResolver();
 
-        $class1 = $instanceResolver->create(Class1::class);
-        $instance = $instanceResolver->create(Class2::class, [$class1]);
+        $multiplication = $instanceResolver->create(ClassMultiplication::class);
+        /** @var ClassPow $instance */
+        $instance = $instanceResolver->create(ClassPow::class, [$multiplication]);
         $args = [
             'a' => 7,
-            $class1,
+            $multiplication,
             'b' => 3,
         ];
         $sum = $instanceResolver->callMethod($instance, 'method1', $args);
@@ -164,7 +192,7 @@ final class InstanceResolverTest extends BaseTest
 
         $args = [
             'a' => 7,
-            Class1::class => $class1,
+            ClassMultiplication::class => $multiplication,
             3,
         ];
         $sum = $instanceResolver->callMethod($instance, 'method1', $args);
@@ -172,7 +200,7 @@ final class InstanceResolverTest extends BaseTest
 
         $args = [
             7,
-            Class1::class => $class1,
+            ClassMultiplication::class => $multiplication,
             'b' => 3,
         ];
         $sum = $instanceResolver->callMethod($instance, 'method1', $args);

@@ -2,7 +2,7 @@
 
 namespace App1;
 
-class Class0
+class ClassSum
 {
 
     public function plus(int $a, int $b): int
