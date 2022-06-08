@@ -12,14 +12,14 @@ use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 class InstanceHelper
 {
 
-    public static function callMethod(object $instance, string $methodName, array $parameters = [], ContainerInterface $container = null)
-    {
-        return self::getInstanceResolver($container)->callMethod($instance, $methodName, $parameters);
-
-        /*$container = $container ?: ContainerHelper::getContainer();
-        $parameters = self::prepareParameters(get_class($instance), $methodName, $parameters, $container);
-        return call_user_func_array([$instance, $methodName], $parameters);*/
-    }
+//    public static function callMethod(object $instance, string $methodName, array $parameters = [], ContainerInterface $container = null)
+//    {
+//        return self::getInstanceResolver($container)->callMethod($instance, $methodName, $parameters);
+//
+//        /*$container = $container ?: ContainerHelper::getContainer();
+//        $parameters = self::prepareParameters(get_class($instance), $methodName, $parameters, $container);
+//        return call_user_func_array([$instance, $methodName], $parameters);*/
+//    }
 
     public static function create($definition, array $constructParams = [], ContainerInterface $container = null): object
     {

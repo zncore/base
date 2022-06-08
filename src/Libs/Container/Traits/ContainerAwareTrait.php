@@ -22,7 +22,7 @@ trait ContainerAwareTrait
         return $this->container;
     }
 
-    protected function ensureContainer(ContainerInterface $container = null): ContainerInterface
+    protected function ensureContainer(ContainerInterface $container = null): ?ContainerInterface
     {
         return $container ?: $this->container;
     }

@@ -92,7 +92,7 @@ final class InstanceHelperTest extends BaseTest
         $this->assertEquals(4, $instance->plus(1,3));
     }
 
-    public function testCallMethodFromIndexArgs()
+    /*public function testCallMethodFromIndexArgs()
     {
         $instance = InstanceHelper::create(Class2::class, [new Class1()]);
         $args = [
@@ -172,5 +172,5 @@ final class InstanceHelperTest extends BaseTest
         ];
         $sum = InstanceHelper::callMethod($instance, 'plus', $args);
         $this->assertEquals(4, $sum);
-    }
+    }*/
 }

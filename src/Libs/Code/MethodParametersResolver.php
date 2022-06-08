@@ -3,9 +3,11 @@
 namespace ZnCore\Base\Libs\Code;
 
 use Exception;
+use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionParameter;
+use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Container\Traits\ContainerAwareTrait;
 
@@ -14,12 +16,26 @@ class MethodParametersResolver
 
     use ContainerAwareTrait;
 
+    private $instanceResolver;
+
+    public function __construct(ContainerInterface $container = null, InstanceResolver $instanceResolver = null)
+    {
+        $this->setContainer($container);
+        $this->instanceResolver = $instanceResolver;
+    }
+
+    public function getInstanceResolver(): InstanceResolver
+    {
+        return $this->instanceResolver ?: new InstanceResolver($this->container);
+    }
+
     public function resolve(string $className, string $methodName, array $constructionArgs = []): array
     {
-        if (!ArrayHelper::isIndexed($constructionArgs)) {
+        if (!ArrayHelper::isIndexed($constructionArgs) || empty($constructionArgs)) {
             $reflectionClass = new ReflectionClass($className);
             try {
                 $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
+
                 $constructionArgs = $this->extractParams($constructorParameters, $constructionArgs);
             } catch (ReflectionException $e) {
             }
@@ -47,7 +63,14 @@ class MethodParametersResolver
         } else {
             $parameterType = $constructorParameter->getType();
             if (!$parameterType->allowsNull()) {
-                return $this->getContainer()->get($parameterType->getName());
+                $className = $parameterType->getName();
+                if($this->ensureContainer()) {
+                    return $this->getContainer()->get($className);
+                } elseif(class_exists($className)) {
+                    $instanceResolver = $this->getInstanceResolver();
+                    return $instanceResolver->create($className);
+//                    return new $className();
+                }
             }
         }
     }

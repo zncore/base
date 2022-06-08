@@ -50,7 +50,7 @@ class InstanceResolver
     private function prepareParameters(string $className, string $methodName, array $constructionArgs, ContainerInterface $container = null): array
     {
         $container = $this->ensureContainer($container);
-        $methodParametersResolver = new MethodParametersResolver($container);
+        $methodParametersResolver = new MethodParametersResolver($container, $this);
         return $methodParametersResolver->resolve($className, $methodName, $constructionArgs);
     }
 
@@ -65,6 +65,7 @@ class InstanceResolver
         if (!class_exists($className)) {
             throw new ClassNotFoundException();
         }
+
         $container = $this->ensureContainer($container);
         $constructionArgs = $this->prepareParameters($className, '__construct', $constructionArgs, $container);
         return $this->createObjectInstance($className, $constructionArgs);
@@ -74,7 +75,8 @@ class InstanceResolver
     {
         if (count($constructionArgs) && method_exists($className, '__construct')) {
 //            $instance = new $className(...$constructionArgs);
-            $instance = (new \ReflectionClass ($className))->newInstanceArgs($constructionArgs);
+            $reflectionClass = new \ReflectionClass($className);
+            $instance = $reflectionClass->newInstanceArgs($constructionArgs);
         } else {
             $instance = new $className();
         }
