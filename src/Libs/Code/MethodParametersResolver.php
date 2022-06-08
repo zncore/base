@@ -7,7 +7,6 @@ use Psr\Container\ContainerInterface;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionParameter;
-use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Container\Traits\ContainerAwareTrait;
 
@@ -31,16 +30,39 @@ class MethodParametersResolver
 
     public function resolve(string $className, string $methodName, array $constructionArgs = []): array
     {
-        if (!ArrayHelper::isIndexed($constructionArgs) || empty($constructionArgs)) {
-            $reflectionClass = new ReflectionClass($className);
-            try {
-                $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
 
-                $constructionArgs = $this->extractParams($constructorParameters, $constructionArgs);
+
+        if (!ArrayHelper::isIndexed($constructionArgs) || empty($constructionArgs)) {
+//            $reflectionClass = new ReflectionClass($className);
+            try {
+//                $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
+                $constructorParameters = $this->extractMethodParameters($className, $methodName);
+
+//                if(empty($constructionArgs)) {
+//                    $constructorParameters = $this-
+
+//                    dd($constructionArgs);
+                    $constructionArgs = $this->extractParams($constructorParameters, $constructionArgs);
+//                    dd($constructionArgs);
+                    /*foreach ($constructorParameters as $constructorParameter) {
+
+                    }*/
+
+                    //dd($className, $methodName, $constructionArgs, $constructorParameters);
+//                }
+
+
+//                $constructionArgs = $this->extractParams($constructorParameters, $constructionArgs);
             } catch (ReflectionException $e) {
             }
         }
         return $constructionArgs;
+    }
+
+    protected function extractMethodParameters(string $className, string $methodName): array {
+        $reflectionClass = new ReflectionClass($className);
+        $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
+        return $constructorParameters;
     }
 
     protected function extractParameterName(ReflectionParameter $constructorParameter, array $constructionArgs = []): string
@@ -62,21 +84,23 @@ class MethodParametersResolver
             //unset($constructionArgs[$parameterName]);
         } else {
             $parameterType = $constructorParameter->getType();
-            if (!$parameterType->allowsNull()) {
-                $className = $parameterType->getName();
-                if($this->ensureContainer()) {
+            $className = $parameterType->getName();
+            if (class_exists($className)) {
+                if ($this->ensureContainer()) {
                     return $this->getContainer()->get($className);
-                } elseif(class_exists($className)) {
+                } else {
                     $instanceResolver = $this->getInstanceResolver();
                     return $instanceResolver->create($className);
-//                    return new $className();
                 }
+            } else {
+                return $constructorParameter->getDefaultValue();
+//                dd($constructorParameter->getDefaultValue());
             }
         }
     }
 
     /**
-     * @param array | ReflectionParameter[] $constructorParameters
+     * @param ReflectionParameter[] $constructorParameters
      * @param array $constructionArgs
      * @return array
      */
@@ -90,9 +114,8 @@ class MethodParametersResolver
             } catch (Exception $e) {
             }
         }
-
+//        dd($flatParameters);
         $flatParameters = $this->fillEmptyParameters($constructorParameters, $flatParameters, $constructionArgs);
-
         ksort($flatParameters);
         return $flatParameters;
     }

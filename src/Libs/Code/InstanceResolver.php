@@ -13,14 +13,13 @@ class InstanceResolver
 
     use ContainerAwareTrait;
 
-    public function callMethod(object $instance, string $methodName, array $parameters = [], ContainerInterface $container = null)
+    public function callMethod(object $instance, string $methodName, array $parameters = [])
     {
-        $container = $this->ensureContainer($container);
-        $parameters = $this->prepareParameters(get_class($instance), $methodName, $parameters, $container);
+        $parameters = $this->prepareParameters(get_class($instance), $methodName, $parameters);
         return call_user_func_array([$instance, $methodName], $parameters);
     }
 
-    public function create($definition, array $constructParams = [], ContainerInterface $container = null): object
+    public function create($definition, array $constructParams = []): object
     {
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
@@ -31,25 +30,23 @@ class InstanceResolver
             $constructParams = $definition['__construct'];
             unset($definition['__construct']);
         }
-        $container = $this->ensureContainer($container);
-        $handlerInstance = $this->createObject($definition['class'], $constructParams, $container);
+        $handlerInstance = $this->createObject($definition['class'], $constructParams);
 
         ClassHelper::configure($handlerInstance, $definition);
         return $handlerInstance;
     }
 
-    public function ensure($definition, $constructParams = [], ContainerInterface $container = null): object
+    public function ensure($definition, $constructParams = []): object
     {
         if (is_object($definition)) {
             return $definition;
         }
-        $container = $this->ensureContainer($container);
-        return $this->create($definition, $constructParams, $container);
+        return $this->create($definition, $constructParams);
     }
 
-    private function prepareParameters(string $className, string $methodName, array $constructionArgs, ContainerInterface $container = null): array
+    private function prepareParameters(string $className, string $methodName, array $constructionArgs): array
     {
-        $container = $this->ensureContainer($container);
+        $container = $this->ensureContainer();
         $methodParametersResolver = new MethodParametersResolver($container, $this);
         return $methodParametersResolver->resolve($className, $methodName, $constructionArgs);
     }
@@ -60,14 +57,12 @@ class InstanceResolver
      * @return object
      * @throws ClassNotFoundException
      */
-    private function createObject(string $className, array $constructionArgs = [], ContainerInterface $container = null): object
+    private function createObject(string $className, array $constructionArgs = []): object
     {
         if (!class_exists($className)) {
             throw new ClassNotFoundException();
         }
-
-        $container = $this->ensureContainer($container);
-        $constructionArgs = $this->prepareParameters($className, '__construct', $constructionArgs, $container);
+        $constructionArgs = $this->prepareParameters($className, '__construct', $constructionArgs);
         return $this->createObjectInstance($className, $constructionArgs);
     }
 
