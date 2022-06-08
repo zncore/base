@@ -20,7 +20,12 @@ return [
             /** @var TranslationServiceInterface $translationService */
             $translationService = \ZnCore\Base\Helpers\InstanceHelper::create(TranslationService::class);
             $translationService->setLanguage('ru');
-            $translationService->setBundles($_ENV['I18NEXT_BUNDLES'] ?? []);
+
+            /** @var \ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface $configManager */
+            $configManager = $container->get(\ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface::class);
+            $bundleConfig = $configManager->get('i18nextBundles', []);
+
+            $translationService->setBundles($bundleConfig);
             $translationService->setDefaultLanguage('ru');
             return $translationService;
             //return I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);

@@ -14,8 +14,8 @@ class ConfigManager implements ConfigManagerInterface
         $this->config[$name] = $value;
     }
 
-    public function get(string $name)
+    public function get(string $name, $defaultValue = null)
     {
-        return $this->config[$name];
+        return $this->config[$name] ?? $defaultValue;
     }
 }
