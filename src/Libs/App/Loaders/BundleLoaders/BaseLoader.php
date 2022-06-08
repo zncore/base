@@ -22,6 +22,11 @@ abstract class BaseLoader
 
     private $configManager;
 
+    public function __construct(ConfigManagerInterface $configManager)
+    {
+        $this->setConfigManager($configManager);
+    }
+
     protected function loadFromCache($callback) {
         if($this->useCache && $this->getCache() instanceof AbstractAdapter) {
             $key = 'kernel_bundle_loader2_' . $this->getName();

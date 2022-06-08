@@ -11,10 +11,10 @@ use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 class SymfonyRoutesLoader extends BaseLoader
 {
 
-    public function __construct(ConfigManagerInterface $configManager)
+    /*public function __construct(ConfigManagerInterface $configManager)
     {
         $this->setConfigManager($configManager);
-    }
+    }*/
 
     public function loadAll(array $bundles): array
     {

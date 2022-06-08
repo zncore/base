@@ -10,13 +10,6 @@ use ZnCore\Base\Libs\I18Next\Services\TranslationService;
 class I18NextLoader extends BaseLoader
 {
 
-    private $configManager;
-
-    public function __construct(ConfigManagerInterface $configManager)
-    {
-        $this->configManager = $configManager;
-    }
-
     public function loadAll(array $bundles): array
     {
         $config = [];
@@ -25,7 +18,7 @@ class I18NextLoader extends BaseLoader
             $config = ArrayHelper::merge($config, $i18nextBundles);
         }
 //        $_ENV['I18NEXT_BUNDLES'] = $config;
-        $this->configManager->set('i18nextBundles', $config);
+        $this->getConfigManager()->set('i18nextBundles', $config);
         return [];
 //        return [$this->getName() => $config];
     }
