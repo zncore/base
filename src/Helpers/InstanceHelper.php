@@ -5,7 +5,9 @@ namespace ZnCore\Base\Helpers;
 use ReflectionNamedType;
 use ZnCore\Base\Exceptions\ClassNotFoundException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
+use ZnCore\Base\Helpers\Code\MethodParametersHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Code\MethodParametersResolver;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 
 class InstanceHelper
@@ -45,46 +47,53 @@ class InstanceHelper
 
     private static function prepareParameters(string $className, string $methodName, array $constructionArgs): array
     {
-        if (!ArrayHelper::isIndexed($constructionArgs)) {
-            $reflectionClass = new \ReflectionClass($className);
-            try {
-                $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
-                $flatParameters = [];
-                foreach ($constructorParameters as $index => $constructorParameter) {
-                    /** @var ReflectionNamedType $parameterType */
-                    $parameterType = $constructorParameter->getType();
-                    if ($parameterType && array_key_exists($parameterType->getName(), $constructionArgs)) {
-                        $parameterName = $parameterType->getName();
-                    } else {
-                        $parameterName = $constructorParameter->name;
-                    }
-                    if (array_key_exists($parameterName, $constructionArgs)) {
-                        $flatParameters[$index] = $constructionArgs[$parameterName];
-                        unset($constructionArgs[$parameterName]);
-                    } else {
-                        if(!$constructorParameter->getType()->allowsNull()) {
-                            try {
-                                $flatParameters[$index] = ContainerHelper::getContainer()->get($constructorParameter->getType()->getName());
-                            } catch (\Exception $e) {
-                            }
-                        }
-                    }
-                }
-                foreach ($constructorParameters as $index => $constructorParameter) {
-                    if (!isset($flatParameters[$index])) {
-                        foreach ($constructionArgs as $constructionArgName => $constructionArgValue) {
-                            if (is_int($constructionArgName)) {
-                                $flatParameters[$index] = $constructionArgValue;
-                            }
-                        }
-                    }
-                }
-                ksort($flatParameters);
-                $constructionArgs = $flatParameters;
-            } catch (\ReflectionException $e) {
-            }
-        }
-        return $constructionArgs;
+        $methodParametersResolver = new MethodParametersResolver(ContainerHelper::getContainer());
+        return $methodParametersResolver->resolve($className, $methodName, $constructionArgs);
+
+//        return MethodParametersHelper::prepareParameters($className, $methodName, $constructionArgs);
+
+
+
+//        if (!ArrayHelper::isIndexed($constructionArgs)) {
+//            $reflectionClass = new \ReflectionClass($className);
+//            try {
+//                $constructorParameters = $reflectionClass->getMethod($methodName)->getParameters();
+//                $flatParameters = [];
+//                foreach ($constructorParameters as $index => $constructorParameter) {
+//                    /** @var ReflectionNamedType $parameterType */
+//                    $parameterType = $constructorParameter->getType();
+//                    if ($parameterType && array_key_exists($parameterType->getName(), $constructionArgs)) {
+//                        $parameterName = $parameterType->getName();
+//                    } else {
+//                        $parameterName = $constructorParameter->name;
+//                    }
+//                    if (array_key_exists($parameterName, $constructionArgs)) {
+//                        $flatParameters[$index] = $constructionArgs[$parameterName];
+//                        unset($constructionArgs[$parameterName]);
+//                    } else {
+//                        if(!$constructorParameter->getType()->allowsNull()) {
+//                            try {
+//                                $flatParameters[$index] = ContainerHelper::getContainer()->get($constructorParameter->getType()->getName());
+//                            } catch (\Exception $e) {
+//                            }
+//                        }
+//                    }
+//                }
+//                foreach ($constructorParameters as $index => $constructorParameter) {
+//                    if (!isset($flatParameters[$index])) {
+//                        foreach ($constructionArgs as $constructionArgName => $constructionArgValue) {
+//                            if (is_int($constructionArgName)) {
+//                                $flatParameters[$index] = $constructionArgValue;
+//                            }
+//                        }
+//                    }
+//                }
+//                ksort($flatParameters);
+//                $constructionArgs = $flatParameters;
+//            } catch (\ReflectionException $e) {
+//            }
+//        }
+//        return $constructionArgs;
     }
 
     /**
