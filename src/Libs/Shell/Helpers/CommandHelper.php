@@ -8,10 +8,40 @@ use ZnCore\Base\Libs\Shell\CommandForm;
 class CommandHelper
 {
 
-//    private $lang = 'en_GB';
-//    private $commandItems = [];
-//    private $path = '.';
     private static $optionGlue = '=';
+
+    public static function getCommandString(CommandForm $commandForm): string
+    {
+        $args = $commandForm->getArguments();
+        if ($commandForm->getCommand()) {
+            array_unshift($args, $commandForm->getCommand());
+//            $args = ArrayHelper::merge([$commandForm->getCommand()], $args);
+        }
+        return self::argsToString($args, $commandForm->getLang());
+    }
+
+    public static function argsToString(array $args, string $langCode = null): string
+    {
+        $commandName = array_shift($args);
+        $langOption = self::generateLang($langCode);
+        $arguments = self::generateCommand($args);
+        $command = "{$langOption} {$commandName} {$arguments}";
+        return trim($command);
+    }
+
+    protected static function generateCommand(array $args): string
+    {
+        $args = self::processCommandArgs($args);
+        return implode(' ', $args);
+    }
+
+    protected static function generateLang(?string $lang = null): string
+    {
+        if ($lang) {
+            return 'LANG=' . $lang;
+        }
+        return '';
+    }
 
     protected static function escapeshellarg($arg): string
     {
@@ -22,18 +52,9 @@ class CommandHelper
             return strval($arg);
         }
         return escapeshellarg($arg);
-
-        /*if (is_string($arg)) {
-            $arg = escapeshellarg($arg);
-            //} elseif (is_array($arg)) {
-
-        } else {
-            throw new \Exception('Bad command option type!');
-        }
-        return $arg;*/
     }
 
-    public static function cleanEmptyArgs(array $args)
+    protected static function cleanEmptyArgs(array $args)
     {
         foreach ($args as $key => $value) {
             if (empty($value)) {
@@ -47,7 +68,7 @@ class CommandHelper
         return $args;
     }
 
-    public static function processCommandArg($key, $value)
+    protected static function processCommandArg($key, $value)
     {
         $cmd = '';
         if (is_string($key)) {
@@ -56,82 +77,14 @@ class CommandHelper
         return $cmd . self::escapeshellarg($value);
     }
 
-    public static function processCommandArgs(array $args)
+    protected static function processCommandArgs(array $args)
     {
         $args = self::cleanEmptyArgs($args);
         $cmdArr = [];
         foreach ($args as $key => $value) {
             $cmdArr[] = self::processCommandArg($key, $value);
         }
-
-//        foreach ($args as $arg) {
-//            if (is_array($arg)) {
-//            } elseif (is_scalar($arg) && !is_bool($arg)) {
-//                $cmd[] = /*self::escapeshellarg*/($arg);
-//            }
-//        }
         return $cmdArr;
     }
 
-    public static function generateCommand(array $args): string
-    {
-        $args = self::processCommandArgs($args);
-        return implode(' ', $args);
-    }
-
-    protected static function generateLang(CommandForm $commandForm): string
-    {
-        if ($commandForm->getLang()) {
-            return 'LANG=' . $commandForm->getLang();
-        }
-        return '';
-    }
-
-    protected static function generateLang2(?string $lang = null): string
-    {
-        if ($lang) {
-            return 'LANG=' . $lang;
-        }
-        return '';
-    }
-
-    public static function argsToString(array $args, string $langCode = null): string
-    {
-        $commandName = array_shift($args);
-        $langOption = self::generateLang2($langCode);
-        $arguments = self::generateCommand($args);
-        $command = "{$langOption} {$commandName} {$arguments}";
-        return trim($command);
-    }
-
-    public static function getCommandString(CommandForm $commandForm): string
-    {
-        $args = $commandForm->getArguments();
-        if($commandForm->getCommand()) {
-            $args = ArrayHelper::merge([$commandForm->getCommand()], $args);
-        }
-        return self::argsToString($args, $commandForm->getLang());
-
-
-
-
-
-        if ($commandForm->getCommand()) {
-            $commandName = $commandForm->getCommand();
-        } else {
-            $commandName = array_shift($args);
-        }
-        $lang = self::generateLang($commandForm);
-
-
-        $arguments = self::generateCommand($args);
-        $command = "{$lang} {$commandName} {$arguments}";
-
-        return trim($command);
-    }
-
-    public static function setCommandString(string $cmd): void
-    {
-
-    }
 }

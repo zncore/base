@@ -9,7 +9,6 @@ class CommandForm
     private $command;
     private $arguments = [];
     private $path = '.';
-//    private $optionGlue = '=';
 
     public function getLang(): string
     {
@@ -39,11 +38,6 @@ class CommandForm
     public function setArguments(array $arguments): void
     {
         $this->arguments = $arguments;
-    }
-
-    public function addCommandItem(string $commandItem): void
-    {
-        $this->commandItems[] = $commandItem;
     }
 
     public function getPath()
