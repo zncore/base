@@ -135,7 +135,6 @@ class ShellCommand
 
         foreach ($args as $arg) {
             if (is_array($arg)) {
-
                 foreach ($arg as $key => $value) {
                     $_c = '';
                     if (is_string($key)) {
