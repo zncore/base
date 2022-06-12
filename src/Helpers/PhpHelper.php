@@ -24,51 +24,6 @@ class PhpHelper
     }
 
     /**
-     * Checks if PHP configuration option (from php.ini) is on.
-     * @param string $name configuration option name.
-     * @return bool option is on.
-     */
-    public static function checkPhpIniOn($name): bool
-    {
-        $value = ini_get($name);
-        if (empty($value)) {
-            return false;
-        }
-
-        return ((int)$value === 1 || strtolower($value) === 'on');
-    }
-
-    /**
-     * Checks if PHP configuration option (from php.ini) is off.
-     * @param string $name configuration option name.
-     * @return bool option is off.
-     */
-    public static function checkPhpIniOff($name): bool
-    {
-        $value = ini_get($name);
-        if (empty($value)) {
-            return true;
-        }
-
-        return (strtolower($value) === 'off');
-    }
-
-    public static function checkPhpIniEmpty($name): bool
-    {
-        $value = ini_get($name);
-        if (empty($value)) {
-            return true;
-        }
-
-        return (strlen($value) === 0);
-    }
-
-    public static function checkPhpIniNotEmpty($name): bool
-    {
-        return ! self::checkPhpIniEmpty($name);
-    }
-
-    /**
      * Checks if the given PHP extension is available and its version matches the given one.
      * @param string $extensionName PHP extension name.
      * @param string $version required PHP extension version.

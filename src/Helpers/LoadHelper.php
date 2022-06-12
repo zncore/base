@@ -2,57 +2,39 @@
 
 namespace ZnCore\Base\Helpers;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
-use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Libs\Store\Helpers\StoreHelper;
-use ZnCore\Base\Libs\Store\StoreFile;
 
+/**
+ * Загрузка и сохранение конфигураций
+ * 
+ * Поддерживаются следующие форматы файлов:
+ * - Json
+ * - Php
+ * - Xml
+ * - Yaml
+ */
 class LoadHelper
 {
 
-    public static function loadConfig($mainConfigFile = null)
+    /**
+     * Загрузить конфиг
+     * @param string $mainConfigFile Имя файла, относительно корня проекта
+     * @return array|null
+     */
+    public static function loadConfig(string $mainConfigFile)
     {
         $rootDirectory = __DIR__ . '/../../../../..';
         return StoreHelper::load($rootDirectory . '/' . $mainConfigFile);
-
-        /*$store = new StoreFile(__DIR__ . '/../../../../../' . $mainConfigFile);
-        $config = $store->load();
-        return $config;*/
     }
 
-    public static function saveConfig($mainConfigFile = null, $data)
+    /**
+     * Сохранить конфиг в файл
+     * @param string $mainConfigFile Имя файла, относительно корня проекта
+     * @param array $data Конфиг
+     */
+    public static function saveConfig(string $mainConfigFile, array $data)
     {
         $rootDirectory = __DIR__ . '/../../../../..';
         return StoreHelper::save($rootDirectory . '/' . $mainConfigFile, $data);
-
-        /*$store = new StoreFile(__DIR__ . '/../../../../../' . $mainConfigFile);
-        $store->save($data);*/
-    }
-
-    /*public static function loadTemplate(string $fileName, array $params = []): string
-    {
-        ob_start();
-        extract($params);
-        include($fileName);
-        $content = ob_get_contents();
-        ob_end_clean();
-        return $content;
-    }*/
-
-    public static function loadScript(string $fileName)
-    {
-        return @include(FilePathHelper::path($fileName));
-    }
-
-    public static function loadConfigList(array $fileNames, array $config = []): array
-    {
-        foreach ($fileNames as $fileName) {
-            $itemConfig = self::loadScript($fileName);
-            if (is_array($itemConfig)) {
-                $config = ArrayHelper::merge($config, $itemConfig);
-            }
-        }
-        return $config;
     }
 }

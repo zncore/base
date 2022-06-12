@@ -4,14 +4,28 @@ namespace ZnCore\Base\Helpers;
 
 use ZnCore\Base\Enums\OsFamilyEnum;
 
+/**
+ * Работа с семействами операционных систем
+ */
 class OsHelper
 {
 
+    /**
+     * Принадлежит ли текущая ОС к определенному семейству
+     * 
+     * Семейства операционных систем определены в OsFamilyEnum.
+     * @param string $family
+     * @return bool
+     */
     public static function isFamily(string $family): bool
     {
         return self::osFamily() == $family;
     }
 
+    /**
+     * Получить имя семества текущей ОС
+     * @return mixed|string
+     */
     public static function osFamily()
     {
         if ('\\' === DIRECTORY_SEPARATOR) {
@@ -30,5 +44,4 @@ class OsHelper
 
         return isset($map[PHP_OS]) ? $map[PHP_OS] : 'Unknown';
     }
-
 }
