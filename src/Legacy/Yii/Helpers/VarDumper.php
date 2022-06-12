@@ -7,7 +7,7 @@
 
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
-use ZnCore\Base\Exceptions\InvalidValueException;
+use ZnCore\Base\Legacy\Yii\Exceptions\InvalidValueException;
 
 /**
  * VarDumper is intended to replace the buggy PHP function var_dump and print_r.

@@ -2,8 +2,8 @@
 
 namespace ZnCore\Base\Traits\MagicAttribute;
 
-use ZnCore\Base\Exceptions\InvalidCallException;
-use ZnCore\Base\Exceptions\UnknownPropertyException;
+use ZnCore\Base\Libs\MagicAttribute\Exceptions\InvalidCallException;
+use ZnCore\Base\Libs\MagicAttribute\Exceptions\UnknownPropertyException;
 
 trait MagicSetterTrait
 {

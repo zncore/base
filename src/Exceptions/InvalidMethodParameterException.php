@@ -4,9 +4,16 @@ namespace ZnCore\Base\Exceptions;
 
 use Exception;
 
+/**
+ * Неверный параметр метода
+ */
 class InvalidMethodParameterException extends Exception
 {
 
+    /**
+     * Имя неверного параметра
+     * @var string
+     */
     private $parameterName;
 
     public function getParameterName(): ?string

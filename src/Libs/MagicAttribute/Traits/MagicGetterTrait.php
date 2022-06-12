@@ -1,9 +1,9 @@
 <?php
 
-namespace ZnCore\Base\Traits\MagicAttribute;
+namespace ZnCore\Base\Libs\MagicAttribute\Traits;
 
-use ZnCore\Base\Exceptions\InvalidCallException;
-use ZnCore\Base\Exceptions\UnknownPropertyException;
+use ZnCore\Base\Libs\MagicAttribute\Exceptions\InvalidCallException;
+use ZnCore\Base\Libs\MagicAttribute\Exceptions\UnknownPropertyException;
 
 trait MagicGetterTrait
 {

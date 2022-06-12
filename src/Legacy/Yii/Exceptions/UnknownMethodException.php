@@ -1,9 +1,12 @@
 <?php
 
-namespace ZnCore\Base\Exceptions;
+namespace ZnCore\Base\Legacy\Yii\Exceptions;
 
 use BadMethodCallException;
 
+/**
+ *
+ */
 class UnknownMethodException extends BadMethodCallException
 {
 

@@ -4,10 +4,22 @@ namespace ZnCore\Base\Exceptions;
 
 use Exception;
 
+/**
+ * Сущность уже существует в хранилище
+ */
 class AlreadyExistsException extends Exception
 {
 
+    /**
+     * Сущность
+     * @var object
+     */
     private $entity;
+
+    /**
+     * Уникальные поля сущности, по которым оно найдено в хранилище
+     * @var array 
+     */
     private $fields = [];
 
     public function getEntity(): ?object
