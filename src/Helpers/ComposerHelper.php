@@ -6,11 +6,18 @@ use Composer\Autoload\ClassLoader;
 use ZnCore\Base\Exceptions\NotFoundDependencyException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 
+/**
+ * Работа с Composer
+ */
 class ComposerHelper
 {
 
     private static $composerVendorClassLoader;
 
+    /**
+     * Получить загрузчик классов
+     * @return ClassLoader
+     */
     public static function getComposerVendorClassLoader(): ClassLoader
     {
         if (!self::$composerVendorClassLoader) {
@@ -53,6 +60,11 @@ class ComposerHelper
         self::getComposerVendorClassLoader()->addPsr4($namespace . '\\', $path);
     }
 
+    /**
+     * Получить имя директории из namespace
+     * @param $path
+     * @return false|string
+     */
     public static function getPsr4Path($path)
     {
         $path = str_replace('/', '\\', $path);

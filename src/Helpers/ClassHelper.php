@@ -9,9 +9,19 @@ use ZnCore\Base\Exceptions\NotInstanceOfException;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Domain\Helpers\EntityHelper;
 
+/**
+ * Работа с классами
+ */
 class ClassHelper
 {
 
+    /**
+     * Является ли объект инстансом класса/интерфейса
+     * @param $instance
+     * @param $interface
+     * @param bool $allowString
+     * @return bool
+     */
     public static function instanceOf($instance, $interface, bool $allowString = false): bool
     {
         try {
@@ -22,6 +32,17 @@ class ClassHelper
         }
     }
 
+    /**
+     * Проверка, является ли объект инстансом класса/интерфейса
+     *
+     * Если не является, то вызывается исключение.
+     *
+     * @param $instance
+     * @param $interface
+     * @param bool $allowString
+     * @throws NotInstanceOfException
+     * @throws \ReflectionException
+     */
     public static function checkInstanceOf($instance, $interface, bool $allowString = false): void
     {
         if (empty($instance)) {
@@ -36,14 +57,14 @@ class ClassHelper
         if (!interface_exists($interface) && !class_exists($interface)) {
             throw new InvalidArgumentException("Interface \"$interface\" not exists");
         }
-        if(is_string($instance) && !$allowString) {
+        if (is_string($instance) && !$allowString) {
             throw new InvalidArgumentException("Instance as string not allowed");
         }
 
-        if(is_string($instance)) {
+        if (is_string($instance)) {
             $reflection = new \ReflectionClass($instance);
             $interfaces = $reflection->getInterfaces();
-            if(!array_key_exists($interface, $interfaces)) {
+            if (!array_key_exists($interface, $interfaces)) {
                 self::throwNotInstanceOfException($instance, $interface);
 //                throw new NotInstanceOfException("Class \"$instance\" not instanceof \"$interface\"");
             }
@@ -54,29 +75,25 @@ class ClassHelper
         }
     }
 
-    private static function throwNotInstanceOfException($instanceClassName, string $interface) {
-        $instanceClassName = is_object($instanceClassName) ? get_class($instanceClassName) : $instanceClassName;
-        throw new NotInstanceOfException("Class \"$instanceClassName\" not instanceof \"$interface\"");
-    }
-
-    public static function getInstanceOfClassName($class, $classname)
+    /**
+     * Получить namespace класса
+     * @param string $name
+     * @return string
+     */
+    public static function getNamespace(string $name)
     {
-        $class = self::getClassName($class, $classname);
-        if (empty($class)) {
-            return null;
-        }
-        if (class_exists($class)) {
-            return new $class();
-        }
-        return null;
+        $name = trim($name, '\\');
+        $arr = explode('\\', $name);
+        array_pop($arr);
+        $name = implode('\\', $arr);
+        return $name;
     }
 
-    public static function getNamespaceOfClassName($class)
-    {
-        $lastSlash = strrpos($class, '\\');
-        return substr($class, 0, $lastSlash);
-    }
-
+    /**
+     * Получить чистое имя класса
+     * @param $class
+     * @return false|string
+     */
     public static function getClassOfClassName($class)
     {
         $lastPos = strrpos($class, '\\');
@@ -84,18 +101,12 @@ class ClassHelper
         return $name;
     }
 
-    public static function extractNameFromClass($class, $type)
-    {
-        $lastPos = strrpos($class, '\\');
-        $name = substr($class, $lastPos + 1, 0 - strlen($type));
-        return $name;
-    }
-
     /**
      * Создать объект
+     *
      * @param string|object|array $definition Определение
      * @param array $params Параметры конструктора
-     * @return mixed
+     * @return object
      * @throws InvalidConfigException
      * @throws NotInstanceOfException
      */
@@ -104,15 +115,15 @@ class ClassHelper
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
         }
-        if(is_object($definition)) {
+        if (is_object($definition)) {
             return $definition;
         }
         $definition = self::normalizeComponentConfig($definition);
-        if($container == null) {
+        if ($container == null) {
             $container = ContainerHelper::getContainer();
         }
         $instance = $container->make($definition['class'], $params);
-        if($definition['class']) {
+        if ($definition['class']) {
             unset($definition['class']);
         }
         EntityHelper::setAttributes($instance, $definition);
@@ -121,10 +132,11 @@ class ClassHelper
 
     /**
      * Создать объект
+     *
      * @param string|object|array $definition Определение
      * @param array $params Атрибуты объекта
      * @param null $interface
-     * @return mixed
+     * @return object
      * @throws InvalidConfigException
      * @throws NotInstanceOfException
      */
@@ -133,14 +145,14 @@ class ClassHelper
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
         }
-        if(is_object($definition)) {
+        if (is_object($definition)) {
             return $definition;
         }
         $definition = self::normalizeComponentConfig($definition);
         $container = ContainerHelper::getContainer();
         $object = $container->make($definition['class']);
         //$object = new $definition['class'];
-        if($definition['class']) {
+        if ($definition['class']) {
             unset($definition['class']);
         }
         EntityHelper::setAttributes($object, $definition);
@@ -153,6 +165,13 @@ class ClassHelper
         return $object;
     }
 
+    /**
+     * Назначить атрибуты сущности из массива
+     *
+     * @param object $object
+     * @param array $properties
+     * @return object
+     */
     public static function configure(object $object, array $properties)
     {
         if (empty($properties)) {
@@ -160,7 +179,7 @@ class ClassHelper
         }
         foreach ($properties as $name => $value) {
             if ($name != 'class') {
-                if(EntityHelper::isWritableAttribute($object, $name)) {
+                if (EntityHelper::isWritableAttribute($object, $name)) {
                     EntityHelper::setAttribute($object, $name, $value);
                 }
 //                $object->{$name} = $value;
@@ -169,50 +188,13 @@ class ClassHelper
         return $object;
     }
 
-    static function getClassName(string $className, string $namespace)
-    {
-        if (empty($namespace)) {
-            return $className;
-        }
-        if (!ClassHelper::isClass($className)) {
-            $className = $namespace . '\\' . ucfirst($className);
-        }
-        return $className;
-    }
-
-    public static function getNamespace(string $name)
-    {
-        $name = trim($name, '\\');
-        $arr = explode('\\', $name);
-        array_pop($arr);
-        $name = implode('\\', $arr);
-        return $name;
-    }
-
-    static function normalizeComponentListConfig($config)
-    {
-        if (empty($config)) {
-            return [];
-        }
-        $components = [];
-        foreach ($config as $id => &$definition) {
-            $definition = self::normalizeComponentConfig($definition);
-            if (self::isComponent($id, $definition)) {
-                $components[$id] = $definition;
-            }
-        }
-        return $components;
-    }
-
-    static function isComponent($id, $definition)
-    {
-        if (empty($definition)) {
-            return false;
-        }
-        return PhpHelper::isValidName($id) && array_key_exists('class', $definition);
-    }
-
-    static function normalizeComponentConfig($config, $class = null)
+    /**
+     * Нормализация описания объекта
+     * @param $config
+     * @param null $class
+     * @return array
+     */
+    public static function normalizeComponentConfig($config, $class = null)
     {
         if (empty($config) && empty($class)) {
             return $config;
@@ -229,8 +211,19 @@ class ClassHelper
         return $config;
     }
 
-    static function isClass($name)
+    /**
+     * Является ли строка именем класса
+     * @param $name
+     * @return bool
+     */
+    public static function isClass($name): bool
     {
         return is_string($name) && (strpos($name, '\\') !== false || class_exists($name));
+    }
+
+    private static function throwNotInstanceOfException($instanceClassName, string $interface)
+    {
+        $instanceClassName = is_object($instanceClassName) ? get_class($instanceClassName) : $instanceClassName;
+        throw new NotInstanceOfException("Class \"$instanceClassName\" not instanceof \"$interface\"");
     }
 }

@@ -101,8 +101,10 @@ class StringHelper
      */
     public static function genUuid()
     {
+        return Uuid::v4()->toRfc4122();
+        
         // composer require ramsey/uuid:"^3 || ^4"
-        $uuid = array(
+        /*$uuid = array(
             'time_low' => 0,
             'time_mid' => 0,
             'time_hi' => 0,
@@ -135,7 +137,7 @@ class StringHelper
             $uuid['node'][5]
         );
 
-        return $uuid;
+        return $uuid;*/
     }
 
     public static function setTab($content, $tabCount)

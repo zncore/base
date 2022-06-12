@@ -7,35 +7,65 @@ use Psr\Log\LoggerInterface;
 use ZnCore\Base\Exceptions\DeprecatedException;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 
+/**
+ * Работа с устаревшим кодом
+ */
 class DeprecateHelper
 {
 
+    /**
+     * Строгий режим устаревания
+     * @var bool 
+     */
     private static $isStrictMode = false;
 
-    public static function softThrow(string $message = '')
+    /**
+     * Мягкое устаревание
+     * 
+     * При включенном строгом режиме устаревания вызывает исключение.
+     * При отключенном строгом режиме устаревания ничего не происходит.
+     * Метод служит для мягкого перехода между версиями
+     * @param string $message
+     * @throws DeprecatedException
+     */
+    public static function softThrow(string $message = ''): void
     {
         if (self::isStrictMode()) {
             self::hardThrow($message);
         }
     }
 
-    public static function hardThrow(string $message = '')
+    /**
+     * Строгое устаревание
+     * 
+     * Всегда вызывает исключение.
+     * @param string $message
+     * @throws DeprecatedException
+     */
+    public static function hardThrow(string $message = ''): void
     {
         self::log($message, debug_backtrace(), \Monolog\Logger::CRITICAL);
         throw new DeprecatedException('Deprecated: ' . $message);
     }
 
+    /**
+     * Включен ли строгий режим устаревания
+     * @return bool
+     */
     public static function isStrictMode(): bool
     {
         return self::getStrictMode() == true;
     }
 
-    public static function setStrictMode()
+    /**
+     * Установить строгий режим устаревания
+     */
+    public static function setStrictMode(): void
     {
         self::$isStrictMode = true;
     }
 
-    public static function getStrictMode()
+    private static function getStrictMode(): bool
     {
         return $_ENV['DEPRECATE_STRICT_MODE'] ?? self::$isStrictMode;
     }
