@@ -2,6 +2,9 @@
 
 namespace ZnCore\Base\Enums\Http;
 
+/**
+ * HTTP-методы
+ */
 class HttpMethodEnum
 {
 

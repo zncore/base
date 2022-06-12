@@ -2,6 +2,9 @@
 
 namespace ZnCore\Base\Enums;
 
+/**
+ * Часто используемые регулярные выражения
+ */
 class RegexpPatternEnum
 {
 

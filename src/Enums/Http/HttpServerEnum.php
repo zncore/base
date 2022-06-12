@@ -2,6 +2,9 @@
 
 namespace ZnCore\Base\Enums\Http;
 
+/**
+ * Имена ключей массива $_SERVER
+ */
 class HttpServerEnum
 {
 

@@ -2,6 +2,9 @@
 
 namespace ZnCore\Base\Enums;
 
+/**
+ * Режимы деплоя
+ */
 class EnvEnum
 {
 

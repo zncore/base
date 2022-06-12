@@ -10,6 +10,9 @@ use DomainException;
 use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 use ZnCore\Contract\Encoder\Interfaces\PrettifyInterface;
 
+/**
+ * XML-сериализатор
+ */
 class XmlEncoder implements EncoderInterface, PrettifyInterface
 {
 

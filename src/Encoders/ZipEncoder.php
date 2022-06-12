@@ -8,6 +8,9 @@ use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use Exception;
 use ZipArchive;
 
+/**
+ * Сжатие данных Zip
+ */
 class ZipEncoder implements EncoderInterface
 {
 

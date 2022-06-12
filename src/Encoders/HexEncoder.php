@@ -4,6 +4,9 @@ namespace ZnCore\Base\Encoders;
 
 use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 
+/**
+ * Hex-сериализатор
+ */
 class HexEncoder implements EncoderInterface
 {
 

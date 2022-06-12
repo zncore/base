@@ -2,6 +2,9 @@
 
 namespace ZnCore\Base\Enums;
 
+/**
+ * Семейство операционных систем
+ */
 class OsFamilyEnum
 {
 

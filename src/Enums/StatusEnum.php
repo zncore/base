@@ -5,6 +5,9 @@ namespace ZnCore\Base\Enums;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
 use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 
+/**
+ * Статусы сущности
+ */
 class StatusEnum implements GetLabelsInterface
 {
 

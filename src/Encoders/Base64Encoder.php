@@ -4,6 +4,9 @@ namespace ZnCore\Base\Encoders;
 
 use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 
+/**
+ * Base64-сериализатор
+ */
 class Base64Encoder implements EncoderInterface
 {
 

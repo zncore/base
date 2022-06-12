@@ -2,6 +2,9 @@
 
 namespace ZnCore\Base\Enums\Measure;
 
+/**
+ * Единицы измерения времени
+ */
 class TimeEnum
 {
 

@@ -4,6 +4,9 @@ namespace ZnCore\Base\Encoders;
 
 use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 
+/**
+ * Сжатие данных GZip
+ */
 class GZipEncoder implements EncoderInterface
 {
 

@@ -4,6 +4,9 @@ namespace ZnCore\Base\Enums\Measure;
 
 use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
 
+/**
+ * Единицы измерения информации в байтах
+ */
 class ByteEnum implements GetLabelsInterface
 {
 
