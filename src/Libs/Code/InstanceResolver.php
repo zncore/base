@@ -19,6 +19,11 @@ class InstanceResolver
         return call_user_func_array([$instance, $methodName], $parameters);
     }
 
+    public function make($definition, array $constructParams = []): object
+    {
+
+    }
+
     public function create($definition, array $constructParams = []): object
     {
         if (empty($definition)) {
