@@ -4,6 +4,7 @@ namespace ZnCore\Base\Libs\App\Loaders\BundleLoaders;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
+use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 
 class ContainerLoader extends BaseLoader
 {
@@ -34,8 +35,17 @@ class ContainerLoader extends BaseLoader
                 $sourceConfig = $config;
             }
             $requiredConfig = require($configFile);
-            $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
-            ArrayHelper::setValue($config, $toKey, $mergedConfig);
+
+            if(is_array($requiredConfig)) {
+                $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
+                ArrayHelper::setValue($config, $toKey, $mergedConfig);
+            } elseif (is_callable($requiredConfig)) {
+                $containerConfigurator = $this
+                    ->getContainer()
+                    ->get(ContainerConfiguratorInterface::class);
+                $this
+                    ->getContainer()->call($requiredConfig);
+            }
         }
         return $config;
     }

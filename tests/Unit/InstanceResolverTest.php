@@ -5,6 +5,7 @@ namespace ZnCore\Base\Tests\Unit;
 use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnTool\Test\Base\BaseTest;
+
 use App1\ClassSum;
 use App1\ClassMultiplication;
 use App1\ClassPow;

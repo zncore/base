@@ -30,22 +30,22 @@ use ZnCore\Base\Libs\DotEnv\DotEnvConfigInterface;
 return [
     'definitions' => [],
     'singletons' => [
-        Request::class => Request::class,
-        RequestContext::class => RequestContext::class,
+//        Request::class => Request::class,
+//        RequestContext::class => RequestContext::class,
 //        RouteCollection::class => RouteCollection::class,
-        ContainerInterface::class => function () {
+        /*ContainerInterface::class => function () {
             return \ZnCore\Base\Libs\Container\Helpers\ContainerHelper::getContainer();
-        },
-        EntityManagerInterface::class => function (ContainerInterface $container) {
+        },*/
+        /*EntityManagerInterface::class => function (ContainerInterface $container) {
             $em = EntityManager::getInstance($container);
 //            $eloquentOrm = $container->get(EloquentOrm::class);
 //            $em->addOrm($eloquentOrm);
             return $em;
-        },
+        },*/
         //ConfigManagerInterface::class => ConfigManager::class,
-        EventDispatcherInterface::class => \Symfony\Component\EventDispatcher\EventDispatcher::class,
-        \Psr\EventDispatcher\EventDispatcherInterface::class => EventDispatcherInterface::class,
-        \Symfony\Component\EventDispatcher\EventDispatcherInterface::class => \Symfony\Component\EventDispatcher\EventDispatcher::class,
+//        \Symfony\Contracts\EventDispatcher\EventDispatcherInterface::class => \Symfony\Component\EventDispatcher\EventDispatcher::class,
+//        \Psr\EventDispatcher\EventDispatcherInterface::class => \Symfony\Contracts\EventDispatcher\EventDispatcherInterface::class,
+//        \Symfony\Component\EventDispatcher\EventDispatcherInterface::class => \Symfony\Component\EventDispatcher\EventDispatcher::class,
         /*EventDispatcherInterface::class => function () {
             $eventDispatcher = new EventDispatcher();
             return $eventDispatcher;
@@ -53,9 +53,9 @@ return [
         FileRepository::class => function () {
             return new FileRepository(DotEnv::get('ELOQUENT_CONFIG_FILE'));
         },
-        Manager::class => function () {
+        /*Manager::class => function () {
             return ManagerFactory::createManagerFromEnv();
-        },
+        },*/
         AdapterInterface::class => function (ContainerInterface $container) {
             if (EnvHelper::isTest() || EnvHelper::isDev()) {
                 $adapter = new \Symfony\Component\Cache\Adapter\ArrayAdapter();
@@ -69,8 +69,8 @@ return [
         //LoggerInterface::class => NullLogger::class,
         //\Symfony\Component\Cache\Adapter\AbstractAdapter::class => AdapterInterface::class,
         CacheInterface::class => AdapterInterface::class,
-        DotEnvConfigInterface::class => function() {
+        /*DotEnvConfigInterface::class => function() {
             return new DotEnvConfig($_ENV);
-        },
+        },*/
     ],
 ];
