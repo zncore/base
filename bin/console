@@ -57,6 +57,8 @@ foreach ($bundleClasses as $bundleClass) {
 
 EnvHelper::prepareTestEnv();
 
+//\ZnCore\Base\Helpers\DeprecateHelper::hardThrow();
+
 if(DotEnv::get('BUNDLES_CONFIG_FILE')) {
     $bundles = ArrayHelper::merge($bundles, include __DIR__ . '/../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE'));
 }

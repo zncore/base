@@ -29,7 +29,6 @@ class ConsoleApp extends BaseConsoleApp
             ZnTool\Generator\Bundle::class,
             ZnTool\Stress\Bundle::class,
             ZnBundle\Queue\Bundle::class,
-            \ZnDatabase\Base\Bundle::class,
         ];
 
         EnvHelper::prepareTestEnv();
