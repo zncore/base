@@ -2,19 +2,10 @@
 
 namespace ZnCore\Base\Libs\Container\Helpers;
 
-use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Exceptions\ReadOnlyException;
-use ZnCore\Base\Helpers\DeprecateHelper;
-use ZnCore\Base\Helpers\Helper;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
-use ZnCore\Base\Libs\App\Libs\ConfigManager;
 use ZnCore\Base\Libs\Container\Libs\ContainerConfigurator;
-use ZnSandbox\Sandbox\App\Libs\ZnCore;
 
 class ContainerHelper
 {
@@ -23,9 +14,8 @@ class ContainerHelper
 
     public static function setContainer(ContainerInterface $container): void
     {
-        if(self::$container) {
-            return;
-//            throw new ReadOnlyException();
+        if (self::$container) {
+            throw new ReadOnlyException();
         }
         self::$container = $container;
     }
