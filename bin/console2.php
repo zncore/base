@@ -46,9 +46,13 @@ $container = new Container();
 $znCore = new ZnCore($container);
 $znCore->init();
 
-$znCore->addContainerConfig(function (ContainerConfiguratorInterface $containerConfigurator) {
+/** @var ContainerConfiguratorInterface $containerConfigurator */
+$containerConfigurator = $container->get(ContainerConfiguratorInterface::class);
+
+$containerConfigurator->singleton(AppInterface::class, ConsoleApp::class);
+/*$znCore->addContainerConfig(function (ContainerConfiguratorInterface $containerConfigurator) {
     $containerConfigurator->singleton(AppInterface::class, ConsoleApp::class);
-});
+});*/
 
 /** @var AppInterface $appFactory */
 $appFactory = $container->get(AppInterface::class);
