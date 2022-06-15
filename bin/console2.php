@@ -42,7 +42,7 @@ class ConsoleApp extends BaseConsoleApp
 
 require __DIR__ . '/../../../../vendor/autoload.php';
 
-$container = Container::getInstance();
+$container = new Container();
 $znCore = new ZnCore($container);
 $znCore->init();
 

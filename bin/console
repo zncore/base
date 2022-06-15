@@ -8,7 +8,7 @@ use ZnCore\Base\Libs\App\Factories\KernelFactory;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use Symfony\Component\Console\Application;
 
-$container = \Illuminate\Container\Container::getInstance();
+$container = new \Illuminate\Container\Container();
 $znCore = new \ZnSandbox\Sandbox\App\Libs\ZnCore($container);
 $znCore->init();
 

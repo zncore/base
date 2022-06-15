@@ -15,7 +15,7 @@ class IlluminateContainerConfigurator implements ContainerConfiguratorInterface
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        ClassHelper::checkInstanceOf($container, Container::class);
+//        ClassHelper::checkInstanceOf($container, Container::class);
     }
 
     public function singleton($abstract, $concrete): void
@@ -30,7 +30,7 @@ class IlluminateContainerConfigurator implements ContainerConfiguratorInterface
 
     public function bindContainerSingleton(): void
     {
-        $this->container->singleton(ContainerInterface::class, Container::class);
+//        $this->container->singleton(ContainerInterface::class, Container::class);
         $this->container->singleton(Container::class, function () {
             return $this->container;
         });
