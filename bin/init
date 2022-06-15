@@ -38,5 +38,6 @@ if(empty($config['definitions'])) {
 
 $input = new ArgvInput;
 $output = new ConsoleOutput;
-$initLib = new Init($input, $output, $config['environments'], $config['definitions']);
+$container = new \Illuminate\Container\Container();
+$initLib = new Init($container, $input, $output, $config['environments'], $config['definitions']);
 $initLib->run();
