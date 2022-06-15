@@ -19,14 +19,13 @@ use ZnSandbox\Sandbox\App\Libs\ZnCore;
 class ContainerHelper
 {
 
-    private static $container;
+    private static $container = null;
 
     public static function setContainer(ContainerInterface $container): void
     {
         if(self::$container) {
             return;
-            dd(debug_backtrace());
-            throw new ReadOnlyException();
+//            throw new ReadOnlyException();
         }
         self::$container = $container;
     }
@@ -34,7 +33,7 @@ class ContainerHelper
     /**
      * @return ContainerInterface|null
      */
-    public static function getContainer(): ContainerInterface
+    public static function getContainer(): ?ContainerInterface
     {
         return self::$container;
     }

@@ -10,9 +10,9 @@ trait SingletonTrait
      */
     private static $instances = [];
 
-    private function __construct()
+    /*private function __construct()
     {
-    }
+    }*/
 
     public static function getInstance(): self
     {
