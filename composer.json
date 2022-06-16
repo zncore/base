@@ -19,8 +19,8 @@
     "symfony/property-access": "4.*|5.*",
     "symfony/dotenv": "4.*|5.*",
     "symfony/yaml": "4.*|5.*",
-    "illuminate/support": "^6.1",
-    "illuminate/container": "^6.1"
+    "illuminate/support": "^6.1|^7.0",
+    "illuminate/container": "^6.1|^7.0"
   },
   "bin": [
     "bin/zn"
