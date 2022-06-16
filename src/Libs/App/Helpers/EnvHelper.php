@@ -8,13 +8,17 @@ use ZnCore\Base\Enums\EnvEnum;
 class EnvHelper
 {
 
-    public static function prepareTestEnv()
-    {
+    public static function isTestEnv(): bool {
         global $_GET, $_SERVER, $argv;
         $isConsoleTest = isset($argv) && in_array('--env=test', $argv);
 //        $isWebTest = isset($_GET['env']) && $_GET['env'] == 'test';
         $isWebTest = (isset($_SERVER['HTTP_ENV_NAME']) && $_SERVER['HTTP_ENV_NAME'] == 'test') || (isset($_GET['env']) && $_GET['env'] == 'test');
-        if ($isConsoleTest || $isWebTest) {
+        return $isConsoleTest || $isWebTest;
+    }
+
+    public static function prepareTestEnv()
+    {
+        if (self::isTestEnv()) {
             $_ENV['APP_ENV'] = 'test';
         }
     }
