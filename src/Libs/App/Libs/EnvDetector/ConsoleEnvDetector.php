@@ -16,9 +16,7 @@ class ConsoleEnvDetector implements EnvDetectorInterface
     public function isTest(): bool
     {
         global $argv;
-        $isConsoleTest = /*isset($argv) && */in_array('--env=test', $argv);
-//        $isWebTest = isset($_GET['env']) && $_GET['env'] == 'test';
-//        $isWebTest = (isset($_SERVER['HTTP_ENV_NAME']) && $_SERVER['HTTP_ENV_NAME'] == 'test') || (isset($_GET['env']) && $_GET['env'] == 'test');
-        return $isConsoleTest /*|| $isWebTest*/;
+        $isConsoleTest = in_array('--env=test', $argv);
+        return $isConsoleTest;
     }
 }

@@ -31,11 +31,12 @@ class ConsoleApp extends BaseConsoleApp
             ZnBundle\Queue\Bundle::class,
         ];
 
-        EnvHelper::prepareTestEnv();
+//        EnvHelper::prepareTestEnv();
 
         if (DotEnv::get('BUNDLES_CONFIG_FILE')) {
             $bundles = ArrayHelper::merge($bundles, include __DIR__ . '/../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE'));
         }
+
         return $bundles;
     }
 }
