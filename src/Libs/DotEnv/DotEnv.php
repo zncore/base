@@ -21,14 +21,14 @@ class DotEnv
         return self::$isInited;
     }
     
-    public static function init(string $basePath = self::ROOT_PATH, string $mode = null): void
+    public static function init(string $basePath = self::ROOT_PATH, string $mode = 'main'): void
     {
         self::$isInited = true;
 
         if(empty($_ENV['APP_MODE'])) {
-            if(!$mode) {
+            /*if(!$mode) {
                 $mode = EnvHelper::isTestEnv() ? 'test' : 'main';
-            }
+            }*/
             $_ENV['APP_MODE'] = $mode;
         }
 
