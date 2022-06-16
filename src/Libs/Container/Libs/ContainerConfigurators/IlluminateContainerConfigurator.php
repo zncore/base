@@ -18,6 +18,13 @@ class IlluminateContainerConfigurator implements ContainerConfiguratorInterface
 //        ClassHelper::checkInstanceOf($container, Container::class);
     }
 
+    public function importFromDir(array $dirs): void {
+        foreach ($dirs as &$dir) {
+            $dir = realpath($dir);
+        }
+//        dd($dirs);
+    }
+
     public function singleton($abstract, $concrete): void
     {
         $this->container->singleton($abstract, $concrete);

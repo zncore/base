@@ -27,6 +27,10 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
         $this->configurator = $this->getContainerConfiguratorByContainer($container);
     }
 
+    public function importFromDir(array $dirs): void {
+        $this->configurator->importFromDir($dirs);
+    }
+
     public function singleton($abstract, $concrete): void
     {
         $this->configurator->singleton($abstract, $concrete);
