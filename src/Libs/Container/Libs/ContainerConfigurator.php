@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Helpers\InstanceHelper;
+use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Libs\ContainerConfigurators\IlluminateContainerConfigurator;
 
@@ -20,6 +21,7 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
     /** @var Container */
     private $container;
     private $configurator;
+    private $config = [];
 
     public function __construct(ContainerInterface $container)
     {
@@ -28,23 +30,36 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
     }
 
     public function importFromDir(array $dirs): void {
-        $this->configurator->importFromDir($dirs);
+        foreach ($dirs as &$dir) {
+            $dir = realpath($dir);
+        }
+        if($dirs) {
+            $this->configurator->importFromDir($dirs);
+            $this->config['import'] = ArrayHelper::merge($this->config['import'] ?? [], $dirs);
+        }
+    }
+
+    public function getConfig(): array
+    {
+        return $this->config;
     }
 
     public function singleton($abstract, $concrete): void
     {
         $this->configurator->singleton($abstract, $concrete);
+        $this->config['singletons'][$abstract] = $concrete;
     }
 
     public function bind($abstract, $concrete, bool $shared = false): void
     {
         $this->configurator->bind($abstract, $concrete, $shared);
+        $this->config['definitions'][$abstract] = $concrete;
     }
 
     public function bindContainerSingleton(): void
     {
         $this->configurator->singleton(ContainerConfiguratorInterface::class, function () {
-            return $this->container;
+            return $this;
         });
         $this->configurator->bindContainerSingleton();
     }
@@ -52,6 +67,7 @@ class ContainerConfigurator implements ContainerConfiguratorInterface
     public function alias($abstract, $alias): void
     {
         $this->configurator->alias($abstract, $alias);
+        $this->config['aliases'][$abstract] = $concrete;
     }
 
     private function getContainerConfiguratorByContainer(ContainerInterface $container): ContainerConfiguratorInterface

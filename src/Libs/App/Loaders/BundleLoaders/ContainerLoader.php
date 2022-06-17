@@ -114,21 +114,16 @@ class ContainerLoader extends BaseLoader
         $config = $containerConfigurator->getConfig();
         $entities = ArrayHelper::getValue($config, 'entities', []);
 
-        $emConfig = $entityManagerConfigurator->getEntities();
+        $emConfig = $entityManagerConfigurator->getConfig();
         if($emConfig) {
             $entities = ArrayHelper::merge($entities, $emConfig);
             $config['entities'] = $entities;
 //            ArrayHelper::set($config, 'entities', $entities);
         }
-
-
-
         return $config;
 
-
-
-        $this
+        /*$this
             ->getContainer()
-            ->call($requiredConfig);
+            ->call($requiredConfig);*/
     }
 }

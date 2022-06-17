@@ -4,10 +4,15 @@ namespace ZnCore\Base\Libs\App\Subscribers;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
 use ZnCore\Base\Libs\App\Events\LoadConfigEvent;
+use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerConfiguratorInterface;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Traits\EntityManagerTrait;
+
+DeprecateHelper::hardThrow();
 
 class ConfigureEntityManagerSubscriber implements EventSubscriberInterface
 {
@@ -23,19 +28,30 @@ class ConfigureEntityManagerSubscriber implements EventSubscriberInterface
 
     public function onAfterLoadConfig(LoadConfigEvent $event)
     {
-        $config = $event->getConfig();
+        return;
+
         $container = $event->getKernel()->getContainer();
-        if (isset($config['container'])) {
-            $this->bindEntityManager($container, $config['container']);
-            if (isset($config['container']['entities'])) {
-                unset($config['container']['entities']);
-            }
+        $config = $event->getConfig();
+        /** @var ContainerConfiguratorInterface $containerConfigurator */
+        $containerConfigurator = $container->get(ContainerConfiguratorInterface::class);
+//        $containerConfig = $config['container'];
+        $containerConfig = $containerConfigurator->getConfig();
+
+        if (!empty($containerConfig)) {
+            $this->bindEntityManager($container, $containerConfig);
+            /*if (isset($config['entities'])) {
+                unset($config['entities']);
+            }*/
         }
-        $event->setConfig($config);
+//        $event->setConfig($config);
     }
 
     private function bindEntityManager(ContainerInterface $container, $entitiesConfig): void
     {
+        /** @var EntityManagerConfiguratorInterface $entityManagerConfigurator */
+        $entityManagerConfigurator = $container->get(EntityManagerConfiguratorInterface::class);
+
+
         /** @var EntityManagerInterface $em */
         $em = $container->get(EntityManagerInterface::class);
         if (!empty($entitiesConfig['entities'])) {

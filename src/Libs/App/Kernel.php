@@ -43,7 +43,7 @@ class Kernel implements KernelInterface
     {
         return [
             ConfigureContainerSubscriber::class,
-            ConfigureEntityManagerSubscriber::class,
+//            ConfigureEntityManagerSubscriber::class,
         ];
     }
 
