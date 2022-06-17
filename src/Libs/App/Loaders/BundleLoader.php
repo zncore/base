@@ -97,11 +97,6 @@ class BundleLoader implements LoaderInterface
         //$this->bundles = ArrayHelper::merge($this->bundles, $bundles);
     }
 
-    public function bootstrapApp(string $appName)
-    {
-
-    }
-
     private function getLoadersConfig()
     {
         return $this->loadersConfig;

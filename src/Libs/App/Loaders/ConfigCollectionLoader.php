@@ -23,18 +23,13 @@ class ConfigCollectionLoader implements LoaderInterface
         $this->setContainer($container);
     }
 
-    public function bootstrapApp(string $appName)
-    {
-
-    }
-
     public function loadMainConfig(string $appName): array
     {
         $config = [];
         if ($this->loaders) {
             foreach ($this->loaders as $loader) {
                 $loader->setContainer($this->getContainer());
-                $loader->bootstrapApp($appName);
+//                $loader->bootstrapApp($appName);
                 $configItem = $loader->loadMainConfig($appName);
                 $config = ArrayHelper::merge($config, $configItem);
             }
