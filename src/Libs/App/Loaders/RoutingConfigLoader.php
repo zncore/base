@@ -6,9 +6,12 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\Loader\PhpFileLoader;
 use Symfony\Component\Routing\RouteCollection;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
+
+DeprecateHelper::hardThrow();
 
 class RoutingConfigLoader /*extends BaseLoader*/ implements LoaderInterface
 {

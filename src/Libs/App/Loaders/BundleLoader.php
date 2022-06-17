@@ -10,14 +10,14 @@ use ZnCore\Base\Libs\App\Base\BaseBundle;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BaseLoader;
-use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ConsoleLoader;
-use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ContainerLoader;
-use ZnCore\Base\Libs\App\Loaders\BundleLoaders\I18NextLoader;
-use ZnCore\Base\Libs\App\Loaders\BundleLoaders\MigrationLoader;
+use ZnLib\Console\Domain\Libs\BundleLoaders\ConsoleLoader;
+use ZnCore\Base\Libs\Container\Libs\BundleLoaders\ContainerLoader;
+use ZnCore\Base\Libs\I18Next\Libs\BundleLoaders\I18NextLoader;
+use ZnDatabase\Migration\Domain\Libs\BundleLoaders\MigrationLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ModuleLoader;
-use ZnCore\Base\Libs\App\Loaders\BundleLoaders\RbacConfigLoader;
-use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRoutesLoader;
-use ZnCore\Base\Libs\App\Loaders\BundleLoaders\SymfonyRpcRoutesLoader;
+use ZnUser\Rbac\Domain\Libs\BundleLoaders\RbacConfigLoader;
+use ZnLib\Web\Symfony4\Libs\BundleLoaders\SymfonyRoutesLoader;
+use ZnLib\Rpc\Domain\Libs\BundleLoaders\SymfonyRpcRoutesLoader;
 use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 
@@ -29,6 +29,36 @@ class BundleLoader implements LoaderInterface
 
     private $bundles = [];
     private $import = [];
+
+    private $loadersConfig = [
+        'migration' => MigrationLoader::class,
+        'container' => [
+            'class' => ContainerLoader::class,
+            //'useCache' => true,
+        ],
+//        'yiiAdmin' => ModuleLoader::class,
+//        'yiiWeb' => ModuleLoader::class,
+        'symfonyWeb' => [
+            'class' => SymfonyRoutesLoader::class,
+            //'useCache' => true,
+        ],
+        'symfonyRpc' => [
+            'class' => SymfonyRpcRoutesLoader::class,
+            //'useCache' => true,
+        ],
+        'rbac' => [
+            'class' => RbacConfigLoader::class,
+            //'useCache' => true,
+        ],
+        'symfonyAdmin' => [
+            'class' => SymfonyRoutesLoader::class,
+        ],
+        'console' => ConsoleLoader::class,
+        'i18next' => [
+            'class' => I18NextLoader::class,
+            //'useCache' => true,
+        ],
+    ];
 
     public function __construct(array $bundles = [], array $import = [])
     {
@@ -72,37 +102,7 @@ class BundleLoader implements LoaderInterface
 
     }
 
-    private $loadersConfig = [
-        'migration' => MigrationLoader::class,
-        'container' => [
-            'class' => ContainerLoader::class,
-            //'useCache' => true,
-        ],
-        'yiiAdmin' => ModuleLoader::class,
-        'yiiWeb' => ModuleLoader::class,
-        'symfonyWeb' => [
-            'class' => SymfonyRoutesLoader::class,
-            //'useCache' => true,
-        ],
-        'symfonyRpc' => [
-            'class' => SymfonyRpcRoutesLoader::class,
-            //'useCache' => true,
-        ],
-        'rbac' => [
-            'class' => RbacConfigLoader::class,
-            //'useCache' => true,
-        ],
-        'symfonyAdmin' => [
-            'class' => SymfonyRoutesLoader::class,
-        ],
-        'console' => ConsoleLoader::class,
-        'i18next' => [
-            'class' => I18NextLoader::class,
-            //'useCache' => true,
-        ],
-    ];
-
-    public function getLoadersConfig()
+    private function getLoadersConfig()
     {
         return $this->loadersConfig;
     }

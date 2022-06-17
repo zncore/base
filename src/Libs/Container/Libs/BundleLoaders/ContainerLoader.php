@@ -1,8 +1,9 @@
 <?php
 
-namespace ZnCore\Base\Libs\App\Loaders\BundleLoaders;
+namespace ZnCore\Base\Libs\Container\Libs\BundleLoaders;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BaseLoader;
 use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnCore\Base\Libs\Code\MethodParametersResolver;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;

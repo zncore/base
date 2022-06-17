@@ -14,6 +14,4 @@ interface ContainerConfiguratorInterface
     public function bindContainerSingleton(): void;
 
     public function alias($abstract, $alias): void;
-
-
 }

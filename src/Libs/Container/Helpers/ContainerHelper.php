@@ -4,6 +4,7 @@ namespace ZnCore\Base\Libs\Container\Helpers;
 
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Exceptions\ReadOnlyException;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Libs\ContainerConfigurator;
 
@@ -35,6 +36,7 @@ class ContainerHelper
 
     public static function configureContainer(ContainerInterface $container, array $containerConfig)
     {
+        DeprecateHelper::hardThrow();
         $configurator = self::getContainerConfiguratorByContainer($container);
         $configurator->bindContainerSingleton();
         self::configContainerFromArray($configurator, $containerConfig);
@@ -42,6 +44,7 @@ class ContainerHelper
 
     public static function configContainerFromArray(ContainerConfiguratorInterface $containerConfigurator, array $containerConfig): void
     {
+        DeprecateHelper::hardThrow();
         if (isset($containerConfig['definitions'])) {
             foreach ($containerConfig['definitions'] as $abstract => $concrete) {
                 $containerConfigurator->bind($abstract, $concrete, true);

@@ -4,6 +4,8 @@ namespace ZnCore\Base\Libs\Container\Interfaces;
 
 use Psr\Container\ContainerInterface;
 
+\ZnCore\Base\Helpers\DeprecateHelper::hardThrow();
+
 interface ContainerAwareInterface
 {
 

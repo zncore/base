@@ -50,9 +50,9 @@ return [
             $eventDispatcher = new EventDispatcher();
             return $eventDispatcher;
         },*/
-        FileRepository::class => function () {
+        /*FileRepository::class => function () {
             return new FileRepository(DotEnv::get('ELOQUENT_CONFIG_FILE'));
-        },
+        },*/
         /*Manager::class => function () {
             return ManagerFactory::createManagerFromEnv();
         },*/
