@@ -3,9 +3,12 @@
 namespace ZnCore\Base\Libs\App\Loaders\BundleLoaders;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Base\Libs\Container\Libs\ContainerConfigurators\ArrayContainerConfigurator;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
+use ZnCore\Domain\Libs\ArrayEntityManager;
 
 class ContainerLoader extends BaseLoader
 {
@@ -42,8 +45,14 @@ class ContainerLoader extends BaseLoader
 
                 $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
                 ArrayHelper::setValue($config, $toKey, $mergedConfig);
+
             } elseif (is_callable($requiredConfig)) {
-                $this->loadFromCallback($requiredConfig);
+                $requiredConfig = $this->loadFromCallback($requiredConfig);
+
+//                dd($requiredConfig);
+
+                $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
+                ArrayHelper::setValue($config, $toKey, $mergedConfig);
             }
         }
         return $config;
@@ -83,7 +92,32 @@ class ContainerLoader extends BaseLoader
         }
     }
 
-    private function loadFromCallback(callable $requiredConfig): void {
+    private function loadFromCallback(callable $requiredConfig) {
+        $instanceResolver = new InstanceResolver();
+        /** @var ArrayContainerConfigurator $containerConfigurator */
+        $containerConfigurator = $instanceResolver->create(ArrayContainerConfigurator::class);
+        /** @var ArrayEntityManager $entityManagerConfigurator */
+        $entityManagerConfigurator = $instanceResolver->create(ArrayEntityManager::class);
+
+
+        $requiredConfig($containerConfigurator, $entityManagerConfigurator);
+
+        $config = $containerConfigurator->getConfig();
+        $entities = ArrayHelper::getValue($config, 'entities', []);
+
+        $emConfig = $entityManagerConfigurator->getEntities();
+        if($emConfig) {
+            $entities = ArrayHelper::merge($entities, $emConfig);
+            $config['entities'] = $entities;
+//            ArrayHelper::set($config, 'entities', $entities);
+        }
+
+
+
+        return $config;
+
+
+
         $this
             ->getContainer()
             ->call($requiredConfig);
