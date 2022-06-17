@@ -30,7 +30,7 @@ trait EventDispatcherTrait
     /**
      * @return EventDispatcherInterface | \Symfony\Component\EventDispatcher\EventDispatcherInterface
      */
-    public function getEventDispatcher(): EventDispatcherInterface
+    protected function getEventDispatcher(): EventDispatcherInterface
     {
         if (!isset($this->eventDispatcher)) {
             $eventDispatcher = new EventDispatcher();

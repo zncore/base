@@ -27,6 +27,7 @@ return [
 
             $translationService->setBundles($bundleConfig);
             $translationService->setDefaultLanguage($defaultLang);
+            \ZnCore\Base\Libs\I18Next\Facades\I18Next::setService($translationService);
             return $translationService;
             //return I18NextServiceFactory::create('ru', 'ru', $_ENV['I18NEXT_BUNDLES'] ?? []);
         },

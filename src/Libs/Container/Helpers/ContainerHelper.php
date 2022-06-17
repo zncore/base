@@ -7,11 +7,14 @@ use ZnCore\Base\Exceptions\ReadOnlyException;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Libs\ContainerConfigurator;
+use ZnCore\Base\Libs\Container\Traits\ContainerAwareStaticAttributeTrait;
 
 class ContainerHelper
 {
 
-    private static $container = null;
+    use ContainerAwareStaticAttributeTrait;
+
+    /*private static $container = null;
 
     public static function setContainer(ContainerInterface $container): void
     {
@@ -23,11 +26,11 @@ class ContainerHelper
 
     /**
      * @return ContainerInterface|null
-     */
+
     public static function getContainer(): ?ContainerInterface
     {
         return self::$container;
-    }
+    }*/
 
     public static function getContainerConfiguratorByContainer(ContainerInterface $container): ContainerConfiguratorInterface
     {
