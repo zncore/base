@@ -5,6 +5,7 @@ namespace ZnCore\Base\Libs\App\Loaders\BundleLoaders;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 
 class ContainerLoader extends BaseLoader
 {
@@ -37,16 +38,54 @@ class ContainerLoader extends BaseLoader
             $requiredConfig = require($configFile);
 
             if(is_array($requiredConfig)) {
+//                $this->loadFromArray($requiredConfig);
+
                 $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
                 ArrayHelper::setValue($config, $toKey, $mergedConfig);
             } elseif (is_callable($requiredConfig)) {
-                $containerConfigurator = $this
-                    ->getContainer()
-                    ->get(ContainerConfiguratorInterface::class);
-                $this
-                    ->getContainer()->call($requiredConfig);
+                $this->loadFromCallback($requiredConfig);
             }
         }
         return $config;
+    }
+
+    private function loadFromArray(array $requiredConfig): void {
+        /** @var ContainerConfiguratorInterface $containerConfigurator */
+        $containerConfigurator = $this
+            ->getContainer()
+            ->get(ContainerConfiguratorInterface::class);
+
+        /** @var EntityManagerInterface $entityManager */
+        $entityManager = $this
+            ->getContainer()
+            ->get(EntityManagerInterface::class);
+
+        if(!empty($requiredConfig['singletons'])) {
+            foreach ($requiredConfig['singletons'] as $abstract => $concrete) {
+                $containerConfigurator->singleton($abstract, $concrete);
+            }
+        }
+
+        if(!empty($requiredConfig['definitions'])) {
+            foreach ($requiredConfig['definitions'] as $abstract => $concrete) {
+                $containerConfigurator->bind($abstract, $concrete);
+            }
+        }
+
+        if(!empty($requiredConfig['entities'])) {
+            foreach ($requiredConfig['entities'] as $entityClass => $repositoryInterface) {
+                $entityManager->bindEntity($entityClass, $repositoryInterface);
+                if($entityClass == 'App\\Bundles\\User\\Domain\\Entities\\IdentityEntity') {
+                    //dump($entityClass, $repositoryInterface);
+                }
+
+            }
+        }
+    }
+
+    private function loadFromCallback(callable $requiredConfig): void {
+        $this
+            ->getContainer()
+            ->call($requiredConfig);
     }
 }
