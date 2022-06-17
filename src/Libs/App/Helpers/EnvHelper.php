@@ -4,6 +4,7 @@ namespace ZnCore\Base\Libs\App\Helpers;
 
 use Symfony\Component\HttpFoundation\Request;
 use ZnCore\Base\Enums\EnvEnum;
+use ZnCore\Base\Helpers\DeprecateHelper;
 
 class EnvHelper
 {
@@ -18,6 +19,7 @@ class EnvHelper
 
     public static function prepareTestEnv()
     {
+        DeprecateHelper::hardThrow();
         if (self::isTestEnv()) {
             $_ENV['APP_ENV'] = 'test';
         }

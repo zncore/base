@@ -5,6 +5,7 @@ namespace ZnCore\Base\Libs\App;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use ZnCore\Base\Enums\Measure\TimeEnum;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
@@ -19,6 +20,8 @@ use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
+
+DeprecateHelper::hardThrow();
 
 class Kernel implements KernelInterface
 {
