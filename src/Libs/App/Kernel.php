@@ -42,7 +42,7 @@ class Kernel implements KernelInterface
     public function subscribes(): array
     {
         return [
-            ConfigureContainerSubscriber::class,
+//            ConfigureContainerSubscriber::class,
 //            ConfigureEntityManagerSubscriber::class,
         ];
     }

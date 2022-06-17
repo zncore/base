@@ -55,5 +55,4 @@ class KernelFactory
             SymfonyDumperFacade::dumpInConsole($_ENV['VAR_DUMPER_OUTPUT']);
         }
     }
-
 }

@@ -4,11 +4,15 @@ use Illuminate\Container\Container;
 use Symfony\Component\Console\Application;
 use ZnCore\Base\Libs\App\Helpers\EnvHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnLib\Console\Symfony4\Base\BaseConsoleApp;
+use ZnLib\Telegram\Domain\Libs\Loaders\BundleLoaders\TelegramRoutesLoader;
+use ZnLib\Telegram\Domain\Subscribers\LoadTelegramRoutesSubscriber;
 use ZnSandbox\Sandbox\App\Interfaces\AppInterface;
 use ZnSandbox\Sandbox\App\Libs\ZnCore;
+use ZnCore\Base\Libs\Event\Interfaces\EventDispatcherConfiguratorInterface;
 //use ZnCore\Base\Console\Libs\ConsoleApp;
 
 define('MICRO_TIME', microtime(true));
@@ -43,12 +47,24 @@ class ConsoleApp extends BaseConsoleApp
     }
 }
 
+//$container = Container::getInstance();
 $container = new Container();
 $znCore = new ZnCore($container);
 $znCore->init();
 
 /** @var ContainerConfiguratorInterface $containerConfigurator */
 $containerConfigurator = $container->get(ContainerConfiguratorInterface::class);
+
+/** @var EventDispatcherConfiguratorInterface $eventDispatcherConfigurator */
+$eventDispatcherConfigurator = $container->get(EventDispatcherConfiguratorInterface::class);
+
+
+//$eventDispatcherConfigurator->addSubscriber(LoadTelegramRoutesSubscriber::class);
+
+//if(/*in_array('telegramRoutes', $import) &&*/ class_exists(LoadTelegramRoutesSubscriber::class)) {
+//    $bundleLoader->addLoaderConfig('telegramRoutes', TelegramRoutesLoader::class);
+//    $kernel->addSubscriber(LoadTelegramRoutesSubscriber::class);
+//}
 
 $containerConfigurator->singleton(AppInterface::class, ConsoleApp::class);
 /*$znCore->addContainerConfig(function (ContainerConfiguratorInterface $containerConfigurator) {
