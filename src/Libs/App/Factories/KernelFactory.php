@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Libs\App\Factories;
 
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\App\Helpers\EnvHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\App\Kernel;
@@ -12,11 +13,14 @@ use ZnLib\Telegram\Domain\Libs\Loaders\BundleLoaders\TelegramRoutesLoader;
 use ZnLib\Telegram\Domain\Subscribers\LoadTelegramRoutesSubscriber;
 use ZnTool\Dev\VarDumper\Facades\SymfonyDumperFacade;
 
+DeprecateHelper::hardThrow();
+
 class KernelFactory
 {
 
     public static function createConsoleKernel(array $bundles = [], $import = ['i18next', 'container', 'console', 'migration']): KernelInterface
     {
+
         self::init();
         $bundleLoader = new BundleLoader($bundles, $import);
         $kernel = new Kernel('console');

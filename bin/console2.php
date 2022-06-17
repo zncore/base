@@ -13,7 +13,6 @@ use ZnLib\Telegram\Domain\Subscribers\LoadTelegramRoutesSubscriber;
 use ZnSandbox\Sandbox\App\Interfaces\AppInterface;
 use ZnSandbox\Sandbox\App\Libs\ZnCore;
 use ZnCore\Base\Libs\Event\Interfaces\EventDispatcherConfiguratorInterface;
-//use ZnCore\Base\Console\Libs\ConsoleApp;
 
 define('MICRO_TIME', microtime(true));
 
@@ -67,9 +66,6 @@ $eventDispatcherConfigurator = $container->get(EventDispatcherConfiguratorInterf
 //}
 
 $containerConfigurator->singleton(AppInterface::class, ConsoleApp::class);
-/*$znCore->addContainerConfig(function (ContainerConfiguratorInterface $containerConfigurator) {
-    $containerConfigurator->singleton(AppInterface::class, ConsoleApp::class);
-});*/
 
 /** @var AppInterface $appFactory */
 $appFactory = $container->get(AppInterface::class);

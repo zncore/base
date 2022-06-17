@@ -3,7 +3,10 @@
 namespace ZnCore\Base\Libs\App\Events;
 
 use Symfony\Contracts\EventDispatcher\Event;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Domain\Traits\Event\EventSkipHandleTrait;
+
+DeprecateHelper::hardThrow();
 
 class ConstructKernelEvent extends Event
 {

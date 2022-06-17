@@ -4,10 +4,13 @@ namespace ZnCore\Base\Libs\App\Subscribers;
 
 use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
 use ZnCore\Base\Libs\App\Events\LoadConfigEvent;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\Container\Traits\ContainerAwareTrait;
+
+DeprecateHelper::hardThrow();
 
 class ConfigureContainerSubscriber implements EventSubscriberInterface
 {

@@ -6,11 +6,14 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Routing\Route;
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Contract\Kernel\Interfaces\KernelInterface;
 use ZnLib\Console\Symfony4\Helpers\CommandHelper;
 use ZnLib\Web\Symfony4\MicroApp\MicroApp;
+
+DeprecateHelper::hardThrow();
 
 class ApplicationFactory
 {
@@ -52,10 +55,10 @@ class ApplicationFactory
         return $application;
     }
 
-    public static function createTest(KernelInterface $kernel)//: MicroApp
+    /*public static function createTest(KernelInterface $kernel)//: MicroApp
     {
         self::createConsole($kernel);
-    }
+    }*/
 
     /*private static function getConfigManager(ContainerInterface $container): ConfigManagerInterface {
         return $container->get(ConfigManagerInterface::class);

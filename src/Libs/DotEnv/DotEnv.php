@@ -20,11 +20,26 @@ class DotEnv
     {
         return self::$isInited;
     }
-    
+
+    public static function lazyInit(string $basePath = self::ROOT_PATH, string $mode = 'main'): void
+    {
+        if(self::$isInited) {
+            return;
+        }
+        self::initDotEnv($basePath, $mode);
+    }
+
     public static function init(string $basePath = self::ROOT_PATH, string $mode = 'main'): void
     {
+        if(self::$isInited) {
+            return;
+//            throw new \Exception('DotEnv already inited!');
+        }
         self::$isInited = true;
+        self::initDotEnv($basePath, $mode);
+    }
 
+    private static function initDotEnv(string $basePath = self::ROOT_PATH, string $mode = 'main') {
         if(empty($_ENV['APP_MODE'])) {
             /*if(!$mode) {
                 $mode = EnvHelper::isTestEnv() ? 'test' : 'main';
@@ -48,6 +63,7 @@ class DotEnv
     public static function get(string $name = null, $default = null)
     {
         if(!self::isInited()) {
+            throw new \Exception('DotEnv not inited!');
             self::init();
         }
         $name = mb_strtoupper($name);
