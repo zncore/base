@@ -8,7 +8,7 @@ trait SingletonTrait
     /**
      * @var static[]|array
      */
-    private static $instances = [];
+    private static $instance;
 
     /*private function __construct()
     {
@@ -16,17 +16,15 @@ trait SingletonTrait
 
     public static function getInstance(): self
     {
-        $className = static::class;
-        $isNotFound = !isset(self::$instances[$className]);
-        if ($isNotFound) {
-            self::$instances[$className] = self::createInstance();
+        if (!self::$instance) {
+            self::$instance = self::createInstance();
         }
-        return self::$instances[$className];
+        return self::$instance;
     }
 
-    protected function createInstance(string $className = null): self
+    private function createInstance(string $className = null): self
     {
         $className = $className ?: static::class;
-        return new $className;
+        return new $className();
     }
 }
