@@ -65,7 +65,8 @@ class InstanceResolver
     private function createObject(string $className, array $constructionArgs = []): object
     {
         if (!class_exists($className)) {
-            throw new ClassNotFoundException();
+//            dd($className);
+            throw new ClassNotFoundException($className);
         }
         $constructionArgs = $this->prepareParameters($className, '__construct', $constructionArgs);
         return $this->createObjectInstance($className, $constructionArgs);

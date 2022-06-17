@@ -23,13 +23,36 @@ class MethodParametersResolver
         $this->instanceResolver = $instanceResolver;
     }
 
-    public function getInstanceResolver(): InstanceResolver
+    public function resolveClosure($closure, /*string $className, string $methodName,*/ array $constructionArgs = []): array
     {
-        return $this->instanceResolver ?: new InstanceResolver($this->container);
+        if (!ArrayHelper::isIndexed($constructionArgs) || empty($constructionArgs)) {
+            try {
+//                $constructorParameters = $this->extractMethodParameters($className, $methodName);
+
+
+                if(is_array($closure)) {
+                    $constructorParameters = $this->extractMethodParameters($closure[0], $closure[1]);
+                    $constructionArgs = $this->extractParams($constructorParameters, $constructionArgs);
+                } elseif(is_callable($closure)) {
+                    $reflectionClass = new \ReflectionFunction($closure);
+                    $constructorParameters = $reflectionClass->getParameters();
+                }
+
+
+
+                $constructionArgs = $this->extractParams($constructorParameters, $constructionArgs);
+
+//                dd($constructorParameters, $constructionArgs);
+            } catch (ReflectionException $e) {
+            }
+        }
+        return $constructionArgs;
     }
 
     public function resolve(string $className, string $methodName, array $constructionArgs = []): array
     {
+//        return $this->resolveClosure([$className, $methodName], $constructionArgs);
+
         if (!ArrayHelper::isIndexed($constructionArgs) || empty($constructionArgs)) {
             try {
                 $constructorParameters = $this->extractMethodParameters($className, $methodName);
@@ -38,6 +61,11 @@ class MethodParametersResolver
             }
         }
         return $constructionArgs;
+    }
+
+    protected function getInstanceResolver(): InstanceResolver
+    {
+        return $this->instanceResolver ?: new InstanceResolver($this->container);
     }
 
     protected function extractMethodParameters(string $className, string $methodName): array
