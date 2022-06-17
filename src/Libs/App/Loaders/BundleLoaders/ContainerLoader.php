@@ -41,7 +41,7 @@ class ContainerLoader extends BaseLoader
             $requiredConfig = require($configFile);
 
             if(is_array($requiredConfig)) {
-//                $this->loadFromArray($requiredConfig);
+                $this->loadFromArray($requiredConfig);
 
                 $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
                 ArrayHelper::setValue($config, $toKey, $mergedConfig);
@@ -49,6 +49,7 @@ class ContainerLoader extends BaseLoader
             } elseif (is_callable($requiredConfig)) {
                 $requiredConfig = $this->loadFromCallback($requiredConfig);
 
+                $this->loadFromArray($requiredConfig);
 //                dd($requiredConfig);
 
                 $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
@@ -84,10 +85,6 @@ class ContainerLoader extends BaseLoader
         if(!empty($requiredConfig['entities'])) {
             foreach ($requiredConfig['entities'] as $entityClass => $repositoryInterface) {
                 $entityManager->bindEntity($entityClass, $repositoryInterface);
-                if($entityClass == 'App\\Bundles\\User\\Domain\\Entities\\IdentityEntity') {
-                    //dump($entityClass, $repositoryInterface);
-                }
-
             }
         }
     }
