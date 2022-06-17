@@ -7,6 +7,7 @@ use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Libs\ContainerConfigurators\ArrayContainerConfigurator;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerConfiguratorInterface;
 use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnCore\Domain\Libs\ArrayEntityManager;
 
@@ -41,17 +42,28 @@ class ContainerLoader extends BaseLoader
             $requiredConfig = require($configFile);
 
             if(is_array($requiredConfig)) {
-                $this->loadFromArray($requiredConfig);
+                /*$this->loadFromArray($requiredConfig);
 
                 $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
-                ArrayHelper::setValue($config, $toKey, $mergedConfig);
+                ArrayHelper::setValue($config, $toKey, $mergedConfig);*/
 
             } elseif (is_callable($requiredConfig)) {
                 $requiredConfig = $this->loadFromCallback($requiredConfig);
 
-                $this->loadFromArray($requiredConfig);
-//                dd($requiredConfig);
+                /*$this->loadFromArray($requiredConfig);
 
+                $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
+                ArrayHelper::setValue($config, $toKey, $mergedConfig);*/
+            }
+
+            if($requiredConfig) {
+                $this->loadFromArray($requiredConfig);
+                if(isset($requiredConfig['entities'])) {
+                    unset($requiredConfig['entities']);
+                }
+                if(isset($requiredConfig['singletons'])) {
+                    unset($requiredConfig['singletons']);
+                }
                 $mergedConfig = ArrayHelper::merge($sourceConfig, $requiredConfig);
                 ArrayHelper::setValue($config, $toKey, $mergedConfig);
             }
@@ -65,10 +77,10 @@ class ContainerLoader extends BaseLoader
             ->getContainer()
             ->get(ContainerConfiguratorInterface::class);
 
-        /** @var EntityManagerInterface $entityManager */
-        $entityManager = $this
+        /** @var EntityManagerConfiguratorInterface $entityManagerConfigurator */
+        $entityManagerConfigurator = $this
             ->getContainer()
-            ->get(EntityManagerInterface::class);
+            ->get(EntityManagerConfiguratorInterface::class);
 
         if(!empty($requiredConfig['singletons'])) {
             foreach ($requiredConfig['singletons'] as $abstract => $concrete) {
@@ -84,7 +96,7 @@ class ContainerLoader extends BaseLoader
 
         if(!empty($requiredConfig['entities'])) {
             foreach ($requiredConfig['entities'] as $entityClass => $repositoryInterface) {
-                $entityManager->bindEntity($entityClass, $repositoryInterface);
+                $entityManagerConfigurator->bindEntity($entityClass, $repositoryInterface);
             }
         }
     }

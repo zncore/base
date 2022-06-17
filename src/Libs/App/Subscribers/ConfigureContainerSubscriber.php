@@ -11,7 +11,7 @@ use ZnCore\Domain\Traits\EntityManagerTrait;
 class ConfigureContainerSubscriber implements EventSubscriberInterface
 {
 
-    use EntityManagerTrait;
+//    use EntityManagerTrait;
 
     public static function getSubscribedEvents()
     {
