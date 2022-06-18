@@ -10,8 +10,8 @@ use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnLib\Console\Symfony4\Base\BaseConsoleApp;
 use ZnLib\Telegram\Domain\Libs\Loaders\BundleLoaders\TelegramRoutesLoader;
 use ZnLib\Telegram\Domain\Subscribers\LoadTelegramRoutesSubscriber;
-use ZnSandbox\Sandbox\App\Interfaces\AppInterface;
-use ZnSandbox\Sandbox\App\Libs\ZnCore;
+use ZnCore\Base\Libs\App\Interfaces\AppInterface;
+use ZnCore\Base\Libs\App\Libs\ZnCore;
 use ZnCore\Base\Libs\Event\Interfaces\EventDispatcherConfiguratorInterface;
 
 define('MICRO_TIME', microtime(true));

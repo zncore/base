@@ -13,9 +13,9 @@ use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Base\Libs\Event\Interfaces\EventDispatcherConfiguratorInterface;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
-use ZnSandbox\Sandbox\App\Enums\AppEventEnum;
-use ZnSandbox\Sandbox\App\Interfaces\AppInterface;
-use ZnSandbox\Sandbox\App\Libs\ZnCore;
+use ZnCore\Base\Libs\App\Enums\AppEventEnum;
+use ZnCore\Base\Libs\App\Interfaces\AppInterface;
+use ZnCore\Base\Libs\App\Libs\ZnCore;
 use ZnTool\Dev\VarDumper\Facades\SymfonyDumperFacade;
 
 abstract class BaseApp implements AppInterface
