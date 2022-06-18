@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\App\Libs\EnvDetector;
+namespace ZnCore\Base\Libs\App\Interfaces;
 
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 

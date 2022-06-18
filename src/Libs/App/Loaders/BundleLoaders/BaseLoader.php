@@ -42,21 +42,6 @@ abstract class BaseLoader
         $this->name = $name;
     }
 
-    /*protected function loadFromCache($callback) {
-        if($this->useCache && $this->getCache() instanceof AbstractAdapter) {
-            $key = 'kernel_bundle_loader2_' . $this->getName();
-            $config = $this->cache->get($key, $callback);
-        } else {
-            $config = call_user_func($callback);
-        }
-        return $config;
-    }
-
-    protected function hasConfigManager(): bool
-    {
-        return isset($this->configManager);
-    }*/
-
     protected function getConfigManager(): ConfigManagerInterface
     {
         return $this->configManager;

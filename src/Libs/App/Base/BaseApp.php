@@ -3,20 +3,18 @@
 namespace ZnCore\Base\Libs\App\Base;
 
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\App\Enums\AppEventEnum;
 use ZnCore\Base\Libs\App\Helpers\EnvHelper;
+use ZnCore\Base\Libs\App\Interfaces\AppInterface;
+use ZnCore\Base\Libs\App\Libs\ZnCore;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Base\Libs\Event\Interfaces\EventDispatcherConfiguratorInterface;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
-use ZnCore\Base\Libs\App\Enums\AppEventEnum;
-use ZnCore\Base\Libs\App\Interfaces\AppInterface;
-use ZnCore\Base\Libs\App\Libs\ZnCore;
-use ZnTool\Dev\VarDumper\Facades\SymfonyDumperFacade;
 
 abstract class BaseApp implements AppInterface
 {
@@ -36,10 +34,11 @@ abstract class BaseApp implements AppInterface
         $this->bundles = ArrayHelper::merge($this->bundles, $bundles);
     }
 
-    protected function loadBundlesFromEnvPath(): void {
+    protected function loadBundlesFromEnvPath(): void
+    {
         $bundles = [];
         if (DotEnv::get('BUNDLES_CONFIG_FILE')) {
-            $bundles = include __DIR__ . '/../../../../../server.soc/' . DotEnv::get('BUNDLES_CONFIG_FILE');
+            $bundles = include __DIR__ . '/../../../../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE');
         }
         $this->addBundles($bundles);
     }
@@ -49,11 +48,13 @@ abstract class BaseApp implements AppInterface
         $this->import = ArrayHelper::merge($this->import, $import);
     }
 
-    public function import(): array {
+    public function import(): array
+    {
         return $this->import;
     }
 
-    protected function bundles(): array {
+    protected function bundles(): array
+    {
         return $this->bundles;
     }
 
@@ -114,11 +115,13 @@ abstract class BaseApp implements AppInterface
         $this->configDispatcher($eventDispatcherConfigurator);
     }
 
-    protected function configDispatcher(EventDispatcherConfiguratorInterface $configurator): void {
+    protected function configDispatcher(EventDispatcherConfiguratorInterface $configurator): void
+    {
 
     }
 
-    protected function dispatchEvent(string $eventName): void {
+    protected function dispatchEvent(string $eventName): void
+    {
         $event = new Event();
         $this->getEventDispatcher()->dispatch($event, $eventName);
     }

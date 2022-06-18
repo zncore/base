@@ -18,7 +18,7 @@ abstract class BaseBundle
 
     /**
      * Что импортировать из бандлов:
-     * 
+     *
      * i18next - переводы в формате I18Next
      * container - конфигурация контейнера (DI)
      * rbac - конфигурация ролей, полномочий, наследования RBAC
@@ -28,7 +28,7 @@ abstract class BaseBundle
      * telegramRoutes - роуты для Telegram-бота
      * symfonyAdmin - роуты админки
      * symfonyWeb - роуты пользовательской части
-     * 
+     *
      * @return array
      */
     public function getImportList(): array
@@ -37,7 +37,7 @@ abstract class BaseBundle
     }
 
     /**
-     * 
+     *
      * @param array $importList
      */
     public function __construct(array $importList = [])

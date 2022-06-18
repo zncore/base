@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Enums;
+namespace ZnCore\Base\Libs\App\Enums;
 
 /**
  * Режимы деплоя

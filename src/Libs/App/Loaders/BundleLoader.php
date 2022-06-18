@@ -33,21 +33,15 @@ class BundleLoader implements LoaderInterface
         'migration' => MigrationLoader::class,
         'container' => [
             'class' => ContainerLoader::class,
-            //'useCache' => true,
         ],
-//        'yiiAdmin' => ModuleLoader::class,
-//        'yiiWeb' => ModuleLoader::class,
         'symfonyWeb' => [
             'class' => SymfonyRoutesLoader::class,
-            //'useCache' => true,
         ],
         'symfonyRpc' => [
             'class' => SymfonyRpcRoutesLoader::class,
-            //'useCache' => true,
         ],
         'rbac' => [
             'class' => RbacConfigLoader::class,
-            //'useCache' => true,
         ],
         'symfonyAdmin' => [
             'class' => SymfonyRoutesLoader::class,
@@ -55,7 +49,6 @@ class BundleLoader implements LoaderInterface
         'console' => ConsoleLoader::class,
         'i18next' => [
             'class' => I18NextLoader::class,
-            //'useCache' => true,
         ],
     ];
 

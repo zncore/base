@@ -28,20 +28,28 @@ class ZnCore
 
     public function init(): ContainerInterface
     {
+        $this->initContainer();
+        $this->initI18Next();
+        $container = $this->getContainer();
+        $containerConfigurator = new ContainerConfigurator($container);
+        $this->configContainer($containerConfigurator);
+        return $container;
+    }
+
+    private function initContainer() {
         $container = $this->getContainer();
         try {
             ContainerHelper::setContainer($container);
         } catch (ReadOnlyException $exception) {
         }
+    }
+
+    private function initI18Next() {
+        $container = $this->getContainer();
         try {
             I18Next::setContainer($container);
         } catch (ReadOnlyException $exception) {
         }
-
-        $containerConfigurator = new ContainerConfigurator($container);
-        $this->configContainer($containerConfigurator);
-
-        return $container;
     }
 
     public function loadBundles(array $bundles, array $import, string $appName): void
@@ -49,8 +57,6 @@ class ZnCore
         $bundleLoader = new BundleLoader($bundles, $import);
         /** @var ConfigCollectionLoader $configCollectionLoader */
         $configCollectionLoader = $this->getContainer()->get(ConfigCollectionLoader::class);
-//        $configCollectionLoader->addSubscriber(ConfigureContainerSubscriber::class);
-//        $configCollectionLoader->addSubscriber(ConfigureEntityManagerSubscriber::class);
         $configCollectionLoader->setLoader($bundleLoader);
         $config = $configCollectionLoader->loadMainConfig($appName);
     }
@@ -63,7 +69,6 @@ class ZnCore
         $containerConfigurator->singleton(ContainerConfiguratorInterface::class, function () use ($containerConfigurator) {
             return $containerConfigurator;
         });
-//        $containerConfigurator->singleton(EntityManagerInterface::class, EntityManager::class);
         $containerConfigurator->singleton(EntityManagerInterface::class, function (ContainerInterface $container) {
             $em = EntityManager::getInstance($container);
 //            $eloquentOrm = $container->get(EloquentOrm::class);
@@ -72,7 +77,6 @@ class ZnCore
         });
 
         $containerConfigurator->singleton(EntityManagerConfiguratorInterface::class, EntityManagerConfigurator::class);
-
         $containerConfigurator->singleton(EventDispatcherConfiguratorInterface::class, EventDispatcherConfigurator::class);
         $containerConfigurator->singleton(EventDispatcherInterface::class, EventDispatcher::class);
         $containerConfigurator->singleton(\Psr\EventDispatcher\EventDispatcherInterface::class, EventDispatcherInterface::class);

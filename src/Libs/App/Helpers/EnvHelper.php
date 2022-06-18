@@ -2,27 +2,18 @@
 
 namespace ZnCore\Base\Libs\App\Helpers;
 
-use Symfony\Component\HttpFoundation\Request;
-use ZnCore\Base\Enums\EnvEnum;
-use ZnCore\Base\Helpers\DeprecateHelper;
+use ZnCore\Base\Libs\App\Enums\EnvEnum;
 
 class EnvHelper
 {
 
-    public static function isTestEnv(): bool {
+    public static function isTestEnv(): bool
+    {
         global $_GET, $_SERVER, $argv;
         $isConsoleTest = isset($argv) && in_array('--env=test', $argv);
 //        $isWebTest = isset($_GET['env']) && $_GET['env'] == 'test';
         $isWebTest = (isset($_SERVER['HTTP_ENV_NAME']) && $_SERVER['HTTP_ENV_NAME'] == 'test') || (isset($_GET['env']) && $_GET['env'] == 'test');
         return $isConsoleTest || $isWebTest;
-    }
-
-    public static function prepareTestEnv()
-    {
-        DeprecateHelper::hardThrow();
-        if (self::isTestEnv()) {
-            $_ENV['APP_ENV'] = 'test';
-        }
     }
 
     public static function setErrorVisibleFromEnv(): void
