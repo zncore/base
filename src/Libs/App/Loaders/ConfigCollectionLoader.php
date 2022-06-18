@@ -29,7 +29,6 @@ class ConfigCollectionLoader implements LoaderInterface
         if ($this->loaders) {
             foreach ($this->loaders as $loader) {
                 $loader->setContainer($this->getContainer());
-//                $loader->bootstrapApp($appName);
                 $configItem = $loader->loadMainConfig($appName);
                 $config = ArrayHelper::merge($config, $configItem);
             }
