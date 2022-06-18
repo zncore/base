@@ -21,6 +21,16 @@ class DotEnv
         return self::$isInited;
     }
 
+    public static function loadFromFile(string $path, string $key = null, $default = null): array {
+        $dotEnv = new \Symfony\Component\Dotenv\Dotenv();
+        $path = \ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper::rootPath() . '/.env';
+        $parsedEnv = $dotEnv->parse(file_get_contents($path), $path);
+        if($key) {
+            return ArrayHelper::get($parsedEnv, $key, $default);
+        }
+        return $parsedEnv;
+    }
+
     public static function lazyInit(string $basePath = self::ROOT_PATH, string $mode = 'main'): void
     {
         if(self::$isInited) {

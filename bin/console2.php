@@ -18,35 +18,6 @@ define('MICRO_TIME', microtime(true));
 
 require __DIR__ . '/../../../../vendor/autoload.php';
 
-class ConsoleApp extends BaseConsoleApp
-{
-
-    protected function bundles(): array
-    {
-        $bundles = [
-//            new ZnCore\Base\Libs\App\Bundle(['all']),
-
-            ZnTool\Package\Bundle::class,
-            ZnDatabase\Base\Bundle::class,
-            ZnDatabase\Tool\Bundle::class,
-            ZnDatabase\Fixture\Bundle::class,
-            ZnDatabase\Migration\Bundle::class,
-            ZnTool\Generator\Bundle::class,
-            ZnTool\Stress\Bundle::class,
-            ZnBundle\Queue\Bundle::class,
-        ];
-
-//        EnvHelper::prepareTestEnv();
-
-        if (DotEnv::get('BUNDLES_CONFIG_FILE')) {
-            $bundles = ArrayHelper::merge($bundles, include __DIR__ . '/../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE'));
-        }
-
-        return $bundles;
-    }
-}
-
-//$container = Container::getInstance();
 $container = new Container();
 $znCore = new ZnCore($container);
 $znCore->init();
@@ -57,7 +28,6 @@ $containerConfigurator = $container->get(ContainerConfiguratorInterface::class);
 /** @var EventDispatcherConfiguratorInterface $eventDispatcherConfigurator */
 $eventDispatcherConfigurator = $container->get(EventDispatcherConfiguratorInterface::class);
 
-
 //$eventDispatcherConfigurator->addSubscriber(LoadTelegramRoutesSubscriber::class);
 
 //if(/*in_array('telegramRoutes', $import) &&*/ class_exists(LoadTelegramRoutesSubscriber::class)) {
@@ -65,10 +35,23 @@ $eventDispatcherConfigurator = $container->get(EventDispatcherConfiguratorInterf
 //    $kernel->addSubscriber(LoadTelegramRoutesSubscriber::class);
 //}
 
-$containerConfigurator->singleton(AppInterface::class, ConsoleApp::class);
+$mainEnv = DotEnv::loadFromFile(DotEnv::ROOT_PATH . '/.env');
+$consoleAppClass = $mainEnv['CONSOLE_APP_CLASS'] ?? \ZnLib\Console\Domain\Libs\ConsoleApp::class;
+$containerConfigurator->singleton(AppInterface::class, $consoleAppClass);
 
 /** @var AppInterface $appFactory */
 $appFactory = $container->get(AppInterface::class);
+
+$appFactory->addBundles([
+    \ZnTool\Package\Bundle::class,
+    \ZnDatabase\Base\Bundle::class,
+    \ZnDatabase\Tool\Bundle::class,
+    \ZnDatabase\Fixture\Bundle::class,
+    \ZnDatabase\Migration\Bundle::class,
+    \ZnTool\Generator\Bundle::class,
+    \ZnTool\Stress\Bundle::class,
+    \ZnBundle\Queue\Bundle::class,
+]);
 $appFactory->init();
 
 /** @var Application $application */
