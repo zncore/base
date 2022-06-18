@@ -10,7 +10,8 @@ class Bundle extends BaseBundle
     public function container(): array
     {
         return [
-            __DIR__ . '/container.php',
+            __DIR__ . '/config/container.php',
+            __DIR__ . '/config/container-cache.php',
         ];
     }
 }

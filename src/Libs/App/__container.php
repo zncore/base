@@ -27,6 +27,8 @@ use ZnDatabase\Fixture\Domain\Repositories\FileRepository;
 use ZnCore\Base\Libs\DotEnv\DotEnvConfig;
 use ZnCore\Base\Libs\DotEnv\DotEnvConfigInterface;
 
+\ZnCore\Base\Helpers\DeprecateHelper::hardThrow();
+
 return [
     'definitions' => [],
     'singletons' => [

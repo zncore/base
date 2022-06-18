@@ -30,6 +30,7 @@ class BundleLoader implements LoaderInterface
     private $bundles = [];
     private $import = [];
 
+    // todo: вынести на уровень приложения для большей гибкости
     private $loadersConfig = [
         'migration' => MigrationLoader::class,
         'container' => [
@@ -130,11 +131,11 @@ class BundleLoader implements LoaderInterface
         /*if(method_exists($loaderInstance, 'setConfigManager') && $this->getContainer()->has(ConfigManagerInterface::class)) {
             $configManager = $this->getContainer()->get(ConfigManagerInterface::class);
             $loaderInstance->setConfigManager($configManager);
-        }*/
+        }
 
         if ($this->getCache()) {
             $loaderInstance->setCache($this->getCache());
-        }
+        }*/
         if ($loaderInstance->getName() == null) {
             $loaderInstance->setName($loaderName);
         }
