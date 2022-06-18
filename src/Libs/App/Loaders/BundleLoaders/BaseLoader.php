@@ -2,20 +2,14 @@
 
 namespace ZnCore\Base\Libs\App\Loaders\BundleLoaders;
 
-use Psr\Container\ContainerInterface;
-use Symfony\Component\Cache\Adapter\AbstractAdapter;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Base\BaseBundle;
-use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
-use ZnCore\Base\Libs\Cache\CacheAwareTrait;
 use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 
 abstract class BaseLoader
 {
 
     use ContainerAttributeTrait;
-    use CacheAwareTrait;
 
     private $configManager;
     protected $useCache = false;
@@ -37,7 +31,7 @@ abstract class BaseLoader
     {
         $this->useCache = $useCache;
     }
-    
+
     public function getName(): ?string
     {
         return $this->name;

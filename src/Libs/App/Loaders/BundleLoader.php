@@ -10,22 +10,20 @@ use ZnCore\Base\Libs\App\Base\BaseBundle;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BaseLoader;
-use ZnLib\Console\Domain\Libs\BundleLoaders\ConsoleLoader;
+use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ModuleLoader;
 use ZnCore\Base\Libs\Container\Libs\BundleLoaders\ContainerLoader;
+use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 use ZnCore\Base\Libs\I18Next\Libs\BundleLoaders\I18NextLoader;
 use ZnDatabase\Migration\Domain\Libs\BundleLoaders\MigrationLoader;
-use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ModuleLoader;
-use ZnUser\Rbac\Domain\Libs\BundleLoaders\RbacConfigLoader;
-use ZnLib\Web\Symfony4\Libs\BundleLoaders\SymfonyRoutesLoader;
+use ZnLib\Console\Domain\Libs\BundleLoaders\ConsoleLoader;
 use ZnLib\Rpc\Domain\Libs\BundleLoaders\SymfonyRpcRoutesLoader;
-use ZnCore\Base\Libs\Cache\CacheAwareTrait;
-use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
+use ZnLib\Web\Symfony4\Libs\BundleLoaders\SymfonyRoutesLoader;
+use ZnUser\Rbac\Domain\Libs\BundleLoaders\RbacConfigLoader;
 
 class BundleLoader implements LoaderInterface
 {
 
     use ContainerAttributeTrait;
-    use CacheAwareTrait;
 
     private $bundles = [];
     private $import = [];
