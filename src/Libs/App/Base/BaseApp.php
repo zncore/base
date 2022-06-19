@@ -21,8 +21,6 @@ use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\I18Next\Libs\BundleLoaders\I18NextLoader;
 use ZnDatabase\Migration\Domain\Libs\BundleLoaders\MigrationLoader;
 use ZnLib\Console\Domain\Libs\BundleLoaders\ConsoleLoader;
-use ZnLib\Rpc\Domain\Libs\BundleLoaders\SymfonyRpcRoutesLoader;
-use ZnLib\Web\Symfony4\Libs\BundleLoaders\SymfonyRoutesLoader;
 use ZnUser\Rbac\Domain\Libs\BundleLoaders\RbacConfigLoader;
 
 abstract class BaseApp implements AppInterface
@@ -52,10 +50,10 @@ abstract class BaseApp implements AppInterface
         $this->addBundles($bundles);
     }
 
-    public function addImport(array $import): void
+    /*public function addImport(array $import): void
     {
         $this->import = ArrayHelper::merge($this->import, $import);
-    }
+    }*/
 
     public function import(): array
     {
@@ -115,20 +113,14 @@ abstract class BaseApp implements AppInterface
 
     protected function bundleLoaders(): array
     {
-        return [
-            'container' => ContainerLoader::class,
-            'i18next' => I18NextLoader::class,
-            'rbac' => RbacConfigLoader::class,
-            'migration' => MigrationLoader::class,
-            'console' => ConsoleLoader::class,
-        ];
+        return include __DIR__ . '/../config/bundleLoaders.php';
     }
 
     protected function createBundleLoaderInstance(): LoaderInterface
     {
         $bundleLoader = new BundleLoader($this->bundles(), $this->import());
         $loaders = $this->bundleLoaders();
-        if($loaders) {
+        if ($loaders) {
             foreach ($loaders as $loaderName => $loaderDefinition) {
                 $bundleLoader->addLoaderConfig($loaderName, $loaderDefinition);
             }
