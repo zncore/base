@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Exceptions;
+namespace ZnCore\Base\Libs\Composer\Exceptions;
 
 use Exception;
 

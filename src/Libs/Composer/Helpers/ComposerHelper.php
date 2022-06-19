@@ -1,10 +1,10 @@
 <?php
 
-namespace ZnCore\Base\Helpers;
+namespace ZnCore\Base\Libs\Composer\Helpers;
 
 use Composer\Autoload\ClassLoader;
-use ZnCore\Base\Exceptions\NotFoundDependencyException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Composer\Exceptions\NotFoundDependencyException;
 
 /**
  * Работа с Composer
@@ -21,8 +21,8 @@ class ComposerHelper
     public static function getComposerVendorClassLoader(): ClassLoader
     {
         if (!self::$composerVendorClassLoader) {
-            $loaders = \Composer\Autoload\ClassLoader::getRegisteredLoaders();
-            $vendorDir = realpath(__DIR__ . '/../../../..');
+            $loaders = ClassLoader::getRegisteredLoaders();
+            $vendorDir = realpath(__DIR__ . '/../../../../../../../vendor');
             self::$composerVendorClassLoader = $loaders[$vendorDir];
         }
         return self::$composerVendorClassLoader;

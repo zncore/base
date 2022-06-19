@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Helpers;
 
+use Symfony\Component\Uid\Uuid;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 
 class TempHelper
@@ -46,7 +47,7 @@ class TempHelper
     private static function getUuid(): string
     {
         if (self::$uuid == null) {
-            self::$uuid = StringHelper::genUuid();
+            self::$uuid = Uuid::v4()->toRfc4122();
         }
         return self::$uuid;
     }

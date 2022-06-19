@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Helpers;
 
 use Symfony\Component\Uid\Uuid;
+use ZnCore\Base\Libs\RandomString;
 
 class StringHelper
 {
@@ -265,6 +266,15 @@ class StringHelper
         return $text;
     }
 
+    /**
+     * @param int $length
+     * @param null $set
+     * @param null $set_characters
+     * @param bool $hightQuality
+     * @return string
+     * @deprecated
+     * @see RandomString
+     */
     static function generateRandomString($length = 8, $set = null, $set_characters = null, $hightQuality = false)
     {
         if (empty($set) && empty($set_characters)) {
