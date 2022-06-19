@@ -18,11 +18,11 @@ class ClassHelper
     /**
      * Является ли объект инстансом класса/интерфейса
      * @param $instance
-     * @param $interface
+     * @param string $interface
      * @param bool $allowString
      * @return bool
      */
-    public static function instanceOf($instance, $interface, bool $allowString = false): bool
+    public static function instanceOf($instance, string $interface, bool $allowString = false): bool
     {
         try {
             self::checkInstanceOf($instance, $interface, $allowString);
@@ -38,12 +38,12 @@ class ClassHelper
      * Если не является, то вызывается исключение.
      *
      * @param $instance
-     * @param $interface
+     * @param string $interface
      * @param bool $allowString
      * @throws NotInstanceOfException
      * @throws \ReflectionException
      */
-    public static function checkInstanceOf($instance, $interface, bool $allowString = false): void
+    public static function checkInstanceOf($instance, string $interface, bool $allowString = false): void
     {
         if (empty($instance)) {
             throw new InvalidArgumentException("Argument \"instance\" is empty");
@@ -80,7 +80,7 @@ class ClassHelper
      * @param string $name
      * @return string
      */
-    public static function getNamespace(string $name)
+    public static function getNamespace(string $name): string
     {
         $name = trim($name, '\\');
         $arr = explode('\\', $name);
@@ -91,10 +91,10 @@ class ClassHelper
 
     /**
      * Получить чистое имя класса
-     * @param $class
+     * @param string $class
      * @return false|string
      */
-    public static function getClassOfClassName($class)
+    public static function getClassOfClassName(string $class)
     {
         $lastPos = strrpos($class, '\\');
         $name = substr($class, $lastPos + 1);
@@ -106,11 +106,12 @@ class ClassHelper
      *
      * @param string|object|array $definition Определение
      * @param array $params Параметры конструктора
+     * @param ContainerInterface|null $container
      * @return object
      * @throws InvalidConfigException
      * @throws NotInstanceOfException
      */
-    public static function createInstance($definition, array $params = [], ContainerInterface $container = null)
+    public static function createInstance($definition, array $params = [], ContainerInterface $container = null): object
     {
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
@@ -123,10 +124,7 @@ class ClassHelper
             $container = ContainerHelper::getContainer();
         }
         $instance = $container->make($definition['class'], $params);
-        if ($definition['class']) {
-            unset($definition['class']);
-        }
-        EntityHelper::setAttributes($instance, $definition);
+        self::configure($instance, $definition);
         return $instance;
     }
 
@@ -135,12 +133,11 @@ class ClassHelper
      *
      * @param string|object|array $definition Определение
      * @param array $params Атрибуты объекта
-     * @param null $interface
      * @return object
      * @throws InvalidConfigException
      * @throws NotInstanceOfException
      */
-    public static function createObject($definition, array $params = [], $interface = null)
+    public static function createObject($definition, array $params = []): object
     {
         if (empty($definition)) {
             throw new InvalidConfigException('Empty class config');
@@ -161,17 +158,18 @@ class ClassHelper
 //        EntityHelper::setAttributes($object, $params);
         self::configure($object, $params);
         self::configure($object, $definition);
-        if (!empty($interface)) {
+        /*if (!empty($interface)) {
             self::checkInstanceOf($object, $interface);
-        }
+        }*/
         return $object;
     }
 
-    protected static function clearDefinition(array &$properties) {
+    protected static function clearDefinition(array &$properties): void
+    {
 //        if (!empty($properties)) {
-            if (isset($properties['class'])) {
-                unset($properties['class']);
-            }
+        if (isset($properties['class'])) {
+            unset($properties['class']);
+        }
 //        }
 //        return $properties;
     }
@@ -181,24 +179,14 @@ class ClassHelper
      *
      * @param object $object
      * @param array $properties
-     * @return object
+     * @return void
      */
-    public static function configure(object $object, array $properties)
+    public static function configure(object $object, array $properties): void
     {
         if (!empty($properties)) {
             self::clearDefinition($properties);
             EntityHelper::setAttributes($object, $properties);
         }
-//        dd($properties);
-        /*foreach ($properties as $name => $value) {
-            if ($name != 'class') {
-                if (EntityHelper::isWritableAttribute($object, $name)) {
-                    EntityHelper::setAttribute($object, $name, $value);
-                }
-//                $object->{$name} = $value;
-            }
-        }*/
-        return $object;
     }
 
     /**
@@ -207,7 +195,7 @@ class ClassHelper
      * @param null $class
      * @return array
      */
-    public static function normalizeComponentConfig($config, $class = null)
+    public static function normalizeComponentConfig($config, $class = null): array
     {
         if (empty($config) && empty($class)) {
             return $config;
@@ -226,10 +214,10 @@ class ClassHelper
 
     /**
      * Является ли строка именем класса
-     * @param $name
+     * @param string $name
      * @return bool
      */
-    public static function isClass($name): bool
+    public static function isClass(string $name): bool
     {
         return is_string($name) && (strpos($name, '\\') !== false || class_exists($name));
     }
