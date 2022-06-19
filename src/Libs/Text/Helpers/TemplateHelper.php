@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Helpers;
+namespace ZnCore\Base\Libs\Text\Helpers;
 
 class TemplateHelper
 {

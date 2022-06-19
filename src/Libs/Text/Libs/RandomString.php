@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs;
+namespace ZnCore\Base\Libs\Text\Libs;
 
 class RandomString
 {

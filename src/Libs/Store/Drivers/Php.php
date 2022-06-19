@@ -8,7 +8,7 @@ use ZnCore\Base\Libs\Store\Helpers\FileGeneratorHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\VarDumper;
-use ZnCore\Base\Helpers\StringHelper;
+use ZnCore\Base\Libs\Text\Helpers\StringHelper;
 
 class Php implements DriverInterface
 {

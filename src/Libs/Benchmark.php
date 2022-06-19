@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs;
 
 use ZnCore\Base\Exceptions\InternalServerErrorException;
-use ZnCore\Base\Helpers\StringHelper;
+use ZnCore\Base\Libs\Text\Helpers\StringHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 
 class Benchmark

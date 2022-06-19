@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Encoders;
 
-use ZnCore\Base\Helpers\StringHelper;
+use ZnCore\Base\Libs\Text\Helpers\StringHelper;
 use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use Exception;

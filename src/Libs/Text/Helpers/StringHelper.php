@@ -1,9 +1,9 @@
 <?php
 
-namespace ZnCore\Base\Helpers;
+namespace ZnCore\Base\Libs\Text\Helpers;
 
 use Symfony\Component\Uid\Uuid;
-use ZnCore\Base\Libs\RandomString;
+use ZnCore\Base\Libs\Text\Libs\RandomString;
 
 class StringHelper
 {

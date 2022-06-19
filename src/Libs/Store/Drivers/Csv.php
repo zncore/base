@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
-use ZnCore\Base\Helpers\StringHelper;
+use ZnCore\Base\Libs\Text\Helpers\StringHelper;
 
 class Csv implements DriverInterface
 {
