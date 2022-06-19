@@ -7,7 +7,10 @@
 
 namespace ZnCore\Base\Legacy\Yii\Helpers;
 
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Legacy\Yii\Exceptions\InvalidValueException;
+
+DeprecateHelper::hardThrow();
 
 /**
  * VarDumper is intended to replace the buggy PHP function var_dump and print_r.

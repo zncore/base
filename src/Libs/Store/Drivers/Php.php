@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
+use Symfony\Component\VarExporter\VarExporter;
 use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
 use ZnCore\Base\Libs\Store\Helpers\FileGeneratorHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
@@ -22,7 +23,8 @@ class Php implements DriverInterface
 
     public function encode($data)
     {
-        $content = VarDumper::export($data);
+//        $content = VarDumper::export($data);
+        $content = VarExporter::export($data);
         $content = StringHelper::setTab($content, 4);
         return $content;
     }
