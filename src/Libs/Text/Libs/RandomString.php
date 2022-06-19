@@ -2,6 +2,8 @@
 
 namespace ZnCore\Base\Libs\Text\Libs;
 
+use Symfony\Component\String\ByteString;
+
 class RandomString
 {
 
@@ -75,20 +77,23 @@ class RandomString
     public function generateString(): string
     {
         $this->validate();
-        $charactersCount = strlen($this->characters);
+        return ByteString::fromRandom($this->getLength(), $this->getCharacters())->toString();
+
+
+        /*$charactersCount = strlen($this->characters);
         $randstring = '';
         for ($i = 0; $i < $this->length; $i++) {
             $randstring .= $this->generateChar();
         }
-        return $randstring;
+        return $randstring;*/
     }
 
-    public function generateChar(): string
+    /*public function generateChar(): string
     {
         $charactersCount = strlen($this->characters);
         $randomNumber = mt_rand(0, $charactersCount - 1);
         return $this->characters[$randomNumber];
-    }
+    }*/
 
     private function validate()
     {

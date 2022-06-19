@@ -10,6 +10,11 @@ use ZnCore\Base\Exceptions\ReadOnlyException;
 class Helper
 {
 
+    public static function isSha1($string)
+    {
+        return preg_match('/[0-9a-f]{40}/i', $string);
+    }
+
     /**
      * Является ли значение бинарным
      * @param $str

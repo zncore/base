@@ -12,16 +12,9 @@ class StringHelper
     const WITHOUT_CHAR = '#\s+#m';
     const NUM_CHAR = '#\D+#m';
 
-    public static function implode(array $list, string $begin, string $end, string $spliter = ' '): string
+    /*public static function implode(array $list, string $begin, string $end, string $spliter = ' '): string
     {
         return $begin . implode("{$end}{$spliter}{$begin}", $list) . $end;
-    }
-
-    public static function getMicroTime(): int
-    {
-        $microtimeFloat = microtime(true) * 10000;
-        $microtimeInt = (int)round($microtimeFloat);
-        return $microtimeInt;
     }
 
     public static function utf8ize($mixed)
@@ -34,9 +27,9 @@ class StringHelper
             return mb_convert_encoding($mixed, "UTF-8", "UTF-8");
         }
         return $mixed;
-    }
+    }*/
 
-    /**
+    /*
      * Векторизует текст для получения хэша или подписи.
      *
      * Заменяет двойные пробелы и переносы на точку.
@@ -45,15 +38,15 @@ class StringHelper
      * @param $data
      * @return string
      */
-    public static function vectorizeText($data)
+    /*public static function vectorizeText($data)
     {
         $data = StringHelper::textToLine($data);
         $data = StringHelper::removeDoubleSpace($data);
         $data = str_replace(' ', '.', $data);
         return $data;
-    }
+    }*/
 
-    public static function formatByMask($login, $mask)
+    /*public static function formatByMask($login, $mask)
     {
         $maskArray = str_split($mask, 1);
         $pos = 0;
@@ -71,7 +64,7 @@ class StringHelper
             }
         }
         return $result;
-    }
+    }*/
 
     public static function fill($value, $length, $char, $place = 'after')
     {
@@ -88,58 +81,22 @@ class StringHelper
         return $value;
     }
 
-    public static function stripContent($data, $beginText, $endText)
+    /*public static function stripContent($data, $beginText, $endText)
     {
         $pattern = preg_quote($beginText) . '[\s\S]+' . preg_quote($endText);
         $data = preg_replace('#' . $pattern . '#i', '', $data);
         return $data;
-    }
+    }*/
 
-    /**
+    /*
      * @return array
      * @deprecated
      * @see Uuid::v4()
      */
-    public static function genUuid()
+    /*public static function genUuid()
     {
         return Uuid::v4()->toRfc4122();
-        
-        // composer require ramsey/uuid:"^3 || ^4"
-        /*$uuid = array(
-            'time_low' => 0,
-            'time_mid' => 0,
-            'time_hi' => 0,
-            'clock_seq_hi' => 0,
-            'clock_seq_low' => 0,
-            'node' => array()
-        );
-
-        $uuid['time_low'] = mt_rand(0, 0xffff) + (mt_rand(0, 0xffff) << 16);
-        $uuid['time_mid'] = mt_rand(0, 0xffff);
-        $uuid['time_hi'] = (4 << 12) | (mt_rand(0, 0x1000));
-        $uuid['clock_seq_hi'] = (1 << 7) | (mt_rand(0, 128));
-        $uuid['clock_seq_low'] = mt_rand(0, 255);
-
-        for ($i = 0; $i < 6; $i++) {
-            $uuid['node'][$i] = mt_rand(0, 255);
-        }
-
-        $uuid = sprintf('%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x',
-            $uuid['time_low'],
-            $uuid['time_mid'],
-            $uuid['time_hi'],
-            $uuid['clock_seq_hi'],
-            $uuid['clock_seq_low'],
-            $uuid['node'][0],
-            $uuid['node'][1],
-            $uuid['node'][2],
-            $uuid['node'][3],
-            $uuid['node'][4],
-            $uuid['node'][5]
-        );
-
-        return $uuid;*/
-    }
+    }*/
 
     public static function setTab($content, $tabCount)
     {
@@ -147,7 +104,7 @@ class StringHelper
         return $content;
     }
 
-    public static function search($haystack, $needle, $offset = 0)
+    /*public static function search($haystack, $needle, $offset = 0)
     {
         $needle = self::prepareTextForSearch($needle);
         $haystack = self::prepareTextForSearch($haystack);
@@ -164,7 +121,7 @@ class StringHelper
         $text = mb_strtolower($text);
         $text = self::removeAllSpace($text);
         return $text;
-    }
+    }*/
 
     public static function getWordArray($content)
     {
@@ -172,7 +129,7 @@ class StringHelper
         return self::textToArray($content);
     }
 
-    public static function getWordRate($content)
+    /*public static function getWordRate($content)
     {
         $content = mb_strtolower($content);
         $wordArray = self::getWordArray($content);
@@ -190,9 +147,9 @@ class StringHelper
     {
         $text = preg_replace(self::PATTERN_SPACES, ' ', $text);
         return $text;
-    }
+    }*/
 
-    public static function normalizeNewLine($text)
+    public static function normalizeNewLines($text)
     {
         $text = str_replace(PHP_EOL, "\n", $text);
         return $text;
@@ -200,7 +157,7 @@ class StringHelper
 
     public static function textToLines($text)
     {
-        $text = self::normalizeNewLine($text);
+        $text = self::normalizeNewLines($text);
         $text = explode("\n", $text);
         return $text;
     }
@@ -269,59 +226,30 @@ class StringHelper
     /**
      * @param int $length
      * @param null $set
-     * @param null $set_characters
-     * @param bool $hightQuality
      * @return string
      * @deprecated
      * @see RandomString
      */
-    static function generateRandomString($length = 8, $set = null, $set_characters = null, $hightQuality = false)
+    static function generateRandomString($length = 8, $set = null)
     {
-        if (empty($set) && empty($set_characters)) {
+        $random = new RandomString();
+        if (empty($set)) {
             $set = 'num|lower|upper';
         }
-        $characters = '';
         $arr = explode('|', $set);
         if (in_array('num', $arr)) {
-            $characters .= '0123456789';
+            $random->addCharactersNumber();
         }
         if (in_array('lower', $arr)) {
-            $characters .= 'abcdefghijklmnopqrstuvwxyz';
+            $random->addCharactersLower();
         }
         if (in_array('upper', $arr)) {
-            $characters .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            $random->addCharactersUpper();
         }
         if (in_array('char', $arr)) {
-            $characters .= '~!@#$^&*`_-=*/+%!?.,:;\'"\\|{}[]<>()';
+            $random->addCharactersSpecChar();
         }
-        if (!empty($set_characters)) {
-            $characters .= $set_characters;
-        }
-        $randstring = '';
-        if ($hightQuality) {
-            $charArr = array();
-            $charactersLen = mb_strlen($characters, 'utf-8');
-        }
-        for ($i = 0; $i < $length; $i++) {
-            $randomNumber = mt_rand(0, strlen($characters) - 1);
-            if ($hightQuality) {
-                if (in_array($randomNumber, $charArr)) {
-                    while (in_array($randomNumber, $charArr)) {
-                        $randomNumber = mt_rand(0, strlen($characters) - 1);
-                    }
-                }
-                $charArr[] = $randomNumber;
-                if (count($charArr) >= $charactersLen) {
-                    $charArr = array();
-                }
-            }
-            $randstring .= $characters[$randomNumber];
-        }
-        return $randstring;
-    }
-
-    public static function isSha1($string)
-    {
-        return preg_match('/[0-9a-f]{40}/i', $string);
+        $random->setLength($length);
+        return $random->generateString();
     }
 }

@@ -2,11 +2,11 @@
 
 namespace ZnCore\Base\Encoders;
 
-use ZnCore\Base\Libs\Text\Helpers\StringHelper;
-use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use Exception;
+use Symfony\Component\Uid\Uuid;
 use ZipArchive;
+use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 
 /**
  * Сжатие данных Zip
@@ -64,7 +64,7 @@ class ZipEncoder implements EncoderInterface
 
     private static function getTmpDirectory(): string
     {
-        $tmpDir = sys_get_temp_dir() . '/qrZip/' . StringHelper::genUuid();
+        $tmpDir = sys_get_temp_dir() . '/qrZip/' . Uuid::v4()->toRfc4122();
         FileHelper::createDirectory($tmpDir);
         return $tmpDir;
     }
