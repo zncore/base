@@ -33,9 +33,7 @@ class ConfigCollectionLoader implements LoaderInterface
                 $config = ArrayHelper::merge($config, $configItem);
             }
         }
-
         $event = new LoadConfigEvent($this, $config);
-//dd($config);
         $this->getEventDispatcher()->dispatch($event, KernelEventEnum::AFTER_LOAD_CONFIG);
         return $event->getConfig();
     }

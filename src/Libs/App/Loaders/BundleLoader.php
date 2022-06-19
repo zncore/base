@@ -11,14 +11,7 @@ use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BaseLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ModuleLoader;
-use ZnCore\Base\Libs\Container\Libs\BundleLoaders\ContainerLoader;
 use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
-use ZnCore\Base\Libs\I18Next\Libs\BundleLoaders\I18NextLoader;
-use ZnDatabase\Migration\Domain\Libs\BundleLoaders\MigrationLoader;
-use ZnLib\Console\Domain\Libs\BundleLoaders\ConsoleLoader;
-use ZnLib\Rpc\Domain\Libs\BundleLoaders\SymfonyRpcRoutesLoader;
-use ZnLib\Web\Symfony4\Libs\BundleLoaders\SymfonyRoutesLoader;
-use ZnUser\Rbac\Domain\Libs\BundleLoaders\RbacConfigLoader;
 
 class BundleLoader implements LoaderInterface
 {
@@ -27,11 +20,7 @@ class BundleLoader implements LoaderInterface
 
     private $bundles = [];
     private $import = [];
-
-    // todo: вынести на уровень приложения для большей гибкости
-    private $loadersConfig = [
-
-    ];
+    private $loadersConfig = [];
 
     public function __construct(array $bundles = [], array $import = [])
     {
@@ -67,7 +56,6 @@ class BundleLoader implements LoaderInterface
             } catch (ClassNotFoundException $e) {
             }
         }
-        //$this->bundles = ArrayHelper::merge($this->bundles, $bundles);
     }
 
     private function getLoadersConfig()
@@ -99,25 +87,14 @@ class BundleLoader implements LoaderInterface
         /** @var BaseLoader $loaderInstance */
         $loaderInstance = ClassHelper::createObject($loaderDefinition);
         $loaderInstance->setContainer($this->getContainer());
-
-        /*if(method_exists($loaderInstance, 'setConfigManager') && $this->getContainer()->has(ConfigManagerInterface::class)) {
-            $configManager = $this->getContainer()->get(ConfigManagerInterface::class);
-            $loaderInstance->setConfigManager($configManager);
-        }
-
-        if ($this->getCache()) {
-            $loaderInstance->setCache($this->getCache());
-        }*/
         if ($loaderInstance->getName() == null) {
             $loaderInstance->setName($loaderName);
         }
         $bundles = $this->filterBundlesByLoader($this->bundles, $loaderName);
-
         if ($this->getContainer()->has(ConfigManagerInterface::class)) {
             $configManager = $this->getContainer()->get(ConfigManagerInterface::class);
             $configManager->set('bundles', $bundles);
         }
-
         $configItem = $loaderInstance->loadAll($bundles);
         return $configItem;
     }
