@@ -152,17 +152,28 @@ class ClassHelper
         $container = ContainerHelper::getContainer();
         $object = $container->make($definition['class']);
         //$object = new $definition['class'];
-        if ($definition['class']) {
+        /*if ($definition['class']) {
             unset($definition['class']);
-        }
-        EntityHelper::setAttributes($object, $definition);
-        EntityHelper::setAttributes($object, $params);
-//        self::configure($object, $params);
-//        self::configure($object, $definition);
+        }*/
+        self::clearDefinition($definition);
+
+//        EntityHelper::setAttributes($object, $definition);
+//        EntityHelper::setAttributes($object, $params);
+        self::configure($object, $params);
+        self::configure($object, $definition);
         if (!empty($interface)) {
             self::checkInstanceOf($object, $interface);
         }
         return $object;
+    }
+
+    protected static function clearDefinition(array &$properties) {
+//        if (!empty($properties)) {
+            if (isset($properties['class'])) {
+                unset($properties['class']);
+            }
+//        }
+//        return $properties;
     }
 
     /**
@@ -174,17 +185,19 @@ class ClassHelper
      */
     public static function configure(object $object, array $properties)
     {
-        if (empty($properties)) {
-            return $object;
+        if (!empty($properties)) {
+            self::clearDefinition($properties);
+            EntityHelper::setAttributes($object, $properties);
         }
-        foreach ($properties as $name => $value) {
+//        dd($properties);
+        /*foreach ($properties as $name => $value) {
             if ($name != 'class') {
                 if (EntityHelper::isWritableAttribute($object, $name)) {
                     EntityHelper::setAttribute($object, $name, $value);
                 }
 //                $object->{$name} = $value;
             }
-        }
+        }*/
         return $object;
     }
 
