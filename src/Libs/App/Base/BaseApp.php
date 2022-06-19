@@ -9,12 +9,21 @@ use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Enums\AppEventEnum;
 use ZnCore\Base\Libs\App\Helpers\EnvHelper;
 use ZnCore\Base\Libs\App\Interfaces\AppInterface;
+use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Libs\ZnCore;
+use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Base\Libs\Container\Libs\BundleLoaders\ContainerLoader;
 use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Base\Libs\Event\Interfaces\EventDispatcherConfiguratorInterface;
 use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
+use ZnCore\Base\Libs\I18Next\Libs\BundleLoaders\I18NextLoader;
+use ZnDatabase\Migration\Domain\Libs\BundleLoaders\MigrationLoader;
+use ZnLib\Console\Domain\Libs\BundleLoaders\ConsoleLoader;
+use ZnLib\Rpc\Domain\Libs\BundleLoaders\SymfonyRpcRoutesLoader;
+use ZnLib\Web\Symfony4\Libs\BundleLoaders\SymfonyRoutesLoader;
+use ZnUser\Rbac\Domain\Libs\BundleLoaders\RbacConfigLoader;
 
 abstract class BaseApp implements AppInterface
 {
@@ -104,9 +113,34 @@ abstract class BaseApp implements AppInterface
         $this->configContainer($this->containerConfigurator);
     }
 
+    protected function bundleLoaders(): array
+    {
+        return [
+            'container' => ContainerLoader::class,
+            'i18next' => I18NextLoader::class,
+            'rbac' => RbacConfigLoader::class,
+            'migration' => MigrationLoader::class,
+            'console' => ConsoleLoader::class,
+        ];
+    }
+
+    protected function createBundleLoaderInstance(): LoaderInterface
+    {
+        $bundleLoader = new BundleLoader($this->bundles(), $this->import());
+        $loaders = $this->bundleLoaders();
+        if($loaders) {
+            foreach ($loaders as $loaderName => $loaderDefinition) {
+                $bundleLoader->addLoaderConfig($loaderName, $loaderDefinition);
+            }
+        }
+        return $bundleLoader;
+    }
+
     protected function initBundles(): void
     {
-        $this->znCore->loadBundles($this->bundles(), $this->import(), $this->appName());
+        $bundleLoader = $this->createBundleLoaderInstance();
+        $this->znCore->loadConfig($bundleLoader, $this->appName());
+//        $this->znCore->loadBundles($this->bundles(), $this->import(), $this->appName());
     }
 
     protected function initDispatcher(): void

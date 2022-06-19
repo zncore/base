@@ -30,26 +30,7 @@ class BundleLoader implements LoaderInterface
 
     // todo: вынести на уровень приложения для большей гибкости
     private $loadersConfig = [
-        'migration' => MigrationLoader::class,
-        'container' => [
-            'class' => ContainerLoader::class,
-        ],
-        'symfonyWeb' => [
-            'class' => SymfonyRoutesLoader::class,
-        ],
-        'symfonyRpc' => [
-            'class' => SymfonyRpcRoutesLoader::class,
-        ],
-        'rbac' => [
-            'class' => RbacConfigLoader::class,
-        ],
-        'symfonyAdmin' => [
-            'class' => SymfonyRoutesLoader::class,
-        ],
-        'console' => ConsoleLoader::class,
-        'i18next' => [
-            'class' => I18NextLoader::class,
-        ],
+
     ];
 
     public function __construct(array $bundles = [], array $import = [])

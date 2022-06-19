@@ -7,6 +7,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Exceptions\ReadOnlyException;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
+use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\App\Loaders\ConfigCollectionLoader;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
@@ -44,21 +45,25 @@ class ZnCore
         }
     }
 
+    public function loadConfig(LoaderInterface $bundleLoader, string $appName): void {
+        /** @var ConfigCollectionLoader $configCollectionLoader */
+        $configCollectionLoader = $this->getContainer()->get(ConfigCollectionLoader::class);
+        $configCollectionLoader->setLoader($bundleLoader);
+        $config = $configCollectionLoader->loadMainConfig($appName);
+    }
+
+    public function loadBundles(array $bundles, array $import, string $appName): void
+    {
+        $bundleLoader = new BundleLoader($bundles, $import);
+        $this->loadConfig($bundleLoader, $appName);
+    }
+
     private function initI18Next() {
         $container = $this->getContainer();
         try {
             I18Next::setContainer($container);
         } catch (ReadOnlyException $exception) {
         }
-    }
-
-    public function loadBundles(array $bundles, array $import, string $appName): void
-    {
-        $bundleLoader = new BundleLoader($bundles, $import);
-        /** @var ConfigCollectionLoader $configCollectionLoader */
-        $configCollectionLoader = $this->getContainer()->get(ConfigCollectionLoader::class);
-        $configCollectionLoader->setLoader($bundleLoader);
-        $config = $configCollectionLoader->loadMainConfig($appName);
     }
 
     protected function configContainer(ContainerConfiguratorInterface $containerConfigurator): void
