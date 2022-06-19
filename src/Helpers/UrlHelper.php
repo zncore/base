@@ -56,12 +56,12 @@ class UrlHelper
         return $url;
     }
 
-    public static function splitUri(string $uri): array
+    /*public static function splitUri(string $uri): array
     {
         $uri = trim($uri, '/');
         $uriSegments = explode('/', $uri);
         return $uriSegments;
-    }
+    }*/
 
     public static function parse($url, $key = null)
     {
@@ -76,7 +76,7 @@ class UrlHelper
         }
     }
 
-    public static function currentDomain()
+    /*public static function currentDomain()
     {
         return self::extractDomainFromUrl($_SERVER['HTTP_HOST']);
     }
@@ -128,6 +128,5 @@ class UrlHelper
         }
         $result = trim($result, '&');
         return $result;
-    }
-
+    }*/
 }

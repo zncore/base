@@ -46,14 +46,9 @@ class PhpHelper
         return version_compare($extensionVersion, $version, $compare);
     }
 
-    public static function isCallable($value)
-    {
-        return $value instanceof \Closure || is_callable($value);
-    }
-
     public static function runValue($value, $params = [])
     {
-        if (self::isCallable($value)) {
+        if (TypeHelper::isCallable($value)) {
             $value = call_user_func_array($value, $params);
         }
         return $value;
@@ -67,5 +62,4 @@ class PhpHelper
         // todo: /^[\w]{1}[\w\d_]+$/i
         return preg_match('/([a-zA-Z0-9_]+)/', $name);
     }
-
 }
