@@ -2,34 +2,26 @@
 
 namespace ZnCore\Base\Libs\App\Loaders\BundleLoaders;
 
+use Psr\Container\ContainerInterface;
 use ZnCore\Base\Libs\App\Base\BaseBundle;
 use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
+use ZnCore\Base\Libs\ConfigManager\Traits\ConfigManagerAwareTrait;
 use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 
 abstract class BaseLoader
 {
 
     use ContainerAttributeTrait;
+    use ConfigManagerAwareTrait;
 
-    private $configManager;
-    protected $useCache = false;
     protected $name;
 
     abstract public function loadAll(array $bundles): array;
 
-    public function __construct(ConfigManagerInterface $configManager)
+    public function __construct(ContainerInterface $container, ConfigManagerInterface $configManager)
     {
+        $this->setContainer($container);
         $this->setConfigManager($configManager);
-    }
-
-    public function isUseCache(): bool
-    {
-        return $this->useCache;
-    }
-
-    public function setUseCache(bool $useCache): void
-    {
-        $this->useCache = $useCache;
     }
 
     public function getName(): ?string
@@ -40,16 +32,6 @@ abstract class BaseLoader
     public function setName(string $name): void
     {
         $this->name = $name;
-    }
-
-    protected function getConfigManager(): ConfigManagerInterface
-    {
-        return $this->configManager;
-    }
-
-    protected function setConfigManager(ConfigManagerInterface $configManager): void
-    {
-        $this->configManager = $configManager;
     }
 
     protected function load(BaseBundle $bundle): array

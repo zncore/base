@@ -16,7 +16,7 @@ use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 class BundleLoader implements LoaderInterface
 {
 
-    use ContainerAttributeTrait;
+    //use ContainerAttributeTrait;
 
     private $bundles = [];
     private $import = [];
@@ -86,15 +86,14 @@ class BundleLoader implements LoaderInterface
     {
         /** @var BaseLoader $loaderInstance */
         $loaderInstance = ClassHelper::createObject($loaderDefinition);
-        $loaderInstance->setContainer($this->getContainer());
         if ($loaderInstance->getName() == null) {
             $loaderInstance->setName($loaderName);
         }
         $bundles = $this->filterBundlesByLoader($this->bundles, $loaderName);
-        if ($this->getContainer()->has(ConfigManagerInterface::class)) {
+        /*if ($this->getContainer()->has(ConfigManagerInterface::class)) {
             $configManager = $this->getContainer()->get(ConfigManagerInterface::class);
             $configManager->set('bundles', $bundles);
-        }
+        }*/
         $configItem = $loaderInstance->loadAll($bundles);
         return $configItem;
     }

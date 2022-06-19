@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\App\Events;
 
 use Symfony\Contracts\EventDispatcher\Event;
+use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerAttributeInterface;
 use ZnCore\Domain\Traits\Event\EventSkipHandleTrait;
 
@@ -12,12 +13,12 @@ class LoadConfigEvent extends Event
     use EventSkipHandleTrait;
 
     private $config;
-    private $kernel;
+    private $loader;
 
-    public function __construct(ContainerAttributeInterface $kernel, array $config)
+    public function __construct(LoaderInterface $loader, array $config)
     {
         $this->config = $config;
-        $this->kernel = $kernel;
+        $this->loader = $loader;
     }
 
     public function getConfig(): array
@@ -30,8 +31,8 @@ class LoadConfigEvent extends Event
         $this->config = $config;
     }
 
-    public function getKernel(): ContainerAttributeInterface
+    /*public function getKernel(): ContainerAttributeInterface
     {
         return $this->kernel;
-    }
+    }*/
 }
