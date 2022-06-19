@@ -2,9 +2,12 @@
 
 namespace ZnCore\Base\Libs\I18Next\Traits;
 
+use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\I18Next\Enums\LanguageI18nEnum;
 use ZnBundle\Language\Domain\Interfaces\Services\RuntimeLanguageServiceInterface;
+
+DeprecateHelper::hardThrow();
 
 /**
  * Trait LanguageTrait
