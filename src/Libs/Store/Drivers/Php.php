@@ -6,7 +6,8 @@ use Symfony\Component\VarExporter\VarExporter;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
 use ZnCore\Base\Libs\Store\Helpers\FileGeneratorHelper;
-use ZnCore\Base\Libs\Text\Helpers\StringHelper;
+
+use ZnCore\Base\Libs\Text\Helpers\TextHelper;
 
 class Php implements DriverInterface
 {
@@ -23,7 +24,7 @@ class Php implements DriverInterface
     {
 //        $content = VarDumper::export($data);
         $content = VarExporter::export($data);
-        $content = StringHelper::setTab($content, 4);
+        $content = TextHelper::setTab($content, 4);
         return $content;
     }
 

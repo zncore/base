@@ -7,9 +7,14 @@ use Symfony\Component\String\ByteString;
 class RandomString
 {
 
+    const NUMBER = '0123456789';
+    const LOWER = 'abcdefghijklmnopqrstuvwxyz';
+    const UPPER = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const SPEC_CHAR = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+
     private $length = 0;
     private $characters = '';
-    private $hightQuality = false;
+    private $characterSets = [];
 
     public function getLength(): int
     {
@@ -33,22 +38,22 @@ class RandomString
 
     public function addCharactersNumber(): void
     {
-        $this->characters .= '0123456789';
+        $this->characters .= self::NUMBER;
     }
 
     public function addCharactersLower(): void
     {
-        $this->characters .= 'abcdefghijklmnopqrstuvwxyz';
+        $this->characters .= self::LOWER;
     }
 
     public function addCharactersUpper(): void
     {
-        $this->characters .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $this->characters .= self::UPPER;
     }
 
     public function addCharactersSpecChar(): void
     {
-        $this->characters .= '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+        $this->characters .= self::SPEC_CHAR;
     }
 
     public function addCustomChar(string $chars): void
@@ -64,38 +69,23 @@ class RandomString
         $this->addCharactersSpecChar();
     }
 
-    public function isHightQuality(): bool
+    public static function generateNumLowerUpper(int $length): string
     {
-        return $this->hightQuality;
-    }
-
-    public function setHightQuality(bool $hightQuality): void
-    {
-        $this->hightQuality = $hightQuality;
+        $random = new RandomString();
+        $random->addCharactersNumber();
+        $random->addCharactersLower();
+        $random->addCharactersUpper();
+        $random->setLength($length);
+        return $random->generateString();
     }
 
     public function generateString(): string
     {
         $this->validate();
         return ByteString::fromRandom($this->getLength(), $this->getCharacters())->toString();
-
-
-        /*$charactersCount = strlen($this->characters);
-        $randstring = '';
-        for ($i = 0; $i < $this->length; $i++) {
-            $randstring .= $this->generateChar();
-        }
-        return $randstring;*/
     }
 
-    /*public function generateChar(): string
-    {
-        $charactersCount = strlen($this->characters);
-        $randomNumber = mt_rand(0, $charactersCount - 1);
-        return $this->characters[$randomNumber];
-    }*/
-
-    private function validate()
+    protected function validate(): void
     {
         if ($this->length == 0) {
             throw new \Exception('Length is 0');

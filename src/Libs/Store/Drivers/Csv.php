@@ -2,7 +2,8 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
-use ZnCore\Base\Libs\Text\Helpers\StringHelper;
+
+use ZnCore\Base\Libs\Text\Helpers\TextHelper;
 
 class Csv implements DriverInterface
 {
@@ -10,7 +11,7 @@ class Csv implements DriverInterface
     public function decode($content)
     {
         $content = trim($content);
-        $lines = StringHelper::textToLines($content);
+        $lines = TextHelper::textToLines($content);
         $data = array_map('str_getcsv', $lines);
         return $data;
     }

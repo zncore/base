@@ -3,8 +3,8 @@
 namespace ZnCore\Base\Libs;
 
 use ZnCore\Base\Exceptions\InternalServerErrorException;
-use ZnCore\Base\Libs\Text\Helpers\StringHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Text\Libs\RandomString;
 
 class Benchmark
 {
@@ -71,7 +71,7 @@ class Benchmark
         $all = self::allFlat();
         return isset($all[$name]);
     }
-    
+
     public static function allFlat(int $percision = 5): array
     {
         $durations = ArrayHelper::map(self::$data, 'name', 'duration');
@@ -100,7 +100,7 @@ class Benchmark
     private static function getRequestId()
     {
         if (!self::$sessionId) {
-            self::$sessionId = time() . '.' . StringHelper::generateRandomString(8);
+            self::$sessionId = time() . '.' . RandomString::generateNumLowerUpper(8);
         }
         return self::$sessionId;
     }
