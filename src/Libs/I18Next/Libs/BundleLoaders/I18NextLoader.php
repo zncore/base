@@ -15,9 +15,7 @@ class I18NextLoader extends BaseLoader
             $i18nextBundles = $this->load($bundle);
             $config = ArrayHelper::merge($config, $i18nextBundles);
         }
-//        $_ENV['I18NEXT_BUNDLES'] = $config;
         $this->getConfigManager()->set('i18nextBundles', $config);
         return [];
-//        return [$this->getName() => $config];
     }
 }

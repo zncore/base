@@ -9,7 +9,7 @@ class TranslatorHelper
 
     public static function processVariables($template, array $attributes)
     {
-        if(is_string($template)) {
+        if (is_string($template)) {
             $attributes = self::prepareVariables($template, $attributes);
             foreach ($attributes as $variable => $value) {
                 if (is_string($value) || is_numeric($value)) {
@@ -18,7 +18,7 @@ class TranslatorHelper
                 }
             }
         }
-        
+
         return $template;
     }
 

@@ -11,7 +11,6 @@ use ZnCore\Base\Libs\App\Helpers\EnvHelper;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 
 return [
-    'definitions' => [],
     'singletons' => [
         AdapterInterface::class => function (ContainerInterface $container) {
             if (EnvHelper::isTest() || EnvHelper::isDev()) {

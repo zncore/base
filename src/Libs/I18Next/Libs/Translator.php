@@ -124,7 +124,7 @@ class Translator
         if (!$return && !isset($variables['lng']) && !empty($this->fallbackLanguage)) {
             $return = self::_getKey($key, array_merge($variables, array('lng' => $this->fallbackLanguage)));
         }
-        
+
         if (!$return && array_key_exists('defaultValue', $variables)) {
             $return = $variables['defaultValue'];
         }
@@ -140,7 +140,7 @@ class Translator
         if (!$return) {
             $return = $key;
         }
-        
+
         /*foreach ($variables as $variable => $value) {
             if (is_string($value) || is_numeric($value)) {
                 $return = preg_replace('/__' . $variable . '__/', $value, $return);
@@ -231,5 +231,4 @@ class Translator
         return $return;
 
     }
-
 }

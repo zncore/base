@@ -2,9 +2,6 @@
 
 namespace ZnCore\Base\Libs\I18Next\Facades;
 
-use Psr\Container\ContainerInterface;
-use Yii;
-use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\Container\Traits\ContainerAwareStaticAttributeTrait;
 use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
 
@@ -13,23 +10,18 @@ class I18Next
 
     use ContainerAwareStaticAttributeTrait;
 
-//    private static $container;
     private static $service;
 
-    /*public static function setContainer(ContainerInterface $container) {
-//        $container = ContainerHelper::getContainer();
-//        self::$container = $container;
-        self::$service = $container->get(TranslationServiceInterface::class);
-    }*/
-
-    public static function getService(): TranslationServiceInterface {
-        if(!isset(self::$service)) {
+    public static function getService(): TranslationServiceInterface
+    {
+        if (!isset(self::$service)) {
             self::setService(self::getContainer()->get(TranslationServiceInterface::class));
         }
         return self::$service;
     }
 
-    public static function setService(TranslationServiceInterface $translationService) {
+    public static function setService(TranslationServiceInterface $translationService)
+    {
         self::$service = $translationService;
     }
 
@@ -44,11 +36,4 @@ class I18Next
         $translationService = self::getService();
         return call_user_func_array([$translationService, 't'], $bundleName);
     }
-
-//    public static function addBundle(string $bundleName, $loaderDefinition)
-//    {
-//        /** @var TranslationServiceInterface $translationService */
-//        $translationService = self::getService();
-//        $translationService->addBundle($bundleName, $loaderDefinition);
-//    }
 }

@@ -7,7 +7,7 @@ use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Base\BaseBundle;
-use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
+use ZnCore\Base\Libs\ConfigManager\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BaseLoader;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\ModuleLoader;

@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\ConfigManager\Traits;
 
-use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
+use ZnCore\Base\Libs\ConfigManager\Interfaces\ConfigManagerInterface;
 
 trait ConfigManagerAwareTrait
 {

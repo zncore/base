@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\ConfigManager\Libs;
 
-use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
+use ZnCore\Base\Libs\ConfigManager\Interfaces\ConfigManagerInterface;
 
 class ConfigManager implements ConfigManagerInterface
 {

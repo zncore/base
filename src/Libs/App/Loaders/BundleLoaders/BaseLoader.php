@@ -4,7 +4,7 @@ namespace ZnCore\Base\Libs\App\Loaders\BundleLoaders;
 
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Libs\App\Base\BaseBundle;
-use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
+use ZnCore\Base\Libs\ConfigManager\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\ConfigManager\Traits\ConfigManagerAwareTrait;
 use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
 

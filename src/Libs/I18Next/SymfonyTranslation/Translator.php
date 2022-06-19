@@ -40,24 +40,7 @@ class Translator implements TranslatorInterface
     public function trans(string $id, array $parameters = [], string $domain = null, string $locale = null)
     {
         $domain = $domain ?: $this->domain;
-        
         $parametersI18Next = TranslatorHelper::paramsToI18Next($parameters);
-//        $keyArr = TranslatorHelper::splitId($id);
-//        if(count($keyArr) == 1) {
-//            $id = TranslatorHelper::getSingularFromId($id);
-//        } else {
-//            //$id = $keyArr['plural'];
-//            $id = TranslatorHelper::getSingularFromId($id);
-//            /*dd($parametersI18Next);
-//            if(isset($parameters['%count%'])) {
-//                dd($parameters['%count%']);
-//            }
-//
-//            $paramName = array_key_first($parameters);
-//            dd($paramName);*/
-//
-//        }
-        
         $key = $domain . '.' . TranslatorHelper::messageToHash($id);
         $translatedMessage = $this->translateMessage($key, $parametersI18Next);
         if($translatedMessage == null) {
@@ -75,7 +58,6 @@ class Translator implements TranslatorInterface
         try {
             $translatedMessage = I18Next::t($this->bundleName, $key, $parameters);
             if ($translatedMessage != $key || EnvHelper::isProd()) {
-               // dd($translatedMessage, $key);
                 return $translatedMessage;
             }
 

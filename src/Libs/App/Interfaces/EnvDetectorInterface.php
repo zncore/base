@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\App\Interfaces;
 
-use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
+use ZnCore\Base\Libs\ConfigManager\Interfaces\ConfigManagerInterface;
 
 interface EnvDetectorInterface
 {

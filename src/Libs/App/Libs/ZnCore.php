@@ -6,10 +6,11 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Exceptions\ReadOnlyException;
-use ZnCore\Base\Libs\App\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\App\Loaders\ConfigCollectionLoader;
+use ZnCore\Base\Libs\ConfigManager\Interfaces\ConfigManagerInterface;
+use ZnCore\Base\Libs\ConfigManager\Libs\ConfigManager;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Libs\ContainerConfigurator;
@@ -37,7 +38,8 @@ class ZnCore
         return $container;
     }
 
-    private function initContainer() {
+    private function initContainer()
+    {
         $container = $this->getContainer();
         try {
             ContainerHelper::setContainer($container);
@@ -45,7 +47,8 @@ class ZnCore
         }
     }
 
-    public function loadConfig(LoaderInterface $bundleLoader, string $appName): void {
+    public function loadConfig(LoaderInterface $bundleLoader, string $appName): void
+    {
         /** @var ConfigCollectionLoader $configCollectionLoader */
         $configCollectionLoader = $this->getContainer()->get(ConfigCollectionLoader::class);
         $configCollectionLoader->setLoader($bundleLoader);
@@ -58,7 +61,8 @@ class ZnCore
         $this->loadConfig($bundleLoader, $appName);
     }
 
-    private function initI18Next() {
+    private function initI18Next()
+    {
         $container = $this->getContainer();
         try {
             I18Next::setContainer($container);
@@ -86,8 +90,8 @@ class ZnCore
         $containerConfigurator->singleton(EventDispatcherInterface::class, EventDispatcher::class);
         $containerConfigurator->singleton(\Psr\EventDispatcher\EventDispatcherInterface::class, EventDispatcherInterface::class);
         $containerConfigurator->singleton(ConfigManagerInterface::class, ConfigManager::class);
-        $containerConfigurator->singleton(ZnCore::class, function () {
+        /*$containerConfigurator->singleton(ZnCore::class, function () {
             return $this;
-        });
+        });*/
     }
 }

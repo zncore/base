@@ -17,7 +17,7 @@ trait LanguageTrait
 
     protected $_language = "ru";
 
-    protected function setRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService) {
+    /*protected function setRuntimeLanguageService(RuntimeLanguageServiceInterface $languageService) {
         $this->_language = $languageService->getLanguage();
     }
 
@@ -29,7 +29,7 @@ trait LanguageTrait
         $this->$attribute = $value;
         $i18nAttribute = $attribute . 'I18n';
         $this->{$i18nAttribute}[$this->_language] = $value;
-    }
+    }*/
 
     protected function i18n(string $attribute): ?string
     {
@@ -55,7 +55,7 @@ trait LanguageTrait
         return $this->$attribute;
     }
 
-    protected function _getI18nArray(string $attribute) {
+    /*protected function _getI18nArray(string $attribute) {
         $i18nAttribute = $attribute . 'I18n';
         if(!empty($this->$i18nAttribute)) {
             return $this->$i18nAttribute;
@@ -64,5 +64,5 @@ trait LanguageTrait
                 $this->_language => $this->$attribute
             ];
         }
-    }
+    }*/
 }

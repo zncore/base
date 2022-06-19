@@ -55,7 +55,7 @@ class TranslationService implements TranslationServiceInterface
     public function setDefaultLanguage(string $defaultLanguage): void
     {
         $this->defaultLanguage = $defaultLanguage;
-        if(empty($this->language)) {
+        if (empty($this->language)) {
             $this->language = $defaultLanguage;
         }
     }
@@ -65,11 +65,6 @@ class TranslationService implements TranslationServiceInterface
         $translator = $this->getTranslator($bundleName);
         return $translator->getTranslation($key, $variables);
     }
-
-    /*public function registerBundle(string $bundleName, string $bundlePath)
-    {
-        $this->bundles[$bundleName] = $bundlePath;
-    }*/
 
     public function addBundle(string $bundleName, $loaderDefinition)
     {
@@ -85,7 +80,8 @@ class TranslationService implements TranslationServiceInterface
         //$this->translators[$bundleName] = new Translator($translation, $this->language);
     }
 
-    private function normalizeDefinition($loaderDefinition): array {
+    private function normalizeDefinition($loaderDefinition): array
+    {
         if (is_string($loaderDefinition)) {
             $loaderDefinition = [
                 'class' => JsonLoader::class,
