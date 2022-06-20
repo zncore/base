@@ -7,7 +7,7 @@ use InvalidArgumentException;
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Query\Entities\Query;
-use ZnCore\Domain\Interfaces\Repository\RelationConfigInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\RelationConfigInterface;
 use ZnCore\Base\Libs\Repository\Interfaces\RepositoryInterface;
 use ZnCore\Base\Libs\Relation\Libs\Types\RelationInterface;
 

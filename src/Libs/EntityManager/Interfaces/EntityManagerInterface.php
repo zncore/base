@@ -5,7 +5,7 @@ namespace ZnCore\Base\Libs\EntityManager\Interfaces;
 use Illuminate\Support\Collection;
 use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
 use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
-use ZnCore\Domain\Interfaces\Repository\ReadOneUniqueInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\ReadOneUniqueInterface;
 use ZnCore\Base\Libs\Repository\Interfaces\RepositoryInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
 

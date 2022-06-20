@@ -1,12 +1,14 @@
 <?php
 
-namespace ZnCore\Base\Helpers;
+namespace ZnCore\Base\Libs\Enum\Helpers;
 
 use InvalidArgumentException;
 use ZnCore\Base\Exceptions\NotInstanceOfException;
+use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Helpers\ReflectionHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
-use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
+use ZnCore\Base\Libs\Enum\Interfaces\GetLabelsInterface;
 
 /**
  * Работа с перечислениями

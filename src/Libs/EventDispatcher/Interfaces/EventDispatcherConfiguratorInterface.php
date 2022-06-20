@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\Event\Interfaces;
+namespace ZnCore\Base\Libs\EventDispatcher\Interfaces;
 
 interface EventDispatcherConfiguratorInterface
 {

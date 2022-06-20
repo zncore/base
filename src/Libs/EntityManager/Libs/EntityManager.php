@@ -17,7 +17,7 @@ use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
 use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerConfiguratorInterface;
 use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Base\Libs\EntityManager\Interfaces\OrmInterface;
-use ZnCore\Domain\Interfaces\Repository\CrudRepositoryInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
 use ZnCore\Base\Libs\Repository\Interfaces\RepositoryInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
 

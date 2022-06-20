@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\Event\Traits;
+namespace ZnCore\Base\Libs\EventDispatcher\Traits;
 
 use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 

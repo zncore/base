@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\Event\Libs;
+namespace ZnCore\Base\Libs\EventDispatcher\Libs;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
@@ -9,8 +9,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnCore\Base\Libs\Container\Traits\ContainerAwareTrait;
-use ZnCore\Base\Libs\Event\Interfaces\EventDispatcherConfiguratorInterface;
-use ZnCore\Base\Libs\Event\Traits\EventDispatcherTrait;
+use ZnCore\Base\Libs\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
+use ZnCore\Base\Libs\EventDispatcher\Traits\EventDispatcherTrait;
 
 class EventDispatcherConfigurator implements EventDispatcherConfiguratorInterface
 {

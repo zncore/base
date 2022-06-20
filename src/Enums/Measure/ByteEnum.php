@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Enums\Measure;
 
-use ZnCore\Contract\Enum\Interfaces\GetLabelsInterface;
+use ZnCore\Base\Libs\Enum\Interfaces\GetLabelsInterface;
 
 /**
  * Единицы измерения информации в байтах

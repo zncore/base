@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\Event\Traits;
+namespace ZnCore\Base\Libs\EventDispatcher\Traits;
 
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;

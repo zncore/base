@@ -6,7 +6,7 @@ use ZnCore\Base\Libs\App\Interfaces\AppInterface;
 use ZnCore\Base\Libs\App\Libs\ZnCore;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
-use ZnCore\Base\Libs\Event\Interfaces\EventDispatcherConfiguratorInterface;
+use ZnCore\Base\Libs\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
 
 define('MICRO_TIME', microtime(true));
 
