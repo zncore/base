@@ -7,7 +7,7 @@ use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
 use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
 use ZnCore\Domain\Interfaces\Repository\ReadOneUniqueInterface;
 use ZnCore\Domain\Interfaces\Repository\RepositoryInterface;
-use ZnCore\Domain\Libs\Query;
+use ZnCore\Base\Libs\Query\Entities\Query;
 
 interface EntityManagerInterface extends TransactionInterface, ReadOneUniqueInterface
 {
