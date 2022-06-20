@@ -5,11 +5,10 @@ namespace ZnCore\Base\Libs\Arr\Traits;
 use Illuminate\Support\Collection;
 use ZnCore\Base\Exceptions\InvalidMethodParameterException;
 use ZnCore\Base\Exceptions\NotFoundException;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Libs\Arr\Helpers\FilterHelper;
-use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
-use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Libs\Query\Entities\Query;
+use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
 
 trait ArrayCrudRepositoryTrait
 {
@@ -35,7 +34,7 @@ trait ArrayCrudRepositoryTrait
 
     public function oneById($id, Query $query = null): EntityIdInterface
     {
-        if(empty($id)) {
+        if (empty($id)) {
             throw (new InvalidMethodParameterException('Empty ID'))
                 ->setParameterName('id');
         }
@@ -50,7 +49,7 @@ trait ArrayCrudRepositoryTrait
         $query->limit(1);
         /** @var Collection $collection */
         $collection = $this->all($query);
-        if($collection->count() == 0) {
+        if ($collection->count() == 0) {
             throw new NotFoundException();
         }
         return $collection->first();

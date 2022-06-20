@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Tests\Unit;
 
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FileSizeHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FindFileHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\MimeTypeHelper;
@@ -15,7 +16,7 @@ final class FileHelperTest extends DataTestCase
     public function testScanDirTree()
     {
         $tree = FindFileHelper::scanDirTree(__DIR__ . '/../../src/i18next');
-        $array = EntityHelper::collectionToArray($tree);
+        $array = CollectionHelper::toArray($tree);
         $expected = $this->loadFromJsonFile(__DIR__ . '/../data/FileHelper/testScanDirTree.json');
         $this->assertArraySubset($expected, $array);
     }

@@ -5,6 +5,7 @@ namespace ZnCore\Base\Libs\Relation\Libs\Types;
 use Illuminate\Support\Collection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Domain\Interfaces\ReadAllInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
@@ -22,7 +23,7 @@ class OneToManyRelation extends BaseRelation implements RelationInterface
 
     protected function loadRelation(Collection $collection)
     {
-        $ids = EntityHelper::getColumn($collection, $this->relationAttribute);
+        $ids = CollectionHelper::getColumn($collection, $this->relationAttribute);
         $ids = array_unique($ids);
         $foreignCollection = $this->loadRelationByIds($ids);
         $propertyAccessor = PropertyAccess::createPropertyAccessor();

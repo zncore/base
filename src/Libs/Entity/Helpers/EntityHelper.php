@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\Entity\Helpers;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Enumerable;
 use ReflectionClass;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -35,7 +36,12 @@ class EntityHelper
         return is_object($data) && !($data instanceof Collection);
     }
 
-    public static function indexingCollection(Collection $collection, string $fieldName): array
+
+
+
+
+
+    /*public static function indexingCollection(Collection $collection, string $fieldName): array
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         $array = [];
@@ -57,6 +63,33 @@ class EntityHelper
         return $collection;
     }
 
+    public static function collectionToArray(Collection $collection): array
+    {
+        $serializer = new Serializer([new ObjectNormalizer()]);
+        $normalizeHandler = function ($value) use ($serializer) {
+            return $serializer->normalize($value);
+            //return is_object($value) ? self::toArray($value) : $value;
+        };
+        $normalizeCollection = $collection->map($normalizeHandler);
+        return $normalizeCollection->all();
+    }
+
+    public static function getColumn(Collection $collection, string $key): array
+    {
+        $propertyAccessor = PropertyAccess::createPropertyAccessor();
+        $array = [];
+        foreach ($collection as $entity) {
+            $array[] = $propertyAccessor->getValue($entity, $key);
+        }
+        $array = array_values($array);
+        return $array;
+    }*/
+
+
+
+
+
+
     public static function toArrayForTablize(object $entity, array $columnList = []): array
     {
         $array = self::toArray($entity);
@@ -71,23 +104,12 @@ class EntityHelper
         return $arraySnakeCase;
     }
 
-    public static function collectionToArray(Collection $collection): array
-    {
-        $serializer = new Serializer([new ObjectNormalizer()]);
-        $normalizeHandler = function ($value) use ($serializer) {
-            return $serializer->normalize($value);
-            //return is_object($value) ? EntityHelper::toArray($value) : $value;
-        };
-        $normalizeCollection = $collection->map($normalizeHandler);
-        return $normalizeCollection->all();
-    }
-
     public static function toArray($entity, bool $recursive = false): array
     {
         $array = [];
         if (is_array($entity)) {
             $array = $entity;
-        } elseif ($entity instanceof Collection) {
+        } elseif ($entity instanceof Enumerable) {
             $array = $entity->toArray();
         } elseif (is_object($entity)) {
             $attributes = self::getAttributeNames($entity);
@@ -152,9 +174,9 @@ class EntityHelper
 
     public static function setAttributesFromObject(object $fromObject, object $toObject): void
     {
-        $entityAttributes = EntityHelper::toArray($fromObject);
-        $entityAttributes = ArrayHelper::extractByKeys($entityAttributes, EntityHelper::getAttributeNames($toObject));
-        EntityHelper::setAttributes($toObject, $entityAttributes);
+        $entityAttributes = self::toArray($fromObject);
+        $entityAttributes = ArrayHelper::extractByKeys($entityAttributes, self::getAttributeNames($toObject));
+        self::setAttributes($toObject, $entityAttributes);
     }
 
     public static function setAttributes(object $entity, $data, array $filedsOnly = []): void
@@ -179,16 +201,5 @@ class EntityHelper
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         return $propertyAccessor->getValue($entity, $key);
-    }
-
-    public static function getColumn(Collection $collection, string $key): array
-    {
-        $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $array = [];
-        foreach ($collection as $entity) {
-            $array[] = $propertyAccessor->getValue($entity, $key);
-        }
-        $array = array_values($array);
-        return $array;
     }
 }

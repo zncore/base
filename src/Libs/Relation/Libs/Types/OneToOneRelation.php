@@ -5,6 +5,7 @@ namespace ZnCore\Base\Libs\Relation\Libs\Types;
 use Illuminate\Support\Collection;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Libs\Query\Entities\Query;
 use ZnCore\Domain\Relations\interfaces\CrudRepositoryInterface;
@@ -21,10 +22,10 @@ class OneToOneRelation extends BaseRelation implements RelationInterface
 
     protected function loadRelation(Collection $collection)
     {
-        $ids = EntityHelper::getColumn($collection, $this->relationAttribute);
+        $ids = CollectionHelper::getColumn($collection, $this->relationAttribute);
         $ids = array_unique($ids);
         $foreignCollection = $this->loadRelationByIds($ids);
-        $foreignCollection = EntityHelper::indexingCollection($foreignCollection, $this->foreignAttribute);
+        $foreignCollection = CollectionHelper::indexing($foreignCollection, $this->foreignAttribute);
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         foreach ($collection as $entity) {
             $relationIndex = $propertyAccessor->getValue($entity, $this->relationAttribute);

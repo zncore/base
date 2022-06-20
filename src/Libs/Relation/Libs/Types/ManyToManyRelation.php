@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Base\Libs\Query\Entities\Where;
 use ZnCore\Domain\Interfaces\ReadAllInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
@@ -95,15 +96,15 @@ class ManyToManyRelation extends BaseRelation implements RelationInterface
 
     protected function loadRelation(Collection $collection)
     {
-        $ids = EntityHelper::getColumn($collection, $this->relationAttribute);
+        $ids = CollectionHelper::getColumn($collection, $this->relationAttribute);
         $ids = array_unique($ids);
         $viaCollection = $this->loadViaByIds($ids);
-        $targetIds = EntityHelper::getColumn($viaCollection, $this->viaTargetAttribute);
+        $targetIds = CollectionHelper::getColumn($viaCollection, $this->viaTargetAttribute);
         $targetIds = array_unique($targetIds);
         $foreignCollection = $this->loadRelationByIds($targetIds);
-        $foreignCollection = EntityHelper::indexingCollection($foreignCollection, 'id');
+        $foreignCollection = CollectionHelper::indexing($foreignCollection, 'id');
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
-        $indexedCollection = EntityHelper::indexingCollection($collection, 'id');
+        $indexedCollection = CollectionHelper::indexing($collection, 'id');
 
         $result = [];
         foreach ($viaCollection as $viaEntity) {

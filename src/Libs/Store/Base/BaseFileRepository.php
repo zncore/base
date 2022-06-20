@@ -1,19 +1,24 @@
 <?php
 
-namespace ZnCore\Base\Libs\FileSystem\Base;
+namespace ZnCore\Base\Libs\Store\Base;
 
 use ZnCore\Base\Exceptions\NotImplementedMethodException;
-use ZnCore\Base\Libs\Arr\Traits\ArrayCrudRepositoryTrait;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
-use ZnCore\Base\Libs\Query\Entities\Query;
 use ZnCore\Base\Libs\Store\StoreFile;
-use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
+use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\RepositoryInterface;
+use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
 
-abstract class BaseFileCrudRepository extends BaseFileRepository implements CrudRepositoryInterface
+abstract class BaseFileRepository implements RepositoryInterface
 {
 
-    use ArrayCrudRepositoryTrait;
+    use EntityManagerAwareTrait;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->setEntityManager($em);
+    }
 
     public function tableName(): string
     {
@@ -30,17 +35,6 @@ abstract class BaseFileCrudRepository extends BaseFileRepository implements Crud
         return 'php';
     }
 
-    /*public function _relations()
-    {
-        return [];
-    }*/
-
-    protected function forgeQuery(Query $query = null)
-    {
-        $query = Query::forge($query);
-        return $query;
-    }
-
     public function fileName(): string
     {
         $tableName = $this->tableName();
@@ -53,6 +47,7 @@ abstract class BaseFileCrudRepository extends BaseFileRepository implements Crud
 
     protected function getItems(): array
     {
+        // todo: cache data
         $store = new StoreFile($this->fileName());
         return $store->load() ?: [];
     }
@@ -60,6 +55,6 @@ abstract class BaseFileCrudRepository extends BaseFileRepository implements Crud
     protected function setItems(array $items)
     {
         $store = new StoreFile($this->fileName());
-        $store->save($items);
+        return $store->save($items);
     }
 }

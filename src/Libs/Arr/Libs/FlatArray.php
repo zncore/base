@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs;
+namespace ZnCore\Base\Libs\Arr\Libs;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 
