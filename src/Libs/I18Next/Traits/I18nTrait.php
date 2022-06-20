@@ -9,7 +9,7 @@ use ZnBundle\Language\Domain\Interfaces\Services\RuntimeLanguageServiceInterface
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\I18Next\Enums\LanguageI18nEnum;
-use ZnCore\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 
 trait I18nTrait
 {

@@ -4,8 +4,8 @@ namespace ZnCore\Base\Libs\Validation\Helpers;
 
 use Illuminate\Support\Collection;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Domain\Entities\ValidateErrorEntity;
-use ZnCore\Domain\Exceptions\UnprocessibleEntityException;
+use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
+use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
 
 class UnprocessableHelper
 {
@@ -13,8 +13,8 @@ class UnprocessableHelper
     public static function throwItem(string $field, string $mesage): void
     {
         $errorCollection = new Collection();
-        $validateErrorEntity = new ValidateErrorEntity($field, $mesage);
-        $errorCollection->add($validateErrorEntity);
+        $ValidationErrorEntity = new ValidationErrorEntity($field, $mesage);
+        $errorCollection->add($ValidationErrorEntity);
         throw new UnprocessibleEntityException($errorCollection);
     }
 
@@ -30,16 +30,16 @@ class UnprocessableHelper
         foreach ($errorArray as $field => $message) {
             if (is_array($message)) {
                 if (ArrayHelper::isAssociative($message)) {
-                    $validateErrorEntity = new ValidateErrorEntity($message['field'], $message['message']);
+                    $ValidationErrorEntity = new ValidationErrorEntity($message['field'], $message['message']);
                 } else {
                     foreach ($message as $m) {
-                        $validateErrorEntity = new ValidateErrorEntity($field, $m);
-                        $errorCollection->add($validateErrorEntity);
+                        $ValidationErrorEntity = new ValidationErrorEntity($field, $m);
+                        $errorCollection->add($ValidationErrorEntity);
                     }
                 }
             } else {
-                $validateErrorEntity = new ValidateErrorEntity($field, $message);
-                $errorCollection->add($validateErrorEntity);
+                $ValidationErrorEntity = new ValidationErrorEntity($field, $message);
+                $errorCollection->add($ValidationErrorEntity);
             }
         }
         return $errorCollection;

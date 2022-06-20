@@ -1,22 +1,29 @@
 <?php
 
-namespace ZnCore\Base\Libs\DynamicEntity\Helpers;
+namespace ZnCore\Base\Libs\Validation\Helpers;
 
 use Illuminate\Support\Collection;
 use Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\ConstraintViolationList;
 use ZnCore\Base\Helpers\DeprecateHelper;
-use ZnCore\Base\Libs\DynamicEntity\Interfaces\ValidateDynamicEntityInterface;
 use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
+use ZnCore\Base\Libs\Validation\Helpers\SymfonyValidationHelper;
 
-class DynamicEntityValidationHelper
+DeprecateHelper::softThrow('ValidateEntityInterface');
+
+/**
+ * Class ArrayValidationHelper
+ * @package ZnCore\Domain\Helpers
+ * @see DynamicEntityValidationHelper
+ */
+class ArrayValidationHelper
 {
 
     /**
      * @return array | Collection | ValidationErrorEntity[]
      */
-    public static function validate(ValidateDynamicEntityInterface $data): Collection
+    public static function validate($data): Collection
     {
         $rules = $data->validationRules();
         return self::validateByRulesArray($data, $rules);

@@ -4,7 +4,7 @@ namespace ZnCore\Base\Libs\I18Next\Mappers;
 
 use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Contract\Mapper\Interfaces\MapperInterface;
-use ZnCore\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 
 class I18nMapper implements MapperInterface
 {

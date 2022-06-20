@@ -18,10 +18,10 @@ use ZnCore\Base\Libs\Container\Traits\ContainerAwareTrait;
 use ZnCore\Base\Libs\Event\Interfaces\EventDispatcherConfiguratorInterface;
 use ZnCore\Base\Libs\Event\Libs\EventDispatcherConfigurator;
 use ZnCore\Base\Libs\I18Next\Facades\I18Next;
-use ZnCore\Domain\Interfaces\Libs\EntityManagerConfiguratorInterface;
-use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
-use ZnCore\Domain\Libs\EntityManager;
-use ZnCore\Domain\Libs\EntityManagerConfigurator;
+use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerConfiguratorInterface;
+use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Base\Libs\EntityManager\Libs\EntityManager;
+use ZnCore\Base\Libs\EntityManager\Libs\EntityManagerConfigurator;
 
 class ZnCore
 {

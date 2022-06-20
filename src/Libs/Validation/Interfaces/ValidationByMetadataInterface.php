@@ -1,10 +1,10 @@
 <?php
 
-namespace ZnCore\Base\Libs\Entity\Interfaces;
+namespace ZnCore\Base\Libs\Validation\Interfaces;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
-interface ValidateEntityByMetadataInterface
+interface ValidationByMetadataInterface
 {
 
     public static function loadValidatorMetadata(ClassMetadata $metadata);

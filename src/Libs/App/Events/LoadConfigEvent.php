@@ -5,7 +5,7 @@ namespace ZnCore\Base\Libs\App\Events;
 use Symfony\Contracts\EventDispatcher\Event;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerAttributeInterface;
-use ZnCore\Domain\Traits\Event\EventSkipHandleTrait;
+use ZnCore\Base\Libs\Event\Traits\EventSkipHandleTrait;
 
 class LoadConfigEvent extends Event
 {

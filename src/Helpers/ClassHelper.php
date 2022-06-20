@@ -7,7 +7,7 @@ use ZnCore\Base\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
 use ZnCore\Base\Exceptions\NotInstanceOfException;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
-use ZnCore\Domain\Helpers\EntityHelper;
+use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 
 /**
  * Работа с классами
