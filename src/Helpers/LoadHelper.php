@@ -4,6 +4,8 @@ namespace ZnCore\Base\Helpers;
 
 use ZnCore\Base\Libs\Store\Helpers\StoreHelper;
 
+DeprecateHelper::hardThrow();
+
 /**
  * Загрузка и сохранение конфигураций
  * 
@@ -21,20 +23,20 @@ class LoadHelper
      * @param string $mainConfigFile Имя файла, относительно корня проекта
      * @return array|null
      */
-    public static function loadConfig(string $mainConfigFile)
+    /*public static function loadConfig(string $mainConfigFile)
     {
         $rootDirectory = __DIR__ . '/../../../../..';
         return StoreHelper::load($rootDirectory . '/' . $mainConfigFile);
-    }
+    }*/
 
     /**
      * Сохранить конфиг в файл
      * @param string $mainConfigFile Имя файла, относительно корня проекта
      * @param array $data Конфиг
      */
-    public static function saveConfig(string $mainConfigFile, array $data)
+    /*public static function saveConfig(string $mainConfigFile, array $data)
     {
         $rootDirectory = __DIR__ . '/../../../../..';
         return StoreHelper::save($rootDirectory . '/' . $mainConfigFile, $data);
-    }
+    }*/
 }
