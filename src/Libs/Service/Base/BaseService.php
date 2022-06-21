@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\Service\Base;
 
 use ZnCore\Base\Libs\EventDispatcher\Traits\EventDispatcherTrait;
-use ZnCore\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Base\Libs\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Base\Libs\Service\Interfaces\CreateEntityInterface;
 use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
 use ZnCore\Base\Libs\Repository\Traits\RepositoryAwareTrait;

@@ -6,8 +6,8 @@ use App\News\Domain\Entities\CommentEntity;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use ZnCore\Contract\User\Exceptions\UnauthorizedException;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;
-use ZnCore\Domain\Enums\EventEnum;
-use ZnCore\Domain\Events\EntityEvent;
+use ZnCore\Base\Libs\Domain\Enums\EventEnum;
+use ZnCore\Base\Libs\Domain\Events\EntityEvent;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 
 /**

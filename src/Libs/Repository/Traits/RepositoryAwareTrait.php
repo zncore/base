@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Repository\Traits;
 
-use ZnCore\Domain\Interfaces\GetEntityClassInterface;
+use ZnCore\Base\Libs\Domain\Interfaces\GetEntityClassInterface;
 
 trait RepositoryAwareTrait
 {

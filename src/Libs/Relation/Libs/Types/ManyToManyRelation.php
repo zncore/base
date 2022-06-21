@@ -11,7 +11,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
 use ZnCore\Base\Libs\Query\Entities\Where;
-use ZnCore\Domain\Interfaces\ReadAllInterface;
+use ZnCore\Base\Libs\Domain\Interfaces\ReadAllInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnCore\Domain\Relations\interfaces\CrudRepositoryInterface;

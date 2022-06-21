@@ -4,8 +4,8 @@ namespace ZnCore\Base\Libs\Service\Subscribes;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use ZnCore\Base\Exceptions\ReadOnlyException;
-use ZnCore\Domain\Enums\EventEnum;
-use ZnCore\Domain\Events\EntityEvent;
+use ZnCore\Base\Libs\Domain\Enums\EventEnum;
+use ZnCore\Base\Libs\Domain\Events\EntityEvent;
 use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
 
