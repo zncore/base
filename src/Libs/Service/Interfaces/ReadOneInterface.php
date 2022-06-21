@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Service\Interfaces;
 
-use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
+use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
 use ZnCore\Base\Exceptions\NotFoundException;
 

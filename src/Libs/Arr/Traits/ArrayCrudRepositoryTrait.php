@@ -8,7 +8,7 @@ use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\Arr\Helpers\FilterHelper;
 use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
 use ZnCore\Base\Libs\Query\Entities\Query;
-use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
+use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
 
 trait ArrayCrudRepositoryTrait
 {

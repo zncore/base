@@ -4,8 +4,8 @@ namespace ZnCore\Base\Libs\DataProvider\Libs;
 
 use Illuminate\Support\Collection;
 use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Contract\Domain\Interfaces\DataProviderInterface;
-use ZnCore\Contract\Domain\Interfaces\ForgeQueryByFilterInterface;
+use ZnCore\Base\Libs\DataProvider\Interfaces\DataProviderInterface;
+use ZnCore\Base\Libs\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
 use ZnCore\Base\Libs\DataProvider\Entities\DataProviderEntity;
 use ZnCore\Base\Libs\Domain\Interfaces\ReadAllInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;

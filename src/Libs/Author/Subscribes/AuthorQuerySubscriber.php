@@ -9,7 +9,7 @@ use ZnCore\Base\Libs\Domain\Events\QueryEvent;
 use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Base\Libs\EntityManager\Traits\EntityManagerAwareTrait;
 
-class AuthorQueryBehavior implements EventSubscriberInterface
+class AuthorQuerySubscriber implements EventSubscriberInterface
 {
 
     use EntityManagerAwareTrait;

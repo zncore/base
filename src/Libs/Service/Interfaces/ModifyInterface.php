@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\Service\Interfaces;
 
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
-use ZnCore\Contract\Domain\Interfaces\Entities\EntityIdInterface;
+use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Base\Exceptions\NotFoundException;
 
 interface ModifyInterface
