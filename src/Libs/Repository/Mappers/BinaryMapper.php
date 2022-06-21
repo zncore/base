@@ -2,9 +2,9 @@
 
 namespace ZnCore\Base\Libs\Repository\Mappers;
 
-use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\MapperInterface;
 
-class BinaryMapper implements EncoderInterface
+class BinaryMapper implements MapperInterface
 {
 
     private $attributes;
@@ -26,7 +26,7 @@ class BinaryMapper implements EncoderInterface
     {
         foreach ($this->attributes as $attribute) {
             $value = $row[$attribute] ?? null;
-            if($value) {
+            if ($value) {
                 $row[$attribute] = base64_decode($row[$attribute]);
             }
         }

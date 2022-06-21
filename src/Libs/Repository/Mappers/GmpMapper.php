@@ -2,9 +2,9 @@
 
 namespace ZnCore\Base\Libs\Repository\Mappers;
 
-use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\MapperInterface;
 
-class GmpMapper implements EncoderInterface
+class GmpMapper implements MapperInterface
 {
 
     private $attributes;

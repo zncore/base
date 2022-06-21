@@ -2,10 +2,10 @@
 
 namespace ZnCore\Base\Libs\Repository\Mappers;
 
-use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
+use ZnCore\Base\Libs\Repository\Interfaces\MapperInterface;
 
-class TimeMapper implements EncoderInterface
+class TimeMapper implements MapperInterface
 {
 
     public $format = 'Y-m-d H:i:s';
@@ -30,7 +30,7 @@ class TimeMapper implements EncoderInterface
         foreach ($this->attributes as $attribute) {
             $attribute = Inflector::underscore($attribute);
             $value = $row[$attribute];
-            if($value) {
+            if ($value) {
                 $row[$attribute] = new \DateTime($value);
             }
         }

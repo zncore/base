@@ -2,10 +2,10 @@
 
 namespace ZnCore\Base\Libs\Repository\Mappers;
 
-use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Repository\Interfaces\MapperInterface;
 
-class PathMapper implements EncoderInterface
+class PathMapper implements MapperInterface
 {
 
     private $map;
@@ -27,7 +27,7 @@ class PathMapper implements EncoderInterface
         foreach ($this->map as $toPath => $fromPath) {
             $value = ArrayHelper::getValue($row, $fromPath);
             ArrayHelper::setValue($row, $toPath, $value);
-            if($this->isRemoveOldValue) {
+            if ($this->isRemoveOldValue) {
                 ArrayHelper::removeItem($row, $fromPath);
             }
         }

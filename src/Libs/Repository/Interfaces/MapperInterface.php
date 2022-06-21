@@ -2,6 +2,8 @@
 
 namespace ZnCore\Base\Libs\Repository\Interfaces;
 
+use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
+
 /**
  * Возможность кодирования/декодирования данных
  * 
@@ -11,22 +13,22 @@ namespace ZnCore\Base\Libs\Repository\Interfaces;
  * @see \Symfony\Component\Serializer\Encoder\EncoderInterface
  * @see \Symfony\Component\Serializer\Encoder\DecoderInterface
  */
-interface MapperInterface
+interface MapperInterface extends EncoderInterface
 {
 
     /**
      * Кодирование данных
      *
-     * @param mixed $data Исходные данные
-     * @return mixed
+     * @param array $entityAttributes Массив атрибутов сущности
+     * @return array
      */
-    public function encode(object $data): array;
+    public function encode($entityAttributes);
 
     /**
      * Декодирование данных
      * 
-     * @param mixed $encodedData Закодированные данные
-     * @return mixed
+     * @param array $rowAttributes Массив атрибутов записи из БД
+     * @return array
      */
-    public function decode($encodedData);
+    public function decode($rowAttributes);
 }

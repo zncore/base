@@ -2,9 +2,9 @@
 
 namespace ZnCore\Base\Libs\Repository\Mappers;
 
-use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\MapperInterface;
 
-class JsonMapper implements EncoderInterface
+class JsonMapper implements MapperInterface
 {
 
     private $attributes;
@@ -26,7 +26,7 @@ class JsonMapper implements EncoderInterface
     {
         foreach ($this->attributes as $attribute) {
             $value = $row[$attribute] ?? null;
-            if($value) {
+            if ($value) {
                 $row[$attribute] = json_decode($row[$attribute], JSON_OBJECT_AS_ARRAY);
             }
         }
