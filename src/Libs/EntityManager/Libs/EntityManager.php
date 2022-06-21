@@ -101,7 +101,7 @@ class EntityManager implements EntityManagerInterface
         return null;
     }
 
-    public function all(string $entityClass, Query $query = null): Collection
+    /*public function all(string $entityClass, Query $query = null): Collection
     {
         $repository = $this->getRepository($entityClass);
         return $repository->all($query);
@@ -111,7 +111,7 @@ class EntityManager implements EntityManagerInterface
     {
         $repository = $this->getRepository($entityClass);
         return $repository->count($query);
-    }
+    }*/
 
     public function loadEntityRelations(object $entityOrCollection, array $with): void
     {
@@ -127,7 +127,7 @@ class EntityManager implements EntityManagerInterface
         $repository->loadRelations($collection, $with);
     }
 
-    public function one(string $entityClass, Query $query = null): EntityIdInterface
+   /* public function one(string $entityClass, Query $query = null): EntityIdInterface
     {
         $repository = $this->getRepository($entityClass);
         return $repository->one($query);
@@ -137,7 +137,7 @@ class EntityManager implements EntityManagerInterface
     {
         $repository = $this->getRepository($entityClass);
         return $repository->oneById($id, $query);
-    }
+    }*/
 
     public function remove(EntityIdInterface $entity): void
     {
