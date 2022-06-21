@@ -42,7 +42,7 @@ class RelationValidator extends BaseValidator
         /** @var EntityManagerInterface $em */
         $em = ContainerHelper::getContainer()->get(EntityManagerInterface::class);
         /** @var FindOneInterface $repository */
-        $repository = $em->getRepositoryByEntityClass($constraint->foreignEntityClass);
+        $repository = $em->getRepository($constraint->foreignEntityClass);
 
         try {
             $repository->oneById($value);

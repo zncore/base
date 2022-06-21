@@ -17,7 +17,7 @@ trait RepositoryAwareTrait
         if ($this->repository) {
             return $this->repository;
         }
-        return $this->getEntityManager()->getRepositoryByEntityClass($this->getEntityClass());
+        return $this->getEntityManager()->getRepository($this->getEntityClass());
     }
 
     protected function setRepository(object $repository)

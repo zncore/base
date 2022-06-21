@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\EntityManager\Libs;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Enumerable;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Exceptions\AlreadyExistsException;
 use ZnCore\Base\Exceptions\InvalidConfigException;
@@ -69,7 +70,7 @@ class EntityManager implements EntityManagerInterface
      * @return RepositoryInterface | CrudRepositoryInterface
      * @throws InvalidConfigException
      */
-    public function getRepositoryByEntityClass(string $entityClass): RepositoryInterface
+    public function getRepository(string $entityClass): RepositoryInterface
     {
         $repositoryDefition = $this->entityManagerConfigurator->entityToRepository($entityClass);
 
@@ -102,40 +103,46 @@ class EntityManager implements EntityManagerInterface
 
     public function all(string $entityClass, Query $query = null): Collection
     {
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+        $repository = $this->getRepository($entityClass);
         return $repository->all($query);
     }
 
     public function count(string $entityClass, Query $query = null): int
     {
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+        $repository = $this->getRepository($entityClass);
         return $repository->count($query);
     }
 
-    public function loadEntityRelations(object $entity, array $with)
+    public function loadEntityRelations(object $entityOrCollection, array $with): void
     {
-        $entityClass = get_class($entity);
-        $collection = new Collection([$entity]);
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+//        $entityClass = get_class($entity);
+        if($entityOrCollection instanceof Enumerable) {
+            $collection = $entityOrCollection;
+        } else {
+            $collection = new Collection([$entityOrCollection]);
+        }
+
+        $entityClass = get_class($collection->first());
+        $repository = $this->getRepository($entityClass);
         $repository->loadRelations($collection, $with);
     }
 
     public function one(string $entityClass, Query $query = null): EntityIdInterface
     {
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+        $repository = $this->getRepository($entityClass);
         return $repository->one($query);
     }
 
     public function oneById(string $entityClass, $id, Query $query = null): EntityIdInterface
     {
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+        $repository = $this->getRepository($entityClass);
         return $repository->oneById($id, $query);
     }
 
-    public function remove(EntityIdInterface $entity)
+    public function remove(EntityIdInterface $entity): void
     {
         $entityClass = get_class($entity);
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+        $repository = $this->getRepository($entityClass);
         if ($entity->getId()) {
             $repository->deleteById($entity->getId());
         } else {
@@ -150,7 +157,7 @@ class EntityManager implements EntityManagerInterface
     public function persist(EntityIdInterface $entity): void
     {
         $entityClass = get_class($entity);
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+        $repository = $this->getRepository($entityClass);
         $this->persistViaRepository($entity, $repository);
     }
 
@@ -215,14 +222,14 @@ class EntityManager implements EntityManagerInterface
         }
 
         $entityClass = get_class($entity);
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+        $repository = $this->getRepository($entityClass);
         $repository->create($entity);
     }
 
     public function update(EntityIdInterface $entity): void
     {
         $entityClass = get_class($entity);
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+        $repository = $this->getRepository($entityClass);
         $repository->update($entity);
     }
 
@@ -230,16 +237,16 @@ class EntityManager implements EntityManagerInterface
     public function oneByUnique(UniqueInterface $entity): EntityIdInterface
     {
         $entityClass = get_class($entity);
-        $repository = $this->getRepositoryByEntityClass($entityClass);
+        $repository = $this->getRepository($entityClass);
         return $repository->oneByUnique($entity);
     }
 
-    public function getRepositoryByClass(string $class): RepositoryInterface
+    protected function getRepositoryByClass(string $class): RepositoryInterface
     {
         return $this->container->get($class);
     }
 
-    public function createEntity(string $entityClassName, $attributes = []): object
+    public function createEntity(string $entityClassName, array $attributes = []): object
     {
         $entityInstance = $this->container->get($entityClassName);
         if ($attributes) {

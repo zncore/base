@@ -12,9 +12,9 @@ use ZnCore\Base\Libs\Query\Entities\Query;
 interface EntityManagerInterface extends TransactionInterface, FindOneUniqueInterface
 {
 
-    public function getRepositoryByEntityClass(string $entityClass): RepositoryInterface;
+    public function getRepository(string $entityClass): RepositoryInterface;
 
-    public function loadEntityRelations(object $entity, array $with);
+    public function loadEntityRelations(object $entityOrCollection, array $with): void;
 //    public function loadEntityRelations(string $entityClass, object $entity, array $with);
 
     public function all(string $entityClass, Query $query = null): Collection;
@@ -27,7 +27,7 @@ interface EntityManagerInterface extends TransactionInterface, FindOneUniqueInte
 
 //    public function oneByUnique(UniqueInterface $entity): ?EntityIdInterface;
 
-    public function remove(EntityIdInterface $entity);
+    public function remove(EntityIdInterface $entity): void;
 
     public function persist(EntityIdInterface $entity): void;
 
@@ -35,9 +35,9 @@ interface EntityManagerInterface extends TransactionInterface, FindOneUniqueInte
 
     public function update(EntityIdInterface $entity): void;
 
-    public function getRepositoryByClass(string $class): RepositoryInterface;
+//    public function getRepositoryByClass(string $class): RepositoryInterface;
 
-    public function createEntity(string $entityClassName, $attributes = []): object;
+    public function createEntity(string $entityClassName, array $attributes = []): object;
 
     public function createEntityCollection(string $entityClassName, array $items): Collection;
 
