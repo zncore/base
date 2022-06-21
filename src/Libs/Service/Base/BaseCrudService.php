@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Libs\Service\Base;
 
+use Illuminate\Support\Enumerable;
 use ZnCore\Base\Exceptions\InvalidMethodParameterException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Helpers\ClassHelper;
@@ -66,7 +67,7 @@ abstract class BaseCrudService extends BaseService implements CrudServiceInterfa
         return $dataProvider;
     }
 
-    public function all(Query $query = null)
+    public function all(Query $query = null): Enumerable
     {
         $isAvailable = $this->beforeMethod('all');
         $query = $this->forgeQuery($query);
@@ -87,7 +88,7 @@ abstract class BaseCrudService extends BaseService implements CrudServiceInterfa
      * @return object|EntityIdInterface
      * @throws NotFoundException
      */
-    public function oneById($id, Query $query = null)
+    public function oneById($id, Query $query = null): EntityIdInterface
     {
         if (empty($id)) {
             throw (new InvalidMethodParameterException('Empty ID'))

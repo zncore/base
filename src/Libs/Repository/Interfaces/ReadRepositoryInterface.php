@@ -7,7 +7,7 @@ use ZnCore\Base\Libs\Domain\Interfaces\GetEntityClassInterface;
 use ZnCore\Base\Libs\Domain\Interfaces\ReadAllInterface;
 
 interface ReadRepositoryInterface extends
-    RepositoryInterface, GetEntityClassInterface, ReadAllInterface, ReadOneInterface//, RelationConfigInterface
+    RepositoryInterface, GetEntityClassInterface, ReadAllInterface, FindOneInterface//, RelationConfigInterface
 {
 
 

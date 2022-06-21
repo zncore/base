@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Libs\Arr\Traits;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Enumerable;
 use ZnCore\Base\Exceptions\InvalidMethodParameterException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\Arr\Helpers\FilterHelper;
@@ -17,7 +18,7 @@ trait ArrayCrudRepositoryTrait
 
     abstract protected function setItems(array $items);
 
-    public function all(Query $query = null)
+    public function all(Query $query = null): Enumerable
     {
         $items = $this->getItems();
         if ($query) {

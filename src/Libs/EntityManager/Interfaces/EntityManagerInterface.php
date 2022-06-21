@@ -5,11 +5,11 @@ namespace ZnCore\Base\Libs\EntityManager\Interfaces;
 use Illuminate\Support\Collection;
 use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Base\Libs\Entity\Interfaces\UniqueInterface;
-use ZnCore\Base\Libs\Repository\Interfaces\ReadOneUniqueInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\FindOneUniqueInterface;
 use ZnCore\Base\Libs\Repository\Interfaces\RepositoryInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
 
-interface EntityManagerInterface extends TransactionInterface, ReadOneUniqueInterface
+interface EntityManagerInterface extends TransactionInterface, FindOneUniqueInterface
 {
 
     public function getRepositoryByEntityClass(string $entityClass): RepositoryInterface;

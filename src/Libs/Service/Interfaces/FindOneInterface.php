@@ -2,11 +2,11 @@
 
 namespace ZnCore\Base\Libs\Service\Interfaces;
 
+use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
-use ZnCore\Base\Exceptions\NotFoundException;
 
-interface ReadOneInterface
+interface FindOneInterface
 {
 
     /**
@@ -15,6 +15,6 @@ interface ReadOneInterface
      * @return object|EntityIdInterface
      * @throws NotFoundException
      */
-    public function oneById($id, Query $query = null);
+    public function oneById($id, Query $query = null): EntityIdInterface;
 
 }
