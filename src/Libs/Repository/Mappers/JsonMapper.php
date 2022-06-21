@@ -14,22 +14,22 @@ class JsonMapper implements MapperInterface
         $this->attributes = $attributes;
     }
 
-    public function encode($data)
+    public function encode($entityAttributes)
     {
         foreach ($this->attributes as $attribute) {
-            $data[$attribute] = json_encode($data[$attribute], JSON_UNESCAPED_UNICODE);
+            $entityAttributes[$attribute] = json_encode($entityAttributes[$attribute], JSON_UNESCAPED_UNICODE);
         }
-        return $data;
+        return $entityAttributes;
     }
 
-    public function decode($row)
+    public function decode($rowAttributes)
     {
         foreach ($this->attributes as $attribute) {
-            $value = $row[$attribute] ?? null;
+            $value = $rowAttributes[$attribute] ?? null;
             if ($value) {
-                $row[$attribute] = json_decode($row[$attribute], JSON_OBJECT_AS_ARRAY);
+                $rowAttributes[$attribute] = json_decode($rowAttributes[$attribute], JSON_OBJECT_AS_ARRAY);
             }
         }
-        return $row;
+        return $rowAttributes;
     }
 }

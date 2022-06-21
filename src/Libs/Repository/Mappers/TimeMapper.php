@@ -16,24 +16,24 @@ class TimeMapper implements MapperInterface
         $this->attributes = $attributes;
     }
 
-    public function encode($data)
+    public function encode($entityAttributes)
     {
         foreach ($this->attributes as $attribute) {
 //            $data[$attribute] = $time->format($this->format);
 //            $data[$attribute] = json_encode($data[$attribute], JSON_UNESCAPED_UNICODE);
         }
-        return $data;
+        return $entityAttributes;
     }
 
-    public function decode($row)
+    public function decode($rowAttributes)
     {
         foreach ($this->attributes as $attribute) {
             $attribute = Inflector::underscore($attribute);
-            $value = $row[$attribute];
+            $value = $rowAttributes[$attribute];
             if ($value) {
-                $row[$attribute] = new \DateTime($value);
+                $rowAttributes[$attribute] = new \DateTime($value);
             }
         }
-        return $row;
+        return $rowAttributes;
     }
 }

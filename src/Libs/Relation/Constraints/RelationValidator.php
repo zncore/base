@@ -10,6 +10,7 @@ use ZnCore\Base\Libs\Constraints\BaseValidator;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Base\Libs\Domain\Interfaces\ReadAllInterface;
+use ZnCore\Base\Libs\Repository\Interfaces\ReadOneInterface;
 
 class RelationValidator extends BaseValidator
 {
@@ -40,7 +41,7 @@ class RelationValidator extends BaseValidator
 
         /** @var EntityManagerInterface $em */
         $em = ContainerHelper::getContainer()->get(EntityManagerInterface::class);
-        /** @var ReadAllInterface $repository */
+        /** @var ReadOneInterface $repository */
         $repository = $em->getRepositoryByEntityClass($constraint->foreignEntityClass);
 
         try {

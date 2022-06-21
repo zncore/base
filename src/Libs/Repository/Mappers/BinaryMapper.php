@@ -14,22 +14,22 @@ class BinaryMapper implements MapperInterface
         $this->attributes = $attributes;
     }
 
-    public function encode($data)
+    public function encode($entityAttributes)
     {
         foreach ($this->attributes as $attribute) {
-            $data[$attribute] = base64_encode($data[$attribute]);
+            $entityAttributes[$attribute] = base64_encode($entityAttributes[$attribute]);
         }
-        return $data;
+        return $entityAttributes;
     }
 
-    public function decode($row)
+    public function decode($rowAttributes)
     {
         foreach ($this->attributes as $attribute) {
-            $value = $row[$attribute] ?? null;
+            $value = $rowAttributes[$attribute] ?? null;
             if ($value) {
-                $row[$attribute] = base64_decode($row[$attribute]);
+                $rowAttributes[$attribute] = base64_decode($rowAttributes[$attribute]);
             }
         }
-        return $row;
+        return $rowAttributes;
     }
 }

@@ -2,20 +2,15 @@
 
 namespace ZnCore\Base\Libs\Relation\Libs\Types;
 
-use App\Organization\Domain\Entities\LanguageEntity;
-use App\Organization\Domain\Entities\OrganizationEntity;
-use App\Organization\Domain\Interfaces\Repositories\LanguageRepositoryInterface;
 use Illuminate\Support\Collection;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
-use ZnCore\Base\Libs\Query\Entities\Where;
-use ZnCore\Base\Libs\Domain\Interfaces\ReadAllInterface;
-use ZnCore\Base\Libs\Query\Entities\Query;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
-use ZnCore\Domain\Relations\interfaces\CrudRepositoryInterface;
 use yii\di\Container;
+use ZnCore\Base\Libs\Domain\Interfaces\FindAllInterface;
+use ZnCore\Base\Libs\Entity\Helpers\CollectionHelper;
+use ZnCore\Base\Libs\Query\Entities\Query;
+use ZnCore\Base\Libs\Query\Entities\Where;
+use ZnCore\Domain\Relations\interfaces\CrudRepositoryInterface;
 
 class ManyToManyRelation extends BaseRelation implements RelationInterface
 {
@@ -62,35 +57,41 @@ class ManyToManyRelation extends BaseRelation implements RelationInterface
         $collection = $this->prepareCollection($collection);
     }
 
-    protected function prepareCollection(Collection $collection) {
-        if($this->prepareCollection) {
+    protected function prepareCollection(Collection $collection)
+    {
+        if ($this->prepareCollection) {
             call_user_func($this->prepareCollection, $collection);
         }
     }
 
-    protected function loadRelationByIds(array $ids) {
+    protected function loadRelationByIds(array $ids)
+    {
         $foreignRepositoryInstance = $this->getRepositoryInstance();
         $query = $this->getQuery();
         $query->whereNew(new Where($this->foreignAttribute, $ids));
         return $this->loadCollection($foreignRepositoryInstance, $ids, $query);
     }
 
-    protected function loadViaByIds(array $ids) {
+    protected function loadViaByIds(array $ids)
+    {
         $foreignRepositoryInstance = $this->getViaRepositoryInstance();
         $query = $this->getQuery();
         $query->whereNew(new Where($this->viaSourceAttribute, $ids));
         return $this->loadCollection($foreignRepositoryInstance, $ids, $query);
     }
 
-    protected function getQuery(): Query {
+    protected function getQuery(): Query
+    {
         return $this->query ? $this->query : new Query;
     }
 
-    protected function getRepositoryInstance()/*: CrudRepositoryInterface*/ {
+    protected function getRepositoryInstance()/*: CrudRepositoryInterface*/
+    {
         return $this->container->get($this->foreignRepositoryClass);
     }
 
-    protected function getViaRepositoryInstance()/*: CrudRepositoryInterface*/ {
+    protected function getViaRepositoryInstance()/*: CrudRepositoryInterface*/
+    {
         return $this->container->get($this->viaRepositoryClass);
     }
 
@@ -124,7 +125,8 @@ class ManyToManyRelation extends BaseRelation implements RelationInterface
         }
     }
 
-    protected function loadCollection(ReadAllInterface $foreignRepositoryInstance, array $ids, Query $query): Collection {
+    protected function loadCollection(FindAllInterface $foreignRepositoryInstance, array $ids, Query $query): Collection
+    {
         //$query->limit(count($ids));
         $collection = $foreignRepositoryInstance->all($query);
         return $collection;

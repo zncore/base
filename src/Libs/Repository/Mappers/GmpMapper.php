@@ -15,26 +15,26 @@ class GmpMapper implements MapperInterface
 
     }
 
-    public function encode($data)
+    public function encode($entityAttributes)
     {
         foreach ($this->attributes as $attribute) {
-            $hex = gmp_strval($data[$attribute], 16);
+            $hex = gmp_strval($entityAttributes[$attribute], 16);
             $binary = hex2bin($hex);
-            $data[$attribute] = base64_encode($binary);
+            $entityAttributes[$attribute] = base64_encode($binary);
         }
-        return $data;
+        return $entityAttributes;
     }
 
-    public function decode($row)
+    public function decode($rowAttributes)
     {
         foreach ($this->attributes as $attribute) {
-            $value = $row[$attribute] ?? null;
+            $value = $rowAttributes[$attribute] ?? null;
             if ($value) {
-                $binary = base64_decode($row[$attribute]);
+                $binary = base64_decode($rowAttributes[$attribute]);
                 $hex = bin2hex($binary);
-                $row[$attribute] = gmp_init($hex, 16);
+                $rowAttributes[$attribute] = gmp_init($hex, 16);
             }
         }
-        return $row;
+        return $rowAttributes;
     }
 }

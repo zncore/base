@@ -2,13 +2,13 @@
 
 namespace ZnCore\Base\Libs\DataProvider\Libs;
 
-use Illuminate\Support\Collection;
+use Illuminate\Support\Enumerable;
 use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Base\Libs\DataProvider\Interfaces\DataProviderInterface;
-use ZnCore\Base\Libs\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
 use ZnCore\Base\Libs\DataProvider\Entities\DataProviderEntity;
+use ZnCore\Base\Libs\DataProvider\Interfaces\DataProviderInterface;
 use ZnCore\Base\Libs\Domain\Interfaces\ReadAllInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
+use ZnCore\Base\Libs\QueryFilter\Interfaces\ForgeQueryByFilterInterface;
 
 class DataProvider implements DataProviderInterface
 {
@@ -129,7 +129,7 @@ class DataProvider implements DataProviderInterface
         return $query;
     }
 
-    public function getCollection(): Collection
+    public function getCollection(): Enumerable
     {
         if ($this->entity->getCollection() === null) {
             $query = $this->forgeQuery();

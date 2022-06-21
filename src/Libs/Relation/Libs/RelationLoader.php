@@ -82,7 +82,7 @@ class RelationLoader
 
                 if (is_object($relation)) {
                     if ($relParts) {
-                        $relation->query = $relation->query ?: new Query;
+                        $relation->query = $relation->query ?: new Query();
                         $relation->query->with($relParts);
                     }
                     $relation->run($collection);

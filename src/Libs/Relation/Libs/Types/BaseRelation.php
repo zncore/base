@@ -5,10 +5,9 @@ namespace ZnCore\Base\Libs\Relation\Libs\Types;
 use Illuminate\Support\Collection;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Libs\Query\Entities\Where;
-use ZnCore\Base\Libs\Domain\Interfaces\ReadAllInterface;
+use ZnCore\Base\Libs\Domain\Interfaces\FindAllInterface;
 use ZnCore\Base\Libs\Query\Entities\Query;
+use ZnCore\Base\Libs\Query\Entities\Where;
 use ZnCore\Domain\Relations\interfaces\CrudRepositoryInterface;
 
 abstract class BaseRelation implements RelationInterface
@@ -77,7 +76,7 @@ abstract class BaseRelation implements RelationInterface
         return $this->loadCollection($foreignRepositoryInstance, $ids, $query);
     }
 
-    protected function loadCollection(ReadAllInterface $foreignRepositoryInstance, array $ids, Query $query): Collection {
+    protected function loadCollection(FindAllInterface $foreignRepositoryInstance, array $ids, Query $query): Collection {
         // todo: костыль, надо проверить наверняка
         /*if (get_called_class() != OneToManyRelation::class) {
             $query->limit(count($ids));
@@ -94,5 +93,4 @@ abstract class BaseRelation implements RelationInterface
     protected function getRepositoryInstance()/*: CrudRepositoryInterface*/ {
         return $this->container->get($this->foreignRepositoryClass);
     }
-
 }

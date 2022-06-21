@@ -3,11 +3,11 @@
 namespace ZnCore\Base\Libs\DataProvider\Interfaces;
 
 use Illuminate\Support\Collection;
-use ZnCore\Base\Libs\Query\Entities\Query;
+use Illuminate\Support\Enumerable;
 
 /**
  * Провайдер данных
- * 
+ *
  * Используется при выборке коллекции сущностей и параметров пагинации
  */
 interface DataProviderInterface
@@ -15,9 +15,9 @@ interface DataProviderInterface
 
     /**
      * Получить коллекцию сущностей
-     * @return Collection
+     * @return Enumerable
      */
-    public function getCollection(): Collection;
+    public function getCollection(): Enumerable;
 
     /**
      * Получить общее колличество записей в хранилище

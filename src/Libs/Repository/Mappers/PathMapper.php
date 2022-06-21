@@ -17,20 +17,20 @@ class PathMapper implements MapperInterface
         $this->isRemoveOldValue = $isRemoveOldValue;
     }
 
-    public function encode($data)
+    public function encode($entityAttributes)
     {
-        return $data;
+        return $entityAttributes;
     }
 
-    public function decode($row)
+    public function decode($rowAttributes)
     {
         foreach ($this->map as $toPath => $fromPath) {
-            $value = ArrayHelper::getValue($row, $fromPath);
-            ArrayHelper::setValue($row, $toPath, $value);
+            $value = ArrayHelper::getValue($rowAttributes, $fromPath);
+            ArrayHelper::setValue($rowAttributes, $toPath, $value);
             if ($this->isRemoveOldValue) {
-                ArrayHelper::removeItem($row, $fromPath);
+                ArrayHelper::removeItem($rowAttributes, $fromPath);
             }
         }
-        return $row;
+        return $rowAttributes;
     }
 }

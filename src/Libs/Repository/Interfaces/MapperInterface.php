@@ -5,19 +5,13 @@ namespace ZnCore\Base\Libs\Repository\Interfaces;
 use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
 
 /**
- * Возможность кодирования/декодирования данных
- * 
- * Другими словами: сериализация/десериализация данных
- *
- * @todo наследовать от:
- * @see \Symfony\Component\Serializer\Encoder\EncoderInterface
- * @see \Symfony\Component\Serializer\Encoder\DecoderInterface
+ * Возможность маппинга сущностей
  */
 interface MapperInterface extends EncoderInterface
 {
 
     /**
-     * Кодирование данных
+     * Маппинг атрибутов сущность -> хранилище
      *
      * @param array $entityAttributes Массив атрибутов сущности
      * @return array
@@ -25,7 +19,7 @@ interface MapperInterface extends EncoderInterface
     public function encode($entityAttributes);
 
     /**
-     * Декодирование данных
+     * Маппинг атрибутов хранилище -> сущность
      * 
      * @param array $rowAttributes Массив атрибутов записи из БД
      * @return array
