@@ -52,6 +52,9 @@ class SymfonyValidationHelper
         return $validatorBuilder;
     }
 
+    /**
+     * @todo перенести в ErrorCollectionHelper::violationsToCollection
+     */
     private static function prepareUnprocessible2(ConstraintViolationList $violationList): Collection
     {
         $collection = new Collection;

@@ -13,6 +13,8 @@ use ZnCore\Base\Helpers\InstanceHelper;
  * 
  * При кодировании/декодировании вызывает соответствующие методы вложенных кодеров.
  * Агрегатный кодер пригодится, когда необходимо реализовать "матрешку" из форматов, например - .tar.gz
+ *
+ * @todo переименовать в ChainEncoder
  */
 class AggregateEncoder implements EncoderInterface
 {
