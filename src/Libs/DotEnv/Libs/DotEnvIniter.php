@@ -2,37 +2,58 @@
 
 namespace ZnCore\Base\Libs\DotEnv\Libs;
 
-use RuntimeException;
-use Symfony\Component\Dotenv\Dotenv as SymfonyDotenv;
+use Symfony\Component\Dotenv\Dotenv;
 use ZnCore\Base\Libs\Composer\Helpers\ComposerHelper;
-use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
+use ZnCore\Base\Patterns\Singleton\SingletonTrait;
 
 class DotEnvIniter
 {
 
-    private $basePath;
-    private $mode;
+    use SingletonTrait;
 
-    public function __construct(string $basePath = self::ROOT_PATH, string $mode = 'main')
+    const ROOT_PATH = __DIR__ . '/../../../../../../..';
+
+    private $inited = false;
+
+    public function init(string $basePath = self::ROOT_PATH, string $mode = 'main'): void
     {
-        $this->basePath = $basePath;
-        $this->mode = $mode;
+        $this->checkSymfonyDotenvPackage();
+        if ($this->checkInit()) {
+            return;
+        }
+        $this->initMode($mode);
+        $this->initRootDirectory($basePath);
+        $this->initSymfonyDotenv($basePath);
     }
 
-    public function init()
+    private function checkInit(): bool
+    {
+        $isInited = $this->inited;
+        $this->inited = true;
+        return $isInited;
+    }
+
+    private function initMode(string $mode): void
     {
         if (empty($_ENV['APP_MODE'])) {
-            $_ENV['APP_MODE'] = $this->mode;
+            $_ENV['APP_MODE'] = $mode;
         }
-        $_ENV['ROOT_PATH'] = FilePathHelper::rootPath();
-        $_ENV['ROOT_DIRECTORY'] = realpath(__DIR__ . '/../../../../../../..');
+    }
 
-        if (!class_exists(SymfonyDotenv::class)) {
-            ComposerHelper::requireAssert(SymfonyDotenv::class, 'symfony/SymfonyDotenv', "4.*|5.*");
-//            throw new RuntimeException('Please run "composer require symfony/SymfonyDotenv" to load the ".env" files configuring the application.');
-        }
-        $dotEnv = new SymfonyDotenv(false);
+    private function initRootDirectory(string $basePath): void
+    {
+        $_ENV['ROOT_DIRECTORY'] = realpath($basePath);
+        $_ENV['ROOT_PATH'] = $_ENV['ROOT_DIRECTORY'];
+    }
+
+    private function checkSymfonyDotenvPackage(): void {
+        ComposerHelper::requireAssert(Dotenv::class, 'symfony/dotenv', "4.*|5.*");
+    }
+
+    private function initSymfonyDotenv($basePath): void
+    {
+        $dotEnv = new Dotenv(false);
         // load all the .env files
-        $dotEnv->loadEnv($this->basePath . '/.env');
+        $dotEnv->loadEnv($basePath . '/.env');
     }
 }
