@@ -3,24 +3,27 @@
 namespace ZnCore\Base\Libs\DotEnv;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\DotEnv\Libs\DotEnvMap;
 
 class DotEnvFacade
 {
 
-    const ROOT_PATH = __DIR__ . '/../../../../../..';
+//    const ROOT_PATH = __DIR__ . '/../../../../../..';
 
-    static private $map = [];
-
+//    static private $map = [];
 
     public static function get(string $path = null, $default = null)
     {
-        if (empty(self::$map)) {
+        return DotEnvMap::get($path, $default);
+//        return DotEnvMap::getInstance()->get($path, $default);
+
+        /*if (empty(self::$map)) {
             self::forgeMap();
         }
-        return ArrayHelper::getValue(self::$map, $path, $default);
+        return ArrayHelper::getValue(self::$map, $path, $default);*/
     }
 
-    private static function forgeMap(): void
+    /*private static function forgeMap(): void
     {
         foreach ($_ENV as $name => $value) {
             $pureName = $name;
@@ -28,5 +31,5 @@ class DotEnvFacade
             $pureName = str_replace('_', '.', $pureName);
             ArrayHelper::set(self::$map, $pureName, $value);
         }
-    }
+    }*/
 }

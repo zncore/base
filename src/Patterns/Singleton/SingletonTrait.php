@@ -6,13 +6,13 @@ trait SingletonTrait
 {
 
     /**
-     * @var static[]|array
+     * @var static
      */
     private static $instance;
 
-    /*private function __construct()
+    private function __construct()
     {
-    }*/
+    }
 
     public static function getInstance(): self
     {
@@ -22,7 +22,7 @@ trait SingletonTrait
         return self::$instance;
     }
 
-    private function createInstance(string $className = null): self
+    private static function createInstance(string $className = null): self
     {
         $className = $className ?: static::class;
         return new $className();
