@@ -5,7 +5,7 @@ use ZnCore\Base\Helpers\InstanceHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Factories\ApplicationFactory;
 use ZnCore\Base\Libs\App\Factories\KernelFactory;
-use ZnCore\Base\Libs\DotEnv\DotEnv;
+use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnv;
 use Symfony\Component\Console\Application;
 
 \ZnCore\Base\Helpers\DeprecateHelper::hardThrow();

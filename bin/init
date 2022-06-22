@@ -5,7 +5,7 @@ use ZnLib\Init\Libs\Init;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-\ZnCore\Base\Libs\DotEnv\DotEnv::init();
+\ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnv::init();
 
 $defaultDefinitions = [
     'copyFiles' => 'ZnLib\Init\Tasks\CopyFilesTask',
