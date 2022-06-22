@@ -1,11 +1,10 @@
 <?php
 
-namespace ZnCore\Base\Libs\DotEnv;
+namespace ZnCore\Base\Libs\DotEnv\Exceptions;
 
 use Throwable;
-use ZnCore\Base\Exceptions\NotFoundException;
 
-class DotEnvNotFoundException extends NotFoundException
+class DotEnvNotFoundException extends \RuntimeException
 {
 
     public function __construct($message = "Not found DotEnv value", $code = 0, Throwable $previous = null)

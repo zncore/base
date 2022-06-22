@@ -8,6 +8,8 @@ use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnCore\Base\Libs\DotEnv\Libs\DotEnvLoader;
 use ZnCore\Base\Libs\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
+use ZnLib\Console\Domain\Libs\ConsoleApp;
 
 define('MICRO_TIME', microtime(true));
 
@@ -25,8 +27,8 @@ $eventDispatcherConfigurator = $container->get(EventDispatcherConfiguratorInterf
 
 //$mainEnv = DotEnv::loadFromFile(DotEnv::ROOT_PATH . '/.env');
 $loader = new DotEnvLoader();
-$mainEnv = $loader->loadFromFile(DotEnv::ROOT_PATH . '/.env');
-$consoleAppClass = $mainEnv['CONSOLE_APP_CLASS'] ?? \ZnLib\Console\Domain\Libs\ConsoleApp::class;
+$mainEnv = $loader->loadFromFile(FilePathHelper::rootPath() . '/.env');
+$consoleAppClass = $mainEnv['CONSOLE_APP_CLASS'] ?? ConsoleApp::class;
 $containerConfigurator->singleton(AppInterface::class, $consoleAppClass);
 
 /** @var AppInterface $appFactory */

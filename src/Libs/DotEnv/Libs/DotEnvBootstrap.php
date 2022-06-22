@@ -4,23 +4,29 @@ namespace ZnCore\Base\Libs\DotEnv\Libs;
 
 use Symfony\Component\Dotenv\Dotenv;
 use ZnCore\Base\Libs\Composer\Helpers\ComposerHelper;
+use ZnCore\Base\Libs\DotEnv\Enums\DotEnvModeEnum;
+use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Patterns\Singleton\SingletonTrait;
 
-class DotEnvIniter
+class DotEnvBootstrap
 {
 
     use SingletonTrait;
 
-    const ROOT_PATH = __DIR__ . '/../../../../../../..';
-
     private $inited = false;
 
-    public function init(string $basePath = self::ROOT_PATH, string $mode = 'main'): void
+    public static function load(string $mode = DotEnvModeEnum::MAIN, string $basePath = null) {
+        DotEnvBootstrap::getInstance()->init($mode, $basePath);
+    }
+
+    public function init(string $mode = DotEnvModeEnum::MAIN, string $basePath = null): void
     {
-        $this->checkSymfonyDotenvPackage();
         if ($this->checkInit()) {
             return;
         }
+        $this->checkSymfonyDotenvPackage();
+
+        $basePath = $basePath ?: FilePathHelper::rootPath();
         $this->initMode($mode);
         $this->initRootDirectory($basePath);
         $this->initSymfonyDotenv($basePath);
@@ -46,7 +52,8 @@ class DotEnvIniter
         $_ENV['ROOT_PATH'] = $_ENV['ROOT_DIRECTORY'];
     }
 
-    private function checkSymfonyDotenvPackage(): void {
+    private function checkSymfonyDotenvPackage(): void
+    {
         ComposerHelper::requireAssert(Dotenv::class, 'symfony/dotenv', "4.*|5.*");
     }
 
