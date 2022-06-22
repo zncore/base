@@ -1,39 +1,31 @@
 <?php
 
-namespace ZnCore\Base\Libs\Constraints;
+namespace ZnCore\Base\Libs\Validation\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
-abstract class BaseValidator extends ConstraintValidator
+class BooleanValidator extends BaseValidator
 {
 
-    protected $constraintClass;
+    protected $constraintClass = Boolean::class;
 
-    public function constraintClass(): string
+    public function validate($value, Constraint $constraint)
     {
-        return $this->constraintClass;
-    }
-
-    protected function checkConstraintType(Constraint $constraint) {
-        $constraintClass = $this->constraintClass();
-        if (!$constraint instanceof $constraintClass) {
-            throw new UnexpectedTypeException($constraint, $constraintClass);
+        /*if (!$constraint instanceof Boolean) {
+            throw new UnexpectedTypeException($constraint, Boolean::class);
         }
-    }
 
-    protected function isEmptyStringOrNull($value): bool {
         // custom constraints should ignore null and empty values to allow
         // other constraints (NotBlank, NotNull, etc.) to take care of that
-        return null === $value || '' === $value;
-    }
+        if (null === $value || '' === $value) {
+            return;
+        }*/
 
-    /*public function validate($value, Constraint $constraint)
-    {
         $this->checkConstraintType($constraint);
-        if ($this->isEmpty($value)) {
+        if ($this->isEmptyStringOrNull($value)) {
             return;
         }
 
@@ -44,5 +36,5 @@ abstract class BaseValidator extends ConstraintValidator
             // separate multiple types using pipes
             // throw new UnexpectedValueException($value, 'string|int');
         }
-    }*/
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\Constraints;
+namespace ZnCore\Base\Libs\Validation\Constraints;
 
 use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints\RegexValidator;

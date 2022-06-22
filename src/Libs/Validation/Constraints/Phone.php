@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\Constraints;
+namespace ZnCore\Base\Libs\Validation\Constraints;
 
 use ZnCore\Base\Enums\RegexpPatternEnum;
 
