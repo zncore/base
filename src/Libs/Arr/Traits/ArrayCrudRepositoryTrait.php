@@ -7,9 +7,9 @@ use Illuminate\Support\Enumerable;
 use ZnCore\Base\Exceptions\InvalidMethodParameterException;
 use ZnCore\Base\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\Arr\Helpers\FilterHelper;
-use ZnCore\Base\Libs\Entity\Helpers\EntityHelper;
-use ZnCore\Base\Libs\Query\Entities\Query;
-use ZnCore\Base\Libs\Entity\Interfaces\EntityIdInterface;
+use ZnCore\Domain\Entity\Helpers\EntityHelper;
+use ZnCore\Domain\Query\Entities\Query;
+use ZnCore\Domain\Entity\Interfaces\EntityIdInterface;
 
 trait ArrayCrudRepositoryTrait
 {

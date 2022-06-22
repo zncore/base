@@ -24,6 +24,13 @@ class InstanceResolver
 
     }
 
+    /**
+     * Создать класс
+     * @param $definition
+     * @param array $constructParams
+     * @return object
+     * @throws \ZnCore\Base\Exceptions\InvalidConfigException
+     */
     public function create($definition, array $constructParams = []): object
     {
         if (empty($definition)) {
@@ -41,6 +48,13 @@ class InstanceResolver
         return $handlerInstance;
     }
 
+    /**
+     * Обеспечить инстанс класса
+     * Если придет объект в определении класса, то он его вернет, иначе создаст новый класс.
+     * @param $definition
+     * @param array $constructParams
+     * @return object
+     */
     public function ensure($definition, $constructParams = []): object
     {
         if (is_object($definition)) {

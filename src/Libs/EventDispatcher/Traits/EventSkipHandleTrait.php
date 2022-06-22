@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\EventDispatcher\Traits;
 
-use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerInterface;
+use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 
 trait EventSkipHandleTrait
 {

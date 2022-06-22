@@ -8,7 +8,7 @@ use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnCore\Base\Libs\Code\MethodParametersResolver;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Libs\ContainerConfigurators\ArrayContainerConfigurator;
-use ZnCore\Base\Libs\EntityManager\Interfaces\EntityManagerConfiguratorInterface;
+use ZnCore\Domain\EntityManager\Interfaces\EntityManagerConfiguratorInterface;
 
 class ContainerLoader extends BaseLoader
 {

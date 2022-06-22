@@ -56,5 +56,4 @@ class ReflectionHelper
         $ucPrefixWithBl = $ucPrefix . '_';
         return strpos($name, $ucPrefixWithBl) === 0;
     }
-
 }

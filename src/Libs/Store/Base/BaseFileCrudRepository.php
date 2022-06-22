@@ -6,9 +6,9 @@ use ZnCore\Base\Exceptions\NotImplementedMethodException;
 use ZnCore\Base\Libs\Arr\Traits\ArrayCrudRepositoryTrait;
 use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnv;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
-use ZnCore\Base\Libs\Query\Entities\Query;
+use ZnCore\Domain\Query\Entities\Query;
 use ZnCore\Base\Libs\Store\StoreFile;
-use ZnCore\Base\Libs\Repository\Interfaces\CrudRepositoryInterface;
+use ZnCore\Domain\Repository\Interfaces\CrudRepositoryInterface;
 
 abstract class BaseFileCrudRepository extends BaseFileRepository implements CrudRepositoryInterface
 {

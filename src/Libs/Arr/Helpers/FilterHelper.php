@@ -4,8 +4,8 @@ namespace ZnCore\Base\Libs\Arr\Helpers;
 
 use Illuminate\Support\Collection;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Libs\Query\Entities\Where;
-use ZnCore\Base\Libs\Query\Entities\Query;
+use ZnCore\Domain\Query\Entities\Where;
+use ZnCore\Domain\Query\Entities\Query;
 
 class FilterHelper
 {
