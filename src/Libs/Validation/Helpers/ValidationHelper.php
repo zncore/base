@@ -10,7 +10,7 @@ use ZnCore\Base\Libs\DynamicEntity\Interfaces\ValidateDynamicEntityInterface;
 use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCore\Base\Libs\Validation\Interfaces\ValidationByMetadataInterface;
-use ZnCore\Base\Libs\Validation\Libs\ValidatorManager;
+use ZnCore\Base\Libs\Validation\Libs\Validators\ChainValidator;
 
 class ValidationHelper
 {
@@ -18,7 +18,7 @@ class ValidationHelper
     public static function validateEntity(object $entity): void
     {
         $container = ContainerHelper::getContainer();
-        $validator = $container->get(ValidatorManager::class);
+        $validator = $container->get(ChainValidator::class);
         $validator->validateEntity($entity);
 
 //        $errorCollection = self::validate($entity);

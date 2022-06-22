@@ -1,16 +1,15 @@
 <?php
 
-namespace ZnCore\Base\Libs\Validation\Libs;
+namespace ZnCore\Base\Libs\Validation\Libs\Validators;
 
 use Illuminate\Support\Collection;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Libs\Code\InstanceResolver;
 use ZnCore\Base\Libs\Container\Traits\ContainerAwareAttributeTrait;
 use ZnCore\Base\Libs\Validation\Interfaces\ValidatorInterface;
-use ZnCore\Base\Libs\Validation\Libs\Validators\ClassMetadataValidator;
-use ZnCore\Base\Libs\Validation\Libs\Validators\DynamicEntityValidator;
+use ZnCore\Base\Libs\DynamicEntity\Libs\Validators\DynamicEntityValidator;
 
-class ValidatorManager implements ValidatorInterface
+class ChainValidator implements ValidatorInterface
 {
 
     use ContainerAwareAttributeTrait;
