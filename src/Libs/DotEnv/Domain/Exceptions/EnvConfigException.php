@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\DotEnv\Exceptions;
+namespace ZnCore\Base\Libs\DotEnv\Domain\Exceptions;
 
 use ZnCore\Base\Exceptions\InvalidConfigException;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\DotEnv\Libs;
+namespace ZnCore\Base\Libs\DotEnv\Domain\Libs;
 
 use Symfony\Component\Dotenv\Dotenv;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;

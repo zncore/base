@@ -5,8 +5,8 @@ use Symfony\Component\Console\Application;
 use ZnCore\Base\Libs\App\Interfaces\AppInterface;
 use ZnCore\Base\Libs\App\Libs\ZnCore;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
-use ZnCore\Base\Libs\DotEnv\DotEnv;
-use ZnCore\Base\Libs\DotEnv\Libs\DotEnvLoader;
+use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnv;
+use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnvLoader;
 use ZnCore\Base\Libs\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnLib\Console\Domain\Libs\ConsoleApp;
@@ -43,6 +43,7 @@ $appFactory->addBundles([
     \ZnTool\Generator\Bundle::class,
     \ZnTool\Stress\Bundle::class,
     \ZnBundle\Queue\Bundle::class,
+    \ZnCore\Base\Libs\DotEnv\Bundle::class,
 ]);
 $appFactory->init();
 

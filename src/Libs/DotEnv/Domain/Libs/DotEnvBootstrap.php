@@ -1,10 +1,10 @@
 <?php
 
-namespace ZnCore\Base\Libs\DotEnv\Libs;
+namespace ZnCore\Base\Libs\DotEnv\Domain\Libs;
 
 use Symfony\Component\Dotenv\Dotenv;
 use ZnCore\Base\Libs\Composer\Helpers\ComposerHelper;
-use ZnCore\Base\Libs\DotEnv\Enums\DotEnvModeEnum;
+use ZnCore\Base\Libs\DotEnv\Domain\Enums\DotEnvModeEnum;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Patterns\Singleton\SingletonTrait;
 
@@ -59,8 +59,14 @@ class DotEnvBootstrap
 
     private function initSymfonyDotenv($basePath): void
     {
+//        (new Dotenv('APP_ENV', 'APP_DEBUG'))->bootEnv($basePath . '/.env', 'dev', ['test'], true);
+
+
         $dotEnv = new Dotenv(false);
+        $dotEnv->bootEnv($basePath . '/.env', 'dev', ['test'], true);
+
+
         // load all the .env files
-        $dotEnv->loadEnv($basePath . '/.env');
+//        $dotEnv->loadEnv($basePath . '/.env');
     }
 }

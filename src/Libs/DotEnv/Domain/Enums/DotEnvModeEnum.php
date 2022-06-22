@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\DotEnv\Enums;
+namespace ZnCore\Base\Libs\DotEnv\Domain\Enums;
 
 class DotEnvModeEnum
 {

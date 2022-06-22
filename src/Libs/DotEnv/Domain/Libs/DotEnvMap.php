@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\DotEnv\Libs;
+namespace ZnCore\Base\Libs\DotEnv\Domain\Libs;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Patterns\Singleton\SingletonTrait;

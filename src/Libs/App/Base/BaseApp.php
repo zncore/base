@@ -15,7 +15,7 @@ use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Libs\BundleLoaders\ContainerLoader;
 use ZnCore\Base\Libs\Container\Traits\ContainerAttributeTrait;
-use ZnCore\Base\Libs\DotEnv\DotEnv;
+use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnv;
 use ZnCore\Base\Libs\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
 use ZnCore\Base\Libs\EventDispatcher\Traits\EventDispatcherTrait;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;

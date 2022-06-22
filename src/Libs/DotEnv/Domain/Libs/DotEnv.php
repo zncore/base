@@ -1,9 +1,9 @@
 <?php
 
-namespace ZnCore\Base\Libs\DotEnv;
+namespace ZnCore\Base\Libs\DotEnv\Domain\Libs;
 
-use ZnCore\Base\Libs\DotEnv\Enums\DotEnvModeEnum;
-use ZnCore\Base\Libs\DotEnv\Libs\DotEnvBootstrap;
+use ZnCore\Base\Libs\DotEnv\Domain\Enums\DotEnvModeEnum;
+use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnvBootstrap;
 
 class DotEnv
 {
