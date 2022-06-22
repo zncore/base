@@ -8,7 +8,6 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\ConstraintViolationList;
 use ZnCore\Base\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
-use ZnCore\Base\Libs\Validation\Helpers\SymfonyValidationHelper;
 
 DeprecateHelper::softThrow('ValidateEntityInterface');
 

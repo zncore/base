@@ -3,36 +3,28 @@
 namespace ZnCore\Base\Libs\Validation\Helpers;
 
 use Illuminate\Support\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
-use ZnBundle\Eav\Domain\Entities\DynamicEntity;
-use ZnBundle\Eav\Domain\Entities\EntityEntity;
-use ZnBundle\Eav\Domain\Libs\TypeNormalizer;
-use ZnBundle\Eav\Domain\Libs\Validator;
-use ZnCore\Base\Helpers\DeprecateHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\DynamicEntity\Helpers\DynamicEntityValidationHelper;
+use ZnCore\Base\Libs\DynamicEntity\Interfaces\ValidateDynamicEntityInterface;
 use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Libs\Validation\Exceptions\UnprocessibleEntityException;
 use ZnCore\Base\Libs\Validation\Interfaces\ValidationByMetadataInterface;
-use ZnCore\Base\Libs\DynamicEntity\Interfaces\ValidateDynamicEntityInterface;
 
 class ValidationHelper
 {
 
-    public static function collectionToArray(Collection $errorCollection): array
-    {
-        $array = [];
-        /** @var ValidationErrorEntity $ValidationErrorEntity */
-        foreach ($errorCollection as $ValidationErrorEntity) {
-            $array[] = [
-                'field' => $ValidationErrorEntity->getField(),
-                'message' => $ValidationErrorEntity->getMessage(),
-            ];
-        }
-        return $array;
-    }
+//    public static function collectionToArray(Collection $errorCollection): array
+//    {
+//        $array = [];
+//        /** @var ValidationErrorEntity $ValidationErrorEntity */
+//        foreach ($errorCollection as $ValidationErrorEntity) {
+//            $array[] = [
+//                'field' => $ValidationErrorEntity->getField(),
+//                'message' => $ValidationErrorEntity->getMessage(),
+//            ];
+//        }
+//        return $array;
+//    }
 
     /*public static function generateErrorCollectionFromArray(array $errorArray): Collection
     {
@@ -78,7 +70,7 @@ class ValidationHelper
         if ($data instanceof ValidateDynamicEntityInterface) {
 //            dump($data);
             return DynamicEntityValidationHelper::validate($data);
-        } elseif($data instanceof ValidationByMetadataInterface) {
+        } elseif ($data instanceof ValidationByMetadataInterface) {
             return SymfonyValidationHelper::validate($data);
         } else {
             return null;
