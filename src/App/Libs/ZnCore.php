@@ -5,9 +5,9 @@ namespace ZnCore\Base\App\Libs;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use ZnCore\Base\ReadOnly\Exceptions\ReadOnlyException;
 use ZnCore\Base\App\Interfaces\LoaderInterface;
 use ZnCore\Base\App\Loaders\BundleLoader;
+use ZnCore\Base\App\Loaders\ChainLoader;
 use ZnCore\Base\App\Loaders\ConfigCollectionLoader;
 use ZnCore\Base\ConfigManager\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\ConfigManager\Libs\ConfigManager;
@@ -18,6 +18,7 @@ use ZnCore\Base\Container\Traits\ContainerAwareTrait;
 use ZnCore\Base\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
 use ZnCore\Base\EventDispatcher\Libs\EventDispatcherConfigurator;
 use ZnCore\Base\I18Next\Facades\I18Next;
+use ZnCore\Base\ReadOnly\Exceptions\ReadOnlyException;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerConfiguratorInterface;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\EntityManager\Libs\EntityManager;
@@ -49,8 +50,8 @@ class ZnCore
 
     public function loadConfig(LoaderInterface $bundleLoader, string $appName): void
     {
-        /** @var ConfigCollectionLoader $configCollectionLoader */
-        $configCollectionLoader = $this->getContainer()->get(ConfigCollectionLoader::class);
+        /** @var ChainLoader $configCollectionLoader */
+        $configCollectionLoader = $this->getContainer()->get(ChainLoader::class);
         $configCollectionLoader->setLoader($bundleLoader);
         $config = $configCollectionLoader->loadMainConfig($appName);
     }

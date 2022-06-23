@@ -4,7 +4,7 @@ namespace ZnCore\Base\I18Next\SymfonyTranslation;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use ZnCore\Base\App\Helpers\EnvHelper;
+use ZnCore\Base\Env\Helpers\EnvHelper;
 use ZnCore\Base\I18Next\Exceptions\NotFoundBundleException;
 use ZnCore\Base\I18Next\Facades\I18Next;
 use ZnCore\Base\I18Next\SymfonyTranslation\Helpers\TranslatorHelper;

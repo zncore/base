@@ -2,11 +2,10 @@
 
 namespace ZnCore\Base\Tests\Unit;
 
-use ZnCore\Domain\Entity\Helpers\CollectionHelper;
-use ZnCore\Base\FileSystem\Helpers\FileSizeHelper;
+use ZnCore\Base\Byte\Helpers\ByteSizeFormatHelper;
 use ZnCore\Base\FileSystem\Helpers\FindFileHelper;
 use ZnCore\Base\FileSystem\Helpers\MimeTypeHelper;
-use ZnCore\Domain\Entity\Helpers\EntityHelper;
+use ZnCore\Domain\Entity\Helpers\CollectionHelper;
 use ZnTool\Test\Asserts\DataAssert;
 use ZnTool\Test\Asserts\DataTestCase;
 
@@ -57,19 +56,19 @@ final class FileHelperTest extends DataTestCase
 
     public function testSize()
     {
-        $size = FileSizeHelper::sizeFormat(123);
+        $size = ByteSizeFormatHelper::sizeFormat(123);
         $this->assertEquals('123 B', $size);
 
-        $size = FileSizeHelper::sizeFormat(1022475);
+        $size = ByteSizeFormatHelper::sizeFormat(1022475);
         $this->assertEquals('998.51 KB', $size);
 
-        $size = FileSizeHelper::sizeFormat(56461789651);
+        $size = ByteSizeFormatHelper::sizeFormat(56461789651);
         $this->assertEquals('52.58 GB', $size);
 
-        $size = FileSizeHelper::sizeFormat(5646178965111111);
+        $size = ByteSizeFormatHelper::sizeFormat(5646178965111111);
         $this->assertEquals('5.01 PB', $size);
 
-        $size = FileSizeHelper::sizeFormat(5999999999999999999);
+        $size = ByteSizeFormatHelper::sizeFormat(5999999999999999999);
         $this->assertEquals('5.2 EB', $size);
     }
 }

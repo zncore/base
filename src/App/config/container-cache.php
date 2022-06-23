@@ -6,8 +6,8 @@ use Symfony\Component\Cache\Adapter\AdapterInterface;
 use Symfony\Component\Cache\Adapter\ArrayAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Contracts\Cache\CacheInterface;
-use ZnCore\Base\Measure\Enums\TimeEnum;
-use ZnCore\Base\App\Helpers\EnvHelper;
+use ZnCore\Base\Time\Enums\TimeEnum;
+use ZnCore\Base\Env\Helpers\EnvHelper;
 use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
 
 return [

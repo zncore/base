@@ -22,12 +22,12 @@ abstract class BaseBundle
      * i18next - переводы в формате I18Next
      * container - конфигурация контейнера (DI)
      * rbac - конфигурация ролей, полномочий, наследования RBAC
-     * symfonyRpc - RPC-роуты
      * migration - миграции БД
      * console - команды консоли
-     * telegramRoutes - роуты для Telegram-бота
+     * symfonyRpc - RPC-роуты
      * symfonyAdmin - роуты админки
      * symfonyWeb - роуты пользовательской части
+     * telegramRoutes - роуты для Telegram-бота
      *
      * @return array
      */

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Measure\Enums;
+namespace ZnCore\Base\Byte\Enums;
 
 use ZnCore\Base\Enum\Interfaces\GetLabelsInterface;
 

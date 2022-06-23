@@ -1,14 +1,11 @@
 <?php
 
-namespace ZnCore\Base\FileSystem\Helpers;
+namespace ZnCore\Base\Byte\Helpers;
 
-use ZnCore\Base\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\Byte\Enums\ByteEnum;
 use ZnCore\Base\Enum\Helpers\EnumHelper;
 
-DeprecateHelper::hardThrow();
-
-class FileSizeHelper
+class ByteSizeFormatHelper
 {
 
     public static function sizeUnit(int $sizeByte)

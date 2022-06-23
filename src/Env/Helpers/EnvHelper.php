@@ -1,8 +1,8 @@
 <?php
 
-namespace ZnCore\Base\App\Helpers;
+namespace ZnCore\Base\Env\Helpers;
 
-use ZnCore\Base\App\Enums\EnvEnum;
+use ZnCore\Base\Env\Enums\EnvEnum;
 
 class EnvHelper
 {

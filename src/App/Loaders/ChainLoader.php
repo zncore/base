@@ -3,14 +3,14 @@
 namespace ZnCore\Base\App\Loaders;
 
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\App\Enums\KernelEventEnum;
 use ZnCore\Base\App\Events\LoadConfigEvent;
 use ZnCore\Base\App\Interfaces\LoaderInterface;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Container\Traits\ContainerAttributeTrait;
 use ZnCore\Base\EventDispatcher\Traits\EventDispatcherTrait;
 
-class ConfigCollectionLoader implements LoaderInterface
+class ChainLoader implements LoaderInterface
 {
 
     use ContainerAttributeTrait;
@@ -28,7 +28,6 @@ class ConfigCollectionLoader implements LoaderInterface
         $config = [];
         if ($this->loaders) {
             foreach ($this->loaders as $loader) {
-//                $loader->setContainer($this->getContainer());
                 $configItem = $loader->loadMainConfig($appName);
                 $config = ArrayHelper::merge($config, $configItem);
             }

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Measure\Enums;
+namespace ZnCore\Base\Time\Enums;
 
 /**
  * Единицы измерения времени

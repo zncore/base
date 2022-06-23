@@ -1,6 +1,6 @@
 <?php
 
-use ZnCore\Base\App\Helpers\EnvHelper;
+use ZnCore\Base\Env\Helpers\EnvHelper;
 use ZnCore\Base\Instance\Helpers\InstanceHelper;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\App\Factories\ApplicationFactory;

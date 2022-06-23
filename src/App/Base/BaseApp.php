@@ -7,7 +7,7 @@ use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\App\Enums\AppEventEnum;
-use ZnCore\Base\App\Helpers\EnvHelper;
+use ZnCore\Base\Env\Helpers\EnvHelper;
 use ZnCore\Base\App\Interfaces\AppInterface;
 use ZnCore\Base\App\Interfaces\LoaderInterface;
 use ZnCore\Base\App\Libs\ZnCore;
