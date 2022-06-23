@@ -5,7 +5,7 @@ namespace ZnCore\Base\Patterns\Strategy\Base;
 /**
  * Class BaseStrategyContext
  *
- * @package ZnCore\Base\Libs\Scenario\Base
+ * @package ZnCore\Base\Scenario\Base
  *
  * @property-read Object $strategyInstance
  */

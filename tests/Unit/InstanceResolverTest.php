@@ -2,8 +2,8 @@
 
 namespace ZnCore\Base\Tests\Unit;
 
-use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
-use ZnCore\Base\Libs\Instance\Libs\Resolvers\InstanceResolver;
+use ZnCore\Base\Instance\Helpers\InstanceHelper;
+use ZnCore\Base\Instance\Libs\Resolvers\InstanceResolver;
 use ZnTool\Test\Base\BaseTest;
 
 use App1\ClassSum;

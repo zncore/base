@@ -2,9 +2,9 @@
 
 namespace ZnCore\Base\Tests\Unit;
 
-use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
-use ZnCore\Base\Libs\I18Next\Interfaces\Services\TranslationServiceInterface;
-use ZnCore\Base\Libs\I18Next\Services\TranslationService;
+use ZnCore\Base\Instance\Helpers\ClassHelper;
+use ZnCore\Base\I18Next\Interfaces\Services\TranslationServiceInterface;
+use ZnCore\Base\I18Next\Services\TranslationService;
 use PHPUnit\Framework\TestCase;
 
 final class I18NextTest extends TestCase

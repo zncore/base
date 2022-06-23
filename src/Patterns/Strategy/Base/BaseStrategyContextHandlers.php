@@ -2,14 +2,14 @@
 
 namespace ZnCore\Base\Patterns\Strategy\Base;
 
-use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Contract\Common\Exceptions\InvalidArgumentException;
-use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
+use ZnCore\Base\Instance\Helpers\InstanceHelper;
 
 /**
  * Class BaseStrategyContext
  *
- * @package ZnCore\Base\Libs\Scenario\Base
+ * @package ZnCore\Base\Scenario\Base
  *
  * @property-read Object $strategyInstance
  * @property-read array $strategyDefinitions

@@ -2,13 +2,13 @@
 
 use Illuminate\Container\Container;
 use Symfony\Component\Console\Application;
-use ZnCore\Base\Libs\App\Interfaces\AppInterface;
-use ZnCore\Base\Libs\App\Libs\ZnCore;
-use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
-use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnv;
-use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnvLoader;
-use ZnCore\Base\Libs\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
-use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
+use ZnCore\Base\App\Interfaces\AppInterface;
+use ZnCore\Base\App\Libs\ZnCore;
+use ZnCore\Base\Container\Interfaces\ContainerConfiguratorInterface;
+use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
+use ZnCore\Base\DotEnv\Domain\Libs\DotEnvLoader;
+use ZnCore\Base\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
+use ZnCore\Base\FileSystem\Helpers\FilePathHelper;
 use ZnLib\Console\Domain\Libs\ConsoleApp;
 
 define('MICRO_TIME', microtime(true));
@@ -43,7 +43,7 @@ $appFactory->addBundles([
     \ZnTool\Generator\Bundle::class,
     \ZnTool\Stress\Bundle::class,
     \ZnBundle\Queue\Bundle::class,
-    \ZnCore\Base\Libs\DotEnv\Bundle::class,
+    \ZnCore\Base\DotEnv\Bundle::class,
 ]);
 $appFactory->init();
 

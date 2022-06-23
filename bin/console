@@ -1,24 +1,24 @@
 <?php
 
-use ZnCore\Base\Libs\App\Helpers\EnvHelper;
-use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
-use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
-use ZnCore\Base\Libs\App\Factories\ApplicationFactory;
-use ZnCore\Base\Libs\App\Factories\KernelFactory;
-use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnv;
+use ZnCore\Base\App\Helpers\EnvHelper;
+use ZnCore\Base\Instance\Helpers\InstanceHelper;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
+use ZnCore\Base\App\Factories\ApplicationFactory;
+use ZnCore\Base\App\Factories\KernelFactory;
+use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
 use Symfony\Component\Console\Application;
 
-\ZnCore\Base\Libs\Develop\Helpers\DeprecateHelper::hardThrow();
+\ZnCore\Base\Develop\Helpers\DeprecateHelper::hardThrow();
 
 $container = new \Illuminate\Container\Container();
-$znCore = new \ZnCore\Base\Libs\App\Libs\ZnCore($container);
+$znCore = new \ZnCore\Base\App\Libs\ZnCore($container);
 $znCore->init();
 
 //$container = \Illuminate\Container\Container::getInstance();
-//$znCore = new \ZnCore\Base\Libs\App\Libs\ZnCore($container);
+//$znCore = new \ZnCore\Base\App\Libs\ZnCore($container);
 //$znCore->init();
 //
-///** @var \ZnCore\Base\Libs\App\Interfaces\AppInterface $appFactory */
+///** @var \ZnCore\Base\App\Interfaces\AppInterface $appFactory */
 //$appFactory = $container->get(\App\AppConsole\Libs\ConsoleApp::class);
 //$appFactory->init();
 //
@@ -28,7 +28,7 @@ $znCore->init();
 
 
 $bundles = [
-    new ZnCore\Base\Libs\App\Bundle(['all']),
+    new ZnCore\Base\App\Bundle(['all']),
 
     ZnTool\Package\Bundle::class,
     ZnDatabase\Base\Bundle::class,
@@ -59,7 +59,7 @@ foreach ($bundleClasses as $bundleClass) {
 
 EnvHelper::prepareTestEnv();
 
-//\ZnCore\Base\Libs\Develop\Helpers\DeprecateHelper::hardThrow();
+//\ZnCore\Base\Develop\Helpers\DeprecateHelper::hardThrow();
 
 if(DotEnv::get('BUNDLES_CONFIG_FILE')) {
     $bundles = ArrayHelper::merge($bundles, include __DIR__ . '/../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE'));
