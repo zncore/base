@@ -6,7 +6,7 @@ use Illuminate\Support\Collection;
 use Symfony\Component\PropertyAccess\Exception\UninitializedPropertyException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Validator\ConstraintViolationList;
-use ZnCore\Base\Helpers\DeprecateHelper;
+use ZnCore\Base\Libs\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Validation\Entities\ValidationErrorEntity;
 
 DeprecateHelper::softThrow('ValidateEntityInterface');

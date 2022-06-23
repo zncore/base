@@ -4,8 +4,10 @@ namespace ZnCore\Base\Libs\Store;
 
 use ZnCore\Base\Exceptions\ClassNotFoundException;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Instance\Libs\Resolvers\InstanceResolver;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FileStorageHelper;
+use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Libs\Store\Drivers\DriverInterface;
 
 class Store
@@ -24,14 +26,20 @@ class Store
         $driver = ucfirst($driver);
         $this->driver = $driver;
         $driverClass = 'ZnCore\\Base\\Libs\\Store\\Drivers\\' . $driver;
-        if (!class_exists($driverClass)) {
+
+        $instanceResolver = new InstanceResolver();
+        $this->driverInstance = $instanceResolver->create($driverClass);
+        ClassHelper::checkInstanceOf($this->driverInstance, DriverInterface::class);
+
+
+        /*if (!class_exists($driverClass)) {
             throw new ClassNotFoundException($driverClass);
         }
         $implements = class_implements($driverClass);
         if (!array_key_exists(DriverInterface::class, $implements)) {
             throw new \Exception('No implements interface of driver class');
         }
-        $this->driverInstance = new $driverClass;
+        $this->driverInstance = new $driverClass;*/
     }
 
     public function getDriver()

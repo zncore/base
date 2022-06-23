@@ -3,8 +3,8 @@
 namespace ZnCore\Base\Libs\App\Loaders;
 
 use ZnCore\Base\Exceptions\ClassNotFoundException;
-use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Base\Helpers\InstanceHelper;
+use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
+use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Base\BaseBundle;
 use ZnCore\Base\Libs\ConfigManager\Interfaces\ConfigManagerInterface;

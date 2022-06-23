@@ -3,8 +3,8 @@
 namespace ZnCore\Base\Libs\Container\Helpers;
 
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Exceptions\ReadOnlyException;
-use ZnCore\Base\Helpers\DeprecateHelper;
+use ZnCore\Base\Libs\ReadOnly\Exceptions\ReadOnlyException;
+use ZnCore\Base\Libs\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Libs\ContainerConfigurator;
 use ZnCore\Base\Libs\Container\Traits\ContainerAwareStaticAttributeTrait;

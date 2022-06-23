@@ -4,7 +4,7 @@ namespace ZnCore\Base\Libs\Container\Libs\ContainerConfigurators;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 
 class ArrayContainerConfigurator implements ContainerConfiguratorInterface

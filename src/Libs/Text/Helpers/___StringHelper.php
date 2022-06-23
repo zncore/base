@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\Text\Helpers;
 
 use Symfony\Component\Uid\Uuid;
-use ZnCore\Base\Helpers\DeprecateHelper;
+use ZnCore\Base\Libs\Develop\Helpers\DeprecateHelper;
 use ZnCore\Base\Libs\Text\Libs\RandomString;
 
 DeprecateHelper::hardThrow();

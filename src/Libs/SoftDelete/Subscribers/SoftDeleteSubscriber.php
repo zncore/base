@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\SoftDelete\Subscribers;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ZnCore\Base\Enums\StatusEnum;
+use ZnCore\Base\Libs\Status\Enums\StatusEnum;
 use ZnCore\Domain\Query\Entities\Where;
 use ZnCore\Domain\Domain\Enums\EventEnum;
 use ZnCore\Domain\Query\Enums\OperatorEnum;

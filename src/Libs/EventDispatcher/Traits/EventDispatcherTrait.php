@@ -5,7 +5,7 @@ namespace ZnCore\Base\Libs\EventDispatcher\Traits;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use ZnCore\Base\Helpers\ClassHelper;
+use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
 
 trait EventDispatcherTrait
 {

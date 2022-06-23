@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\SoftDelete\Traits\Entity;
 
 use ZnCore\Contract\User\Exceptions\UnauthorizedException;
-use ZnCore\Base\Enums\StatusEnum;
+use ZnCore\Base\Libs\Status\Enums\StatusEnum;
 
 /**
  * @todo: перенести в отдельный пакет

@@ -4,7 +4,7 @@ namespace ZnCore\Base\Encoders;
 
 use Illuminate\Support\Collection;
 use ZnCore\Contract\Encoder\Interfaces\EncoderInterface;
-use ZnCore\Base\Helpers\InstanceHelper;
+use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
 
 /**
  * Агрегатный кодер

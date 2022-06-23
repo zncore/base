@@ -5,7 +5,7 @@ namespace ZnCore\Base\Libs\App\Libs;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use ZnCore\Base\Exceptions\ReadOnlyException;
+use ZnCore\Base\Libs\ReadOnly\Exceptions\ReadOnlyException;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;
 use ZnCore\Base\Libs\App\Loaders\BundleLoader;
 use ZnCore\Base\Libs\App\Loaders\ConfigCollectionLoader;

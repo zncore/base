@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\FileSystem\Helpers;
 
-use ZnCore\Base\Enums\Measure\ByteEnum;
+use ZnCore\Base\Libs\Measure\Enums\ByteEnum;
 use ZnCore\Base\Libs\Enum\Helpers\EnumHelper;
 
 class FileSizeHelper

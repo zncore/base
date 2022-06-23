@@ -5,7 +5,7 @@ namespace ZnCore\Base\Libs\Arr\Traits;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Enumerable;
 use ZnCore\Base\Exceptions\InvalidMethodParameterException;
-use ZnCore\Base\Exceptions\NotFoundException;
+use ZnCore\Domain\Entity\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\Arr\Helpers\FilterHelper;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 use ZnCore\Domain\Query\Entities\Query;

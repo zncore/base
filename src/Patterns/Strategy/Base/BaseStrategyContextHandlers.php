@@ -4,7 +4,7 @@ namespace ZnCore\Base\Patterns\Strategy\Base;
 
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Exceptions\InvalidArgumentException;
-use ZnCore\Base\Helpers\InstanceHelper;
+use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
 
 /**
  * Class BaseStrategyContext

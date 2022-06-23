@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\FileSystem\Helpers;
 
 use Symfony\Component\Mime\MimeTypes;
-use ZnCore\Base\Enums\Measure\ByteEnum;
+use ZnCore\Base\Libs\Measure\Enums\ByteEnum;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use PATHINFO_EXTENSION;
 

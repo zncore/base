@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\SoftDelete\Traits\Service;
 
-use ZnCore\Base\Enums\StatusEnum;
+use ZnCore\Base\Libs\Status\Enums\StatusEnum;
 
 trait SoftRestoreTrait
 {

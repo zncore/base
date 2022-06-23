@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Helpers;
 
-use ZnCore\Base\Exceptions\ReadOnlyException;
+use ZnCore\Base\Libs\ReadOnly\Exceptions\ReadOnlyException;
 
 /**
  *

@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Tests\Unit;
 
-use ZnCore\Base\Helpers\InstanceHelper;
+use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
 use ZnTool\Test\Base\BaseTest;
 
 class Class1

@@ -3,9 +3,9 @@
 namespace ZnCore\Base\Libs\Enum\Helpers;
 
 use InvalidArgumentException;
-use ZnCore\Base\Exceptions\NotInstanceOfException;
-use ZnCore\Base\Helpers\ClassHelper;
-use ZnCore\Base\Helpers\ReflectionHelper;
+use ZnCore\Base\Libs\Instance\Exceptions\NotInstanceOfException;
+use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
+use ZnCore\Base\Libs\Php\Helpers\ReflectionHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
 use ZnCore\Base\Libs\Enum\Interfaces\GetLabelsInterface;
