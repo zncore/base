@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\SoftDelete\Subscribes;
+namespace ZnCore\Base\Libs\SoftDelete\Subscribers;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use ZnCore\Base\Enums\StatusEnum;
@@ -12,7 +12,7 @@ use ZnCore\Domain\Domain\Events\QueryEvent;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\EntityManager\Traits\EntityManagerAwareTrait;
 
-class SoftDeleteBehavior implements EventSubscriberInterface
+class SoftDeleteSubscriber implements EventSubscriberInterface
 {
 
     use EntityManagerAwareTrait;

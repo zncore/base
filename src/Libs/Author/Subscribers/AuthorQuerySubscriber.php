@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\Author\Subscribes;
+namespace ZnCore\Base\Libs\Author\Subscribers;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use ZnBundle\User\Domain\Interfaces\Services\AuthServiceInterface;

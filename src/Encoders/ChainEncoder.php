@@ -16,7 +16,7 @@ use ZnCore\Base\Helpers\InstanceHelper;
  *
  * @todo переименовать в ChainEncoder
  */
-class AggregateEncoder implements EncoderInterface
+class ChainEncoder implements EncoderInterface
 {
 
     /**
@@ -25,7 +25,7 @@ class AggregateEncoder implements EncoderInterface
     private $encoderCollection;
 
     /**
-     * AggregateEncoder constructor.
+     * ChainEncoder constructor.
      * @param Collection|EncoderInterface[] $encoderCollection Коллекция кодеров
      */
     public function __construct(Collection $encoderCollection)

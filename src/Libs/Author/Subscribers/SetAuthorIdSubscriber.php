@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Libs\Author\Subscribes;
+namespace ZnCore\Base\Libs\Author\Subscribers;
 
 use App\News\Domain\Entities\CommentEntity;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
