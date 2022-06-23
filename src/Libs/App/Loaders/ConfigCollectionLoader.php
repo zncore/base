@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\App\Loaders;
 
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Enums\KernelEventEnum;
 use ZnCore\Base\Libs\App\Events\LoadConfigEvent;
 use ZnCore\Base\Libs\App\Interfaces\LoaderInterface;

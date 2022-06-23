@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Store;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 
 class ActiveStore
 {

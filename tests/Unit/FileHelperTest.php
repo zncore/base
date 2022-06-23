@@ -15,7 +15,7 @@ final class FileHelperTest extends DataTestCase
 
     public function testScanDirTree()
     {
-        $tree = FindFileHelper::scanDirTree(__DIR__ . '/../../src/i18next');
+        $tree = FindFileHelper::scanDirTree(__DIR__ . '/../../src/CommonTranslate/i18next');
         $array = CollectionHelper::toArray($tree);
         $expected = $this->loadFromJsonFile(__DIR__ . '/../data/FileHelper/testScanDirTree.json');
         $this->assertArraySubset($expected, $array);

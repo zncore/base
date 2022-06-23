@@ -4,10 +4,10 @@ namespace ZnCore\Base\Libs\Instance\Libs;
 
 use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Exceptions\NotImplementedMethodException;
+use ZnCore\Contract\Common\Exceptions\NotImplementedMethodException;
 use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Instance\Libs\Resolvers\InstanceResolver;
 use ZnLib\Rpc\Domain\Exceptions\MethodNotFoundException;
 

@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Container\Libs\BundleLoaders;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BaseLoader;
 use ZnCore\Base\Libs\Instance\Libs\Resolvers\InstanceResolver;
 use ZnCore\Base\Libs\Instance\Libs\Resolvers\MethodParametersResolver;

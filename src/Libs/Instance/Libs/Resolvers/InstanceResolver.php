@@ -3,8 +3,8 @@
 namespace ZnCore\Base\Libs\Instance\Libs\Resolvers;
 
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Exceptions\ClassNotFoundException;
-use ZnCore\Base\Exceptions\InvalidConfigException;
+use ZnCore\Base\Libs\Instance\Exceptions\ClassNotFoundException;
+use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Libs\Container\Traits\ContainerAwareTrait;
 
@@ -29,7 +29,7 @@ class InstanceResolver
      * @param $definition
      * @param array $constructParams
      * @return object
-     * @throws \ZnCore\Base\Exceptions\InvalidConfigException
+     * @throws \ZnCore\Contract\Common\Exceptions\InvalidConfigException
      */
     public function create($definition, array $constructParams = []): object
     {

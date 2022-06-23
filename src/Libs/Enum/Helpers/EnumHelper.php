@@ -6,8 +6,8 @@ use InvalidArgumentException;
 use ZnCore\Base\Libs\Instance\Exceptions\NotInstanceOfException;
 use ZnCore\Base\Libs\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Libs\Php\Helpers\ReflectionHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\Inflector;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Text\Helpers\Inflector;
 use ZnCore\Base\Libs\Enum\Interfaces\GetLabelsInterface;
 
 /**

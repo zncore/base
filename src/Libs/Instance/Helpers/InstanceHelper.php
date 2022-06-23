@@ -18,7 +18,7 @@ class InstanceHelper
      * @param array $constructParams
      * @param ContainerInterface|null $container
      * @return object
-     * @throws \ZnCore\Base\Exceptions\InvalidConfigException
+     * @throws \ZnCore\Contract\Common\Exceptions\InvalidConfigException
      */
     public static function create($definition, array $constructParams = [], ContainerInterface $container = null): object
     {

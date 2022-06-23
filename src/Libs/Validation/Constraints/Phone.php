@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Validation\Constraints;
 
-use ZnCore\Base\Enums\RegexpPatternEnum;
+use ZnCore\Base\Libs\Regexp\Enums\RegexpPatternEnum;
 
 class Phone extends BaseRegex
 {

@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Arr\Libs;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 
 class FlatArray
 {

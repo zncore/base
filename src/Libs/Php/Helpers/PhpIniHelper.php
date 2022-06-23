@@ -2,9 +2,6 @@
 
 namespace ZnCore\Base\Libs\Php\Helpers;
 
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
-use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
-
 class PhpIniHelper
 {
 
@@ -48,7 +45,7 @@ class PhpIniHelper
 
     public static function isNotEmpty($name): bool
     {
-        return ! self::checkPhpIniEmpty($name);
+        return !self::checkPhpIniEmpty($name);
     }
 
 }

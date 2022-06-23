@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\FileSystem\Helpers;
 
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\FileSystem\Helpers\FileHelper;
 
 class FilePathHelper
 {

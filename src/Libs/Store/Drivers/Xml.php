@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Store\Drivers;
 
-use ZnCore\Base\Encoders\XmlEncoder;
+use ZnCore\Base\Libs\Format\Encoders\XmlEncoder;
 
 class Xml extends BaseEncoderDriver implements DriverInterface
 {

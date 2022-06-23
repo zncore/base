@@ -2,7 +2,6 @@
 
 namespace ZnCore\Base\Libs\Store;
 
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 
 class StoreFile

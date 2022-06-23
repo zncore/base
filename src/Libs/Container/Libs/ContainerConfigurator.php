@@ -6,7 +6,7 @@ use Illuminate\Container\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Domain\Entity\Exceptions\NotFoundException;
 use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\Container\Interfaces\ContainerConfiguratorInterface;
 use ZnCore\Base\Libs\Container\Libs\ContainerConfigurators\IlluminateContainerConfigurator;
 

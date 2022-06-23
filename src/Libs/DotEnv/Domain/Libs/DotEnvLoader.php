@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\DotEnv\Domain\Libs;
 
 use Symfony\Component\Dotenv\Dotenv;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 
 class DotEnvLoader
 {

@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\I18Next\Libs\BundleLoaders;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Loaders\BundleLoaders\BaseLoader;
 
 class I18NextLoader extends BaseLoader

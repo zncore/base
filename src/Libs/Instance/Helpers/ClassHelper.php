@@ -3,8 +3,8 @@
 namespace ZnCore\Base\Libs\Instance\Helpers;
 
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Exceptions\InvalidArgumentException;
-use ZnCore\Base\Exceptions\InvalidConfigException;
+use ZnCore\Contract\Common\Exceptions\InvalidArgumentException;
+use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Base\Libs\Instance\Exceptions\NotInstanceOfException;
 use ZnCore\Base\Libs\Container\Helpers\ContainerHelper;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;

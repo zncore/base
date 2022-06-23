@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Libs\Arr\Helpers;
 
 use Illuminate\Support\Collection;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Query\Entities\Where;
 use ZnCore\Domain\Query\Entities\Query;
 

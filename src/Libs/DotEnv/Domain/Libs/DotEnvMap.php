@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\DotEnv\Domain\Libs;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Patterns\Singleton\SingletonTrait;
 
 class DotEnvMap

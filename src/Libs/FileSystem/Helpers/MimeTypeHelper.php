@@ -4,7 +4,7 @@ namespace ZnCore\Base\Libs\FileSystem\Helpers;
 
 use Symfony\Component\Mime\MimeTypes;
 use ZnCore\Base\Libs\Measure\Enums\ByteEnum;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use PATHINFO_EXTENSION;
 
 class MimeTypeHelper

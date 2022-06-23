@@ -2,22 +2,22 @@
 
 namespace ZnCore\Base\Libs\Php\Helpers;
 
-use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;
 
 class PhpHelper
 {
 
-    public static function requireFromDirectory(string $directory, bool $isRecursive = false) {
+    public static function requireFromDirectory(string $directory, bool $isRecursive = false)
+    {
         $directory = rtrim($directory, '/');
         $libs = FindFileHelper::scanDir($directory);
         foreach ($libs as $lib) {
             $path = $directory . '/' . $lib;
-            if(is_file($path)) {
-                if(is_file($path) && FilePathHelper::fileExt($lib) == 'php') {
+            if (is_file($path)) {
+                if (is_file($path) && FilePathHelper::fileExt($lib) == 'php') {
                     require_once $path;
                 }
-            } elseif(is_dir($path)) {
+            } elseif (is_dir($path)) {
                 self::requireFromDirectory($path, $isRecursive);
             }
         }

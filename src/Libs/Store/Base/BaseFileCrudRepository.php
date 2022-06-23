@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Libs\Store\Base;
 
-use ZnCore\Base\Exceptions\NotImplementedMethodException;
+use ZnCore\Contract\Common\Exceptions\NotImplementedMethodException;
 use ZnCore\Base\Libs\Arr\Traits\ArrayCrudRepositoryTrait;
 use ZnCore\Base\Libs\DotEnv\Domain\Libs\DotEnv;
 use ZnCore\Base\Libs\FileSystem\Helpers\FilePathHelper;

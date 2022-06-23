@@ -5,7 +5,7 @@ namespace ZnCore\Base\Libs\App\Base;
 use Psr\Container\ContainerInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Libs\App\Enums\AppEventEnum;
 use ZnCore\Base\Libs\App\Helpers\EnvHelper;
 use ZnCore\Base\Libs\App\Interfaces\AppInterface;

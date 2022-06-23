@@ -2,8 +2,8 @@
 
 namespace ZnCore\Base\Patterns\Strategy\Base;
 
-use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Base\Exceptions\InvalidArgumentException;
+use ZnCore\Base\Libs\Arr\Helpers\ArrayHelper;
+use ZnCore\Contract\Common\Exceptions\InvalidArgumentException;
 use ZnCore\Base\Libs\Instance\Helpers\InstanceHelper;
 
 /**
