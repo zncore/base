@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Container\Libs\BundleLoaders;
 
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
-use ZnCore\Base\App\Loaders\BundleLoaders\BaseLoader;
+use ZnCore\Base\Bundle\Base\BaseLoader;
 use ZnCore\Base\Instance\Libs\Resolvers\InstanceResolver;
 use ZnCore\Base\Instance\Libs\Resolvers\MethodParametersResolver;
 use ZnCore\Base\Container\Interfaces\ContainerConfiguratorInterface;

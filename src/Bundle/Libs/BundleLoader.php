@@ -1,16 +1,14 @@
 <?php
 
-namespace ZnCore\Base\App\Loaders;
+namespace ZnCore\Base\Bundle\Libs;
 
-use ZnCore\Base\App\Base\BaseBundle;
-use ZnCore\Base\App\Interfaces\LoaderInterface;
-use ZnCore\Base\App\Loaders\BundleLoaders\BaseLoader;
-use ZnCore\Base\App\Loaders\BundleLoaders\ModuleLoader;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
+use ZnCore\Base\Bundle\Base\BaseBundle;
+use ZnCore\Base\Bundle\Base\BaseLoader;
 use ZnCore\Base\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Instance\Helpers\InstanceHelper;
 
-class BundleLoader implements LoaderInterface
+class BundleLoader
 {
 
     private $bundles = [];
@@ -21,19 +19,6 @@ class BundleLoader implements LoaderInterface
     {
         $this->addBundles($bundles);
         $this->import = $import;
-    }
-
-    private function createBundleInstance($bundleDefinition): BaseBundle
-    {
-        /** @var BaseBundle $bundleInstance */
-        if (is_object($bundleDefinition)) {
-            $bundleInstance = $bundleDefinition;
-        } elseif (is_string($bundleDefinition)) {
-            $bundleInstance = InstanceHelper::create($bundleDefinition, [['all']]);
-        } elseif (is_array($bundleDefinition)) {
-            $bundleInstance = InstanceHelper::create($bundleDefinition);
-        }
-        return $bundleInstance;
     }
 
     public function addBundles(array $bundles)
@@ -50,11 +35,6 @@ class BundleLoader implements LoaderInterface
         }
     }
 
-    private function getLoadersConfig()
-    {
-        return $this->loadersConfig;
-    }
-
     public function addLoaderConfig(string $name, $loader)
     {
         $this->loadersConfig[$name] = $loader;
@@ -67,6 +47,24 @@ class BundleLoader implements LoaderInterface
         foreach ($loaders as $loaderName => $loaderDefinition) {
             $this->load($loaderName, $loaderDefinition);
         }
+    }
+
+    private function getLoadersConfig()
+    {
+        return $this->loadersConfig;
+    }
+
+    private function createBundleInstance($bundleDefinition): BaseBundle
+    {
+        /** @var BaseBundle $bundleInstance */
+        if (is_object($bundleDefinition)) {
+            $bundleInstance = $bundleDefinition;
+        } elseif (is_string($bundleDefinition)) {
+            $bundleInstance = InstanceHelper::create($bundleDefinition, [['all']]);
+        } elseif (is_array($bundleDefinition)) {
+            $bundleInstance = InstanceHelper::create($bundleDefinition);
+        }
+        return $bundleInstance;
     }
 
     private function load(string $loaderName, $loaderDefinition): void

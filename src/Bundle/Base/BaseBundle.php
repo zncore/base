@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\App\Base;
+namespace ZnCore\Base\Bundle\Base;
 
 abstract class BaseBundle
 {

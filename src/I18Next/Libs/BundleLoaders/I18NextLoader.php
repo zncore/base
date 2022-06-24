@@ -3,7 +3,7 @@
 namespace ZnCore\Base\I18Next\Libs\BundleLoaders;
 
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
-use ZnCore\Base\App\Loaders\BundleLoaders\BaseLoader;
+use ZnCore\Base\Bundle\Base\BaseLoader;
 
 class I18NextLoader extends BaseLoader
 {

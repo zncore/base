@@ -5,24 +5,17 @@ namespace ZnCore\Base\App\Base;
 use Psr\Container\ContainerInterface;
 use Symfony\Contracts\EventDispatcher\Event;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\App\Enums\AppEventEnum;
-use ZnCore\Base\Env\Helpers\EnvHelper;
 use ZnCore\Base\App\Interfaces\AppInterface;
-use ZnCore\Base\App\Interfaces\LoaderInterface;
 use ZnCore\Base\App\Libs\ZnCore;
-use ZnCore\Base\App\Loaders\BundleLoader;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
+use ZnCore\Base\Bundle\Libs\BundleLoader;
 use ZnCore\Base\Container\Interfaces\ContainerConfiguratorInterface;
-use ZnCore\Base\Container\Libs\BundleLoaders\ContainerLoader;
 use ZnCore\Base\Container\Traits\ContainerAttributeTrait;
 use ZnCore\Base\DotEnv\Domain\Libs\DotEnv;
+use ZnCore\Base\Env\Helpers\EnvHelper;
 use ZnCore\Base\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
 use ZnCore\Base\EventDispatcher\Traits\EventDispatcherTrait;
-use ZnCore\Base\FileSystem\Helpers\FilePathHelper;
-use ZnCore\Base\I18Next\Libs\BundleLoaders\I18NextLoader;
-use ZnDatabase\Migration\Domain\Libs\BundleLoaders\MigrationLoader;
-use ZnLib\Console\Domain\Libs\BundleLoaders\ConsoleLoader;
-use ZnUser\Rbac\Domain\Libs\BundleLoaders\RbacConfigLoader;
 
 abstract class BaseApp implements AppInterface
 {
@@ -117,7 +110,7 @@ abstract class BaseApp implements AppInterface
         return include __DIR__ . '/../config/bundleLoaders.php';
     }
 
-    protected function createBundleLoaderInstance(): LoaderInterface
+    protected function createBundleLoaderInstance(): BundleLoader
     {
         $bundleLoader = new BundleLoader($this->bundles(), $this->import());
         $loaders = $this->bundleLoaders();

@@ -1,9 +1,9 @@
 <?php
 
-namespace ZnCore\Base\App\Loaders\BundleLoaders;
+namespace ZnCore\Base\Bundle\Base;
 
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\App\Base\BaseBundle;
+use ZnCore\Base\Bundle\Base\BaseBundle;
 use ZnCore\Base\ConfigManager\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\ConfigManager\Traits\ConfigManagerAwareTrait;
 use ZnCore\Base\Container\Traits\ContainerAttributeTrait;
