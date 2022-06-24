@@ -13,7 +13,7 @@ use ZnCore\Domain\EntityManager\Interfaces\EntityManagerConfiguratorInterface;
 class ContainerLoader extends BaseLoader
 {
 
-    public function loadAll(array $bundles): array
+    public function loadAll(array $bundles): void
     {
         $config = [];
         foreach ($bundles as $bundle) {
@@ -22,7 +22,6 @@ class ContainerLoader extends BaseLoader
                 $config = $this->importFromConfig([$containerConfig], $config);
             }
         }
-        return [];
     }
 
     private function importFromConfig($fileList, array $config = []): array

@@ -16,7 +16,7 @@ abstract class BaseLoader
 
     protected $name;
 
-    abstract public function loadAll(array $bundles): array;
+    abstract public function loadAll(array $bundles): void;
 
     public function __construct(ContainerInterface $container, ConfigManagerInterface $configManager)
     {

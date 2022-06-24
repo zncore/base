@@ -2,11 +2,8 @@
 
 namespace ZnCore\Base\App\Interfaces;
 
-use ZnCore\Base\Container\Interfaces\ContainerAttributeInterface;
-
-interface LoaderInterface //extends ContainerAttributeInterface
+interface LoaderInterface
 {
 
-//    public function bootstrapApp(string $appName);
-    public function loadMainConfig(string $appName): array;
+    public function loadMainConfig(string $appName): void;
 }

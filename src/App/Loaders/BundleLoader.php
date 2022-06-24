@@ -2,21 +2,16 @@
 
 namespace ZnCore\Base\App\Loaders;
 
-use ZnCore\Base\Instance\Exceptions\ClassNotFoundException;
-use ZnCore\Base\Instance\Helpers\ClassHelper;
-use ZnCore\Base\Instance\Helpers\InstanceHelper;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\App\Base\BaseBundle;
-use ZnCore\Base\ConfigManager\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\App\Interfaces\LoaderInterface;
 use ZnCore\Base\App\Loaders\BundleLoaders\BaseLoader;
 use ZnCore\Base\App\Loaders\BundleLoaders\ModuleLoader;
-use ZnCore\Base\Container\Traits\ContainerAttributeTrait;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
+use ZnCore\Base\Instance\Helpers\ClassHelper;
+use ZnCore\Base\Instance\Helpers\InstanceHelper;
 
 class BundleLoader implements LoaderInterface
 {
-
-    //use ContainerAttributeTrait;
 
     private $bundles = [];
     private $import = [];
@@ -44,17 +39,14 @@ class BundleLoader implements LoaderInterface
     public function addBundles(array $bundles)
     {
         foreach ($bundles as $bundleDefinition) {
-//            try {
-                $bundleInstance = $this->createBundleInstance($bundleDefinition);
-                $bundleClass = get_class($bundleInstance);
-                if (!isset($this->bundles[$bundleClass])) {
-                    if ($bundleInstance->deps()) {
-                        $this->addBundles($bundleInstance->deps());
-                    }
-                    $this->bundles[$bundleClass] = $bundleInstance;
+            $bundleInstance = $this->createBundleInstance($bundleDefinition);
+            $bundleClass = get_class($bundleInstance);
+            if (!isset($this->bundles[$bundleClass])) {
+                if ($bundleInstance->deps()) {
+                    $this->addBundles($bundleInstance->deps());
                 }
-//            } catch (ClassNotFoundException $e) {
-//            }
+                $this->bundles[$bundleClass] = $bundleInstance;
+            }
         }
     }
 
@@ -68,21 +60,16 @@ class BundleLoader implements LoaderInterface
         $this->loadersConfig[$name] = $loader;
     }
 
-    public function loadMainConfig(string $appName): array
+    public function loadMainConfig(string $appName): void
     {
         $loaders = $this->getLoadersConfig();
         $loaders = ArrayHelper::extractByKeys($loaders, $this->import);
-        $config = [];
         foreach ($loaders as $loaderName => $loaderDefinition) {
-            $configItem = $this->load($loaderName, $loaderDefinition);
-            if ($configItem) {
-                $config = ArrayHelper::merge($config, $configItem);
-            }
+            $this->load($loaderName, $loaderDefinition);
         }
-        return $config;
     }
 
-    private function load(string $loaderName, $loaderDefinition): array
+    private function load(string $loaderName, $loaderDefinition): void
     {
         /** @var BaseLoader $loaderInstance */
         $loaderInstance = ClassHelper::createObject($loaderDefinition);
@@ -90,8 +77,7 @@ class BundleLoader implements LoaderInterface
             $loaderInstance->setName($loaderName);
         }
         $bundles = $this->filterBundlesByLoader($this->bundles, $loaderName);
-        $configItem = $loaderInstance->loadAll($bundles);
-        return $configItem;
+        $loaderInstance->loadAll($bundles);
     }
 
     private function filterBundlesByLoader(array $bundles, string $loaderName): array

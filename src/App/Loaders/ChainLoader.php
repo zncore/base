@@ -5,7 +5,6 @@ namespace ZnCore\Base\App\Loaders;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\App\Enums\KernelEventEnum;
 use ZnCore\Base\App\Interfaces\LoaderInterface;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Container\Traits\ContainerAttributeTrait;
 
 class ChainLoader implements LoaderInterface
@@ -20,16 +19,13 @@ class ChainLoader implements LoaderInterface
         $this->setContainer($container);
     }
 
-    public function loadMainConfig(string $appName): array
+    public function loadMainConfig(string $appName): void
     {
-        $config = [];
         if ($this->loaders) {
             foreach ($this->loaders as $loader) {
-                $configItem = $loader->loadMainConfig($appName);
-//                $config = ArrayHelper::merge($config, $configItem);
+                $loader->loadMainConfig($appName);
             }
         }
-        return $config;
     }
 
     public function setLoader(LoaderInterface $loader): void
