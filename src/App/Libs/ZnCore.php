@@ -46,22 +46,10 @@ class ZnCore
         }
     }
 
-//    public function loadConfig(LoaderInterface $bundleLoader, string $appName): void
-//    {
-//        $bundleLoader->loadMainConfig($appName);
-//
-//        /** @var ChainLoader $chainLoader */
-////        $chainLoader = $this->getContainer()->get(ChainLoader::class);
-////        $chainLoader->setLoader($bundleLoader);
-////        $chainLoader->loadMainConfig($appName);
-//    }
-
     public function loadBundles(array $bundles, array $import, string $appName): void
     {
         $bundleLoader = new BundleLoader($bundles, $import);
         $bundleLoader->loadMainConfig($appName);
-
-//        $this->loadConfig($bundleLoader, $appName);
     }
 
     private function initI18Next()
@@ -93,8 +81,5 @@ class ZnCore
         $containerConfigurator->singleton(EventDispatcherInterface::class, EventDispatcher::class);
         $containerConfigurator->singleton(\Psr\EventDispatcher\EventDispatcherInterface::class, EventDispatcherInterface::class);
         $containerConfigurator->singleton(ConfigManagerInterface::class, ConfigManager::class);
-        /*$containerConfigurator->singleton(ZnCore::class, function () {
-            return $this;
-        });*/
     }
 }
