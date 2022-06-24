@@ -132,7 +132,9 @@ abstract class BaseApp implements AppInterface
     protected function initBundles(): void
     {
         $bundleLoader = $this->createBundleLoaderInstance();
-        $this->znCore->loadConfig($bundleLoader, $this->appName());
+        $bundleLoader->loadMainConfig($this->appName());
+
+//        $this->znCore->loadConfig($bundleLoader, $this->appName());
 //        $this->znCore->loadBundles($this->bundles(), $this->import(), $this->appName());
     }
 

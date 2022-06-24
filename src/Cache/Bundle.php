@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\App;
+namespace ZnCore\Base\Cache;
 
 use ZnCore\Base\App\Base\BaseBundle;
 

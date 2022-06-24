@@ -44,7 +44,7 @@ class BundleLoader implements LoaderInterface
     public function addBundles(array $bundles)
     {
         foreach ($bundles as $bundleDefinition) {
-            try {
+//            try {
                 $bundleInstance = $this->createBundleInstance($bundleDefinition);
                 $bundleClass = get_class($bundleInstance);
                 if (!isset($this->bundles[$bundleClass])) {
@@ -53,8 +53,8 @@ class BundleLoader implements LoaderInterface
                     }
                     $this->bundles[$bundleClass] = $bundleInstance;
                 }
-            } catch (ClassNotFoundException $e) {
-            }
+//            } catch (ClassNotFoundException $e) {
+//            }
         }
     }
 
@@ -90,10 +90,6 @@ class BundleLoader implements LoaderInterface
             $loaderInstance->setName($loaderName);
         }
         $bundles = $this->filterBundlesByLoader($this->bundles, $loaderName);
-        /*if ($this->getContainer()->has(ConfigManagerInterface::class)) {
-            $configManager = $this->getContainer()->get(ConfigManagerInterface::class);
-            $configManager->set('bundles', $bundles);
-        }*/
         $configItem = $loaderInstance->loadAll($bundles);
         return $configItem;
     }

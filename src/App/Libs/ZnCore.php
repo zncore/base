@@ -48,18 +48,22 @@ class ZnCore
         }
     }
 
-    public function loadConfig(LoaderInterface $bundleLoader, string $appName): void
-    {
-        /** @var ChainLoader $configCollectionLoader */
-        $configCollectionLoader = $this->getContainer()->get(ChainLoader::class);
-        $configCollectionLoader->setLoader($bundleLoader);
-        $config = $configCollectionLoader->loadMainConfig($appName);
-    }
+//    public function loadConfig(LoaderInterface $bundleLoader, string $appName): void
+//    {
+//        $bundleLoader->loadMainConfig($appName);
+//
+//        /** @var ChainLoader $chainLoader */
+////        $chainLoader = $this->getContainer()->get(ChainLoader::class);
+////        $chainLoader->setLoader($bundleLoader);
+////        $chainLoader->loadMainConfig($appName);
+//    }
 
     public function loadBundles(array $bundles, array $import, string $appName): void
     {
         $bundleLoader = new BundleLoader($bundles, $import);
-        $this->loadConfig($bundleLoader, $appName);
+        $bundleLoader->loadMainConfig($appName);
+
+//        $this->loadConfig($bundleLoader, $appName);
     }
 
     private function initI18Next()

@@ -22,7 +22,7 @@ class ContainerLoader extends BaseLoader
                 $config = $this->importFromConfig([$containerConfig], $config);
             }
         }
-        return [$this->getName() => $config];
+        return [];
     }
 
     private function importFromConfig($fileList, array $config = []): array
