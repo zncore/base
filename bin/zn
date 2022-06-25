@@ -1,13 +1,6 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__ . '/../../../autoload.php';
+require __DIR__ . '/../../../znlib/console/bin/zn';
 
-\ZnCore\Base\Develop\Helpers\DeprecateHelper::hardThrow();
-
-if ($argv[1] == 'init') {
-    require __DIR__ . '/init';
-} else {
-//    require __DIR__ . '/console';
-    require __DIR__ . '/console2.php';
-}
+\ZnCore\Base\Develop\Helpers\DeprecateHelper::softThrow();
