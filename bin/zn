@@ -3,6 +3,8 @@
 
 require __DIR__ . '/../../../autoload.php';
 
+\ZnCore\Base\Develop\Helpers\DeprecateHelper::hardThrow();
+
 if ($argv[1] == 'init') {
     require __DIR__ . '/init';
 } else {
