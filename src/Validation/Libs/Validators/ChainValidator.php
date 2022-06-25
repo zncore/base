@@ -4,10 +4,9 @@ namespace ZnCore\Base\Validation\Libs\Validators;
 
 use Illuminate\Support\Collection;
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\Instance\Libs\Resolvers\InstanceResolver;
 use ZnCore\Base\Container\Traits\ContainerAwareAttributeTrait;
+use ZnCore\Base\Instance\Libs\Resolvers\InstanceResolver;
 use ZnCore\Base\Validation\Interfaces\ValidatorInterface;
-use ZnLib\Components\DynamicEntity\Libs\Validators\DynamicEntityValidator;
 
 class ChainValidator implements ValidatorInterface
 {
@@ -15,17 +14,17 @@ class ChainValidator implements ValidatorInterface
     use ContainerAwareAttributeTrait;
 
     /** @var Collection | ValidatorInterface[] */
-    private $validators;
+    private $validators = [];
 
     public function __construct(ContainerInterface $container)
     {
         $this->setContainer($container);
-        $validators = [
-            ClassMetadataValidator::class,
-            DynamicEntityValidator::class,
-        ];
-        $instanceResolver = new InstanceResolver($container);
+    }
+
+    public function setValidators(array $validators): void
+    {
         $instances = new Collection();
+        $instanceResolver = new InstanceResolver($this->getContainer());
         foreach ($validators as $validatorDefinition) {
             $validatorInstance = $instanceResolver->ensure($validatorDefinition);
             $instances->add($validatorInstance);
