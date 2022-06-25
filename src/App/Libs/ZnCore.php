@@ -15,12 +15,12 @@ use ZnCore\Base\Container\Libs\ContainerConfigurator;
 use ZnCore\Base\Container\Traits\ContainerAwareTrait;
 use ZnCore\Base\EventDispatcher\Interfaces\EventDispatcherConfiguratorInterface;
 use ZnCore\Base\EventDispatcher\Libs\EventDispatcherConfigurator;
-use ZnLib\Components\I18Next\Facades\I18Next;
 use ZnCore\Contract\Common\Exceptions\ReadOnlyException;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerConfiguratorInterface;
 use ZnCore\Domain\EntityManager\Interfaces\EntityManagerInterface;
 use ZnCore\Domain\EntityManager\Libs\EntityManager;
 use ZnCore\Domain\EntityManager\Libs\EntityManagerConfigurator;
+use ZnLib\Components\I18Next\Facades\I18Next;
 
 class ZnCore
 {
