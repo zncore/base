@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\I18Next\Traits;
+namespace ZnCore\Base\I18n\Traits;
 
 use Illuminate\Support\Collection;
 use ZnBundle\Language\Domain\Entities\LanguageEntity;
@@ -8,7 +8,7 @@ use ZnBundle\Language\Domain\Interfaces\Services\LanguageServiceInterface;
 use ZnBundle\Language\Domain\Interfaces\Services\RuntimeLanguageServiceInterface;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Container\Helpers\ContainerHelper;
-use ZnCore\Base\I18Next\Enums\LanguageI18nEnum;
+use ZnCore\Base\I18n\Enums\LanguageI18nEnum;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 
 trait I18nTrait

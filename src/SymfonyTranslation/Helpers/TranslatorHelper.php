@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\I18Next\SymfonyTranslation\Helpers;
+namespace ZnCore\Base\SymfonyTranslation\Helpers;
 
 class TranslatorHelper
 {

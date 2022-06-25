@@ -1,13 +1,13 @@
 <?php
 
-namespace ZnCore\Base\I18Next\SymfonyTranslation;
+namespace ZnCore\Base\SymfonyTranslation\Libs;
 
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use ZnCore\Base\Env\Helpers\EnvHelper;
 use ZnCore\Base\I18Next\Exceptions\NotFoundBundleException;
 use ZnCore\Base\I18Next\Facades\I18Next;
-use ZnCore\Base\I18Next\SymfonyTranslation\Helpers\TranslatorHelper;
+use ZnCore\Base\SymfonyTranslation\Helpers\TranslatorHelper;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
 
 class Translator implements TranslatorInterface
@@ -26,17 +26,6 @@ class Translator implements TranslatorInterface
         $this->locale = $locale;
     }
 
-    private function plural_form($number, $after) {
-        $locale = strtolower($this->locale);
-        if(strpos($locale, 'ru') !== false ) {
-            $cases = array (2, 0, 1, 1, 1, 2);
-            $form = ($number%100>4 && $number%100<20)? 2: $cases[min($number%10, 5)];
-        } else {
-            $form = $number == 1 ? 0 : 1;
-        }
-        return $after[$form];
-    }
-
     public function trans(string $id, array $parameters = [], string $domain = null, string $locale = null)
     {
         $domain = $domain ?: $this->domain;
@@ -52,7 +41,18 @@ class Translator implements TranslatorInterface
         }
         return $translatedMessage;
     }
-    
+
+    private function plural_form($number, $after) {
+        $locale = strtolower($this->locale);
+        if(strpos($locale, 'ru') !== false ) {
+            $cases = array (2, 0, 1, 1, 1, 2);
+            $form = ($number%100>4 && $number%100<20)? 2: $cases[min($number%10, 5)];
+        } else {
+            $form = $number == 1 ? 0 : 1;
+        }
+        return $after[$form];
+    }
+
     private function translateMessage(string $key, array $parameters = []): ?string
     {
         try {

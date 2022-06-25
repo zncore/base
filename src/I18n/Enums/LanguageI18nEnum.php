@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\I18Next\Enums;
+namespace ZnCore\Base\I18n\Enums;
 
 class LanguageI18nEnum
 {
