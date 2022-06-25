@@ -74,9 +74,7 @@ class Translator
      */
     public function getMissingTranslations()
     {
-
         return $this->missingTranslation;
-
     }
 
     /**
@@ -165,68 +163,50 @@ class Translator
      */
     private function _getKey($key, $variables = array())
     {
-
         $return = false;
-
-        if (array_key_exists('lng', $variables) && array_key_exists($variables['lng'], $this->translation))
+        if (array_key_exists('lng', $variables) && array_key_exists($variables['lng'], $this->translation)) {
             $translation = $this->translation[$variables['lng']];
-
-        else if (array_key_exists($this->language, $this->translation))
+        } elseif (array_key_exists($this->language, $this->translation)) {
             $translation = $this->translation[$this->language];
-
-        else
+        } else {
             $translation = array();
-
+        }
         // path traversal - last array will be response
         $paths_arr = explode('.', $key);
-
         while ($path = array_shift($paths_arr)) {
-
             if (array_key_exists($path, $translation) && is_array($translation[$path]) && count($paths_arr) > 0) {
-
                 $translation = $translation[$path];
-
             } else if (array_key_exists($path, $translation)) {
-
                 // Request has context
                 if (array_key_exists('context', $variables)) {
-
-                    if (array_key_exists($path . '_' . $variables['context'], $translation))
+                    if (array_key_exists($path . '_' . $variables['context'], $translation)) {
                         $path = $path . '_' . $variables['context'];
+                    }
                 }
-
                 // Request is plural form
                 // TODO: implement more complex i18next handling
                 if (array_key_exists('count', $variables)) {
-
-                    if ($variables['count'] != 1 && array_key_exists($path . '_plural_' . $variables['count'], $translation))
+                    if ($variables['count'] != 1 && array_key_exists($path . '_plural_' . $variables['count'], $translation)) {
                         $path = $path . '_plural' . $variables['count'];
-
-                    else if ($variables['count'] != 1 && array_key_exists($path . '_plural', $translation))
+                    }
+                    elseif ($variables['count'] != 1 && array_key_exists($path . '_plural', $translation)) {
                         $path = $path . '_plural';
-
+                    }
                 }
-
                 $return = $translation[$path];
-
                 break;
-
             } else {
-
                 return false;
-
             }
-
         }
 
-        if (is_array($return) && isset($variables['returnObjectTrees']) && $variables['returnObjectTrees'] === true)
+        if (is_array($return) && isset($variables['returnObjectTrees']) && $variables['returnObjectTrees'] === true) {
             $return = $return;
-
-        else if (is_array($return) && array_keys($return) === range(0, count($return) - 1))
+        } elseif (is_array($return) && array_keys($return) === range(0, count($return) - 1)) {
             $return = implode("\n", $return);
-
-        else if (is_array($return))
+        } elseif (is_array($return)) {
             return false;
+        }
 
         return $return;
 
