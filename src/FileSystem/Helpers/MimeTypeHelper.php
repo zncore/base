@@ -2,10 +2,9 @@
 
 namespace ZnCore\Base\FileSystem\Helpers;
 
-use Symfony\Component\Mime\MimeTypes;
-use ZnCore\Base\Byte\Enums\ByteEnum;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use PATHINFO_EXTENSION;
+use Symfony\Component\Mime\MimeTypes;
+use ZnCore\Base\Arr\Helpers\ArrayHelper;
 
 class MimeTypeHelper
 {

@@ -7,7 +7,7 @@ use Psr\Container\ContainerInterface;
 use ZnCore\Base\Instance\Libs\Resolvers\InstanceResolver;
 use ZnCore\Base\Container\Traits\ContainerAwareAttributeTrait;
 use ZnCore\Base\Validation\Interfaces\ValidatorInterface;
-use ZnCore\Base\DynamicEntity\Libs\Validators\DynamicEntityValidator;
+use ZnLib\Components\DynamicEntity\Libs\Validators\DynamicEntityValidator;
 
 class ChainValidator implements ValidatorInterface
 {

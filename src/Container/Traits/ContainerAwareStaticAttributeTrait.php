@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Container\Traits;
 
 use Psr\Container\ContainerInterface;
-use ZnCore\Base\ReadOnly\Exceptions\ReadOnlyException;
+use ZnLib\Components\ReadOnly\Exceptions\ReadOnlyException;
 
 trait ContainerAwareStaticAttributeTrait
 {

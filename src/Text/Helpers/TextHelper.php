@@ -2,9 +2,6 @@
 
 namespace ZnCore\Base\Text\Helpers;
 
-use Symfony\Component\Uid\Uuid;
-use ZnCore\Base\Text\Libs\RandomString;
-
 class TextHelper
 {
 
@@ -60,7 +57,7 @@ class TextHelper
 
     public static function removeDoubleChar($text, string $char)
     {
-        $text = preg_replace('#'.preg_quote($char).'+#m', $char, $text);
+        $text = preg_replace('#' . preg_quote($char) . '+#m', $char, $text);
         return $text;
     }
 
