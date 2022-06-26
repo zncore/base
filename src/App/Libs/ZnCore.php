@@ -27,14 +27,14 @@ class ZnCore
 
     use ContainerAwareTrait;
 
-    public function init(): ContainerInterface
+    public function init()//: ContainerInterface
     {
         $this->initContainer();
         $this->initI18Next();
         $container = $this->getContainer();
         $containerConfigurator = new ContainerConfigurator($container);
         $this->configContainer($containerConfigurator);
-        return $container;
+//        return $container;
     }
 
     private function initContainer()
@@ -46,11 +46,11 @@ class ZnCore
         }
     }
 
-    public function loadBundles(array $bundles, array $import, string $appName): void
+    /*public function loadBundles(array $bundles, array $import, string $appName): void
     {
         $bundleLoader = new BundleLoader($bundles, $import);
         $bundleLoader->loadMainConfig($appName);
-    }
+    }*/
 
     private function initI18Next()
     {
