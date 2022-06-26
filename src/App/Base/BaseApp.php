@@ -107,7 +107,7 @@ abstract class BaseApp implements AppInterface
 
     protected function bundleLoaders(): array
     {
-        return include __DIR__ . '/../../../../../znlib/components/src/DefaultContainer/config/bundleLoaders.php';
+        return include __DIR__ . '/../../../../../znlib/components/src/DefaultApp/config/bundleLoaders.php';
     }
 
     protected function createBundleLoaderInstance(): BundleLoader

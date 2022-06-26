@@ -6,7 +6,6 @@ use Psr\Container\ContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use ZnCore\Base\App\Loaders\ConfigCollectionLoader;
-use ZnCore\Base\Bundle\Libs\BundleLoader;
 use ZnCore\Base\ConfigManager\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\ConfigManager\Libs\ConfigManager;
 use ZnCore\Base\Container\Helpers\ContainerHelper;
@@ -27,14 +26,13 @@ class ZnCore
 
     use ContainerAwareTrait;
 
-    public function init()//: ContainerInterface
+    public function init(): void
     {
         $this->initContainer();
-        $this->initI18Next();
+//        $this->initI18Next();
         $container = $this->getContainer();
         $containerConfigurator = new ContainerConfigurator($container);
         $this->configContainer($containerConfigurator);
-//        return $container;
     }
 
     private function initContainer()
@@ -46,20 +44,14 @@ class ZnCore
         }
     }
 
-    /*public function loadBundles(array $bundles, array $import, string $appName): void
-    {
-        $bundleLoader = new BundleLoader($bundles, $import);
-        $bundleLoader->loadMainConfig($appName);
-    }*/
-
-    private function initI18Next()
+    /*private function initI18Next()
     {
         $container = $this->getContainer();
         try {
             I18Next::setContainer($container);
         } catch (ReadOnlyException $exception) {
         }
-    }
+    }*/
 
     protected function configContainer(ContainerConfiguratorInterface $containerConfigurator): void
     {
