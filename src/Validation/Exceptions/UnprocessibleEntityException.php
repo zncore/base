@@ -4,6 +4,7 @@ namespace ZnCore\Base\Validation\Exceptions;
 
 use Error;
 use Illuminate\Support\Collection;
+use Symfony\Component\Validator\ConstraintViolation;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
 
 class UnprocessibleEntityException extends Error
@@ -32,6 +33,14 @@ class UnprocessibleEntityException extends Error
      */
     public function getErrorCollection(): ?Collection
     {
+        if($this->errorCollection) {
+            foreach ($this->errorCollection as $errorEntity) {
+                if(!$errorEntity->getViolation()) {
+                    $violation = new ConstraintViolation($errorEntity->getMessage(), null, [], null, $errorEntity->getField(), null);
+                    $errorEntity->setViolation($violation);
+                }
+            }
+        }
         return $this->errorCollection;
     }
 

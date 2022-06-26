@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Validation\Entities;
 
+use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 
 class ValidationErrorEntity
@@ -42,7 +43,7 @@ class ValidationErrorEntity
         $this->violation = $violation;
     }
 
-    public function getViolation()
+    public function getViolation(): ?ConstraintViolationInterface
     {
         return $this->violation;
     }
