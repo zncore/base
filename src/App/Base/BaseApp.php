@@ -30,6 +30,11 @@ abstract class BaseApp implements AppInterface
 
     abstract public function appName(): string;
 
+    public function setBundles(array $bundles)
+    {
+        $this->bundles = $bundles;
+    }
+
     public function addBundles(array $bundles): void
     {
         $this->bundles = ArrayHelper::merge($this->bundles, $bundles);

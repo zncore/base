@@ -31,7 +31,16 @@ class ZnCore
         $this->initContainer();
 //        $this->initI18Next();
         $container = $this->getContainer();
+        $this->configureContainer($container);
+    }
+
+    public function configureContainer(ContainerInterface $container) {
         $containerConfigurator = new ContainerConfigurator($container);
+
+        $containerConfigurator->singleton(ContainerInterface::class, function () use($container) {
+            return $container;
+        });
+
         $this->configContainer($containerConfigurator);
     }
 
@@ -55,9 +64,6 @@ class ZnCore
 
     protected function configContainer(ContainerConfiguratorInterface $containerConfigurator): void
     {
-        $containerConfigurator->singleton(ContainerInterface::class, function () {
-            return $this->getContainer();
-        });
         $containerConfigurator->singleton(ContainerConfiguratorInterface::class, function () use ($containerConfigurator) {
             return $containerConfigurator;
         });
