@@ -22,6 +22,16 @@ class ErrorCollectionHelper
         return $array;
     }
 
+    public static function itemArrayToCollection(array $errors): Collection
+    {
+        $errorCollection = new Collection();
+        foreach ($errors as $error) {
+            $validationErrorEntity = new ValidationErrorEntity($error['field'], $error['message']);
+            $errorCollection->add($validationErrorEntity);
+        }
+        return $errorCollection;
+    }
+
     public static function flatArrayToCollection(array $errorArray): Collection
     {
         $errorCollection = new Collection();

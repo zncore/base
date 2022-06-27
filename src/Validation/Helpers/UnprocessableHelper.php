@@ -12,8 +12,8 @@ class UnprocessableHelper
     public static function throwItem(string $field, string $mesage): void
     {
         $errorCollection = new Collection();
-        $ValidationErrorEntity = new ValidationErrorEntity($field, $mesage);
-        $errorCollection->add($ValidationErrorEntity);
+        $validationErrorEntity = new ValidationErrorEntity($field, $mesage);
+        $errorCollection->add($validationErrorEntity);
         throw new UnprocessibleEntityException($errorCollection);
     }
 
