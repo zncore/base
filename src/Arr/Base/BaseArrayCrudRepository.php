@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Arr\Base;
 
+use ZnCore\Domain\Repository\Base\BaseRepository;
 use ZnCore\Domain\Repository\Interfaces\CrudRepositoryInterface;
 use ZnCore\Base\Arr\Traits\ArrayCrudRepositoryTrait;
 
