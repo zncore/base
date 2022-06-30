@@ -26,7 +26,7 @@ trait ArrayCrudRepositoryTrait
 
     abstract protected function setItems(array $items);
 
-    public function all(Query $query = null): Enumerable
+    public function findAll(Query $query = null): Enumerable
     {
         $items = $this->getItems();
         if ($query) {
@@ -37,7 +37,7 @@ trait ArrayCrudRepositoryTrait
 
     public function count(Query $query = null): int
     {
-        $collection = $this->all($query);
+        $collection = $this->findAll($query);
         return $collection->count();
     }
 
@@ -57,7 +57,7 @@ trait ArrayCrudRepositoryTrait
         $query = $this->forgeQuery($query);
         $query->limit(1);
         /** @var Collection $collection */
-        $collection = $this->all($query);
+        $collection = $this->findAll($query);
         if ($collection->count() == 0) {
             throw new NotFoundException();
         }
