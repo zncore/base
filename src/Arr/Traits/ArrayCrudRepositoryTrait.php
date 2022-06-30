@@ -41,7 +41,7 @@ trait ArrayCrudRepositoryTrait
         return $collection->count();
     }
 
-    public function oneById($id, Query $query = null): EntityIdInterface
+    public function findOneById($id, Query $query = null): EntityIdInterface
     {
         if (empty($id)) {
             throw (new InvalidMethodParameterException('Empty ID'))
