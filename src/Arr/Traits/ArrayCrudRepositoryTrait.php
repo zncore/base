@@ -65,9 +65,9 @@ trait ArrayCrudRepositoryTrait
     }
 
 
-    /*public function oneByUnique(UniqueInterface $entity): EntityIdInterface
+    /*public function findOneByUnique(UniqueInterface $entity): EntityIdInterface
     {
-        // TODO: Implement oneByUnique() method.
+        // TODO: Implement findOneByUnique() method.
     }*/
 
     public function create(EntityIdInterface $entity)
