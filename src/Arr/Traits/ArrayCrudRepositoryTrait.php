@@ -49,7 +49,7 @@ trait ArrayCrudRepositoryTrait
         }
         $query = $this->forgeQuery($query);
         $query->where('id', $id);
-        return $collection->one($query);
+        return $collection->findOne($query);
     }
 
     /**
