@@ -5,6 +5,7 @@ namespace ZnCore\Base\Arr\Traits;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Enumerable;
 use ZnCore\Contract\Common\Exceptions\InvalidMethodParameterException;
+use ZnCore\Domain\Domain\Traits\DispatchEventTrait;
 use ZnCore\Domain\Domain\Traits\FindAllTrait;
 use ZnCore\Domain\Domain\Traits\FindOneTrait;
 use ZnCore\Domain\Entity\Exceptions\NotFoundException;
@@ -21,6 +22,7 @@ trait ArrayCrudRepositoryTrait
 
     use CrudRepositoryFindAllTrait;
     use CrudRepositoryFindOneTrait;
+    use DispatchEventTrait;
 
     abstract protected function getItems(): array;
 
