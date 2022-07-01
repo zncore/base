@@ -2,18 +2,14 @@
 
 namespace ZnCore\Base\Arr\Traits;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Enumerable;
+use ZnCore\Base\Arr\Helpers\FilterHelper;
 use ZnCore\Contract\Common\Exceptions\InvalidMethodParameterException;
 use ZnCore\Domain\Domain\Traits\DispatchEventTrait;
-use ZnCore\Domain\Domain\Traits\FindAllTrait;
-use ZnCore\Domain\Domain\Traits\FindOneTrait;
 use ZnCore\Domain\Entity\Exceptions\NotFoundException;
-use ZnCore\Base\Arr\Helpers\FilterHelper;
 use ZnCore\Domain\Entity\Helpers\EntityHelper;
-use ZnCore\Domain\Entity\Interfaces\UniqueInterface;
-use ZnCore\Domain\Query\Entities\Query;
 use ZnCore\Domain\Entity\Interfaces\EntityIdInterface;
+use ZnCore\Domain\Query\Entities\Query;
 use ZnCore\Domain\Repository\Traits\CrudRepositoryFindAllTrait;
 use ZnCore\Domain\Repository\Traits\CrudRepositoryFindOneTrait;
 
