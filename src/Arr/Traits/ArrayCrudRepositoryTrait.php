@@ -52,18 +52,34 @@ trait ArrayCrudRepositoryTrait
         return $collection->one($query);
     }
 
-    public function one(Query $query = null): EntityIdInterface
-    {
-        $query = $this->forgeQuery($query);
-        $query->limit(1);
-        /** @var Collection $collection */
-        $collection = $this->findAll($query);
-        if ($collection->count() == 0) {
-            throw new NotFoundException();
-        }
-        return $collection->first();
-    }
+    /**
+     * @param Query|null $query
+     * @return EntityIdInterface
+     * @throws NotFoundException
+     */
+//    public function one(Query $query = null): EntityIdInterface
+//    {
+//        $query = $this->forgeQuery($query);
+//        $query->limit(1);
+//        /** @var Collection $collection */
+//        $collection = $this->findAll($query);
+//        if ($collection->count() == 0) {
+//            throw new NotFoundException();
+//        }
+//        return $collection->first();
+//    }
 
+//    public function findOne(Query $query = null): EntityIdInterface
+//    {
+//        $query = $this->forgeQuery($query);
+//        $query->limit(1);
+//        /** @var Collection $collection */
+//        $collection = $this->findAll($query);
+//        if ($collection->count() == 0) {
+//            throw new NotFoundException();
+//        }
+//        return $collection->first();
+//    }
 
     /*public function findOneByUnique(UniqueInterface $entity): EntityIdInterface
     {
