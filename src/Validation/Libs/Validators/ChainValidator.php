@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Validation\Libs\Validators;
 
-use Illuminate\Support\Collection;
+use ZnCore\Domain\Collection\Libs\Collection;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Container\Traits\ContainerAwareAttributeTrait;
 use ZnCore\Base\Instance\Libs\Resolvers\InstanceResolver;

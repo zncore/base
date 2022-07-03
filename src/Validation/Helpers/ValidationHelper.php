@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Validation\Helpers;
 
-use Illuminate\Support\Collection;
+use ZnCore\Domain\Collection\Libs\Collection;
 use Symfony\Component\Validator\ConstraintViolationList;
 use ZnCore\Base\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;

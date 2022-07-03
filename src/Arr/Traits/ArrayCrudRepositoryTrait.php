@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Arr\Traits;
 
-use Illuminate\Support\Enumerable;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Base\Arr\Helpers\FilterHelper;
 use ZnCore\Contract\Common\Exceptions\InvalidMethodParameterException;
 use ZnCore\Domain\Domain\Traits\DispatchEventTrait;

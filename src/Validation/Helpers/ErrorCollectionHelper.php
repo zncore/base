@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Validation\Helpers;
 
-use Illuminate\Support\Collection;
+use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
 

@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Validation\Libs\Validators;
 
-use Illuminate\Support\Enumerable;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Base\Validation\Exceptions\UnprocessibleEntityException;
 
 class BaseValidator

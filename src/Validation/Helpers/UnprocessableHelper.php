@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Validation\Helpers;
 
-use Illuminate\Support\Collection;
+use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Validation\Exceptions\UnprocessibleEntityException;
 

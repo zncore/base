@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Validation\Exceptions;
 
 use Error;
-use Illuminate\Support\Collection;
+use ZnCore\Domain\Collection\Libs\Collection;
 use Symfony\Component\Validator\ConstraintViolation;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
 

@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Validation\Helpers;
 
-use Illuminate\Support\Collection;
+use ZnCore\Domain\Collection\Libs\Collection;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Validator\ConstraintViolationList;
