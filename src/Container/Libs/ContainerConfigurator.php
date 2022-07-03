@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Container\Libs;
 
-use Illuminate\Container\Container;
+use ZnCore\Base\Container\Libs\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Domain\Entity\Exceptions\NotFoundException;
 use ZnCore\Base\Instance\Helpers\InstanceHelper;

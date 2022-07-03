@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\EventDispatcher\Libs;
 
-use Illuminate\Container\Container;
+use ZnCore\Base\Container\Libs\Container;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

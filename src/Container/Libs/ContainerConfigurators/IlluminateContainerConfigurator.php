@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Container\Libs\ContainerConfigurators;
 
-use Illuminate\Container\Container;
+use ZnCore\Base\Container\Libs\Container;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Container\Interfaces\ContainerConfiguratorInterface;
