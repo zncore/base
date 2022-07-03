@@ -40,20 +40,6 @@ abstract class BaseApp implements AppInterface
         $this->bundles = ArrayHelper::merge($this->bundles, $bundles);
     }
 
-    protected function loadBundlesFromEnvPath(): void
-    {
-        $bundles = [];
-        if (DotEnv::get('BUNDLES_CONFIG_FILE')) {
-            $bundles = include __DIR__ . '/../../../../../../' . DotEnv::get('BUNDLES_CONFIG_FILE');
-        }
-        $this->addBundles($bundles);
-    }
-
-    /*public function addImport(array $import): void
-    {
-        $this->import = ArrayHelper::merge($this->import, $import);
-    }*/
-
     public function import(): array
     {
         return $this->import;
@@ -75,7 +61,6 @@ abstract class BaseApp implements AppInterface
         $this->setEventDispatcher($dispatcher);
         $this->containerConfigurator = $containerConfigurator;
         $this->znCore = $znCore;
-//        defined('REQUEST_ID') OR define('REQUEST_ID', Uuid::v4()->toRfc4122());
     }
 
     public function init(): void
@@ -131,9 +116,6 @@ abstract class BaseApp implements AppInterface
     {
         $bundleLoader = $this->createBundleLoaderInstance();
         $bundleLoader->loadMainConfig($this->appName());
-
-//        $this->znCore->loadConfig($bundleLoader, $this->appName());
-//        $this->znCore->loadBundles($this->bundles(), $this->import(), $this->appName());
     }
 
     protected function initDispatcher(): void
