@@ -2,10 +2,14 @@
 
 namespace ZnCore\Base\Arr\Helpers;
 
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Expr\Comparison;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
+use ZnCore\Domain\Entity\Helpers\CollectionHelper;
 use ZnCore\Domain\Query\Entities\Where;
 use ZnCore\Domain\Query\Entities\Query;
+use ZnCore\Domain\Query\Enums\OperatorEnum;
 
 class FilterHelper
 {
@@ -23,20 +27,28 @@ class FilterHelper
 
     private static function filterItemsByCondition(Collection $collection, array $whereArray): Collection
     {
-        $collection = new \Illuminate\Support\Collection($collection->toArray());
-
-
         foreach ($whereArray as $where) {
             $values = ArrayHelper::toArray($where->value);
-            $resultCollection = new \Illuminate\Support\Collection();
+            $resultCollection = new Collection();
             foreach ($values as $value) {
-                $filteredCollection = $collection->where($where->column, $where->operator, $value);
-                $resultCollection = $resultCollection->concat($filteredCollection);
+
+                /*$operators = [
+                    OperatorEnum::EQUAL => Comparison::EQ,
+                ];*/
+
+                $expr = new Comparison($where->column, $where->operator, $value);
+                $criteria = new Criteria();
+                $criteria->andWhere($expr);
+                $filteredCollection = $collection->matching($criteria);
+
+//                $filteredCollection = $collection->where($where->column, $where->operator, $value);
+                CollectionHelper::appendCollection($resultCollection, $filteredCollection);
+
+//                $resultCollection = $resultCollection->concat($filteredCollection);
+                dump($where, $collection);
             }
             $collection = $resultCollection;
         }
-
-        return new Collection($collection->toArray());
-//        return $collection;
+        return $collection;
     }
 }
