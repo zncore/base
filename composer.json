@@ -16,7 +16,6 @@
 
     "psr/event-dispatcher": "^1",
     "zncore/contract": "0.x-dev",
-    "symfony/property-access": "4.*|5.*",
     "symfony/dotenv": "4.*|5.*",
     "symfony/mime": "^4.4|^5.0"
   },

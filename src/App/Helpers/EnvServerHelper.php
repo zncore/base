@@ -2,9 +2,6 @@
 
 namespace ZnCore\Base\App\Helpers;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
-
 class EnvServerHelper
 {
 
@@ -24,7 +21,7 @@ class EnvServerHelper
         global $_SERVER;
         return $_SERVER['REQUEST_METHOD'] == 'OPTIONS';
     }
-    
+
     public static function isContainsSegmentUri(string $name)
     {
         $isMatch = preg_match('/(\/' . $name . ')($|\/|\?)/', $_SERVER['REQUEST_URI'], $matches);
@@ -42,7 +39,7 @@ class EnvServerHelper
 
     public static function fixUri(string $name)
     {
-        if(ltrim($_SERVER['REQUEST_URI'], '/') === $name) {
+        if (ltrim($_SERVER['REQUEST_URI'], '/') === $name) {
             $_SERVER['REQUEST_URI'] .= '/';
         }
         $_SERVER['SCRIPT_NAME'] = "/$name/index.php";

@@ -1,12 +1,12 @@
 <?php
 
-namespace ZnCore\Base\Container\Libs\legacy\container;
+namespace ZnCore\Base\Container\Legacy\Container;
 
 use ArrayAccess;
 use Closure;
 use Exception;
-use ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException;
-use ZnCore\Base\Container\Libs\legacy\contracts\Container\Container as ContainerContract;
+use ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException;
+use ZnCore\Base\Container\Legacy\Contracts\Container\Container as ContainerContract;
 use LogicException;
 use ReflectionClass;
 use ReflectionException;
@@ -137,7 +137,7 @@ class Container implements ArrayAccess, ContainerContract
      * Define a contextual binding.
      *
      * @param  array|string  $concrete
-     * @return \ZnCore\Base\Container\Libs\legacy\contracts\Container\ContextualBindingBuilder
+     * @return \ZnCore\Base\Container\Legacy\Contracts\Container\ContextualBindingBuilder
      */
     public function when($concrete)
     {
@@ -622,7 +622,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  array  $parameters
      * @return mixed
      *
-     * @throws \ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException
+     * @throws \ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException
      */
     public function make($abstract, array $parameters = [])
     {
@@ -653,7 +653,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  bool  $raiseEvents
      * @return mixed
      *
-     * @throws \ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException
+     * @throws \ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException
      */
     protected function resolve($abstract, $parameters = [], $raiseEvents = true)
     {
@@ -788,7 +788,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  string  $concrete
      * @return mixed
      *
-     * @throws \ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException
+     * @throws \ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException
      */
     public function build($concrete)
     {
@@ -849,7 +849,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  \ReflectionParameter[]  $dependencies
      * @return array
      *
-     * @throws \ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException
+     * @throws \ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException
      */
     protected function resolveDependencies(array $dependencies)
     {
@@ -916,7 +916,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  \ReflectionParameter  $parameter
      * @return mixed
      *
-     * @throws \ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException
+     * @throws \ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException
      */
     protected function resolvePrimitive(ReflectionParameter $parameter)
     {
@@ -937,7 +937,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  \ReflectionParameter  $parameter
      * @return mixed
      *
-     * @throws \ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException
+     * @throws \ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException
      */
     protected function resolveClass(ReflectionParameter $parameter)
     {
@@ -963,7 +963,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  string  $concrete
      * @return void
      *
-     * @throws \ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException
+     * @throws \ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException
      */
     protected function notInstantiable($concrete)
     {
@@ -984,7 +984,7 @@ class Container implements ArrayAccess, ContainerContract
      * @param  \ReflectionParameter  $parameter
      * @return void
      *
-     * @throws \ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException
+     * @throws \ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException
      */
     protected function unresolvablePrimitive(ReflectionParameter $parameter)
     {
@@ -1214,8 +1214,8 @@ class Container implements ArrayAccess, ContainerContract
     /**
      * Set the shared instance of the container.
      *
-     * @param  \ZnCore\Base\Container\Libs\legacy\contracts\Container\Container|null  $container
-     * @return \ZnCore\Base\Container\Libs\legacy\contracts\Container\Container|static
+     * @param  \ZnCore\Base\Container\Legacy\Contracts\Container\Container|null  $container
+     * @return \ZnCore\Base\Container\Legacy\Contracts\Container\Container|static
      */
     public static function setInstance(ContainerContract $container = null)
     {

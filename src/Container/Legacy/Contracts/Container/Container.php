@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Container\Libs\legacy\contracts\Container;
+namespace ZnCore\Base\Container\Legacy\Contracts\Container;
 
 use Closure;
 use Psr\Container\ContainerInterface;
@@ -115,7 +115,7 @@ interface Container extends ContainerInterface
      * Define a contextual binding.
      *
      * @param  string|array  $concrete
-     * @return \ZnCore\Base\Container\Libs\legacy\contracts\Container\ContextualBindingBuilder
+     * @return \ZnCore\Base\Container\Legacy\Contracts\Container\ContextualBindingBuilder
      */
     public function when($concrete);
 
@@ -141,7 +141,7 @@ interface Container extends ContainerInterface
      * @param  array  $parameters
      * @return mixed
      *
-     * @throws \ZnCore\Base\Container\Libs\legacy\contracts\Container\BindingResolutionException
+     * @throws \ZnCore\Base\Container\Legacy\Contracts\Container\BindingResolutionException
      */
     public function make($abstract, array $parameters = []);
 

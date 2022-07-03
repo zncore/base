@@ -1,16 +1,16 @@
 <?php
 
-namespace ZnCore\Base\Container\Libs\legacy\container;
+namespace ZnCore\Base\Container\Legacy\Container;
 
-use ZnCore\Base\Container\Libs\legacy\contracts\Container\Container;
-use ZnCore\Base\Container\Libs\legacy\contracts\Container\ContextualBindingBuilder as ContextualBindingBuilderContract;
+use ZnCore\Base\Container\Legacy\Contracts\Container\Container;
+use ZnCore\Base\Container\Legacy\Contracts\Container\ContextualBindingBuilder as ContextualBindingBuilderContract;
 
 class ContextualBindingBuilder implements ContextualBindingBuilderContract
 {
     /**
      * The underlying container instance.
      *
-     * @var \ZnCore\Base\Container\Libs\legacy\contracts\Container\Container
+     * @var \ZnCore\Base\Container\Legacy\Contracts\Container\Container
      */
     protected $container;
 
@@ -31,7 +31,7 @@ class ContextualBindingBuilder implements ContextualBindingBuilderContract
     /**
      * Create a new contextual binding builder.
      *
-     * @param  \ZnCore\Base\Container\Libs\legacy\contracts\Container\Container  $container
+     * @param  \ZnCore\Base\Container\Legacy\Contracts\Container\Container  $container
      * @param  string|array  $concrete
      * @return void
      */

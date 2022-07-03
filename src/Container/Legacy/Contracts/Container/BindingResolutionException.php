@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Container\Libs\legacy\contracts\Container;
+namespace ZnCore\Base\Container\Legacy\Contracts\Container;
 
 use Exception;
 use Psr\Container\ContainerExceptionInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace ZnCore\Base\Container\Libs\legacy\container;
+namespace ZnCore\Base\Container\Legacy\Container;
 
 use Closure;
 use ReflectionNamedType;
