@@ -18,7 +18,7 @@ class UnprocessibleEntityException extends Error
     }
 
     /**
-     * @var array | Collection | ValidationErrorEntity[]
+     * @var array | \ZnCore\Domain\Collection\Interfaces\Enumerable | ValidationErrorEntity[]
      */
     private $errorCollection;
 
@@ -29,7 +29,7 @@ class UnprocessibleEntityException extends Error
     }
 
     /**
-     * @return array | Collection | ValidationErrorEntity[] | null
+     * @return array | \ZnCore\Domain\Collection\Interfaces\Enumerable | ValidationErrorEntity[] | null
      */
     public function getErrorCollection(): ?Collection
     {

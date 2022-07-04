@@ -17,7 +17,7 @@ class SymfonyValidationHelper
 {
 
     /**
-     * @return array | Collection | ValidationErrorEntity[]
+     * @return array | \ZnCore\Domain\Collection\Interfaces\Enumerable | ValidationErrorEntity[]
      */
     public static function validate(ValidationByMetadataInterface $entity): Collection
     {

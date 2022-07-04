@@ -26,7 +26,7 @@ class ValidationHelper
     }
 
 //    /**
-//     * @return array | Collection | ValidationErrorEntity[]
+//     * @return array | \ZnCore\Domain\Collection\Interfaces\Enumerable | ValidationErrorEntity[]
 //     */
 //    private static function validate(object $data): ?Collection
 //    {
@@ -40,7 +40,7 @@ class ValidationHelper
 //    }
 
     /**
-     * @return array | Collection | ValidationErrorEntity[]
+     * @return array | \ZnCore\Domain\Collection\Interfaces\Enumerable | ValidationErrorEntity[]
      */
     public static function validateValue($value, array $rules): ConstraintViolationList
     {

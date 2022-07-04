@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Validation\Libs\Validators;
 
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use Psr\Container\ContainerInterface;
 use ZnCore\Base\Container\Traits\ContainerAwareAttributeTrait;
@@ -13,7 +14,7 @@ class ChainValidator implements ValidatorInterface
 
     use ContainerAwareAttributeTrait;
 
-    /** @var Collection | ValidatorInterface[] */
+    /** @var Enumerable | ValidatorInterface[] */
     private $validators = [];
 
     public function __construct(ContainerInterface $container)
