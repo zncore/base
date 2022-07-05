@@ -2,11 +2,8 @@
 
 namespace ZnCore\Base\Arr\Helpers;
 
-use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
-use ZnCore\Domain\Query\Entities\Where;
 use ZnCore\Domain\Query\Entities\Query;
 
 class FilterHelper
@@ -19,7 +16,6 @@ class FilterHelper
         return $collection->toArray();
 
 //        return $collection->matching($criteria);
-
 
 
 //        $collection = new Collection($items);

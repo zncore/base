@@ -2,9 +2,9 @@
 
 namespace ZnCore\Base\Validation\Helpers;
 
-use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Validation\Exceptions\UnprocessibleEntityException;
+use ZnCore\Domain\Collection\Libs\Collection;
 
 class UnprocessableHelper
 {

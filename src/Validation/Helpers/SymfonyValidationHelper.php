@@ -2,8 +2,6 @@
 
 namespace ZnCore\Base\Validation\Helpers;
 
-use ZnCore\Domain\Collection\Interfaces\Enumerable;
-use ZnCore\Domain\Collection\Libs\Collection;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Validator\ConstraintViolationList;
@@ -13,6 +11,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use ZnCore\Base\Container\Helpers\ContainerHelper;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
 use ZnCore\Base\Validation\Interfaces\ValidationByMetadataInterface;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
+use ZnCore\Domain\Collection\Libs\Collection;
 
 class SymfonyValidationHelper
 {

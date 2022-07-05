@@ -6,11 +6,9 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
 use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
-use ZnCore\Domain\Query\Entities\Where;
 use ZnCore\Domain\Query\Entities\Query;
-use ZnCore\Domain\Query\Enums\OperatorEnum;
+use ZnCore\Domain\Query\Entities\Where;
 
 class FilterHelper
 {

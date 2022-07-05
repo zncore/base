@@ -3,10 +3,10 @@
 namespace ZnCore\Base\Validation\Exceptions;
 
 use Error;
-use ZnCore\Domain\Collection\Interfaces\Enumerable;
-use ZnCore\Domain\Collection\Libs\Collection;
 use Symfony\Component\Validator\ConstraintViolation;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
+use ZnCore\Domain\Collection\Libs\Collection;
 
 class UnprocessibleEntityException extends Error
 {
@@ -34,9 +34,9 @@ class UnprocessibleEntityException extends Error
      */
     public function getErrorCollection(): ?Enumerable
     {
-        if($this->errorCollection) {
+        if ($this->errorCollection) {
             foreach ($this->errorCollection as $errorEntity) {
-                if(!$errorEntity->getViolation()) {
+                if (!$errorEntity->getViolation()) {
                     $violation = new ConstraintViolation($errorEntity->getMessage(), null, [], null, $errorEntity->getField(), null);
                     $errorEntity->setViolation($violation);
                 }
