@@ -3,6 +3,7 @@
 namespace ZnCore\Base\Validation\Exceptions;
 
 use Error;
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use Symfony\Component\Validator\ConstraintViolation;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
@@ -10,7 +11,7 @@ use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
 class UnprocessibleEntityException extends Error
 {
 
-    public function __construct(Collection $errorCollection = null)
+    public function __construct(Enumerable $errorCollection = null)
     {
         if ($errorCollection) {
             $this->setErrorCollection($errorCollection);
@@ -18,20 +19,20 @@ class UnprocessibleEntityException extends Error
     }
 
     /**
-     * @var array | \ZnCore\Domain\Collection\Interfaces\Enumerable | ValidationErrorEntity[]
+     * @var array | Enumerable | ValidationErrorEntity[]
      */
     private $errorCollection;
 
-    public function setErrorCollection(Collection $errorCollection)
+    public function setErrorCollection(Enumerable $errorCollection)
     {
         $this->errorCollection = $errorCollection;
         $this->updateMessage();
     }
 
     /**
-     * @return array | \ZnCore\Domain\Collection\Interfaces\Enumerable | ValidationErrorEntity[] | null
+     * @return array | Enumerable | ValidationErrorEntity[] | null
      */
-    public function getErrorCollection(): ?Collection
+    public function getErrorCollection(): ?Enumerable
     {
         if($this->errorCollection) {
             foreach ($this->errorCollection as $errorEntity) {

@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Validation\Helpers;
 
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use Symfony\Component\Validator\ConstraintViolationList;
 use ZnCore\Base\Container\Helpers\ContainerHelper;
@@ -28,7 +29,7 @@ class ValidationHelper
 //    /**
 //     * @return array | \ZnCore\Domain\Collection\Interfaces\Enumerable | ValidationErrorEntity[]
 //     */
-//    private static function validate(object $data): ?Collection
+//    private static function validate(object $data): ?Enumerable
 //    {
 //        if ($data instanceof ValidateDynamicEntityInterface) {
 //            return DynamicEntityValidationHelper::validate($data);

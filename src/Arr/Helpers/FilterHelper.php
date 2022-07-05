@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Arr\Helpers;
 
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Domain\Entity\Helpers\CollectionHelper;
@@ -32,7 +33,7 @@ class FilterHelper
 //        return $collection->toArray();
     }
 
-    /*private static function filterItemsByCondition(Collection $collection, array $whereArray): Collection
+    /*private static function filterItemsByCondition(Enumerable $collection, array $whereArray): Collection
     {
         $collection = new \Illuminate\Support\Collection($collection->toArray());
         foreach ($whereArray as $where) {

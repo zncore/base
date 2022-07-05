@@ -10,7 +10,7 @@ use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
 class ErrorCollectionHelper
 {
 
-    public static function collectionToArray(Collection $errorCollection): array
+    public static function collectionToArray(Enumerable $errorCollection): array
     {
         $array = [];
         /** @var ValidationErrorEntity $ValidationErrorEntity */
