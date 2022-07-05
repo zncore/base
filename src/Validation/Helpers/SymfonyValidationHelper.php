@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Validation\Helpers;
 
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Translation\Translator;
@@ -19,7 +20,7 @@ class SymfonyValidationHelper
     /**
      * @return array | \ZnCore\Domain\Collection\Interfaces\Enumerable | ValidationErrorEntity[]
      */
-    public static function validate(ValidationByMetadataInterface $entity): Collection
+    public static function validate(ValidationByMetadataInterface $entity): Enumerable
     {
         $validator = self::createValidator();
         /** @var ConstraintViolationList $violationsList */
@@ -55,7 +56,7 @@ class SymfonyValidationHelper
     /**
      * @todo перенести в ErrorCollectionHelper::violationsToCollection
      */
-    private static function prepareUnprocessible2(ConstraintViolationList $violationList): Collection
+    private static function prepareUnprocessible2(ConstraintViolationList $violationList): Enumerable
     {
         $collection = new Collection;
         foreach ($violationList->getIterator() as $violation) {

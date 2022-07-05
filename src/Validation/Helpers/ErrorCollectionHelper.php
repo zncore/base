@@ -2,6 +2,7 @@
 
 namespace ZnCore\Base\Validation\Helpers;
 
+use ZnCore\Domain\Collection\Interfaces\Enumerable;
 use ZnCore\Domain\Collection\Libs\Collection;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Validation\Entities\ValidationErrorEntity;
@@ -22,7 +23,7 @@ class ErrorCollectionHelper
         return $array;
     }
 
-    public static function itemArrayToCollection(array $errors): Collection
+    public static function itemArrayToCollection(array $errors): Enumerable
     {
         $errorCollection = new Collection();
         foreach ($errors as $error) {
@@ -32,7 +33,7 @@ class ErrorCollectionHelper
         return $errorCollection;
     }
 
-    public static function flatArrayToCollection(array $errorArray): Collection
+    public static function flatArrayToCollection(array $errorArray): Enumerable
     {
         $errorCollection = new Collection();
         foreach ($errorArray as $field => $message) {
