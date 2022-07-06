@@ -83,9 +83,5 @@ final class I18NextTest extends TestCase
             'test' => 'vendor/zncore/base/tests/example/',
         ]);
         return $translationService;
-        /*return new TranslationService([
-            'test' => 'vendor/php7lab/sandbox/tests/example/',
-        ]);*/
     }
-
 }

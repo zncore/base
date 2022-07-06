@@ -48,7 +48,7 @@ class UnprocessibleEntityException extends Error
     public function add(string $field, string $message): UnprocessibleEntityException
     {
         if (!isset($this->errorCollection)) {
-            $this->errorCollection = new Collection;
+            $this->errorCollection = new Collection();
         }
         $this->errorCollection[] = new ValidationErrorEntity($field, $message);
         $this->updateMessage();
