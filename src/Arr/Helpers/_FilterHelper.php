@@ -4,13 +4,16 @@ namespace ZnCore\Base\Arr\Helpers;
 
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\Common\Collections\Expr\Comparison;
+use ZnCore\Base\Develop\Helpers\DeprecateHelper;
 use ZnCore\Collection\Interfaces\Enumerable;
 use ZnCore\Collection\Libs\Collection;
 use ZnCore\Entity\Helpers\CollectionHelper;
 use ZnCore\Domain\Query\Entities\Query;
 use ZnCore\Domain\Query\Entities\Where;
 
-class FilterHelper
+DeprecateHelper::hardThrow();
+
+class _FilterHelper
 {
 
     public static function filterItems(array $items, Query $query): array
