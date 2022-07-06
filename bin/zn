@@ -3,4 +3,4 @@
 
 require __DIR__ . '/../../../znlib/console/bin/zn';
 
-\ZnCore\Base\Develop\Helpers\DeprecateHelper::softThrow();
+\ZnCore\Code\Helpers\DeprecateHelper::softThrow();

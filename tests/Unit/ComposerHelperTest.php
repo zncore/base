@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use ZnCore\Base\Composer\Helpers\ComposerHelper;
+use ZnCore\Code\Helpers\ComposerHelper;
 
 final class ComposerHelperTest extends TestCase
 {
