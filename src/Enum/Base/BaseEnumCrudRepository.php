@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Enum\Base;
 
 use ZnCore\Base\Enum\Helpers\EnumHelper;
-use ZnCore\Base\Arr\Base\BaseArrayCrudRepository;
+use ZnLib\Components\ArrayRepository\Base\BaseArrayCrudRepository;
 
 abstract class BaseEnumCrudRepository extends BaseArrayCrudRepository
 {
