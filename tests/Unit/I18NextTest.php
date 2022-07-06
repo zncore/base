@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Tests\Unit;
 
-use ZnCore\Base\Instance\Helpers\ClassHelper;
+use ZnCore\Instance\Helpers\ClassHelper;
 use ZnLib\Components\I18Next\Interfaces\Services\TranslationServiceInterface;
 use ZnLib\Components\I18Next\Services\TranslationService;
 use PHPUnit\Framework\TestCase;

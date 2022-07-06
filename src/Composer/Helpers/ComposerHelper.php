@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Composer\Helpers;
 
 use Composer\Autoload\ClassLoader;
-use ZnCore\Base\Arr\Helpers\ArrayHelper;
+use ZnCore\Arr\Helpers\ArrayHelper;
 use ZnCore\Base\Composer\Exceptions\NotFoundDependencyException;
 
 /**
