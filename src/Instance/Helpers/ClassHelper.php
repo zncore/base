@@ -6,8 +6,8 @@ use Psr\Container\ContainerInterface;
 use ZnCore\Contract\Common\Exceptions\InvalidArgumentException;
 use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Base\Instance\Exceptions\NotInstanceOfException;
-use ZnCore\Base\Container\Helpers\ContainerHelper;
-use ZnCore\Domain\Entity\Helpers\EntityHelper;
+use ZnCore\Container\Helpers\ContainerHelper;
+use ZnCore\Entity\Helpers\EntityHelper;
 
 /**
  * Работа с классами

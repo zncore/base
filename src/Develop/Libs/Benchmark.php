@@ -4,7 +4,7 @@ namespace ZnCore\Base\Develop\Libs;
 
 use ZnCore\Contract\Common\Exceptions\InternalServerErrorException;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
-use ZnCore\Base\Text\Libs\RandomString;
+use ZnCore\Text\Libs\RandomString;
 
 class Benchmark
 {

@@ -5,7 +5,7 @@ namespace ZnCore\Base\Enum\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
-use ZnCore\Base\Validation\Constraints\BaseValidator;
+use ZnCore\Validation\Constraints\BaseValidator;
 use ZnCore\Base\Enum\Helpers\EnumHelper;
 
 class EnumValidator extends BaseValidator

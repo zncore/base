@@ -2,8 +2,8 @@
 
 namespace ZnCore\Base\Arr\Helpers;
 
-use ZnCore\Domain\Collection\Libs\Collection;
-use ZnCore\Domain\Entity\Helpers\CollectionHelper;
+use ZnCore\Collection\Libs\Collection;
+use ZnCore\Entity\Helpers\CollectionHelper;
 use ZnCore\Domain\Query\Entities\Query;
 
 class FilterHelper

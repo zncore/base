@@ -2,7 +2,7 @@
 
 namespace ZnCore\Base\Php\Helpers;
 
-use ZnCore\Base\FileSystem\Helpers\FilePathHelper;
+use ZnCore\FileSystem\Helpers\FilePathHelper;
 
 class PhpHelper
 {

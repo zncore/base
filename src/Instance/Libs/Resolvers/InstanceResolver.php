@@ -6,7 +6,7 @@ use Psr\Container\ContainerInterface;
 use ZnCore\Base\Instance\Exceptions\ClassNotFoundException;
 use ZnCore\Contract\Common\Exceptions\InvalidConfigException;
 use ZnCore\Base\Instance\Helpers\ClassHelper;
-use ZnCore\Base\Container\Traits\ContainerAwareTrait;
+use ZnCore\Container\Traits\ContainerAwareTrait;
 
 class InstanceResolver
 {

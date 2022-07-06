@@ -5,7 +5,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use App1\ClassSum;
 use App1\ClassMultiplication;
 use App1\ClassPow;
-use ZnCore\Base\FileSystem\Helpers\FileStorageHelper;
+use ZnCore\FileSystem\Helpers\FileStorageHelper;
 
 require_once __DIR__ . '/../../classes/ClassSum.php';
 require_once __DIR__ . '/../../classes/ClassMultiplication.php';

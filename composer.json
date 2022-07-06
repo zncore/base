@@ -13,12 +13,7 @@
     "php": ">=7.2",
     "ext-json": "*",
     "ext-intl": "*",
-
-    "psr/container": "^1.1 || ^2.0",
-    "psr/event-dispatcher": "^1",
-    "zncore/contract": "0.x-dev",
-    "symfony/dotenv": "4.*|5.*",
-    "symfony/mime": "^4.4|^5.0"
+    "zncore/contract": "0.x-dev"
   },
   "autoload": {
     "psr-4": {

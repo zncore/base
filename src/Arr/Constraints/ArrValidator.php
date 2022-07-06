@@ -6,7 +6,7 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
-use ZnCore\Base\Validation\Constraints\BaseValidator;
+use ZnCore\Validation\Constraints\BaseValidator;
 
 class ArrValidator extends BaseValidator
 {

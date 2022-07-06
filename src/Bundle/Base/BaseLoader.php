@@ -6,7 +6,7 @@ use Psr\Container\ContainerInterface;
 use ZnCore\Base\Bundle\Base\BaseBundle;
 use ZnCore\Base\ConfigManager\Interfaces\ConfigManagerInterface;
 use ZnCore\Base\ConfigManager\Traits\ConfigManagerAwareTrait;
-use ZnCore\Base\Container\Traits\ContainerAttributeTrait;
+use ZnCore\Container\Traits\ContainerAttributeTrait;
 
 abstract class BaseLoader
 {

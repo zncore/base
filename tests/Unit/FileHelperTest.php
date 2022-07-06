@@ -3,9 +3,9 @@
 namespace ZnCore\Base\Tests\Unit;
 
 use ZnLib\Components\Byte\Helpers\ByteSizeFormatHelper;
-use ZnCore\Base\FileSystem\Helpers\FindFileHelper;
-use ZnCore\Base\FileSystem\Helpers\MimeTypeHelper;
-use ZnCore\Domain\Entity\Helpers\CollectionHelper;
+use ZnCore\FileSystem\Helpers\FindFileHelper;
+use ZnCore\FileSystem\Helpers\MimeTypeHelper;
+use ZnCore\Entity\Helpers\CollectionHelper;
 use ZnTool\Test\Asserts\DataAssert;
 use ZnTool\Test\Asserts\DataTestCase;
 

@@ -8,7 +8,7 @@ use ReflectionClass;
 use ReflectionException;
 use ReflectionParameter;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
-use ZnCore\Base\Container\Traits\ContainerAwareTrait;
+use ZnCore\Container\Traits\ContainerAwareTrait;
 
 class MethodParametersResolver
 {

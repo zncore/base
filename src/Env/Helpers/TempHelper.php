@@ -3,7 +3,7 @@
 namespace ZnCore\Base\Env\Helpers;
 
 use Symfony\Component\Uid\Uuid;
-use ZnCore\Base\FileSystem\Helpers\FileHelper;
+use ZnCore\FileSystem\Helpers\FileHelper;
 
 class TempHelper
 {

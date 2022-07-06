@@ -7,7 +7,7 @@ use ZnCore\Base\Instance\Exceptions\NotInstanceOfException;
 use ZnCore\Base\Instance\Helpers\ClassHelper;
 use ZnCore\Base\Php\Helpers\ReflectionHelper;
 use ZnCore\Base\Arr\Helpers\ArrayHelper;
-use ZnCore\Base\Text\Helpers\Inflector;
+use ZnCore\Text\Helpers\Inflector;
 use ZnCore\Base\Enum\Interfaces\GetLabelsInterface;
 
 /**
