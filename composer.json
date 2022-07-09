@@ -5,7 +5,9 @@
   "authors": [
     {
       "name": "Zn Developer",
-      "email": "zndev@ya.ru"
+      "email": "zndev@ya.ru",
+      "homepage": "https://zncommunity.github.io/",
+      "role": "Developer"
     }
   ],
   "minimum-stability": "dev",
