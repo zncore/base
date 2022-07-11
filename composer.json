@@ -14,8 +14,7 @@
   "require": {
     "php": ">=7.2",
     "ext-json": "*",
-    "ext-intl": "*",
-    "zncore/contract": "0.x-dev"
+    "ext-intl": "*"
   },
   "autoload": {
     "psr-4": {
