@@ -51,7 +51,7 @@ class FileHelper extends BaseFileHelper
     {
         $rootDir = __DIR__ . '/../../../../../../..';
         $path = str_replace('\\', '/', $path);
-        if ($path{0} == '/') {
+        if ($path[0] == '/') {
             return $rootDir . $path;
         }
         return $path;
