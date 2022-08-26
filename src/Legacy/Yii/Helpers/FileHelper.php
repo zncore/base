@@ -153,7 +153,7 @@ class FileHelper extends BaseFileHelper
 
     public static function isAlias($path)
     {
-        return is_string($path) && !empty($path) && $path{0} == '@';
+        return is_string($path) && !empty($path) && $path[0] == '@';
     }
 
     public static function getAlias($path)
